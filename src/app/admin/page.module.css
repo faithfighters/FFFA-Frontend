@@ -1,0 +1,196 @@
+/* ===== ADMIN PAGES ===== */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+}
+
+.statCard {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-100);
+}
+
+.statIcon {
+    font-size: 2.5rem;
+}
+
+.statInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.statValue {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-dark);
+}
+
+.statLabel {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.recentActivity {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-2xl);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-100);
+}
+
+.activityList {
+    display: flex;
+    flex-direction: column;
+}
+
+.activityItem {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.activityItem:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.activityIcon {
+    width: 40px;
+    height: 40px;
+    background: var(--color-gray-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.activityDetails p {
+    font-size: var(--font-size-base);
+    color: var(--color-dark);
+}
+
+.activityTime {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+}
+
+/* Table Styles for other admin pages */
+.tableContainer {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-100);
+    overflow: hidden;
+}
+
+.tableHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--color-gray-100);
+    background: var(--color-gray-light);
+}
+
+.tableTitle {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+}
+
+.tableContainer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableContainer th {
+    text-align: left;
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    color: var(--color-gray-500);
+    border-bottom: 1px solid var(--color-gray-100);
+    background: #fdfdfd;
+}
+
+.tableContainer td {
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--color-gray-100);
+    font-size: var(--font-size-sm);
+    color: var(--color-dark);
+}
+
+.tableContainer tr:last-child td {
+    border-bottom: none;
+}
+
+.actionBtn {
+    padding: 6px 12px;
+    font-size: var(--font-size-xs);
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.approveBtn {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.rejectBtn {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.statusPending {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.statusApproved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.statusActive {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+@media (max-width: 1024px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.overviewGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    margin-top: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+    .overviewGrid { grid-template-columns: 1fr; }
+}

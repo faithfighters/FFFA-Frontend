@@ -1,0 +1,215 @@
+/* ===== CONTACT PAGE STYLES ===== */
+
+.contactSection {
+    padding: var(--space-4xl) 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: flex-start;
+}
+
+/* --- Info Column --- */
+.infoCol {
+    padding: var(--space-xl) 0;
+}
+
+.infoTitle {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    color: var(--color-dark);
+    margin-bottom: var(--space-lg);
+}
+
+.infoDesc {
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-2xl);
+}
+
+.infoItems {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.infoItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+}
+
+.infoIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(230, 30, 42, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-red);
+}
+
+.infoText {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-700);
+    line-height: 1.6;
+}
+
+.infoLink {
+    font-size: var(--font-size-base);
+    color: var(--color-dark);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.infoLink:hover {
+    color: var(--color-red);
+}
+
+/* --- Social Links --- */
+.socials {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.socialLink {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    transition: all var(--transition-base);
+}
+
+.socialLink:hover {
+    background-color: var(--color-red);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow-red);
+}
+
+/* --- Form Column --- */
+.formCol {
+    position: relative;
+}
+
+.formCard {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-xl);
+    padding: var(--space-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-gray-100);
+}
+
+.formTitle {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-xl);
+}
+
+.successMsg {
+    background-color: #ecfdf5;
+    color: #065f46;
+    padding: var(--space-md);
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+    animation: fadeIn 0.3s ease;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.formLabel {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.formInput {
+    padding: 14px 18px;
+    font-size: var(--font-size-base);
+    color: var(--color-dark);
+    background-color: var(--color-gray-light);
+    border-radius: var(--border-radius-md);
+    border: 2px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.formInput::placeholder {
+    color: var(--color-gray-500);
+}
+
+.formInput:focus {
+    border-color: var(--color-blue);
+    background-color: var(--color-white);
+}
+
+.formTextarea {
+    padding: 14px 18px;
+    font-size: var(--font-size-base);
+    color: var(--color-dark);
+    background-color: var(--color-gray-light);
+    border-radius: var(--border-radius-md);
+    border: 2px solid transparent;
+    resize: vertical;
+    font-family: var(--font-family);
+    transition: all var(--transition-fast);
+}
+
+.formTextarea::placeholder {
+    color: var(--color-gray-500);
+}
+
+.formTextarea:focus {
+    border-color: var(--color-blue);
+    background-color: var(--color-white);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,166 @@
+/* ===== ABOUT PAGE STYLES ===== */
+
+/* --- Two Column Layout --- */
+.twoColumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+}
+
+.textCol {
+    order: 1;
+}
+
+.imageCol {
+    order: 2;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.sectionImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+}
+
+.imageCol:hover .sectionImage {
+    transform: scale(1.03);
+}
+
+.contentBlock {
+    margin: var(--space-xl) 0;
+}
+
+.contentBlock p {
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-md);
+}
+
+.contentBlock strong {
+    color: var(--color-dark);
+}
+
+/* --- Our Story (reversed columns) --- */
+.ourStory .imageCol {
+    order: 1;
+}
+
+.ourStory .textCol {
+    order: 2;
+}
+
+/* --- How We Operate --- */
+.operateGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
+}
+
+/* --- Leadership --- */
+.leaderGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
+}
+
+.leaderCard {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-2xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+}
+
+.leaderCard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.leaderAvatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-dark-navy), var(--color-blue-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.leaderAvatar::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-dark-navy), #2d4a7a);
+}
+
+.leaderInitials {
+    position: relative;
+    z-index: 1;
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-white);
+    letter-spacing: 2px;
+}
+
+.leaderName {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-xs);
+}
+
+.leaderRole {
+    font-size: var(--font-size-sm);
+    color: var(--color-red);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--space-sm);
+}
+
+.leaderBio {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+    line-height: 1.6;
+    margin-top: var(--space-sm);
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+
+    .operateGrid,
+    .leaderGrid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .twoColumn {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+
+    .imageCol,
+    .ourStory .imageCol {
+        order: 1;
+    }
+
+    .textCol,
+    .ourStory .textCol {
+        order: 2;
+    }
+}

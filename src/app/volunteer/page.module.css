@@ -1,0 +1,120 @@
+.introSection { padding-bottom: var(--space-2xl); }
+
+.rolesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+}
+
+.howSection {}
+
+.stepsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    text-align: center;
+}
+
+.step {
+    padding: var(--space-xl);
+}
+
+.stepNumber {
+    width: 56px;
+    height: 56px;
+    background: var(--color-red);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto var(--space-md);
+}
+
+.step h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    color: var(--color-dark);
+}
+
+.step p {
+    color: var(--color-gray-600);
+    line-height: 1.7;
+}
+
+.formSection {}
+
+.form { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+}
+
+.formGroup { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input {
+    padding: 14px 16px;
+    border: 2px solid var(--color-gray-200);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    color: var(--color-dark);
+    transition: border-color 0.2s;
+    font-family: inherit;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-red);
+}
+
+.successCard {
+    background: white;
+    border: 2px solid #22c55e;
+    border-radius: 16px;
+    padding: var(--space-3xl);
+    text-align: center;
+}
+
+.successIcon {
+    width: 64px;
+    height: 64px;
+    background: #22c55e;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto var(--space-lg);
+}
+
+.successCard h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-sm);
+}
+
+.successCard p {
+    color: var(--color-gray-600);
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .rolesGrid, .stepsGrid { grid-template-columns: 1fr; }
+    .formRow { grid-template-columns: 1fr; }
+}

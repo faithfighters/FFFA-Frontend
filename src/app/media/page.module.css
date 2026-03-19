@@ -1,0 +1,139 @@
+/* ===== MEDIA PAGE ===== */
+.featured {
+    background: var(--color-white);
+}
+
+.featuredGrid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+    margin-top: var(--space-2xl);
+}
+
+.videoThumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.thumbImg {
+    object-fit: cover;
+}
+
+.playBtn,
+.playBtnSmall {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    transition: background var(--transition-fast);
+    cursor: pointer;
+}
+
+.playBtn:hover,
+.playBtnSmall:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.featuredInfo {
+    padding: var(--space-lg) 0;
+}
+
+.tag,
+.tagSmall {
+    display: inline-block;
+    background: var(--color-red);
+    color: white;
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-full);
+}
+
+.tagSmall {
+    font-size: 10px;
+    padding: 3px 10px;
+}
+
+.featuredTitle {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    margin: var(--space-md) 0 var(--space-sm);
+    color: var(--color-dark);
+}
+
+.featuredDesc {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-500);
+    line-height: 1.6;
+}
+
+.featuredMeta,
+.videoMeta {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-300);
+    margin-top: var(--space-sm);
+}
+
+/* Gallery Grid */
+.videoGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
+}
+
+.videoCard {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+}
+
+.videoCard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.videoThumbSmall {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.videoInfo {
+    padding: var(--space-lg);
+}
+
+.videoTitle {
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-top: var(--space-sm);
+}
+
+@media (max-width: 1024px) {
+    .featuredGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .videoGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .videoGrid {
+        grid-template-columns: 1fr;
+    }
+}

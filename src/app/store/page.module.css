@@ -1,0 +1,68 @@
+.heroSection {}
+
+.badge {
+    display: inline-block;
+    background: var(--color-red);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--space-lg);
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.categoriesSection {}
+
+.categoriesGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+}
+
+.policySection {}
+
+.policyGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2xl);
+    text-align: center;
+}
+
+.policyItem {}
+
+.policyIcon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+}
+
+.policyItem h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-sm);
+}
+
+.policyItem p {
+    color: var(--color-gray-600);
+    line-height: 1.6;
+}
+
+.alertSection {}
+
+@media (max-width: 1024px) {
+    .categoriesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .categoriesGrid, .policyGrid { grid-template-columns: 1fr; }
+}

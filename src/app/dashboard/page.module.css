@@ -1,0 +1,208 @@
+/* ===== DASHBOARD PAGE ===== */
+.dashPage {
+    min-height: 100vh;
+    background: var(--color-gray-light);
+    padding: calc(var(--header-height) + var(--space-2xl)) 0 var(--space-3xl);
+}
+
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+}
+
+.welcomeTitle {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.welcomeSub {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-500);
+}
+
+.logoutBtn {
+    border: 2px solid var(--color-dark) !important;
+    color: var(--color-dark) !important;
+}
+
+/* Stats Grid */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+}
+
+.statCard {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+}
+
+.statCard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.statIcon {
+    font-size: 2.5rem;
+}
+
+.statInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.statValue {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-dark);
+}
+
+.statLabel {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Section */
+.section {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-2xl);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--space-xl);
+}
+
+/* Allocation Bar */
+.allocationBar {
+    display: flex;
+    height: 50px;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-lg);
+}
+
+.allocationCharity {
+    width: 80%;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+}
+
+.allocationOps {
+    width: 20%;
+    background: linear-gradient(135deg, var(--color-blue-dark), var(--color-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: var(--font-size-xs);
+}
+
+.allocationDetail {
+    display: flex;
+    gap: var(--space-2xl);
+}
+
+.allocItem {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.allocLabel {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+}
+
+.allocValue {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+/* Action Cards */
+.actionsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.actionCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    background: var(--color-gray-light);
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    color: var(--color-dark);
+}
+
+.actionCard:hover {
+    background: var(--color-dark);
+    color: var(--color-white);
+    transform: translateY(-3px);
+}
+
+.actionIcon {
+    font-size: 2.5rem;
+}
+
+.actionLabel {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 1024px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .actionsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .actionsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .allocationDetail {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .allocationOps span {
+        display: none;
+    }
+}

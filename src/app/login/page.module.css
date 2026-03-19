@@ -1,0 +1,192 @@
+/* ===== AUTH PAGES (Login / Register) ===== */
+.authPage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, var(--color-dark-navy) 0%, var(--color-dark) 100%);
+    padding: calc(var(--header-height) + var(--space-4xl)) var(--space-xl) var(--space-4xl);
+}
+
+.authCard {
+    width: 100%;
+    max-width: 680px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-xl);
+    padding: var(--space-3xl);
+    box-shadow: var(--shadow-lg);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.authHeader {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.authTitle {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    color: var(--color-dark);
+    text-transform: uppercase;
+}
+
+.authSubtitle {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-500);
+    margin-top: var(--space-sm);
+}
+
+.error {
+    background-color: #fef2f2;
+    color: #dc2626;
+    padding: var(--space-md);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input {
+    padding: 14px 18px;
+    font-size: var(--font-size-base);
+    background-color: var(--color-gray-light);
+    border-radius: var(--border-radius-md);
+    border: 2px solid transparent;
+    transition: all var(--transition-fast);
+    color: var(--color-dark);
+}
+
+.input:focus {
+    border-color: var(--color-blue);
+    background-color: var(--color-white);
+}
+
+.input::placeholder {
+    color: var(--color-gray-500);
+}
+
+.submitBtn {
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--space-sm);
+    padding: 16px !important;
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.authFooter {
+    text-align: center;
+    margin-top: var(--space-xl);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+}
+
+.authLink {
+    color: var(--color-red);
+    font-weight: 600;
+}
+
+.authLink:hover {
+    text-decoration: underline;
+}
+
+.authHint {
+    text-align: center;
+    margin-top: var(--space-md);
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-300);
+    background: var(--color-gray-light);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius-sm);
+}
+
+/* Plan Selection (Register page) */
+.planGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+}
+
+.planOption {
+    padding: var(--space-md) var(--space-sm);
+    border: 2px solid var(--color-gray-100);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    background: var(--color-white);
+}
+
+.planOption:hover {
+    border-color: var(--color-blue);
+}
+
+.planOptionActive {
+    border-color: var(--color-red);
+    background: #fef2f2;
+}
+
+.planName {
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.planPrice {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: var(--color-red);
+    margin: var(--space-xs) 0;
+}
+
+.planVotes {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 680px) {
+    .authCard {
+        padding: var(--space-xl);
+    }
+
+    .planGrid {
+        grid-template-columns: 1fr;
+    }
+}

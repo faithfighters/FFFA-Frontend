@@ -1,0 +1,215 @@
+/* ===== SUBMIT VIDEO PAGE ===== */
+.submitPage {
+    min-height: 100vh;
+    background: var(--color-gray-light);
+    padding: calc(var(--header-height) + var(--space-2xl)) 0 var(--space-3xl);
+}
+
+.pageHeader {
+    margin-bottom: var(--space-2xl);
+}
+
+.form {
+    max-width: 700px;
+    background: var(--color-white);
+    border-radius: var(--border-radius-xl);
+    padding: var(--space-2xl);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* Drop Zone */
+.dropZone {
+    border: 2px dashed var(--color-gray-300);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-3xl);
+    text-align: center;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.dropZoneActive {
+    border-color: var(--color-blue);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.dropZoneHasFile {
+    border-color: #16a34a;
+    background: #f0fdf4;
+    padding: var(--space-xl);
+}
+
+.dropIcon {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+}
+
+.dropText {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.dropOr {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-300);
+    margin: var(--space-md) 0;
+}
+
+.browseBtn {
+    cursor: pointer;
+}
+
+.dropHint {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-300);
+    margin-top: var(--space-md);
+}
+
+.fileInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.fileIcon {
+    font-size: 2rem;
+}
+
+.fileNameText {
+    font-weight: 600;
+    color: var(--color-dark);
+    flex: 1;
+    text-align: left;
+}
+
+.removeFile {
+    background: none;
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-500);
+    cursor: pointer;
+    padding: var(--space-sm);
+}
+
+/* Form Fields */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-dark);
+}
+
+.input,
+.textarea {
+    padding: 14px 18px;
+    font-size: var(--font-size-base);
+    background: var(--color-gray-light);
+    border-radius: var(--border-radius-md);
+    border: 2px solid transparent;
+    transition: all var(--transition-fast);
+    color: var(--color-dark);
+}
+
+.input:focus,
+.textarea:focus {
+    border-color: var(--color-blue);
+    background: var(--color-white);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: var(--font-family);
+}
+
+.submitBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px !important;
+}
+
+.submitBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Success */
+.successCard {
+    max-width: 550px;
+    margin: var(--space-3xl) auto;
+    background: var(--color-white);
+    border-radius: var(--border-radius-xl);
+    padding: var(--space-3xl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.successIcon {
+    font-size: 4rem;
+    margin-bottom: var(--space-lg);
+}
+
+/* Form layout */
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+}
+
+@media (max-width: 640px) {
+    .formGrid { grid-template-columns: 1fr; }
+}
+
+.sectionTitle {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-dark);
+    border-bottom: 2px solid var(--color-gray-100);
+    padding-bottom: var(--space-sm);
+    margin-bottom: 0;
+}
+
+/* Bill type selector */
+.billTypeGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+}
+
+@media (max-width: 640px) {
+    .billTypeGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.billTypeBtn {
+    padding: var(--space-md);
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--border-radius-md);
+    background: var(--color-white);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: center;
+    color: var(--color-dark);
+}
+
+.billTypeBtn:hover {
+    border-color: var(--color-blue);
+    background: rgba(59, 130, 246, 0.04);
+}
+
+.billTypeBtnActive {
+    border-color: var(--color-blue);
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--color-blue);
+}

@@ -1,0 +1,103 @@
+.heroBanner { text-align: center; }
+
+.giveawayTitle {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    color: var(--color-dark);
+    line-height: 1.1;
+    margin: var(--space-lg) 0;
+    text-transform: uppercase;
+}
+
+.giveawaySubtitle {
+    font-size: 1.125rem;
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.entrySection {}
+
+.entryGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+}
+
+.entryInfo h2 { color: white; }
+
+.rulesBlock {
+    margin-top: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.ruleItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.ruleIcon {
+    color: var(--color-red);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.entryCard {
+    background: white;
+    border-radius: 16px;
+    padding: var(--space-3xl);
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.prizeBadge {
+    font-size: 4rem;
+    margin-bottom: var(--space-lg);
+}
+
+.entryCard h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-md);
+}
+
+.entryCard p {
+    color: var(--color-gray-600);
+    line-height: 1.7;
+}
+
+.entryNote {
+    font-size: 0.8rem !important;
+    color: var(--color-gray-400) !important;
+    margin-top: var(--space-md) !important;
+}
+
+.termsSection {}
+
+.termsTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-lg);
+}
+
+.termsText {
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .entryGrid { grid-template-columns: 1fr; }
+}
