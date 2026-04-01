@@ -34,8 +34,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(2, 6, 23, 0.4) 0%, rgba(2, 6, 23, 0.95) 100%),
-    radial-gradient(circle at center, transparent 0%, rgba(2, 6, 23, 0.8) 100%);
+    linear-gradient(to bottom, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.7) 100%),
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
   z-index: 1;
 }
 
@@ -59,33 +59,74 @@
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -3px;
-  line-height: 1;
-  color: var(--color-white);
+  line-height: 1.1;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.heroLine3 {
-  background: linear-gradient(to right, #ffffff, #cbd5e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.redText {
+  color: #ff0000;
+}
+
+.whiteText {
+  color: #ffffff;
+}
+
+.blueText {
+  color: #00aeef;
 }
 
 .heroQuote {
-  font-size: var(--font-size-xl);
-  color: var(--color-gray-300);
+  font-size: 1.15rem;
+  color: #ffffff;
   line-height: 1.6;
-  max-width: 700px;
+  max-width: 600px;
   margin-bottom: var(--space-2xl);
-  font-weight: 300;
-  border-left: 2px solid var(--color-red);
-  padding-left: var(--space-lg);
+  font-weight: 500;
+  border-left: none;
+  padding-left: 0;
+  opacity: 0.9;
 }
 
 .heroCtas {
   display: flex;
   gap: var(--space-md);
   flex-wrap: wrap;
+}
+
+.heroDonateBtn {
+  background-color: #ff0000;
+  color: var(--color-white);
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+}
+
+.heroDonateBtn:hover {
+  background-color: #cc0000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+}
+
+.heroJoinBtn {
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.heroJoinBtn:hover {
+  background-color: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Who We Are Section --- */
@@ -381,6 +422,59 @@
   .heroLine1,
   .heroLine2,
   .heroLine3 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+    letter-spacing: -0.5px;
   }
+}
+
+/* --- Futuristic Enhancements --- */
+.heroCtas .btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.heroCtas .btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  transition: all 0.6s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.heroCtas .btn:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.impactCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.impactCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(220, 38, 38, 0.05), transparent);
+  transform: rotate(45deg);
+  transition: all var(--transition-slow);
+  opacity: 0;
+}
+
+.impactCard:hover::before {
+  animation: shimmer 0.8s ease;
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }

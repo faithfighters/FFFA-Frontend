@@ -46,23 +46,22 @@ export default function Home() {
         >
           <div className="container">
             <motion.h1 className={styles.heroTitle} variants={staggerContainer}>
-              <motion.span className={styles.heroLine1} variants={fadeInUp}>One Nation.</motion.span>
-              <motion.span className={styles.heroLine2} variants={fadeInUp}>One Spirit.</motion.span>
-              <motion.span className={styles.heroLine3} variants={fadeInUp}>One Mission.</motion.span>
+              <motion.span className={`${styles.heroLine1} ${styles.redText}`} variants={fadeInUp}>One Nation.</motion.span>
+              <motion.span className={`${styles.heroLine2} ${styles.whiteText}`} variants={fadeInUp}>One Spirit.</motion.span>
+              <motion.span className={`${styles.heroLine3} ${styles.blueText}`} variants={fadeInUp}>One Mission.</motion.span>
             </motion.h1>
 
             <motion.p className={styles.heroQuote} variants={fadeInUp}>
-              "Faith Fighters For America unites communities with compassion,
-              making every act of giving a shared and visible moment of kindness."
+              Faith Fighters For America unites communities with compassion, making
+              every act of giving a shared and visible moment of kindness.
             </motion.p>
 
             <motion.div className={styles.heroCtas} variants={fadeInUp}>
-              <Link href="/join" className="btn btn--primary">
-                DONATE NOW
-                <span className="btn-arrow">→</span>
+              <Link href="/join" className={styles.heroDonateBtn}>
+                Donate
               </Link>
-              <Link href="/about" className="btn btn--outline">
-                OUR MISSION
+              <Link href="/about" className={styles.heroJoinBtn}>
+                Join Now
               </Link>
             </motion.div>
           </div>

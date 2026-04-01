@@ -32,13 +32,28 @@
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.3);
-    transition: background var(--transition-fast);
+    backdrop-filter: blur(4px);
+    transition: all var(--transition-base);
     cursor: pointer;
+    border-radius: var(--border-radius-lg);
 }
 
 .playBtn:hover,
 .playBtnSmall:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(220, 38, 38, 0.4);
+    backdrop-filter: blur(8px);
+    transform: scale(1.05);
+}
+
+.playBtn:hover svg,
+.playBtnSmall:hover svg {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+}
+
+.playBtn svg,
+.playBtnSmall svg {
+    transition: all var(--transition-base);
 }
 
 .featuredInfo {

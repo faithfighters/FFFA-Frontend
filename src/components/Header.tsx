@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 
 const navLinks = [
@@ -18,6 +19,7 @@ const navLinks = [
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -33,53 +35,88 @@ export default function Header() {
             <Image
               src="/images/fffa-logo.png"
               alt="FFFA Logo"
-              width={80}
-              height={115}
+              width={100}
+              height={140}
               priority
               style={{ objectFit: 'contain' }}
             />
           </div>
         </Link>
 
-        <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>
-          <ul className={styles.navList}>
-            {navLinks.map((link) => (
-              <li key={link.href} className={styles.navItem}>
-                <Link
-                  href={link.href}
-                  className={styles.navLink}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className={styles.navWrapper}>
+          {/* Top White Navigation Bar */}
+          <div className={styles.topNav}>
+            <nav className={styles.nav}>
+              <ul className={styles.navList}>
+                {navLinks.map((link, index) => (
+                  <li key={link.href} className={styles.navItem}>
+                    <Link
+                      href={link.href}
+                      className={`${styles.navLink} ${pathname === link.href ? styles.navLinkActive : ''}`}
+                    >
+                      {link.label}
+                    </Link>
+                    {index < navLinks.length - 1 && <span className={styles.separator}>|</span>}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <Link href="/join" className={styles.topDonateBtn}>
+              Donate
+            </Link>
+          </div>
 
-        <div className={styles.actions}>
-          <Link href="/join" className={`btn btn--primary ${styles.donateBtn}`}>
-            DONATE NOW
-            <span className="btn-arrow">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </Link>
-
-          <button
-            className={styles.menuToggle}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerOpen : ''}`}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </button>
+          {/* Secondary Actions Bar */}
+          <div className={styles.secondaryActions}>
+            <Link href="/support" className={styles.supportLink}>
+              Support Us
+            </Link>
+            <div className={styles.actionButtons}>
+              <Link href="/login" className={styles.loginBtn}>
+                Login
+              </Link>
+              <Link href="/join" className={styles.joinBtn}>
+                Join Now
+              </Link>
+            </div>
+          </div>
         </div>
+
+        <button
+          className={styles.menuToggle}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerOpen : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
       </div>
+
+      {/* Mobile Navigation */}
+      <nav className={`${styles.mobileNav} ${isMenuOpen ? styles.mobileNavOpen : ''}`}>
+        <ul className={styles.mobileNavList}>
+          {navLinks.map((link) => (
+            <li key={link.href} className={styles.mobileNavItem}>
+              <Link
+                href={link.href}
+                className={`${styles.mobileNavLink} ${pathname === link.href ? styles.mobileNavLinkActive : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+          <li className={styles.mobileNavItem}>
+            <Link href="/login" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
+          </li>
+          <li className={styles.mobileNavItem}>
+            <Link href="/join" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
+          </li>
+        </ul>
+      </nav>
 
       {isMenuOpen && (
         <div className={styles.overlay} onClick={() => setIsMenuOpen(false)} />
