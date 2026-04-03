@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import PageBanner from '@/components/PageBanner';
-import Newsletter from '@/components/Newsletter';
+import PageBanner from '@/components/frontend/PageBanner';
+import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {

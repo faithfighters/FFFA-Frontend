@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import { ShieldCheck, HeartHandshake, BookOpen } from 'lucide-react';
-import Newsletter from '@/components/Newsletter';
+import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
 // Reusable animation variants
@@ -66,6 +66,79 @@ export default function Home() {
             </motion.div>
           </div>
         </motion.div>
+      </section>
+
+      {/* ===== LMS OVERVIEW SECTION ===== */}
+      <section className={`section section--dark ${styles.lmsOverview}`}>
+        <div className="container">
+          <div className={styles.lmsGrid}>
+            {/* Video Side */}
+            <motion.div
+              className={styles.lmsVideo}
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className={styles.videoPlayer}>
+                <div className={styles.videoPlaceholder}>
+                  <div className={styles.videoPlayLarge}>
+                    <div className={styles.videoPlayTriangle} />
+                  </div>
+                </div>
+                <div className={styles.videoControls}>
+                  <span className={styles.videoControlBtn}>▶</span>
+                  <div className={styles.videoTimeline}>
+                    <div className={styles.videoTimelineFill} style={{ width: '35%' }} />
+                  </div>
+                  <span className={styles.videoTime}>2:34 / 6:12</span>
+                  <span className={styles.videoControlBtn}>🔊</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Content Side */}
+            <motion.div
+              className={styles.lmsContent}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              <motion.span className="section-label section-label--red" variants={fadeInUp}>
+                LMS Overview
+              </motion.span>
+              <motion.h2 className="heading-lg" variants={fadeInUp}>
+                Our Impact In Numbers
+              </motion.h2>
+
+              <motion.div className={styles.lmsStats} variants={fadeInUp}>
+                <div className={styles.lmsStat}>
+                  <span className={styles.lmsStatValue}>963</span>
+                  <span className={styles.lmsStatLabel}>Mission Tasked To Last Year</span>
+                </div>
+                <div className={styles.lmsStat}>
+                  <span className={styles.lmsStatValue}>$126,477</span>
+                  <span className={styles.lmsStatLabel}>Donated Last Year</span>
+                </div>
+              </motion.div>
+
+              <motion.blockquote className={styles.lmsQuote} variants={fadeInUp}>
+                <p>&ldquo;Faith Fighters gave my family the support we thought was impossible to find. Their transparency and genuine hearts changed our lives forever.&rdquo;</p>
+                <cite>— Rebecca M., Texas</cite>
+              </motion.blockquote>
+
+              <motion.div className={styles.lmsCtas} variants={fadeInUp}>
+                <Link href="/join" className={styles.heroDonateBtn}>
+                  Donate
+                </Link>
+                <Link href="/about" className={styles.heroJoinBtn}>
+                  Join Now
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* ===== WHO WE ARE SECTION ===== */}

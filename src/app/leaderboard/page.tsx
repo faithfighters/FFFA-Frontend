@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
-import PageBanner from '@/components/PageBanner';
-import Newsletter from '@/components/Newsletter';
+import PageBanner from '@/components/frontend/PageBanner';
+import Newsletter from '@/components/frontend/Newsletter';
 import { Cause } from '@/lib/types';
 import styles from './page.module.css';
 

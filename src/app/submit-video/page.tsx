@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import ProtectedRoute from '@/components/ProtectedRoute';
+import ProtectedRoute from '@/components/shared/ProtectedRoute';
 import styles from './page.module.css';
 
 export default function SubmitVideoPage() {

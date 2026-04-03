@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Header from '@/components/frontend/Header';
+import Footer from '@/components/frontend/Footer';
 import { AuthProvider } from '@/context/AuthContext';
 import './globals.css';
 
@@ -26,11 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={montserrat.variable} suppressHydrationWarning>
       <body style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}>
@@ -43,4 +39,3 @@ export default function RootLayout({
     </html>
   );
 }
-

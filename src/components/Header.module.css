@@ -11,6 +11,16 @@
     padding-top: var(--space-md);
 }
 
+/* Auth page specific header styles */
+.header.authPage {
+    justify-content: center; /* Center the logo on auth pages */
+}
+
+.header.authPage .navWrapper,
+.header.authPage .menuToggle {
+    display: none !important;
+}
+
 .scrolled {
     position: fixed;
     background-color: rgba(2, 6, 23, 0.95) !important;

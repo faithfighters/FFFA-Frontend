@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageBanner from '@/components/PageBanner';
+import PageBanner from '@/components/frontend/PageBanner';
 import legalStyles from '../privacy-policy/page.module.css';
 
 export const metadata: Metadata = {

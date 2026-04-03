@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Newsletter from '@/components/Newsletter';
+import Newsletter from '@/components/frontend/Newsletter';
 import { PLAN_CONFIG } from '@/lib/types';
 import styles from './page.module.css';
 

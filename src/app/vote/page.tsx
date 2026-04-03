@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
-import ProtectedRoute from '@/components/ProtectedRoute';
+import ProtectedRoute from '@/components/shared/ProtectedRoute';
 import { Cause, VotingCycle } from '@/lib/types';
 import styles from './page.module.css';
 

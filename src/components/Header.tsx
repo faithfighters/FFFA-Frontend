@@ -21,6 +21,9 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  // Hide navigation on auth pages
+  const isAuthPage = pathname === '/login' || pathname === '/register';
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
@@ -28,7 +31,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${isAuthPage ? styles.authPage : ''}`}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
           <div className={styles.logoIcon}>
@@ -43,6 +46,7 @@ export default function Header() {
           </div>
         </Link>
 
+        {!isAuthPage && (
         <div className={styles.navWrapper}>
           {/* Top White Navigation Bar */}
           <div className={styles.topNav}>
@@ -81,7 +85,9 @@ export default function Header() {
             </div>
           </div>
         </div>
+        )}
 
+        {!isAuthPage && (
         <button
           className={styles.menuToggle}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -93,6 +99,7 @@ export default function Header() {
             <span></span>
           </span>
         </button>
+        )}
       </div>
 
       {/* Mobile Navigation */}

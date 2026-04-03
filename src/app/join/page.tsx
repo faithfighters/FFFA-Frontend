@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageBanner from '@/components/PageBanner';
+import PageBanner from '@/components/frontend/PageBanner';
 import JoinContent from './JoinContent';
 
 export const metadata: Metadata = {

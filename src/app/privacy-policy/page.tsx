@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageBanner from '@/components/PageBanner';
+import PageBanner from '@/components/frontend/PageBanner';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {

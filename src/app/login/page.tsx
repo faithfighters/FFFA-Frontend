@@ -1,10 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+
+const floatingDonors = [
+    { name: 'Jordan S.', amount: '$400' },
+    { name: 'Maria T.', amount: '$250' },
+    { name: 'David R.', amount: '$180' },
+    { name: 'Sarah K.', amount: '$400' },
+    { name: 'Alex M.', amount: '$320' },
+    { name: 'Lisa P.', amount: '$150' },
+    { name: 'James W.', amount: '$500' },
+    { name: 'Emma C.', amount: '$275' },
+];
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -20,68 +32,104 @@ export default function LoginPage() {
         setLoading(true);
         const result = await login(email, password);
         if (result.success) {
-            // Redirect based on role (me endpoint returns user role)
-            const meRes = await fetch('/api/auth/me', { credentials: 'include' });
-            const meData = await meRes.json();
-            if (meData.user?.role === 'admin') {
-                router.push('/admin');
-            } else {
-                router.push('/dashboard');
-            }
+            router.push('/dashboard');
         } else {
             setError(result.error || 'Invalid credentials. Please try again.');
         }
         setLoading(false);
     };
 
+    const handleGoogleSSO = () => {
+        window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+    };
+
     return (
-        <div className={styles.authPage}>
-            <div className={styles.authCard}>
-                <div className={styles.authHeader}>
-                    <h1 className={styles.authTitle}>Welcome Back</h1>
-                    <p className={styles.authSubtitle}>Sign in to your FFFA account</p>
+        <div className={styles.loginPage}>
+            {/* Grid background */}
+            <div className={styles.gridBg} />
+
+            {/* Floating Avatar Ring */}
+            <div className={styles.avatarRing}>
+                {floatingDonors.map((donor, i) => (
+                    <div key={i} className={styles.floatingAvatar}>
+                        <div className={styles.avatarImg}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                                <circle cx="12" cy="8" r="4" />
+                                <path d="M5 20c0-4 3.5-7 7-7s7 3 7 7" />
+                            </svg>
+                        </div>
+                        <span className={styles.avatarLabel}>{donor.name}</span>
+                        <span className={styles.avatarDonation}>
+                            Donated <strong>{donor.amount}</strong>🔥
+                        </span>
+                    </div>
+                ))}
+            </div>
+
+            <div className={styles.card}>
+                {/* Brand icon */}
+                <div className={styles.brandIcon}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7" />
+                        <polyline points="7 7 17 7 17 17" />
+                    </svg>
                 </div>
+
+                <h1 className={styles.title}>Sign in with email</h1>
+                <p className={styles.subtitle}>
+                    Make a new doc to bring your words, data, and teams together. For free.
+                </p>
 
                 {error && <div className={styles.error}>{error}</div>}
 
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="email" className={styles.label}>Email Address</label>
+                    <div className={styles.fieldRow}>
+                        <div className={styles.labelRow}>
+                            <label htmlFor="email" className={styles.label}>Email</label>
+                        </div>
                         <input
-                            id="email"
-                            type="email"
-                            className={styles.input}
+                            id="email" type="email" className={styles.input}
                             placeholder="you@example.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            suppressHydrationWarning
+                            value={email} onChange={(e) => setEmail(e.target.value)}
+                            required suppressHydrationWarning
                         />
                     </div>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="password" className={styles.label}>Password</label>
+
+                    <div className={styles.fieldRow}>
+                        <div className={styles.labelRow}>
+                            <label htmlFor="password" className={styles.label}>Password</label>
+                            <a href="#" className={styles.forgotLink}>Forgot password?</a>
+                        </div>
                         <input
-                            id="password"
-                            type="password"
-                            className={styles.input}
-                            placeholder="••••••••"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            suppressHydrationWarning
+                            id="password" type="password" className={styles.input}
+                            placeholder="Enter your password"
+                            value={password} onChange={(e) => setPassword(e.target.value)}
+                            required suppressHydrationWarning
                         />
                     </div>
-                    <button type="submit" className={`btn btn--primary ${styles.submitBtn}`} disabled={loading}>
-                        {loading ? 'Signing In...' : 'Sign In'}
+
+                    <button type="submit" className={styles.submitBtn} disabled={loading}>
+                        {loading ? 'Signing in…' : 'Get started'}
                     </button>
                 </form>
 
-                <p className={styles.authFooter}>
-                    Don&apos;t have an account?{' '}
-                    <Link href="/register" className={styles.authLink}>Create one</Link>
-                </p>
-                <p className={styles.authHint}>
-                    Admin: <strong>admin@faithfighters.com</strong>
+                <div className={styles.divider}>
+                    <span className={styles.dividerLine} />
+                    <span className={styles.dividerText}>Or sign in with</span>
+                    <span className={styles.dividerLine} />
+                </div>
+
+                <div className={styles.socialRow}>
+                    <button type="button" className={styles.socialBtn} style={{ width: '100%' }} onClick={handleGoogleSSO} aria-label="Google">
+                        Sign in with Google
+                    </button>
+                </div>
+
+                <p className={styles.footer}>
+                    New to Faith Fighter of America?{' '}
+                    <a href="/register" className={styles.footerLink}>
+                        Create an account
+                    </a>
                 </p>
             </div>
         </div>
