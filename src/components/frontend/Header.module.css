@@ -1,0 +1,321 @@
+/* ===== PREMIUM HEADER STYLES ===== */
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent !important;
+    transition: all var(--transition-base);
+    padding-top: var(--space-md);
+}
+
+.scrolled {
+    position: fixed;
+    background-color: rgba(2, 6, 23, 0.95) !important;
+    backdrop-filter: var(--glass-blur);
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+    box-shadow: var(--shadow-md);
+}
+
+.container {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    z-index: 1100;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.logoIcon {
+    display: flex;
+    align-items: flex-start;
+    transition: transform var(--transition-base);
+}
+
+.logoIcon:hover {
+    transform: scale(1.05);
+}
+
+.navWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-sm);
+    max-width: 100%;
+}
+
+.topNav {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-white);
+    border-radius: 8px;
+    padding-left: 0; 
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    width: fit-content;
+}
+
+.nav {
+    display: flex;
+    padding: 0 10px 0 20px;
+}
+
+.navList {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+}
+
+.navLink {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-gray-700);
+    text-transform: none;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.navLink:hover {
+    color: var(--color-red);
+}
+
+.navLinkActive {
+    color: var(--color-red) !important;
+}
+
+.separator {
+    color: #cbd5e1;
+    font-weight: 300;
+    user-select: none;
+    opacity: 0.5;
+}
+
+.topDonateBtn {
+    background-color: #ff0000;
+    color: var(--color-white);
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 12px 35px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.topDonateBtn:hover {
+    background-color: #cc0000;
+}
+
+.secondaryActions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    padding-right: 10px;
+}
+
+.supportLink {
+    color: var(--color-white);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.supportLink:hover {
+    opacity: 0.8;
+}
+
+.actionButtons {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.loginBtn {
+    background-color: #ff0000;
+    color: var(--color-white);
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 12px 40px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+}
+
+.loginBtn:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+}
+
+.joinBtn {
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 12px 35px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.joinBtn:hover {
+    background-color: #f8fafc;
+    transform: translateY(-2px);
+}
+
+.menuToggle {
+    display: none;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    outline: none; /* Removed the default ugly browser focus ring */
+}
+.menuToggle:hover {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-white);
+    margin: 5px 0;
+    transition: 0.4s;
+    border-radius: 2px;
+}
+
+.mobileNav {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .nav {
+        padding: 0 var(--space-md);
+    }
+    .separator {
+        margin: 0 var(--space-xs);
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        align-items: center;
+        padding: 0 var(--space-lg);
+    }
+
+    .logo {
+        margin-top: 0;
+    }
+
+    .logoIcon img {
+        width: 60px !important;
+        height: auto !important;
+    }
+
+    .navWrapper {
+        display: none;
+    }
+
+    .menuToggle {
+        display: flex;
+        z-index: 2000;
+    }
+
+    .mobileNav {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        max-width: 320px;
+        height: 100vh;
+        background-color: var(--color-dark-navy);
+        z-index: 1900;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 100px 40px;
+        box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6);
+        overflow-y: auto;
+    }
+
+    .mobileNavOpen {
+        right: 0;
+    }
+
+    .mobileNavList {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+
+    .mobileNavItem {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 15px;
+    }
+
+    .mobileNavLink {
+        color: var(--color-white);
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+    }
+
+    .mobileNavLinkActive {
+        color: var(--color-red);
+    }
+
+    .overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1800;
+    }
+}
+
+@media (max-width: 480px) {
+    .logoIcon img {
+        width: 50px !important;
+    }
+    
+    .mobileNav {
+        width: 90%;
+        padding: 80px 30px;
+    }
+    
+    .mobileNavLink {
+        font-size: 1.15rem;
+    }
+}
