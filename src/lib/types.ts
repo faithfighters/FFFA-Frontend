@@ -3,7 +3,7 @@ export interface User {
     name: string;
     email: string;
     role: 'member' | 'admin';
-    plan?: 'basic' | 'standard' | 'premium';
+    plan?: 'basic' | 'standard' | 'premium' | 'faith_fighter';
     votesRemaining?: number;
     votesTotal?: number;
     joinedAt: string;
@@ -71,7 +71,7 @@ export interface Vote {
 export interface Subscription {
     id: string;
     userId: string;
-    plan: 'basic' | 'standard' | 'premium';
+    plan: 'basic' | 'standard' | 'premium' | 'faith_fighter';
     amount: number;
     status: 'active' | 'cancelled' | 'past_due';
     startDate: string;

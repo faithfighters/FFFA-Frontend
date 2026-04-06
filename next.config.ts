@@ -4,6 +4,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  experimental: {
+    turbopackUseSystemTlsCerts: true,
+  },
   images: {
     qualities: [25, 50, 75, 90, 95, 100],
     remotePatterns: [

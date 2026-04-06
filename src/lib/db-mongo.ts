@@ -45,7 +45,7 @@ export async function updateUser(id: string, updates: Partial<StoredUser>): Prom
   const result = await db
     .collection<StoredUser>(COLLECTIONS.users)
     .findOneAndUpdate({ id }, { $set: updates }, { returnDocument: 'after' });
-  return result.value || null;
+  return result || null;
 }
 
 export async function getAllUsers(): Promise<StoredUser[]> {
@@ -75,7 +75,7 @@ export async function updateCause(id: string, updates: Partial<Cause>): Promise<
   const result = await db
     .collection<Cause>(COLLECTIONS.causes)
     .findOneAndUpdate({ id }, { $set: updates }, { returnDocument: 'after' });
-  return result.value || null;
+  return result || null;
 }
 
 // ===== VOTING CYCLES =====
@@ -151,10 +151,10 @@ export async function updateVideo(id: string, updates: Partial<Video>): Promise<
   const result = await db
     .collection<Video>(COLLECTIONS.videos)
     .findOneAndUpdate({ id }, { $set: updates }, { returnDocument: 'after' });
-  return result.value || null;
+  return result || null;
 }
 
-export async function getVideosByStatus(status: string): Promise<Video[]> {
+export async function getVideosByStatus(status: Video['status']): Promise<Video[]> {
   const db = await getDatabase();
   return db.collection<Video>(COLLECTIONS.videos).find({ status }).toArray();
 }
@@ -176,7 +176,7 @@ export async function updateSubscription(id: string, updates: Partial<Subscripti
   const result = await db
     .collection<Subscription>(COLLECTIONS.subscriptions)
     .findOneAndUpdate({ id }, { $set: updates }, { returnDocument: 'after' });
-  return result.value || null;
+  return result || null;
 }
 
 // ===== PAYOUTS =====
@@ -196,5 +196,5 @@ export async function updatePayout(id: string, updates: Partial<Payout>): Promis
   const result = await db
     .collection<Payout>(COLLECTIONS.payouts)
     .findOneAndUpdate({ id }, { $set: updates }, { returnDocument: 'after' });
-  return result.value || null;
+  return result || null;
 }
