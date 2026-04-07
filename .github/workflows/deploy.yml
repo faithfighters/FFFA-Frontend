@@ -11,8 +11,8 @@ env:
   DOCKER_IMAGE: kchauhan023/faithfighters
   APP_PORT_PROD: 4000
   APP_PORT_STAGE: 4001
-  CONTAINER_NAME_PROD: faithfighters-backend
-  CONTAINER_NAME_STAGE: faithfighters-backend-stage
+  CONTAINER_NAME_PROD: faithfighters-app
+  CONTAINER_NAME_STAGE: faithfighters-app-stage
 
 jobs:
   build-and-deploy:
