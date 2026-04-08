@@ -9,6 +9,7 @@ import styles from './Header.module.css';
 const navLinks = [
   { label: 'About us', href: '/about' },
   { label: 'Media', href: '/media' },
+  { label: 'Blogs', href: '/blogs' },
   { label: 'Store', href: '/store' },
   { label: 'Volunteer', href: '/volunteer' },
   { label: 'Contact', href: '/contact' },
@@ -37,8 +38,8 @@ export default function Header() {
             <Image
               src="/images/fffa-logo.png"
               alt="FFFA Logo"
-              width={100}
-              height={140}
+              width={105}
+              height={150}
               priority
               style={{ objectFit: 'contain' }}
             />
