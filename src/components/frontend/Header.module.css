@@ -8,14 +8,13 @@
     z-index: 1000;
     background-color: transparent !important;
     transition: all var(--transition-base);
-    padding-top: var(--space-md);
 }
 
 .scrolled {
     position: fixed;
     background-color: rgba(2, 6, 23, 0.95) !important;
     backdrop-filter: var(--glass-blur);
-    padding-top: var(--space-xs);
+    padding-top: 0; /* No padding at top even when scrolled */
     padding-bottom: var(--space-xs);
     box-shadow: var(--shadow-md);
 }
@@ -27,12 +26,13 @@
 
 .container {
     display: flex;
-    align-items: center; 
+    align-items: flex-start; /* Changed from center to allow touching top */
     justify-content: space-between;
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-xl);
+    height: 150px; /* Accommodate double layer */
 }
 
 .logo {
@@ -41,6 +41,7 @@
     z-index: 1100;
     flex-shrink: 0;
     margin-right: 20px;
+    padding-top: 23px; /* Figma: top 23px */
 }
 
 .logoIcon {
@@ -57,19 +58,20 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: var(--space-sm);
+    gap: 0; /* Remove gap between top bar and secondary row */
     max-width: 100%;
 }
 
 .topNav {
     display: flex;
     align-items: center;
-    background-color: var(--color-white);
-    border-radius: 8px;
-    padding-left: 0; 
-    box-shadow: var(--shadow-md);
+    background-color: #ffffff;
+    border-radius: 0 0 14px 14px; /* Figma: 0 0 14 14 */
+    padding-left: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: fit-content;
+    height: 45px; /* Figma height 45px */
+    margin-top: 0;
 }
 
 .nav {
@@ -91,40 +93,43 @@
 }
 
 .navLink {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--color-gray-700);
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
     text-transform: none;
-    padding: 12px 15px;
+    padding: 0 12px;
     transition: all 0.3s ease;
     white-space: nowrap;
 }
 
 .navLink:hover {
-    color: var(--color-red);
+    color: #ff0000;
 }
 
 .navLinkActive {
-    color: var(--color-red) !important;
+    color: #ff0000 !important;
 }
 
 .separator {
-    color: #cbd5e1;
+    color: #000000;
     font-weight: 300;
-    user-select: none;
-    opacity: 0.5;
+    margin: 0 4px;
+    opacity: 0.6;
 }
 
 .topDonateBtn {
-    background-color: #ff0000;
-    color: var(--color-white);
-    font-weight: 800;
-    font-size: 0.9rem;
-    padding: 12px 35px;
-    text-transform: uppercase;
+    background-color: #ff0012; /* Figma color */
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding: 0 35px;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    margin-left: 10px;
+    border-radius: 0 0 14px 0; /* Figma radius */
 }
 
 .topDonateBtn:hover {
@@ -134,8 +139,10 @@
 .secondaryActions {
     display: flex;
     align-items: center;
-    gap: var(--space-xl);
-    padding-right: 10px;
+    gap: 20px;
+    padding-top: 21px; /* Figma: secondary rows start at 66px. Top bar is 45px. 66-45=21 */
+    position: relative;
+    right: 0;
 }
 
 .supportLink {
@@ -158,35 +165,36 @@
 
 .loginBtn {
     background-color: #ff0000;
-    color: var(--color-white);
-    font-weight: 800;
-    font-size: 0.95rem;
-    padding: 12px 40px;
-    border-radius: 14px;
+    color: #ffffff;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 35px;
+    border-radius: 12px;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+    transition: all 0.2s ease;
 }
 
 .loginBtn:hover {
     background-color: #cc0000;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .joinBtn {
-    background-color: var(--color-white);
-    color: var(--color-dark);
-    font-weight: 800;
-    font-size: 0.95rem;
-    padding: 12px 35px;
-    border-radius: 14px;
+    background-color: #ffffff;
+    color: #0b1626;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 30px;
+    border-radius: 12px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .joinBtn:hover {
     background-color: #f8fafc;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .menuToggle {
@@ -234,15 +242,17 @@
 @media (max-width: 900px) {
     .container {
         align-items: center;
-        padding: 0 var(--space-lg);
+        padding: 0 clamp(1rem, 5vw, 2rem);
+        height: 80px; 
     }
 
     .logo {
         margin-top: 0;
+        padding-top: 0;
     }
 
     .logoIcon img {
-        width: 60px !important;
+        width: 50px !important;
         height: auto !important;
     }
 
@@ -253,6 +263,7 @@
     .menuToggle {
         display: flex;
         z-index: 2000;
+        border-color: rgba(255, 255, 255, 0.3);
     }
 
     .mobileNav {

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
-import { ShieldCheck, HeartHandshake, BookOpen } from 'lucide-react';
+import { ShieldCheck, HeartHandshake, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
@@ -68,141 +68,97 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ===== LMS OVERVIEW SECTION ===== */}
-      <section className={`section section--dark ${styles.lmsOverview}`}>
+      {/* ===== WHO WE ARE SECTION ===== */}
+      {/* ===== IMPACT OVERVIEW (LMS) SECTION ===== */}
+      <section className={styles.lmsOverview}>
         <div className="container">
           <div className={styles.lmsGrid}>
-            {/* Video Side */}
             <motion.div
-              className={styles.lmsVideo}
-              initial={{ opacity: 0, x: -40 }}
+              className={styles.lmsVideoWrapper}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className={styles.videoPlayer}>
-                <div className={styles.videoPlaceholder}>
-                  <div className={styles.videoPlayLarge}>
-                    <div className={styles.videoPlayTriangle} />
+              <div className={styles.videoCard}>
+                <Image
+                  src="/images/video-thumbnail.png"
+                  alt="Impact Video"
+                  width={394}
+                  height={700}
+                  className={styles.videoImg}
+                />
+                <div className={styles.videoOverlay}>
+                  <div className={styles.playIcon}>
+                    <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
                   </div>
-                </div>
-                <div className={styles.videoControls}>
-                  <span className={styles.videoControlBtn}>▶</span>
-                  <div className={styles.videoTimeline}>
-                    <div className={styles.videoTimelineFill} style={{ width: '35%' }} />
+                  <div className={styles.volumeIcon}>
+                    <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
                   </div>
-                  <span className={styles.videoTime}>2:34 / 6:12</span>
-                  <span className={styles.videoControlBtn}>🔊</span>
                 </div>
               </div>
             </motion.div>
 
-            {/* Content Side */}
-            <motion.div
-              className={styles.lmsContent}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
-              <motion.span className="section-label section-label--red" variants={fadeInUp}>
-                LMS Overview
-              </motion.span>
-              <motion.h2 className="heading-lg" variants={fadeInUp}>
-                Our Impact In Numbers
-              </motion.h2>
-
-              <motion.div className={styles.lmsStats} variants={fadeInUp}>
-                <div className={styles.lmsStat}>
-                  <span className={styles.lmsStatValue}>963</span>
-                  <span className={styles.lmsStatLabel}>Mission Tasked To Last Year</span>
+            <div className={styles.lmsContent}>
+              <motion.div
+                className={styles.statsCard}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className={styles.statItem}>
+                  <span className={styles.statNumberRed}>963</span>
+                  <span className={styles.statLabel}>MISSION TASKED TO LAST YEAR</span>
                 </div>
-                <div className={styles.lmsStat}>
-                  <span className={styles.lmsStatValue}>$126,477</span>
-                  <span className={styles.lmsStatLabel}>Donated Last Year</span>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumberNavy}>$126,477</span>
+                  <span className={styles.statLabel}>DONATED LAST YEAR</span>
                 </div>
               </motion.div>
 
-              <motion.blockquote className={styles.lmsQuote} variants={fadeInUp}>
-                <p>&ldquo;Faith Fighters gave my family the support we thought was impossible to find. Their transparency and genuine hearts changed our lives forever.&rdquo;</p>
-                <cite>— Rebecca M., Texas</cite>
-              </motion.blockquote>
+              <motion.div
+                className={styles.quoteBlock}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <h3 className={styles.lmsQuoteText}>
+                  &ldquo;I couldn&rsquo;t even begin to imagine what my outcome would have been if it wasn&rsquo;t for Faith Fighters For America.&rdquo;
+                </h3>
+                <p className={styles.lmsSubDesc}>
+                  Mum-of-four Nikki Benstead, from Goldsithney, needed the help of the charity when her horse spooked and reared up, falling over backwards on top of Nikki and rolling over her.
+                </p>
 
-              <motion.div className={styles.lmsCtas} variants={fadeInUp}>
-                <Link href="/join" className={styles.heroDonateBtn}>
-                  Donate
-                </Link>
-                <Link href="/about" className={styles.heroJoinBtn}>
-                  Join Now
-                </Link>
+                <div className={styles.lmsCtas}>
+                  <Link href="/coming-soon" className={styles.donatePill}>Donate</Link>
+                  <Link href="/coming-soon" className={styles.joinPill}>Join Now</Link>
+                </div>
               </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== WHO WE ARE SECTION ===== */}
-      <section className={`section section--dark ${styles.whoWeAre}`}>
-        <div className="container">
-          <div className={styles.whoWeAreGrid}>
-            <motion.div
-              className={styles.whoWeAreText}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={fadeInUp}
-            >
-              <span className="section-label section-label--red">Who We Are</span>
-              <h2 className="heading-lg">Restoring the Fabric of Our Nation</h2>
-              <div className={styles.whoWeAreContent}>
-                <p className="text-body">
-                  Faith Fighters For America unites communities with compassion, making every act of giving a shared and visible moment of kindness.
-                </p>
-                <p className="text-body text-body--light">
-                  Our vision is to create a transparent movement where everyone can see and celebrate how helping neighbors becomes a story that inspires us all. We believe in the power of faith-driven action to bridge divides and elevate the standard of community care.
-                </p>
-              </div>
-              <Link href="/about" className="btn btn--secondary mt-8">
-                READ FULL STORY
-              </Link>
-            </motion.div>
-
-            <motion.div
-              className={styles.whoWeAreImage}
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, ease: "easeOut" }}
-            >
-              <Image
-                src="/images/praying-hands.png"
-                alt="Praying hands painted with American flag"
-                width={600}
-                height={700}
-                className={styles.prayingHands}
-                quality={95}
-              />
-              <div className={styles.imageGlow}></div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ===== WHAT WE DO SECTION ===== */}
-      <section className={`section ${styles.whatWeDo}`}>
+      <section className={styles.whatWeDo}>
         <div className="container">
-          <motion.div
+          <motion.div 
             className={styles.whatWeDoHeader}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <span className="section-label">Our Promises</span>
-            <h2 className="heading-lg">Pillars of Action</h2>
+            <div className={styles.labelWrapper}>
+              <span className={styles.whatWeDoLabel}>OUR PROMISES</span>
+              <div className={styles.redUnderline} />
+            </div>
+            <h2 className={styles.whatWeDoTitle}>WHAT WE DO</h2>
           </motion.div>
 
-          <motion.div
+          <motion.div 
             className={styles.whatWeDoGrid}
             initial="hidden"
             whileInView="visible"
@@ -213,25 +169,25 @@ export default function Home() {
               {
                 icon: ShieldCheck,
                 title: "Transparent Givings",
-                desc: "Every donation is handled with honesty and absolute accountability, ensuring your support makes a documented real impact."
+                desc: "Every donation is handled with honesty and accountability, ensuring your support makes a real impact."
               },
               {
                 icon: HeartHandshake,
-                title: "Community Action",
-                desc: "We work hand in hand with local organizations to inspire change, provide immediate relief, and strengthen the spirit of unity."
+                title: "Community Actions",
+                desc: "We work hand in hand with local communities to inspire change and strengthen the spirit of unity."
               },
               {
                 icon: BookOpen,
-                title: "Impact Stories",
-                desc: "We share powerful, video-verified stories of faith and hope that remind us what it means to stand together as one nation."
+                title: "Stories",
+                desc: "We share powerful stories of faith and hope that remind us what it means to stand together as one nation."
               }
             ].map((feature, idx) => (
-              <motion.div key={idx} className="card" variants={fadeInUp}>
-                <div className="card__icon">
-                  <feature.icon size={32} strokeWidth={1.5} />
+              <motion.div key={idx} className={styles.whatWeDoCard} variants={fadeInUp}>
+                <div className={styles.whatWeDoCardIconCircle}>
+                  <feature.icon size={24} />
                 </div>
-                <h4 className="card__title">{feature.title}</h4>
-                <p className="card__text">{feature.desc}</p>
+                <h4 className={styles.whatWeDoCardTitle}>{feature.title}</h4>
+                <p className={styles.whatWeDoCardText}>{feature.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -239,70 +195,169 @@ export default function Home() {
       </section>
 
       {/* ===== UNITED BY FAITH SECTION ===== */}
-      <section className={`section section--navy ${styles.unitedByFaith}`}>
+      <section className={styles.unitedByFaith}>
         <div className="container">
           <div className={styles.unitedGrid}>
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
             >
-              <span className="section-label section-label--red">Our Commitment</span>
-              <h2 className="heading-lg">United By Faith.<br />Driven By Impact.</h2>
-              <p className="text-body mt-6 mb-10" style={{ maxWidth: '600px' }}>
-                We're building a national movement of everyday Americans stepping up to strengthen communities, restore unity, and stand for what matters. When we pool our resources, the impact is undeniable.
-              </p>
-
-              <div className={styles.statGrid}>
-                <div className={styles.statBox}>
-                  <div className={styles.statValue}>80<span className={styles.statPercent}>%</span></div>
-                  <div className={styles.statLabel}>Directly to Charities</div>
-                </div>
-                <div className={styles.statBox}>
-                  <div className={styles.statValue}>100<span className={styles.statPercent}>%</span></div>
-                  <div className={styles.statLabel}>Voter Controlled</div>
-                </div>
+              <div className={styles.labelWrapper}>
+                <span className={styles.unitedLabel}>ISSUES</span>
+                <div className={styles.aboutUnderline} />
               </div>
+              <h2 className={styles.unitedTitle}>UNITED BY FAITH. DRIVEN BY IMPACT</h2>
+              <p className={styles.unitedText}>
+                We&rsquo;re building a national movement of everyday Americans stepping up to strengthen communities, restore unity, and stand for what matters.
+              </p>
+              <div className={styles.unitedTabs}>
+                <button className={styles.unitedTab}>People-Powered Community</button>
+                <button className={styles.unitedTab}>United by Faith</button>
+                <button className={styles.unitedTab}>Strength Through Unity</button>
+              </div>
+            </motion.div>
+            <motion.div
+              className={styles.unitedImage}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <Image
+                src="/images/shaking-hands.png"
+                alt="Handshake"
+                width={500}
+                height={400}
+                className={styles.unitedHands}
+              />
             </motion.div>
           </div>
         </div>
-        <div className={styles.unitedDecoration}></div>
+      </section>
+
+      {/* ===== REEL CAMPAIGN SECTION ===== */}
+      <section className={styles.reelCampaign}>
+        <div className="container">
+          <div className={styles.reelGrid}>
+            <motion.div 
+              className={styles.reelLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+            >
+              <h2 className={styles.reelMainTitle}>
+                <span className={styles.redText}>TOGETHER</span>
+                <span className={styles.navyText}>WE CAN</span>
+                <span className={styles.blueText}>SAVE LIVES</span>
+              </h2>
+              <p className={styles.reelDesc}>
+                Mum-of-four Nikki Benstead, from Goldsithney, needed the help of the charity when her horse spooked and reared up, falling over backwards on top of Nikki and rolling over her.
+              </p>
+              <Link href="/vote" className={styles.castVoteBtn}>Cast Vote</Link>
+            </motion.div>
+
+            <div className={styles.reelCarouselArea}>
+              <div className={styles.reelNavBtn + ' ' + styles.reelNavLeft}>
+                <ChevronLeft size={20} />
+              </div>
+              
+              <motion.div 
+                className={styles.reelCardGrid}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={staggerContainer}
+              >
+                {[
+                  { img: 'reel1.png', title: "University 'security guard' needs money for medical...", progress: 65 },
+                  { img: 'reel2.png', title: "Emergency fund needed for pro athlete, badly injured in game...", progress: 35 },
+                  { img: 'reel3.png', title: "Fire fighter fund collection for Sarasota neighbourhood fire...", progress: 65 }
+                ].map((reel, idx) => (
+                  <motion.div key={idx} className={styles.reelCard} variants={fadeInUp}>
+                    <div className={styles.reelThumbWrapper}>
+                      <Image src={`/images/${reel.img}`} alt={reel.title} width={226} height={400} className={styles.reelThumb} />
+                    </div>
+                    <p className={styles.reelCardTitle}>{reel.title}</p>
+                    <div className={styles.reelProgressWrapper}>
+                      <div className={styles.reelProgressBg}>
+                        <div className={styles.reelProgressFill} style={{ width: `${reel.progress}%` }}>
+                          <span className={styles.fireEmoji}>🔥</span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <div className={styles.reelNavBtn + ' ' + styles.reelNavRight}>
+                <ChevronRight size={20} />
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ===== IMPACT STORY SECTION ===== */}
       <section className={styles.impactStory}>
-        <div className={styles.impactImage}>
-          <Image
-            src="/images/handshake-flag.png"
-            alt="Handshake with American flag painted hands"
-            fill
-            className={styles.impactBg}
-            quality={90}
-          />
-          <div className={styles.impactImageOverlay}></div>
-        </div>
-        <motion.div
-          className={styles.impactContent}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          <div className={styles.impactCard}>
-            <span className="section-label section-label--red">Field Report</span>
-            <h2 className="heading-md" style={{ color: "var(--color-dark)", marginBottom: "var(--space-md)" }}>
-              Restoring Hope Across State Lines
-            </h2>
-            <p className="text-body" style={{ color: "var(--color-gray-700)", marginBottom: "var(--space-xl)" }}>
-              Through extreme transparent outreach, prayer, and collective financial effort, Faith Fighters for America helps bring comfort, unity, and renewed belief to families in need — proving that when faith leads, profound change follows.
-            </p>
-            <Link href="/media" className="btn btn--dark">
-              WATCH VIDEOS
-              <span className="btn-arrow">→</span>
-            </Link>
+        <div className="container">
+          <div className={styles.impactGrid}>
+            <motion.div 
+               className={styles.impactImages}
+               initial={{ opacity: 0, x: -30 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true, margin: "-100px" }}
+               transition={{ duration: 0.8 }}
+            >
+              <div className={styles.impactImgWrapperMain}>
+                <Image src="/images/flag-2.png" alt="American Flag" width={600} height={450} className={styles.impactImgBlend} />
+              </div>
+              <div className={styles.impactImgWrapperSub}>
+                <Image src="/images/prayer-hands-2.png" alt="Praying Hands" width={400} height={400} className={styles.impactImg} />
+              </div>
+            </motion.div>
+            <motion.div 
+              className={styles.impactContent}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+            >
+              <div className={styles.labelWrapper}>
+                <span className={styles.impactLabel}>IMPACT STORY</span>
+                <div className={styles.impactUnderline} />
+              </div>
+              <h2 className={styles.impactTitle}>FAITH IN ACTION: RESTORING HOPE IN OUR COMMUNITIES</h2>
+              <p className={styles.impactText}>
+                Through outreach, prayer, and collective effort, Faith Fighters for America helps bring comfort, unity, and renewed belief to families in need &mdash; proving that when faith leads, change follows.
+              </p>
+              <Link href="/stories" className={styles.readMoreBtnRed}>READ MORE <span>&gt;</span></Link>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
+      </section>
+
+      <section className={styles.store}>
+        <div className="container">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+          >
+            <div className={styles.storeLabelArea}>
+              <span className={styles.impactLabel}>STORE</span>
+              <div className={styles.impactUnderline} />
+            </div>
+            <h2 className={styles.storeTitle}>GEAR THAT GIVES BACK</h2>
+            <p className={styles.storeSubtitle}>
+              Get ready to wear your faith proudly — our official FFFA store is launching soon with apparel and accessories that inspire unity, courage, and American spirit.
+            </p>
+            <Link href="/store" className={styles.viewAllBtn}>VIEW ALL &gt;</Link>
+          </motion.div>
+        </div>
       </section>
 
       {/* ===== NEWSLETTER SECTION ===== */}
