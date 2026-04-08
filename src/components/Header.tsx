@@ -22,7 +22,7 @@ export default function Header() {
   const pathname = usePathname();
 
   // Hide navigation on auth pages
-  const isAuthPage = pathname === '/login' || pathname === '/register';
+  const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/coming-soon';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -76,10 +76,10 @@ export default function Header() {
               Support Us
             </Link>
             <div className={styles.actionButtons}>
-              <Link href="/login" className={styles.loginBtn}>
+              <Link href="/coming-soon" className={styles.loginBtn}>
                 Login
               </Link>
-              <Link href="/join" className={styles.joinBtn}>
+              <Link href="/coming-soon" className={styles.joinBtn}>
                 Join Now
               </Link>
             </div>
@@ -117,10 +117,10 @@ export default function Header() {
             </li>
           ))}
           <li className={styles.mobileNavItem}>
-            <Link href="/login" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
+            <Link href="/coming-soon" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
           </li>
           <li className={styles.mobileNavItem}>
-            <Link href="/join" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
+            <Link href="/coming-soon" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
           </li>
         </ul>
       </nav>

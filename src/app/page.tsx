@@ -28,7 +28,7 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroBgWrapper}>
           <Image
-            src="/images/hero-flag.png"
+            src="/images/coming-soon-bg.png"
             alt="American flag background"
             fill
             className={styles.heroBg}
@@ -46,9 +46,9 @@ export default function Home() {
         >
           <div className="container">
             <motion.h1 className={styles.heroTitle} variants={staggerContainer}>
-              <motion.span className={`${styles.heroLine1} ${styles.redText}`} variants={fadeInUp}>One Nation.</motion.span>
-              <motion.span className={`${styles.heroLine2} ${styles.whiteText}`} variants={fadeInUp}>One Spirit.</motion.span>
-              <motion.span className={`${styles.heroLine3} ${styles.blueText}`} variants={fadeInUp}>One Mission.</motion.span>
+              <motion.span className={`${styles.heroLine1} ${styles.redText}`} variants={fadeInUp}>ONE NATION.</motion.span>
+              <motion.span className={`${styles.heroLine2} ${styles.whiteText}`} variants={fadeInUp}>ONE SPIRIT.</motion.span>
+              <motion.span className={`${styles.heroLine3} ${styles.blueText}`} variants={fadeInUp}>ONE MISSION.</motion.span>
             </motion.h1>
 
             <motion.p className={styles.heroQuote} variants={fadeInUp}>
@@ -57,10 +57,10 @@ export default function Home() {
             </motion.p>
 
             <motion.div className={styles.heroCtas} variants={fadeInUp}>
-              <Link href="/join" className={styles.heroDonateBtn}>
+              <Link href="/coming-soon" className={styles.heroDonateBtn}>
                 Donate
               </Link>
-              <Link href="/about" className={styles.heroJoinBtn}>
+              <Link href="/coming-soon" className={styles.heroJoinBtn}>
                 Join Now
               </Link>
             </motion.div>

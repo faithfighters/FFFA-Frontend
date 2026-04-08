@@ -1,6 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+// ─── TEMPORARY REDIRECT ─────────────────────────────────────────────────────
+// Remove the two lines below when ready to go live with the register page.
+import { useEffect } from 'react';
+// ────────────────────────────────────────────────────────────────────────────
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -31,6 +36,13 @@ function RegisterForm() {
     const [loading, setLoading] = useState(false);
     const { register } = useAuth();
     const router = useRouter();
+
+    // ─── TEMPORARY REDIRECT ─────────────────────────────────────────────
+    // Remove this useEffect block when ready to go live with the register page.
+    useEffect(() => {
+        router.replace('/coming-soon');
+    }, [router]);
+    // ─────────────────────────────────────────────────────────────────────
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

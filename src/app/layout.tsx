@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
+import { Montserrat, Roboto } from 'next/font/google';
 import Header from '@/components/frontend/Header';
 import Footer from '@/components/frontend/Footer';
 import { AuthProvider } from '@/context/AuthContext';
@@ -9,6 +9,13 @@ const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   variable: '--font-montserrat',
+  display: 'swap',
+});
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  variable: '--font-roboto',
   display: 'swap',
 });
 
@@ -28,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={montserrat.variable} suppressHydrationWarning>
+    <html lang="en" className={`${montserrat.variable} ${roboto.variable}`} suppressHydrationWarning>
       <body style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}>
         <AuthProvider>
           <Header />

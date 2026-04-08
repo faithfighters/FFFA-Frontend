@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-color: var(--color-dark);
+  background-color: #0d1a2f;
 }
 
 .heroBgWrapper {
@@ -25,17 +25,14 @@
 
 .heroBg {
   object-fit: cover;
-  object-position: 50% 20%;
-  transform: scale(1.05);
-  /* Slight zoom for premium feel */
+  object-position: center center;
 }
 
+/* Figma: Rectangle 3263 — left-side dark fade */
 .heroGradient {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.7) 100%),
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  background: linear-gradient(271.53deg, rgba(13, 26, 47, 0) -0.75%, rgba(13, 26, 47, 0.4) 98.39%);
   z-index: 1;
 }
 
@@ -43,91 +40,104 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding-top: var(--header-height);
+  padding-top: 142px; /* below header (~45px nav + 97px secondary) */
 }
 
+/* Figma: stacked title group — left: 101px */
 .heroTitle {
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--space-xl);
+  margin-bottom: 22px;
+  padding-left: 0;
 }
 
 .heroLine1,
 .heroLine2,
 .heroLine3 {
-  font-size: var(--font-size-hero);
+  font-family: var(--font-roboto), 'Arial Black', sans-serif;
+  font-style: normal;
   font-weight: 900;
+  font-size: clamp(2.5rem, 5.6vw, 5rem); /* 80px at 1440 */
+  line-height: 1.175;
   text-transform: uppercase;
-  letter-spacing: -3px;
-  line-height: 1.1;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0;
 }
 
-.redText {
-  color: #ff0000;
-}
+/* Figma colors */
+.redText  { color: #FF003F; }
+.whiteText { color: #FFFFFF; }
+.blueText  { color: #00B1EB; }
 
-.whiteText {
-  color: #ffffff;
-}
-
-.blueText {
-  color: #00aeef;
-}
-
+/* Figma: subtitle — Roboto 500, 14px, white */
 .heroQuote {
-  font-size: 1.15rem;
-  color: #ffffff;
-  line-height: 1.6;
-  max-width: 600px;
-  margin-bottom: var(--space-2xl);
+  font-family: var(--font-roboto), sans-serif;
   font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #FFFFFF;
+  max-width: 465px;
+  margin-bottom: 38px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  opacity: 1;
   border-left: none;
   padding-left: 0;
-  opacity: 0.9;
 }
 
 .heroCtas {
   display: flex;
-  gap: var(--space-md);
+  gap: 17px;
   flex-wrap: wrap;
 }
 
+/* Figma: Donate — 130×45px, #FF0012, radius 14px */
 .heroDonateBtn {
-  background-color: #ff0000;
-  color: var(--color-white);
-  padding: 12px 40px;
-  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 45px;
+  background: #FF0012;
+  color: #FFFFFF;
+  border-radius: 14px;
+  font-family: var(--font-roboto), sans-serif;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 14px;
+  line-height: 16px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 15px rgba(255, 0, 18, 0.35);
 }
 
 .heroDonateBtn:hover {
-  background-color: #cc0000;
+  background: #cc0010;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
 }
 
+/* Figma: Join Now — 130×45px, #FFFFFF, radius 14px, dark text */
 .heroJoinBtn {
-  background-color: var(--color-white);
-  color: var(--color-dark);
-  padding: 12px 40px;
-  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 45px;
+  background: #FFFFFF;
+  color: #031423;
+  border-radius: 14px;
+  font-family: var(--font-roboto), sans-serif;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .heroJoinBtn:hover {
-  background-color: #f8fafc;
+  background: #e8edf2;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
+
 
 /* --- Who We Are Section --- */
 .whoWeAre {
@@ -323,20 +333,18 @@
 
 /* --- Responsive Layout Breakpoints --- */
 @media (max-width: 1280px) {
-
   .heroLine1,
   .heroLine2,
   .heroLine3 {
-    font-size: 5rem;
+    font-size: clamp(2rem, 4.5vw, 4.5rem);
   }
 }
 
 @media (max-width: 1024px) {
-
   .heroLine1,
   .heroLine2,
   .heroLine3 {
-    font-size: 4rem;
+    font-size: clamp(2rem, 4vw, 3.5rem);
   }
 
   .whatWeDoGrid {
@@ -353,16 +361,14 @@
 }
 
 @media (max-width: 768px) {
-
   .heroLine1,
   .heroLine2,
   .heroLine3 {
-    font-size: 3rem;
-    letter-spacing: -1px;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
   }
 
   .heroQuote {
-    font-size: var(--font-size-lg);
+    font-size: 13px;
   }
 
   .whoWeAreGrid {
@@ -418,12 +424,20 @@
 }
 
 @media (max-width: 480px) {
-
   .heroLine1,
   .heroLine2,
   .heroLine3 {
-    font-size: 2.25rem;
-    letter-spacing: -0.5px;
+    font-size: clamp(1.6rem, 8vw, 2rem);
+  }
+
+  .heroCtas {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heroDonateBtn,
+  .heroJoinBtn {
+    width: 140px;
   }
 }
 

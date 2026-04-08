@@ -20,6 +20,11 @@
     box-shadow: var(--shadow-md);
 }
 
+/* Hide header entirely on coming-soon / auth pages */
+.authPage {
+    display: none !important;
+}
+
 .container {
     display: flex;
     align-items: center; 

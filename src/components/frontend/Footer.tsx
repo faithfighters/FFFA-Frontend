@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import styles from './Footer.module.css';
 
 const importantLinks = [
@@ -19,6 +22,8 @@ const quickLinks = [
 ];
 
 export default function Footer() {
+    const pathname = usePathname();
+    if (pathname === '/coming-soon') return null;
     return (
         <footer className={styles.footer}>
             <div className={styles.container}>

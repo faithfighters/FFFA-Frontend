@@ -1,7 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+// ─── TEMPORARY REDIRECT ─────────────────────────────────────────────────────
+// Remove the two lines below when ready to go live with the login page.
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+// ────────────────────────────────────────────────────────────────────────────
+
+import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
 
@@ -25,6 +30,13 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
     const router = useRouter();
+
+    // ─── TEMPORARY REDIRECT ─────────────────────────────────────────────
+    // Remove this useEffect block when ready to go live with the login page.
+    useEffect(() => {
+        router.replace('/coming-soon');
+    }, [router]);
+    // ─────────────────────────────────────────────────────────────────────
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
