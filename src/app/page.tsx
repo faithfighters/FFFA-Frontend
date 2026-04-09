@@ -260,23 +260,41 @@ export default function Home() {
             </motion.div>
 
             <div className={styles.reelCarouselArea}>
-              <div className={styles.reelNavBtn + ' ' + styles.reelNavLeft}>
-                <ChevronLeft size={20} />
-              </div>
+              <button 
+                className={`${styles.reelNavBtn} ${styles.reelNavLeft}`}
+                onClick={() => {
+                  const container = document.getElementById('reels-container');
+                  if (container && container.firstElementChild) {
+                    const scrollAmount = (container.firstElementChild as HTMLElement).offsetWidth + 20;
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                  }
+                }}
+                aria-label="Scroll left"
+              >
+                <ChevronLeft size={24} />
+              </button>
               
-              <motion.div 
+              <div 
+                id="reels-container"
                 className={styles.reelCardGrid}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={staggerContainer}
               >
                 {[
                   { img: 'reel1.png', title: "University 'security guard' needs money for medical...", progress: 65 },
                   { img: 'reel2.png', title: "Emergency fund needed for pro athlete, badly injured in game...", progress: 35 },
-                  { img: 'reel3.png', title: "Fire fighter fund collection for Sarasota neighbourhood fire...", progress: 65 }
+                  { img: 'reel3.png', title: "Fire fighter fund collection for Sarasota neighbourhood fire...", progress: 65 },
+                  { img: 'reel1.png', title: "Local community support for educational supplies...", progress: 80 },
+                  { img: 'reel2.png', title: "Healing hands: Medical outreach for remote clinics...", progress: 45 },
+                  { img: 'reel3.png', title: "Youth sports scholarship fund for underprivileged kids...", progress: 90 },
+                  { img: 'reel1.png', title: "Mental health awareness seminar: Donate to support...", progress: 55 }
                 ].map((reel, idx) => (
-                  <motion.div key={idx} className={styles.reelCard} variants={fadeInUp}>
+                  <motion.div 
+                    key={idx} 
+                    className={styles.reelCard}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: (idx % 3) * 0.1 }}
+                  >
                     <div className={styles.reelThumbWrapper}>
                       <Image src={`/images/${reel.img}`} alt={reel.title} width={226} height={400} className={styles.reelThumb} />
                     </div>
@@ -290,11 +308,21 @@ export default function Home() {
                     </div>
                   </motion.div>
                 ))}
-              </motion.div>
-
-              <div className={styles.reelNavBtn + ' ' + styles.reelNavRight}>
-                <ChevronRight size={20} />
               </div>
+
+              <button 
+                className={`${styles.reelNavBtn} ${styles.reelNavRight}`}
+                onClick={() => {
+                  const container = document.getElementById('reels-container');
+                  if (container && container.firstElementChild) {
+                    const scrollAmount = (container.firstElementChild as HTMLElement).offsetWidth + 20;
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                  }
+                }}
+                aria-label="Scroll right"
+              >
+                <ChevronRight size={24} />
+              </button>
             </div>
           </div>
         </div>
@@ -306,34 +334,46 @@ export default function Home() {
           <div className={styles.impactGrid}>
             <motion.div 
                className={styles.impactImages}
-               initial={{ opacity: 0, x: -30 }}
-               whileInView={{ opacity: 1, x: 0 }}
+               initial={{ opacity: 0, scale: 0.9 }}
+               whileInView={{ opacity: 1, scale: 1 }}
                viewport={{ once: true, margin: "-100px" }}
-               transition={{ duration: 0.8 }}
+               transition={{ duration: 1, ease: "easeOut" }}
             >
               <div className={styles.impactImgWrapperMain}>
-                <Image src="/images/flag-2.png" alt="American Flag" width={600} height={450} className={styles.impactImgBlend} />
+                <Image 
+                  src="/images/flag-2.png" 
+                  alt="American Flag" 
+                  fill 
+                  className={styles.impactImgBlend} 
+                />
               </div>
               <div className={styles.impactImgWrapperSub}>
-                <Image src="/images/prayer-hands-2.png" alt="Praying Hands" width={400} height={400} className={styles.impactImg} />
+                <Image 
+                  src="/images/prayer-hands-2.png" 
+                  alt="Praying Hands" 
+                  fill 
+                  className={styles.impactImg} 
+                />
               </div>
             </motion.div>
             <motion.div 
               className={styles.impactContent}
-              initial="hidden"
-              whileInView="visible"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              variants={fadeInUp}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className={styles.labelWrapper}>
+              <div className={styles.impactLabelArea}>
                 <span className={styles.impactLabel}>IMPACT STORY</span>
-                <div className={styles.impactUnderline} />
+                <div className={styles.impactLine} />
               </div>
               <h2 className={styles.impactTitle}>FAITH IN ACTION: RESTORING HOPE IN OUR COMMUNITIES</h2>
               <p className={styles.impactText}>
                 Through outreach, prayer, and collective effort, Faith Fighters for America helps bring comfort, unity, and renewed belief to families in need &mdash; proving that when faith leads, change follows.
               </p>
-              <Link href="/stories" className={styles.readMoreBtnRed}>READ MORE <span>&gt;</span></Link>
+              <Link href="/stories" className={styles.readMoreBtnRed}>
+                READ MORE <span>&rarr;</span>
+              </Link>
             </motion.div>
           </div>
         </div>

@@ -9,7 +9,6 @@ import styles from './Header.module.css';
 const navLinks = [
   { label: 'About us', href: '/about' },
   { label: 'Media', href: '/media' },
-  { label: 'Blogs', href: '/blogs' },
   { label: 'Store', href: '/store' },
   { label: 'Volunteer', href: '/volunteer' },
   { label: 'Contact', href: '/contact' },
