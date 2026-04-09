@@ -1,6 +1,6 @@
 .banner {
     position: relative;
-    min-height: 400px;
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,7 +8,7 @@
     background-size: cover;
     background-position: center;
     background-color: var(--color-dark-navy);
-    margin-top: var(--header-height);
+    padding-top: var(--header-height);
 }
 
 .banner::before {

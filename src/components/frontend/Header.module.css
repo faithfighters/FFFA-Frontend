@@ -26,13 +26,14 @@
 
 .container {
     display: flex;
-    align-items: flex-start; /* Changed from center to allow touching top */
+    align-items: flex-start;
     justify-content: space-between;
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-xl);
-    height: 150px; /* Accommodate double layer */
+    height: 140px; /* Slightly reduced to keep everything tight to the top */
+    position: relative;
 }
 
 .logo {
@@ -147,14 +148,18 @@
 
 .supportLink {
     color: var(--color-white);
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.9rem; /* Reduced slightly for premium feel */
+    font-weight: 700;
+    text-transform: uppercase; /* Match other navigation vibes */
+    letter-spacing: 1px;
     text-decoration: none;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Make it visible over the flag/images */
 }
 
 .supportLink:hover {
-    opacity: 0.8;
+    color: var(--color-red);
+    transform: translateY(-1px);
 }
 
 .actionButtons {
