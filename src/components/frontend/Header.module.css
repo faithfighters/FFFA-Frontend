@@ -277,7 +277,6 @@
         top: 0;
         right: -100%;
         width: 85%;
-        max-width: 320px;
         height: 100vh;
         background-color: var(--color-dark-navy);
         z-index: 1900;
@@ -330,13 +329,20 @@
     .logoIcon img {
         width: 50px !important;
     }
-    
+
     .mobileNav {
-        width: 90%;
-        padding: 80px 30px;
+        width: 92%;
+        padding: 80px 24px;
     }
-    
+
     .mobileNavLink {
         font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .mobileNav {
+        width: 100%;
+        padding: 80px 20px;
     }
 }

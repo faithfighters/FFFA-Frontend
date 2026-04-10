@@ -174,11 +174,9 @@
 
 /* --- Responsive --- */
 @media (max-width: 1024px) {
-
     .operateGrid,
     .leaderGrid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -196,5 +194,16 @@
     .textCol,
     .ourStory .textCol {
         order: 2;
+    }
+
+    .contentBlock p {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 560px) {
+    .operateGrid,
+    .leaderGrid {
+        grid-template-columns: 1fr;
     }
 }

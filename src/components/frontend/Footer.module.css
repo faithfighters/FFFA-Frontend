@@ -115,8 +115,29 @@
     }
 }
 
+@media (max-width: 768px) {
+    .container {
+        padding: 0 24px;
+    }
+}
+
 @media (max-width: 600px) {
     .mainContent {
         grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .footer {
+        padding-top: 48px;
+    }
+
+    .brand {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 0 16px;
     }
 }
