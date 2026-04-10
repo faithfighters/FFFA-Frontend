@@ -599,8 +599,6 @@ img {
 
   .btn {
     padding: 16px 32px;
-    width: 100%;
-    justify-content: center;
   }
 }
 
@@ -616,6 +614,16 @@ img {
 
   .container {
     padding: 0 var(--space-md);
+  }
+}
+
+@media (max-width: 360px) {
+  .heading-xl { font-size: 2rem; }
+  .heading-lg { font-size: 1.75rem; }
+  .heading-md { font-size: 1.5rem; }
+
+  .container {
+    padding: 0 1rem;
   }
 }
 

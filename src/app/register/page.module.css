@@ -453,7 +453,7 @@
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 800px) {
     .loginPage {
-        padding: 100px 20px 40px; /* Reduced top padding for mobile */
+        padding: 100px 20px 40px;
     }
 
     .avatarRing {
@@ -470,9 +470,22 @@
     .avatarDonation {
         font-size: 9px;
     }
+}
+
+@media (max-width: 640px) {
+    .avatarRing {
+        width: 400px;
+        height: 400px;
+    }
 
     .planGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .planOption {
+        min-height: 130px;
+        padding: 16px 10px;
     }
 }
 

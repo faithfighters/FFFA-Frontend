@@ -142,7 +142,14 @@
     line-height: 1.7;
 }
 
+@media (max-width: 1024px) {
+    .rolesGrid, .stepsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
-    .rolesGrid, .stepsGrid { grid-template-columns: 1fr; }
     .formRow { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+    .rolesGrid, .stepsGrid { grid-template-columns: 1fr; }
 }

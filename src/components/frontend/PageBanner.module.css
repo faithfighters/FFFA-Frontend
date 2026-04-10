@@ -87,10 +87,35 @@
 
 @media (max-width: 768px) {
     .banner {
-        min-height: 300px;
+        min-height: 280px;
+    }
+
+    .container {
+        padding: var(--space-2xl) var(--space-lg);
     }
 
     .title {
         font-size: var(--font-size-3xl);
+    }
+
+    .crumb,
+    .crumbActive,
+    .separator {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        min-height: 240px;
+    }
+
+    .container {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    .title {
+        font-size: var(--font-size-2xl);
+        letter-spacing: 0;
     }
 }

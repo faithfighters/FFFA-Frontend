@@ -571,8 +571,13 @@
 
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 1280px) {
-    .statsGrid { grid-template-columns: repeat(2, 1fr); }
+    .statsGrid { grid-template-columns: repeat(3, 1fr); }
     .campaignsGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 1100px) {
+    .statsGrid { grid-template-columns: repeat(2, 1fr); }
+    .campaignsGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 1024px) {
@@ -629,9 +634,9 @@
     .mobileOverlay.overlayVisible { display: block; }
 
     .greeting { flex-direction: column; align-items: flex-start; gap: 14px; }
-    .statsGrid { grid-template-columns: 1fr; }
+    .statsGrid { grid-template-columns: repeat(2, 1fr); }
     .campaignsGrid { grid-template-columns: 1fr; }
-    .actionsGrid { grid-template-columns: 1fr; }
+    .actionsGrid { grid-template-columns: repeat(2, 1fr); }
 
     .topbar { padding: 0 16px; }
     .searchBar { width: 180px; }
@@ -642,4 +647,6 @@
 @media (max-width: 480px) {
     .searchBar { width: 140px; }
     .userName, .userDropdown { display: none; }
+    .statsGrid { grid-template-columns: 1fr; }
+    .actionsGrid { grid-template-columns: 1fr; }
 }

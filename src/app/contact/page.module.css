@@ -257,10 +257,24 @@
 }
 
 /* --- Responsive --- */
+@media (max-width: 900px) {
+    .grid {
+        gap: var(--space-2xl);
+    }
+
+    .infoTitle {
+        font-size: var(--font-size-2xl);
+    }
+
+    .infoDesc {
+        font-size: var(--font-size-base);
+    }
+}
+
 @media (max-width: 768px) {
     .grid {
         grid-template-columns: 1fr;
-        gap: var(--space-2xl);
+        gap: var(--space-xl);
     }
 
     .formRow {

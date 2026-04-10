@@ -163,6 +163,18 @@
     }
 }
 
+@media (max-width: 768px) {
+    .tableHeader,
+    .tableRow {
+        grid-template-columns: 60px 1.5fr 90px 1fr;
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .colProgress {
+        display: none;
+    }
+}
+
 @media (max-width: 640px) {
     .statsGrid {
         grid-template-columns: 1fr 1fr;
@@ -172,6 +184,7 @@
     .tableHeader,
     .tableRow {
         grid-template-columns: 50px 1fr 80px 80px;
+        padding: var(--space-sm) var(--space-md);
     }
 
     .colProgress {
