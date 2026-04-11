@@ -169,8 +169,21 @@
 .lmsOverview {
   position: relative;
   background-color: #FFFFFF;
-  padding: 80px 0;
-  overflow: visible; /* Changed to visible to ensure no weird clipping */
+  padding: 120px 0;
+  overflow: visible;
+}
+
+/* Diagonal Background Stage from left edge */
+.lmsOverview::before {
+  content: '';
+  position: absolute;
+  top: 60px; /* Start higher up so image's top is under the blue top */
+  left: 0;
+  width: 67%; /* Extended to the right to overlap the pink box correctly */
+  height: 635px;
+  background: #F0F5FC;
+  clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+  z-index: 0;
 }
 
 .lmsGrid {
@@ -179,23 +192,12 @@
   gap: 60px;
   align-items: center;
   position: relative;
-}
-
-/* Rectangle 3264 (Blue Stage) */
-.lmsGrid::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  left: -200px;
-  width: 810px;
-  height: 635px;
-  background: #F0F5FC;
-  z-index: 0;
+  z-index: 1; /* Establishes stacking context */
 }
 
 .lmsVideoWrapper {
   position: relative;
-  z-index: 1;
+  margin-top: 20px; /* Push image down so top aligns perfectly under the shape top */
 }
 
 .videoCard {
@@ -206,7 +208,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
+  margin: 0;
 }
 
 .videoImg {
@@ -351,13 +353,16 @@
     gap: 40px;
     padding: 0 10px;
   }
-  .lmsGrid::before {
+  .lmsOverview::before {
     display: none;
   }
   .lmsVideoWrapper {
     margin: 0 auto;
     width: 100%;
     max-width: 450px;
+  }
+  .videoCard {
+    margin: 0 auto;
   }
   .statsCard {
     margin: 40px auto;
