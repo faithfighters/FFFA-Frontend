@@ -1,10 +1,6 @@
 'use client';
 
-// ─── TEMPORARY REDIRECT ─────────────────────────────────────────────────────
-// Remove the two lines below when ready to go live with the login page.
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-// ────────────────────────────────────────────────────────────────────────────
 
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
@@ -31,28 +27,31 @@ export default function LoginPage() {
     const { login } = useAuth();
     const router = useRouter();
 
-    // ─── TEMPORARY REDIRECT ─────────────────────────────────────────────
-    // Remove this useEffect block when ready to go live with the login page.
-    useEffect(() => {
-        router.replace('/coming-soon');
-    }, [router]);
-    // ─────────────────────────────────────────────────────────────────────
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setLoading(true);
+        
+        // TEMPORARY REDIRECT TO COMING SOON
+        router.push('/coming-soon');
+        
+        // Uncomment below when API is ready
+        /*
         const result = await login(email, password);
         if (result.success) {
             router.push('/dashboard');
         } else {
             setError(result.error || 'Invalid credentials. Please try again.');
         }
+        */
+        
         setLoading(false);
     };
 
     const handleGoogleSSO = () => {
-        window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+        router.push('/coming-soon');
+        // window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
     };
 
     return (
