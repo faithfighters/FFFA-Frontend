@@ -9,14 +9,12 @@ import styles from './page.module.css';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 const floatingDonors = [
-    { name: 'Jordan S.', amount: '$400' },
-    { name: 'Maria T.', amount: '$250' },
-    { name: 'David R.', amount: '$180' },
-    { name: 'Sarah K.', amount: '$400' },
-    { name: 'Alex M.', amount: '$320' },
-    { name: 'Lisa P.', amount: '$150' },
-    { name: 'James W.', amount: '$500' },
-    { name: 'Emma C.', amount: '$275' },
+    { name: 'Jordan S.', amount: '$400', image: 'https://i.pravatar.cc/150?u=1' },
+    { name: 'Maria T.', amount: '$250', image: 'https://i.pravatar.cc/150?u=2' },
+    { name: 'David R.', amount: '$180', image: 'https://i.pravatar.cc/150?u=3' },
+    { name: 'Sarah K.', amount: '$400', image: 'https://i.pravatar.cc/150?u=4' },
+    { name: 'Alex M.', amount: '$320', image: 'https://i.pravatar.cc/150?u=5' },
+    { name: 'Lisa P.', amount: '$150', image: 'https://i.pravatar.cc/150?u=6' },
 ];
 
 export default function LoginPage() {
@@ -32,10 +30,10 @@ export default function LoginPage() {
         e.preventDefault();
         setError('');
         setLoading(true);
-        
+
         // TEMPORARY REDIRECT TO COMING SOON
         router.push('/coming-soon');
-        
+
         // Uncomment below when API is ready
         /*
         const result = await login(email, password);
@@ -45,7 +43,7 @@ export default function LoginPage() {
             setError(result.error || 'Invalid credentials. Please try again.');
         }
         */
-        
+
         setLoading(false);
     };
 
@@ -64,10 +62,15 @@ export default function LoginPage() {
                 {floatingDonors.map((donor, i) => (
                     <div key={i} className={styles.floatingAvatar}>
                         <div className={styles.avatarImg}>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                                <circle cx="12" cy="8" r="4" />
-                                <path d="M5 20c0-4 3.5-7 7-7s7 3 7 7" />
-                            </svg>
+                            {donor.image ? (
+                                /* eslint-disable-next-line @next/next/no-img-element */
+                                <img src={donor.image} alt={donor.name} width={52} height={52} className={styles.profileImg} />
+                            ) : (
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M5 20c0-4 3.5-7 7-7s7 3 7 7" />
+                                </svg>
+                            )}
                         </div>
                         <span className={styles.avatarLabel}>{donor.name}</span>
                         <span className={styles.avatarDonation}>
@@ -131,8 +134,8 @@ export default function LoginPage() {
                 </div>
 
                 <div className={styles.socialRow}>
-                    <button type="button" className={styles.socialBtn} style={{ width: '100%' }} onClick={handleGoogleSSO} aria-label="Google">
-                        Sign in with Google
+                    <button type="button" className={styles.socialBtn} onClick={handleGoogleSSO} aria-label="Google">
+                        <span style={{ fontWeight: 'bold' }}>G</span>
                     </button>
                 </div>
 

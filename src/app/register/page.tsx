@@ -12,14 +12,12 @@ import { Suspense } from 'react';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 const floatingDonors = [
-    { name: 'Jordan S.', amount: '$400' },
-    { name: 'Maria T.', amount: '$250' },
-    { name: 'David R.', amount: '$180' },
-    { name: 'Sarah K.', amount: '$400' },
-    { name: 'Alex M.', amount: '$320' },
-    { name: 'Lisa P.', amount: '$150' },
-    { name: 'James W.', amount: '$500' },
-    { name: 'Emma C.', amount: '$275' },
+    { name: 'Jordan S.', amount: '$400', image: 'https://i.pravatar.cc/150?u=1' },
+    { name: 'Maria T.', amount: '$250', image: 'https://i.pravatar.cc/150?u=2' },
+    { name: 'David R.', amount: '$180', image: 'https://i.pravatar.cc/150?u=3' },
+    { name: 'Sarah K.', amount: '$400', image: 'https://i.pravatar.cc/150?u=4' },
+    { name: 'Alex M.', amount: '$320', image: 'https://i.pravatar.cc/150?u=5' },
+    { name: 'Lisa P.', amount: '$150', image: 'https://i.pravatar.cc/150?u=6' },
 ];
 
 function RegisterForm() {
@@ -70,10 +68,15 @@ function RegisterForm() {
                 {floatingDonors.map((donor, i) => (
                     <div key={i} className={styles.floatingAvatar}>
                         <div className={styles.avatarImg}>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                                <circle cx="12" cy="8" r="4" />
-                                <path d="M5 20c0-4 3.5-7 7-7s7 3 7 7" />
-                            </svg>
+                            {donor.image ? (
+                                /* eslint-disable-next-line @next/next/no-img-element */
+                                <img src={donor.image} alt={donor.name} width={52} height={52} className={styles.profileImg} />
+                            ) : (
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M5 20c0-4 3.5-7 7-7s7 3 7 7" />
+                                </svg>
+                            )}
                         </div>
                         <span className={styles.avatarLabel}>{donor.name}</span>
                         <span className={styles.avatarDonation}>
@@ -100,28 +103,30 @@ function RegisterForm() {
                 {error && <div className={styles.error}>{error}</div>}
 
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.fieldRow}>
-                        <div className={styles.labelRow}>
-                            <label htmlFor="name" className={styles.label}>Full Name</label>
+                    <div style={{ display: 'flex', gap: '16px' }}>
+                        <div className={styles.fieldRow} style={{ flex: 1 }}>
+                            <div className={styles.labelRow}>
+                                <label htmlFor="name" className={styles.label}>Full Name</label>
+                            </div>
+                            <input
+                                id="name" type="text" className={styles.input}
+                                placeholder="John Smith"
+                                value={name} onChange={(e) => setName(e.target.value)}
+                                required suppressHydrationWarning
+                            />
                         </div>
-                        <input
-                            id="name" type="text" className={styles.input}
-                            placeholder="John Smith"
-                            value={name} onChange={(e) => setName(e.target.value)}
-                            required suppressHydrationWarning
-                        />
-                    </div>
 
-                    <div className={styles.fieldRow}>
-                        <div className={styles.labelRow}>
-                            <label htmlFor="email" className={styles.label}>Email</label>
+                        <div className={styles.fieldRow} style={{ flex: 1 }}>
+                            <div className={styles.labelRow}>
+                                <label htmlFor="email" className={styles.label}>Email</label>
+                            </div>
+                            <input
+                                id="email" type="email" className={styles.input}
+                                placeholder="you@example.com"
+                                value={email} onChange={(e) => setEmail(e.target.value)}
+                                required suppressHydrationWarning
+                            />
                         </div>
-                        <input
-                            id="email" type="email" className={styles.input}
-                            placeholder="you@example.com"
-                            value={email} onChange={(e) => setEmail(e.target.value)}
-                            required suppressHydrationWarning
-                        />
                     </div>
 
                     <div className={styles.fieldRow}>
@@ -168,8 +173,8 @@ function RegisterForm() {
                 </div>
 
                 <div className={styles.socialRow}>
-                    <button type="button" className={styles.socialBtn} style={{ width: '100%' }} onClick={handleGoogleSSO} aria-label="Google">
-                        Sign in with Google
+                    <button type="button" className={styles.socialBtn} onClick={handleGoogleSSO} aria-label="Google">
+                        <span style={{ fontWeight: 'bold' }}>G</span>
                     </button>
                 </div>
 
