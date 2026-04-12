@@ -74,10 +74,10 @@ export default function Header() {
               Support Us
             </Link>
             <div className={styles.actionButtons}>
-              <Link href="/coming-soon" className={styles.loginBtn}>
+              <Link href="/login" className={styles.loginBtn}>
                 Login
               </Link>
-              <Link href="/coming-soon" className={styles.joinBtn}>
+              <Link href="/register" className={styles.joinBtn}>
                 Join Now
               </Link>
             </div>
@@ -112,10 +112,10 @@ export default function Header() {
             </li>
           ))}
           <li className={styles.mobileNavItem}>
-            <Link href="/coming-soon" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
+            <Link href="/login" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
           </li>
           <li className={styles.mobileNavItem}>
-            <Link href="/coming-soon" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
+            <Link href="/register" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
           </li>
         </ul>
       </nav>

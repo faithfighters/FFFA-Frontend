@@ -169,8 +169,21 @@
 .lmsOverview {
   position: relative;
   background-color: #FFFFFF;
-  padding: 80px 0;
-  overflow: visible; /* Changed to visible to ensure no weird clipping */
+  padding: 120px 0;
+  overflow: visible;
+}
+
+/* Diagonal Background Stage from left edge */
+.lmsOverview::before {
+  content: '';
+  position: absolute;
+  top: 60px; /* Start higher up so image's top is under the blue top */
+  left: 0;
+  width: 67%; /* Extended to the right to overlap the pink box correctly */
+  height: 635px;
+  background: #F0F5FC;
+  clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+  z-index: 0;
 }
 
 .lmsGrid {
@@ -179,23 +192,12 @@
   gap: 60px;
   align-items: center;
   position: relative;
-}
-
-/* Rectangle 3264 (Blue Stage) */
-.lmsGrid::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  left: -200px;
-  width: 810px;
-  height: 635px;
-  background: #F0F5FC;
-  z-index: 0;
+  z-index: 1; /* Establishes stacking context */
 }
 
 .lmsVideoWrapper {
   position: relative;
-  z-index: 1;
+  margin-top: 20px; /* Push image down so top aligns perfectly under the shape top */
 }
 
 .videoCard {
@@ -206,7 +208,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
+  margin: 0;
 }
 
 .videoImg {
@@ -351,13 +353,16 @@
     gap: 40px;
     padding: 0 10px;
   }
-  .lmsGrid::before {
+  .lmsOverview::before {
     display: none;
   }
   .lmsVideoWrapper {
     margin: 0 auto;
     width: 100%;
     max-width: 450px;
+  }
+  .videoCard {
+    margin: 0 auto;
   }
   .statsCard {
     margin: 40px auto;
@@ -395,15 +400,15 @@
   .donatePill, .joinPill { width: 100%; max-width: 100%; height: 48px; border-radius: 12px; }
 }
 
-/* --- What We Do Section --- */
 .whatWeDo {
   background-color: #0b1626;
   padding: clamp(60px, 10vw, 120px) 0;
+  padding-bottom: 180px; /* Extra padding so the next section can overlap */
 }
 
 .whatWeDoHeader {
-  text-align: center;
-  margin-bottom: 80px;
+  text-align: left;
+  margin-bottom: 60px;
 }
 
 .whatWeDoLabel {
@@ -421,7 +426,7 @@
   font-weight: 900;
   font-size: clamp(32px, 5vw, 56px);
   text-transform: uppercase;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .whatWeDoGrid {
@@ -431,18 +436,17 @@
 }
 
 .whatWeDoCard {
-  background: rgba(255, 255, 255, 0.05);
+  background: #182335;
   padding: 50px 35px;
   border-radius: 4px;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .whatWeDoCard:hover {
   transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: #1e2a3f;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -478,6 +482,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+  align-items: flex-start;
 }
 
 .redUnderline {
@@ -487,24 +492,24 @@
   margin-top: 5px;
 }
 
-.whatWeDoHeader .labelWrapper {
-  align-items: center;
-}
-
-
 /* --- United By Faith Section --- */
 .unitedByFaith {
   position: relative;
-  overflow: hidden;
-  background-color: #F0F5FC;
-  padding: 100px 0;
+  background-color: transparent;
+  padding: 0 0 100px 0;
+  margin-top: -100px;
+  z-index: 10;
 }
 
 .unitedGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 60px;
   align-items: center;
+  background-color: #F0F5FC;
+  padding: 60px;
+  border-radius: 4px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 }
 
 .unitedLabel {
