@@ -12,11 +12,38 @@
 
 .scrolled {
     position: fixed;
-    background-color: rgba(2, 6, 23, 0.95) !important;
-    backdrop-filter: var(--glass-blur);
-    padding-top: 0; /* No padding at top even when scrolled */
-    padding-bottom: var(--space-xs);
+    background-color: rgba(2, 6, 23, 0.4) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding-top: 0;
+    padding-bottom: 0;
     box-shadow: var(--shadow-md);
+}
+
+.scrolled .topNav {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
+.scrolled .container {
+    height: 70px;
+    align-items: center;
+}
+
+.scrolled .logoIcon img {
+    height: 50px !important;
+    width: auto !important;
+    transition: all 0.3s ease;
+}
+
+.scrolled .logo {
+    padding-top: 0;
+}
+
+.scrolled .secondaryActions {
+    padding-top: 0;
 }
 
 /* Hide header entirely on coming-soon / auth pages */

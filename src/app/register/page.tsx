@@ -1,9 +1,5 @@
 'use client';
 
-// ─── TEMPORARY REDIRECT ─────────────────────────────────────────────────────
-// Remove the two lines below when ready to go live with the register page.
-import { useEffect } from 'react';
-// ────────────────────────────────────────────────────────────────────────────
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -37,28 +33,31 @@ function RegisterForm() {
     const { register } = useAuth();
     const router = useRouter();
 
-    // ─── TEMPORARY REDIRECT ─────────────────────────────────────────────
-    // Remove this useEffect block when ready to go live with the register page.
-    useEffect(() => {
-        router.replace('/coming-soon');
-    }, [router]);
-    // ─────────────────────────────────────────────────────────────────────
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setLoading(true);
+
+        // TEMPORARY REDIRECT TO COMING SOON
+        router.push('/coming-soon');
+
+        // Uncomment below when API is ready
+        /*
         const result = await register(name, email, password, plan);
         if (result.success) {
             router.push('/dashboard');
         } else {
             setError(result.error || 'Registration failed. Please try again.');
         }
+        */
+
         setLoading(false);
     };
 
     const handleGoogleSSO = () => {
-        window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+        router.push('/coming-soon');
+        // window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
     };
 
     return (
