@@ -37,8 +37,8 @@
 /* ── Floating Avatars Ring ─────────────────────────────────── */
 .avatarRing {
     position: absolute;
-    width: 750px;
-    height: 750px;
+    width: 600px;
+    height: 600px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -80,8 +80,8 @@
 }
 
 .avatarImg {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: linear-gradient(135deg, #667eea, #764ba2);
     display: flex;
@@ -98,7 +98,7 @@
 }
 
 .avatarLabel {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 600;
     color: #334155;
     text-align: center;
@@ -106,7 +106,7 @@
 }
 
 .avatarDonation {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 700;
     color: #0f172a;
 }
@@ -116,11 +116,11 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 460px;
+    max-width: 368px;
     background: #ffffff;
-    border-radius: 24px;
-    padding: 60px 44px 40px;
-    margin-top: 26px;
+    border-radius: 20px;
+    padding: 48px 36px 32px;
+    margin-top: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0,0,0,0.04);
     animation: cardIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -133,13 +133,13 @@
 /* ── Brand icon ─────────────────────────────────────────────── */
 .brandIcon {
     position: absolute;
-    top: -26px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 52px;
-    height: 52px;
+    width: 42px;
+    height: 42px;
     background: #0f172a;
-    border-radius: 14px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -147,26 +147,26 @@
 }
 
 .brandIcon svg {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     color: #fff;
 }
 
 /* ── Headings ───────────────────────────────────────────────── */
 .title {
-    font-size: 24px;
+    font-size: 19px;
     font-weight: 800;
     color: #0f172a;
     text-align: center;
-    margin: 16px 0 8px;
-    letter-spacing: -0.5px;
+    margin: 12px 0 6px;
+    letter-spacing: -0.4px;
 }
 
 .subtitle {
-    font-size: 14px;
+    font-size: 11.5px;
     color: #64748b;
     text-align: center;
-    margin: 0 0 28px;
+    margin: 0 0 22px;
     line-height: 1.6;
 }
 
@@ -203,15 +203,15 @@
 }
 
 .label {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     color: #334155;
 }
 
 .forgotLink {
-    font-size: 12px;
+    font-size: 9.5px;
     font-weight: 600;
     color: #dc2626;
     text-decoration: none;
@@ -224,12 +224,12 @@
 
 .input {
     width: 100%;
-    padding: 14px 16px;
-    font-size: 14px;
+    padding: 11px 13px;
+    font-size: 11.5px;
     color: #0f172a;
     background: #f8fafc;
     border: 1.5px solid #e2e8f0;
-    border-radius: 12px;
+    border-radius: 10px;
     outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
     font-family: inherit;
@@ -246,10 +246,10 @@
 /* ── Submit button ──────────────────────────────────────────── */
 .submitBtn {
     width: 100%;
-    padding: 16px;
+    padding: 13px;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     color: #fff;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 700;
     border: none;
     border-radius: 50px;
@@ -257,8 +257,8 @@
     transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
     margin-top: 4px;
     font-family: inherit;
-    letter-spacing: 0.3px;
-    box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.4);
+    letter-spacing: 0.2px;
+    box-shadow: 0 8px 16px -4px rgba(15, 23, 42, 0.4);
 }
 
 .submitBtn:hover:not(:disabled) {
@@ -275,7 +275,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    margin: 24px 0 20px;
+    margin: 20px 0 16px;
 }
 
 .dividerLine {
@@ -285,9 +285,9 @@
 }
 
 .dividerText {
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     color: #94a3b8;
     text-transform: uppercase;
     white-space: nowrap;
@@ -302,16 +302,16 @@
 
 .socialBtn {
     flex: 1;
-    height: 48px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #e2e8f0;
-    border-radius: 24px;
+    border-radius: 20px;
     background: #fff;
     cursor: pointer;
     transition: all 0.15s;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
     color: #334155;
     font-family: inherit;
@@ -327,8 +327,8 @@
 /* ── Footer ─────────────────────────────────────────────────── */
 .footer {
     text-align: center;
-    margin-top: 24px;
-    font-size: 13.5px;
+    margin-top: 20px;
+    font-size: 11px;
     color: #64748b;
 }
 
