@@ -365,7 +365,9 @@
 
 @media (max-width: 560px) {
     .loginPage {
-        padding: 80px 16px 32px; /* Further reduced for small screens */
+        padding: 60px 16px 32px;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
     .avatarRing {
@@ -375,5 +377,73 @@
     .card {
         padding: 36px 24px 32px;
         border-radius: 20px;
+    }
+}
+
+/* ── Mobile Scrolling Donors ────────────────────────────────── */
+.mobileDonorsWrapper {
+    display: none;
+    width: 100vw;
+    margin-left: -16px; /* Negate parent padding for full width scroll */
+    margin-bottom: 24px;
+    z-index: 2;
+    margin-top: 10px;
+}
+
+.mobileDonorsScroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 0 16px 12px 16px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+}
+
+.mobileDonorsScroll::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.mobileDonorCard {
+    flex: 0 0 auto;
+    width: 140px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    scroll-snap-align: center;
+    border: 1px solid #f1f5f9;
+}
+
+.mobileDonorInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+}
+
+.mobileDonorName {
+    font-size: 10px;
+    font-weight: 700;
+    color: #334155;
+    white-space: nowrap;
+}
+
+.mobileDonorAmount {
+    font-size: 8px;
+    font-weight: 600;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.mobileDonorAmount strong {
+    color: #0f172a;
+}
+
+@media (max-width: 560px) {
+    .mobileDonorsWrapper {
+        display: block;
     }
 }

@@ -1,13 +1,12 @@
 'use client';
 
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { PLAN_CONFIG, PlanKey } from '@/lib/types';
 import styles from './page.module.css';
-import { Suspense } from 'react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
@@ -20,6 +19,8 @@ const floatingDonors = [
     { name: 'Lisa P.', amount: '$150', image: 'https://i.pravatar.cc/150?u=6' },
 ];
 
+const extendedDonors = Array.from({ length: 60 }).flatMap(() => floatingDonors);
+
 function RegisterForm() {
     const searchParams = useSearchParams();
     const [name, setName] = useState('');
@@ -30,9 +31,46 @@ function RegisterForm() {
     const [loading, setLoading] = useState(false);
     const { register } = useAuth();
     const router = useRouter();
+    const mobileScrollRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (mobileScrollRef.current) {
+                const el = mobileScrollRef.current;
+                const cards = Array.from(el.children) as HTMLElement[];
+                if (cards.length === 0) return;
 
-    const handleSubmit = async (e: React.FormEvent) => {
+                // 1. Calculate the current center of the container
+                const containerCenter = el.scrollLeft + (el.clientWidth / 2);
+                
+                // 2. Find which card is currently closest to the center
+                let closestIndex = 0;
+                let minDistance = Infinity;
+
+                cards.forEach((card, index) => {
+                    const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+                    const distance = Math.abs(containerCenter - cardCenter);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestIndex = index;
+                    }
+                });
+
+                // 3. Target exactly one card ahead
+                const nextIndex = closestIndex + 1;
+                
+                if (nextIndex >= cards.length) {
+                    // Seamlessly loop back to start without animation
+                    el.scrollTo({ left: 0, behavior: 'instant' } as any);
+                } else {
+                    const nextCard = cards[nextIndex];
+                    const targetScroll = nextCard.offsetLeft - (el.clientWidth / 2) + (nextCard.offsetWidth / 2);
+                    el.scrollTo({ left: targetScroll, behavior: 'smooth' });
+                }
+            }
+        }, 3500);
+        return () => clearInterval(interval);
+    }, []);    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setLoading(true);
@@ -84,6 +122,31 @@ function RegisterForm() {
                         </span>
                     </div>
                 ))}
+            </div>
+
+            {/* Mobile Donors Slider */}
+            <div className={styles.mobileDonorsWrapper}>
+                <div className={styles.mobileDonorsScroll} ref={mobileScrollRef}>
+                    {extendedDonors.map((donor, i) => (
+                        <div key={i} className={styles.mobileDonorCard}>
+                            <div className={styles.avatarImg}>
+                                {donor.image ? (
+                                    /* eslint-disable-next-line @next/next/no-img-element */
+                                    <img src={donor.image} alt={donor.name} width={38} height={38} className={styles.profileImg} />
+                                ) : (
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                                        <circle cx="12" cy="8" r="4" />
+                                        <path d="M5 20c0-4 3.5-7 7-7s7 3 7 7" />
+                                    </svg>
+                                )}
+                            </div>
+                            <div className={styles.mobileDonorInfo}>
+                                <span className={styles.mobileDonorName}>{donor.name}</span>
+                                <span className={styles.mobileDonorAmount}>Donated <strong>{donor.amount}</strong>🔥</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div className={styles.card}>
