@@ -28,7 +28,8 @@ const quickLinks = [
 
 export default function Footer() {
     const pathname = usePathname();
-    if (pathname === '/coming-soon') return null;
+    const hideOnRoutes = ['/coming-soon', '/login', '/register'];
+    if (hideOnRoutes.includes(pathname)) return null;
 
     return (
         <footer className={styles.footer}>
