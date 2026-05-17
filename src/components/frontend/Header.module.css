@@ -59,7 +59,8 @@
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-xl);
-    height: 140px; /* Slightly reduced to keep everything tight to the top */
+    height: 140px;
+    /* Slightly reduced to keep everything tight to the top */
     position: relative;
 }
 
@@ -69,7 +70,8 @@
     z-index: 1100;
     flex-shrink: 0;
     margin-right: 20px;
-    padding-top: 23px; /* Figma: top 23px */
+    padding-top: 23px;
+    /* Figma: top 23px */
 }
 
 .logoIcon {
@@ -86,7 +88,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 0; /* Remove gap between top bar and secondary row */
+    gap: 0;
+    /* Remove gap between top bar and secondary row */
     max-width: 100%;
 }
 
@@ -94,11 +97,13 @@
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    border-radius: 0 0 14px 14px; /* Figma: 0 0 14 14 */
+    border-radius: 0 0 14px 14px;
+    /* Figma: 0 0 14 14 */
     padding-left: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    height: 45px; /* Figma height 45px */
+    height: 45px;
+    /* Figma height 45px */
     margin-top: 0;
 }
 
@@ -147,7 +152,8 @@
 }
 
 .topDonateBtn {
-    background-color: #ff0012; /* Figma color */
+    background-color: #ff0012;
+    /* Figma color */
     color: #ffffff;
     font-weight: 700;
     font-size: 14px;
@@ -157,7 +163,8 @@
     padding: 0 35px;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    border-radius: 0 0 14px 0; /* Figma radius */
+    border-radius: 0 0 14px 0;
+    /* Figma radius */
 }
 
 .topDonateBtn:hover {
@@ -168,20 +175,24 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    padding-top: 21px; /* Figma: secondary rows start at 66px. Top bar is 45px. 66-45=21 */
+    padding-top: 21px;
+    /* Figma: secondary rows start at 66px. Top bar is 45px. 66-45=21 */
     position: relative;
     right: 0;
 }
 
 .supportLink {
     color: var(--color-white);
-    font-size: 0.9rem; /* Reduced slightly for premium feel */
+    font-size: 0.9rem;
+    /* Reduced slightly for premium feel */
     font-weight: 700;
-    text-transform: uppercase; /* Match other navigation vibes */
+    text-transform: uppercase;
+    /* Match other navigation vibes */
     letter-spacing: 1px;
     text-decoration: none;
     transition: all 0.3s ease;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Make it visible over the flag/images */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Make it visible over the flag/images */
 }
 
 .supportLink:hover {
@@ -242,8 +253,10 @@
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    outline: none; /* Removed the default ugly browser focus ring */
+    outline: none;
+    /* Removed the default ugly browser focus ring */
 }
+
 .menuToggle:hover {
     background: rgba(15, 23, 42, 0.8);
 }
@@ -266,6 +279,7 @@
     .nav {
         padding: 0 var(--space-md);
     }
+
     .separator {
         margin: 0 var(--space-xs);
     }
@@ -275,7 +289,7 @@
     .container {
         align-items: center;
         padding: 0 clamp(1rem, 5vw, 2rem);
-        height: 80px; 
+        height: 80px;
     }
 
     .logo {

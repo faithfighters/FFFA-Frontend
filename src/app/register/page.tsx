@@ -75,25 +75,23 @@ function RegisterForm() {
         setError('');
         setLoading(true);
 
-        // TEMPORARY REDIRECT TO COMING SOON
-        router.push('/coming-soon');
+        // TEMPORARY REDIRECT TO COMING SOON - Commented Out
+        // router.push('/coming-soon');
 
-        // Uncomment below when API is ready
-        /*
+        // Activated API Registration Flow
         const result = await register(name, email, password, plan);
         if (result.success) {
             router.push('/dashboard');
         } else {
             setError(result.error || 'Registration failed. Please try again.');
         }
-        */
 
         setLoading(false);
     };
 
     const handleGoogleSSO = () => {
-        router.push('/coming-soon');
-        // window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+        // router.push('/coming-soon');
+        window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
     };
 
     return (
