@@ -30,8 +30,10 @@ function SubmitVideoContent() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [causeTag, setCauseTag] = useState('');
+    const [videoFile, setVideoFile] = useState<File | null>(null);
     const [fileName, setFileName] = useState('');
     const [isDragging, setIsDragging] = useState(false);
+    const [uploading, setUploading] = useState(false);
 
     // Submitter info
     const [submitterPhone, setSubmitterPhone] = useState('');
@@ -57,19 +59,62 @@ function SubmitVideoContent() {
         e.preventDefault();
         setIsDragging(false);
         const file = e.dataTransfer.files[0];
-        if (file) setFileName(file.name);
+        if (file) {
+            setVideoFile(file);
+            setFileName(file.name);
+        }
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        if (file) setFileName(file.name);
+        if (file) {
+            setVideoFile(file);
+            setFileName(file.name);
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
+
+        if (!videoFile) {
+            setError('Please select a video file to upload.');
+            return;
+        }
+
         setLoading(true);
         try {
+            // Step 1: Get presigned S3 upload URL
+            setUploading(true);
+            const presignRes = await fetch('/api/upload/presign', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({
+                    contentType: videoFile.type,
+                    fileSizeBytes: videoFile.size,
+                    folder: 'videos',
+                }),
+            });
+            const presignData = await presignRes.json();
+            if (!presignRes.ok) {
+                setError(presignData.message || presignData.error || 'Failed to get upload URL.');
+                return;
+            }
+
+            // Step 2: Upload file directly to S3 using the presigned URL
+            const s3Res = await fetch(presignData.uploadUrl, {
+                method: 'PUT',
+                headers: { 'Content-Type': videoFile.type },
+                body: videoFile,
+            });
+            setUploading(false);
+            if (!s3Res.ok) {
+                setError('Video upload to storage failed. Please try again.');
+                return;
+            }
+
+            // Step 3: Submit the video record with the public URL
             const payload: Record<string, unknown> = {
                 title,
                 description,
@@ -79,7 +124,7 @@ function SubmitVideoContent() {
                 targetAmount: targetAmount ? Number(targetAmount) : undefined,
                 submitterPhone,
                 submitterEmail,
-                videoUrl: '#pending-upload',
+                videoUrl: presignData.publicUrl,
             };
 
             if (billType) {
@@ -107,6 +152,7 @@ function SubmitVideoContent() {
         } catch {
             setError('Network error. Please try again.');
         } finally {
+            setUploading(false);
             setLoading(false);
         }
     };
@@ -155,7 +201,7 @@ function SubmitVideoContent() {
                             <div className={styles.fileInfo}>
                                 <span className={styles.fileIcon}>🎥</span>
                                 <span className={styles.fileNameText}>{fileName}</span>
-                                <button type="button" className={styles.removeFile} onClick={() => setFileName('')}>✕</button>
+                                <button type="button" className={styles.removeFile} onClick={() => { setFileName(''); setVideoFile(null); }}>✕</button>
                             </div>
                         ) : (
                             <>
@@ -288,9 +334,9 @@ function SubmitVideoContent() {
                     <button
                         type="submit"
                         className={`btn btn--primary ${styles.submitBtn}`}
-                        disabled={loading || !title || !causeTag || !description || !beneficiaryName || !targetAmount || !urgencyReason}
+                        disabled={loading || !videoFile || !title || !causeTag || !description || !beneficiaryName || !targetAmount || !urgencyReason}
                     >
-                        {loading ? 'Submitting...' : 'Submit for Review'}
+                        {uploading ? 'Uploading video...' : loading ? 'Submitting...' : 'Submit for Review'}
                     </button>
                 </form>
             </div>

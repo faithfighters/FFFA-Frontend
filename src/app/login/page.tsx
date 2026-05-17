@@ -72,25 +72,22 @@ export default function LoginPage() {
         setError('');
         setLoading(true);
 
-        // TEMPORARY REDIRECT TO COMING SOON
-        router.push('/coming-soon');
-
-        // Uncomment below when API is ready
-        /*
         const result = await login(email, password);
         if (result.success) {
-            router.push('/dashboard');
+            if (result.role === 'admin' || result.role === 'moderator') {
+                window.location.href = 'http://localhost:3001/login';
+            } else {
+                router.push('/dashboard');
+            }
         } else {
             setError(result.error || 'Invalid credentials. Please try again.');
         }
-        */
 
         setLoading(false);
     };
 
     const handleGoogleSSO = () => {
-        router.push('/coming-soon');
-        // window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+        window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
     };
 
     return (
