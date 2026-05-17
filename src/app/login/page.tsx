@@ -74,11 +74,7 @@ export default function LoginPage() {
 
         const result = await login(email, password);
         if (result.success) {
-            if (result.role === 'admin' || result.role === 'moderator') {
-                window.location.href = 'http://localhost:3001/login';
-            } else {
-                router.push('/dashboard');
-            }
+            router.push('/dashboard');
         } else {
             setError(result.error || 'Invalid credentials. Please try again.');
         }
