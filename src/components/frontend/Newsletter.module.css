@@ -1,0 +1,201 @@
+.newsletter {
+    position: relative;
+    background-color: #007AFF;
+    background-image: 
+        linear-gradient(rgba(0, 100, 255, 0.4), rgba(0, 100, 255, 0.4)),
+        url('/images/newsletter-bg.png');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    overflow: hidden;
+    color: #FFFFFF;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.titleArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutLabelWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.labelUnderline {
+    width: 60px;
+    height: 2px;
+    background-color: #FFFFFF;
+    margin-top: 5px;
+}
+
+.title {
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.formArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.description {
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 24px;
+    max-width: 600px;
+}
+
+.form {
+    display: flex;
+    gap: 0; /* Merging input and button for joined look */
+    background: #FFFFFF;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 55px;
+}
+
+.input {
+    flex: 1;
+    padding: 0 20px;
+    background: transparent;
+    border: none;
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 14px;
+    color: #0b1626;
+    outline: none;
+}
+
+.submitBtn {
+    height: 100%;
+    padding: 0 25px;
+    background: #ec1d3c;
+    color: #FFFFFF;
+    border: none;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s ease;
+}
+
+.submitBtn:hover {
+    background: #d11a35;
+}
+
+.noSpam {
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 15px;
+}
+
+@media (max-width: 1024px) {
+    .newsletter {
+        padding: 60px 0;
+    }
+    .container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+        padding: 0 30px;
+    }
+    .aboutLabelWrapper {
+        align-items: center;
+    }
+    .title {
+        font-size: clamp(28px, 8vw, 44px);
+    }
+    .description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        height: auto; /* Allow height to adapt if stacked */
+    }
+}
+
+@media (max-width: 768px) {
+    .newsletter {
+        padding: 60px 0 80px;
+    }
+    .container {
+        padding: 0 20px;
+        gap: 25px;
+    }
+    .form {
+        flex-direction: column;
+        background: transparent;
+        gap: 12px;
+        overflow: visible;
+        width: 100%;
+        max-width: 100%; /* Ensure full width availability */
+    }
+    .input {
+        background: #FFFFFF;
+        height: 56px; /* Increased height */
+        border-radius: 99px !important;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-size: 15px;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease;
+    }
+    .input:focus {
+        border-color: #ec1d3c;
+    }
+    .submitBtn {
+        height: 46px; /* Reduced height */
+        border-radius: 99px !important;
+        width: 100%;
+        justify-content: center;
+        box-shadow: 0 8px 16px rgba(236, 29, 60, 0.35);
+        font-size: 13px;
+        letter-spacing: 0.5px;
+    }
+    .description {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 25px;
+        color: rgba(255, 255, 255, 0.95);
+    }
+    .title {
+        font-size: 28px;
+        margin-top: 10px;
+    }
+}
