@@ -26,12 +26,18 @@ function RegisterForm() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [plan, setPlan] = useState<PlanKey>((searchParams.get('plan') as PlanKey) || 'basic');
+    const [plan, setPlan] = useState<PlanKey>((searchParams.get('plan') as PlanKey) || 'faith_builder');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { register } = useAuth();
+    const { register, user, isLoading: authLoading } = useAuth();
     const router = useRouter();
     const mobileScrollRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!authLoading && user) {
+            router.replace('/');
+        }
+    }, [user, authLoading, router]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -81,7 +87,7 @@ function RegisterForm() {
         // Activated API Registration Flow
         const result = await register(name, email, password, plan);
         if (result.success) {
-            router.push('/dashboard');
+            router.push('/');
         } else {
             setError(result.error || 'Registration failed. Please try again.');
         }
@@ -210,10 +216,10 @@ function RegisterForm() {
                             {(Object.keys(PLAN_CONFIG) as PlanKey[]).map((key) => (
                                 <div
                                     key={key}
-                                    className={`${styles.planOption} ${plan === key ? styles.planOptionActive : ''} ${key === 'standard' ? styles.planPopular : ''}`}
+                                    className={`${styles.planOption} ${plan === key ? styles.planOptionActive : ''} ${key === 'faith_hero' ? styles.planPopular : ''}`}
                                     onClick={() => setPlan(key)}
                                 >
-                                    {key === 'standard' && <div className={styles.popularBadge}>POPULAR</div>}
+                                    {key === 'faith_hero' && <div className={styles.popularBadge}>POPULAR</div>}
                                     <div className={styles.planName}>{PLAN_CONFIG[key].name}</div>
                                     <div className={styles.planPrice}>${PLAN_CONFIG[key].price}/mo</div>
                                     <div className={styles.planVotes}>{PLAN_CONFIG[key].votes} vote{PLAN_CONFIG[key].votes > 1 ? 's' : ''}/cycle</div>

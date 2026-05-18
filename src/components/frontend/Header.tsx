@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import styles from './Header.module.css';
 
 const navLinks = [
@@ -19,6 +20,15 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { user, isAdmin, logout } = useAuth();
+  const firstName = user?.name?.split(' ')[0] || '';
+  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
+
+  const donateHref = !user
+    ? '/join'
+    : isAdmin
+    ? `${adminUrl}/admin`
+    : '/vote';
 
   // Hide navigation on auth pages and coming-soon
   const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/coming-soon';
@@ -63,9 +73,13 @@ export default function Header() {
                 ))}
               </ul>
             </nav>
-            <Link href="/join" className={styles.topDonateBtn}>
+            <a
+              href={donateHref}
+              className={styles.topDonateBtn}
+              {...(isAdmin && user ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
               Donate
-            </Link>
+            </a>
           </div>
 
           {/* Secondary Actions Bar */}
@@ -74,12 +88,19 @@ export default function Header() {
               Support Us
             </Link>
             <div className={styles.actionButtons}>
-              <Link href="/login" className={styles.loginBtn}>
-                Login
-              </Link>
-              <Link href="/register" className={styles.joinBtn}>
-                Join Now
-              </Link>
+              {user ? (
+                <>
+                  <span className={styles.loginBtn} style={{ cursor: 'default' }}>Hi, {firstName}</span>
+                  <button className={styles.joinBtn} onClick={() => logout()} style={{ border: 'none', cursor: 'pointer' }}>
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" className={styles.loginBtn}>Login</Link>
+                  <Link href="/register" className={styles.joinBtn}>Join Now</Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -111,12 +132,22 @@ export default function Header() {
               </Link>
             </li>
           ))}
-          <li className={styles.mobileNavItem}>
-            <Link href="/login" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
-          </li>
-          <li className={styles.mobileNavItem}>
-            <Link href="/register" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
-          </li>
+          {user ? (
+            <li className={styles.mobileNavItem}>
+              <button className={styles.mobileNavLink} onClick={() => { logout(); setIsMenuOpen(false); }} style={{ background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left' }}>
+                Logout ({firstName})
+              </button>
+            </li>
+          ) : (
+            <>
+              <li className={styles.mobileNavItem}>
+                <Link href="/login" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link href="/register" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
 

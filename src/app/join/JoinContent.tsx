@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Newsletter from '@/components/frontend/Newsletter';
 import { PLAN_CONFIG } from '@/lib/types';
+import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,10 +24,11 @@ const features = [
 ];
 
 export default function JoinContent() {
+  const { user } = useAuth();
   const plans = [
-    { key: 'basic' as const, ...PLAN_CONFIG.basic, featured: false },
-    { key: 'standard' as const, ...PLAN_CONFIG.standard, featured: true },
-    { key: 'premium' as const, ...PLAN_CONFIG.premium, featured: false },
+    { key: 'faith_builder' as const, ...PLAN_CONFIG.faith_builder, featured: false },
+    { key: 'faith_hero' as const, ...PLAN_CONFIG.faith_hero, featured: true },
+    { key: 'faith_fighter' as const, ...PLAN_CONFIG.faith_fighter, featured: false },
   ];
 
   return (
@@ -78,13 +80,23 @@ export default function JoinContent() {
                     <li key={feature}>✓ {feature}</li>
                   ))}
                 </ul>
-                <Link
-                  href={`/register?plan=${plan.key}`}
-                  className="btn btn--primary"
-                  style={{ width: '100%', justifyContent: 'center' }}
-                >
-                  Get Started
-                </Link>
+                {user ? (
+                  <Link
+                    href="/vote"
+                    className="btn btn--primary"
+                    style={{ width: '100%', justifyContent: 'center' }}
+                  >
+                    Allocate Your Votes
+                  </Link>
+                ) : (
+                  <Link
+                    href={`/register?plan=${plan.key}`}
+                    className="btn btn--primary"
+                    style={{ width: '100%', justifyContent: 'center' }}
+                  >
+                    Get Started
+                  </Link>
+                )}
               </motion.div>
             ))}
           </div>

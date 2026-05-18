@@ -57,10 +57,10 @@ export default function Home() {
             </motion.p>
 
             <motion.div className={styles.heroCtas} variants={fadeInUp}>
-              <Link href="/coming-soon" className={styles.heroDonateBtn}>
+              <Link href="/join" className={styles.heroDonateBtn}>
                 Donate
               </Link>
-              <Link href="/coming-soon" className={styles.heroJoinBtn}>
+              <Link href="/join" className={styles.heroJoinBtn}>
                 Join Now
               </Link>
             </motion.div>
@@ -132,8 +132,8 @@ export default function Home() {
                 </p>
 
                 <div className={styles.lmsCtas}>
-                  <Link href="/coming-soon" className={styles.donatePill}>Donate</Link>
-                  <Link href="/coming-soon" className={styles.joinPill}>Join Now</Link>
+                  <Link href="/join" className={styles.donatePill}>Donate</Link>
+                  <Link href="/join" className={styles.joinPill}>Join Now</Link>
                 </div>
               </motion.div>
             </div>

@@ -7,7 +7,7 @@ interface AuthContextType {
     user: User | null;
     isLoading: boolean;
     login: (email: string, password: string) => Promise<{ success: boolean; role?: string; error?: string }>;
-    register: (name: string, email: string, password: string, plan: 'basic' | 'standard' | 'premium') => Promise<{ success: boolean; error?: string }>;
+    register: (name: string, email: string, password: string, plan: 'faith_builder' | 'faith_hero' | 'faith_fighter') => Promise<{ success: boolean; error?: string }>;
     logout: () => void;
     isAdmin: boolean;
     refreshUser: () => Promise<void>;
@@ -61,7 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         name: string,
         email: string,
         password: string,
-        plan: 'basic' | 'standard' | 'premium'
+        plan: 'faith_builder' | 'faith_hero' | 'faith_fighter'
     ): Promise<{ success: boolean; error?: string }> => {
         try {
             const res = await fetch('/api/auth/register', {

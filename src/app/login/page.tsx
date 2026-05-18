@@ -24,9 +24,15 @@ export default function LoginPage() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, user, isLoading: authLoading } = useAuth();
     const router = useRouter();
     const mobileScrollRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!authLoading && user) {
+            router.replace('/');
+        }
+    }, [user, authLoading, router]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -74,7 +80,7 @@ export default function LoginPage() {
 
         const result = await login(email, password);
         if (result.success) {
-            router.push('/dashboard');
+            router.push('/');
         } else {
             setError(result.error || 'Invalid credentials. Please try again.');
         }
@@ -83,7 +89,7 @@ export default function LoginPage() {
     };
 
     const handleGoogleSSO = () => {
-        window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+        window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/')}`;
     };
 
     return (

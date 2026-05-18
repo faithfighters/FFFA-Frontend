@@ -3,7 +3,7 @@ export interface User {
     name: string;
     email: string;
     role: 'member' | 'admin';
-    plan?: 'basic' | 'standard' | 'premium' | 'faith_fighter';
+    plan?: 'faith_builder' | 'faith_hero' | 'faith_fighter';
     votesRemaining?: number;
     votesTotal?: number;
     joinedAt: string;
@@ -22,6 +22,7 @@ export interface Cause {
     image?: string;
     status: 'active' | 'funded' | 'closed';
     createdAt: string;
+    submittedBy?: string;
 }
 
 export interface Video {
@@ -71,7 +72,7 @@ export interface Vote {
 export interface Subscription {
     id: string;
     userId: string;
-    plan: 'basic' | 'standard' | 'premium' | 'faith_fighter';
+    plan: 'faith_builder' | 'faith_hero' | 'faith_fighter';
     amount: number;
     status: 'active' | 'cancelled' | 'past_due';
     startDate: string;
@@ -92,13 +93,13 @@ export interface Payout {
 }
 
 export const PLAN_CONFIG = {
-    basic: {
+    faith_builder: {
         name: 'Basic',
         price: 39.95,
-        votes: 2,
+        votes: 1,
         features: [
             'Full platform access',
-            '2 donation votes per cycle',
+            '1 donation vote per cycle',
             'Live-streamed acts of kindness',
             'Impact reports access',
             'Profile badge',
@@ -106,26 +107,26 @@ export const PLAN_CONFIG = {
             'Community updates & exclusive newsletters',
         ],
     },
-    standard: {
+    faith_hero: {
         name: 'Standard',
         price: 59.95,
-        votes: 4,
+        votes: 2,
         features: [
             'All Basic benefits',
-            '4 donation votes per cycle',
+            '2 donation votes per cycle',
             'Priority town hall access',
             'Behind-the-scenes content previews',
             '10% merchandise discount',
             'Annual digital recognition certificate',
         ],
     },
-    premium: {
+    faith_fighter: {
         name: 'Premium',
         price: 79.95,
-        votes: 6,
+        votes: 3,
         features: [
             'All Standard benefits',
-            '6 donation votes per cycle',
+            '3 donation votes per cycle',
             'Propose local initiatives',
             'Quarterly Freedom Roundtable livestreams',
             '15% merchandise discount',

@@ -161,6 +161,7 @@ function VoteContent() {
                     <div className={styles.causesGrid}>
                         {causes.map((cause) => {
                             const votes = allocations[cause.id] || 0;
+                            const isOwnCause = !!(user?.id && cause.submittedBy && cause.submittedBy === user.id);
                             const progress = cause.goalAmount > 0
                                 ? Math.round((cause.raisedAmount / cause.goalAmount) * 100)
                                 : 0;
@@ -184,11 +185,19 @@ function VoteContent() {
                                                 <span>{cause.totalVotes.toLocaleString()} donations</span>
                                             </div>
                                         </div>
-                                        <div className={styles.voteControls}>
-                                            <button className={styles.voteBtn} onClick={() => removeVote(cause.id)} disabled={votes === 0} aria-label="Remove donation vote">−</button>
-                                            <span className={styles.voteCount}>{votes}</span>
-                                            <button className={styles.voteBtn} onClick={() => addVote(cause.id)} disabled={remaining === 0} aria-label="Add donation vote">+</button>
-                                        </div>
+                                        {isOwnCause ? (
+                                            <div className={styles.voteControls}>
+                                                <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontStyle: 'italic' }}>
+                                                    You cannot vote for your own submission
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <div className={styles.voteControls}>
+                                                <button className={styles.voteBtn} onClick={() => removeVote(cause.id)} disabled={votes === 0} aria-label="Remove donation vote">−</button>
+                                                <span className={styles.voteCount}>{votes}</span>
+                                                <button className={styles.voteBtn} onClick={() => addVote(cause.id)} disabled={remaining === 0} aria-label="Add donation vote">+</button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             );
