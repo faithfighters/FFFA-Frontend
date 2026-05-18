@@ -48,7 +48,7 @@ function DashboardLayout() {
     }, [pathname]);
 
     useEffect(() => {
-        refreshUser().catch(() => {});
+        refreshUser().catch(() => { });
         fetch('/api/votes', { credentials: 'include' })
             .then(r => r.json())
             .then(data => {
@@ -61,9 +61,9 @@ function DashboardLayout() {
                     setAllocations(init);
                 }
             })
-            .catch(() => {})
+            .catch(() => { })
             .finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleCastVote = async (causeId: string, change: number) => {
@@ -167,6 +167,7 @@ function DashboardLayout() {
                     {bottomItems.map((item) => (
                         <Link
                             key={item.href}
+                            href={item.href}
                             className={`${styles.navLink} ${pathname === item.href ? styles.navLinkActive : ''}`}
                         >
                             <span className={styles.navIcon}>{item.icon}</span>
@@ -200,8 +201,8 @@ function DashboardLayout() {
 
                     <div className={styles.topbarRight}>
                         <button className={styles.notificationBtn}>🔔</button>
-                        <div 
-                            className={styles.userProfile} 
+                        <div
+                            className={styles.userProfile}
                             onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
                             style={{ position: 'relative', cursor: 'pointer' }}
                         >
@@ -231,7 +232,7 @@ function DashboardLayout() {
                                     display: 'flex',
                                     flexDirection: 'column'
                                 }}>
-                                    <Link 
+                                    <Link
                                         href="/dashboard/profile"
                                         style={{
                                             padding: '12px 20px',
@@ -250,7 +251,7 @@ function DashboardLayout() {
                                     >
                                         👤 My Profile
                                     </Link>
-                                    <button 
+                                    <button
                                         onClick={async (e) => {
                                             e.stopPropagation();
                                             await logout();
@@ -325,8 +326,8 @@ function DashboardLayout() {
                                 {causes.slice(0, 4).map((cause) => {
                                     const progress = cause.goalAmount > 0 ? Math.round((cause.raisedAmount / cause.goalAmount) * 100) : 0;
                                     return (
-                                        <div 
-                                            key={cause.id} 
+                                        <div
+                                            key={cause.id}
                                             className={styles.campaignCard}
                                             style={{ cursor: 'pointer' }}
                                             onClick={() => setActiveVideo(cause)}
@@ -387,11 +388,11 @@ function DashboardLayout() {
                     <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                         <div className={styles.modalVideoSection}>
                             <button className={styles.closeBtn} onClick={() => setActiveVideo(null)}>✕</button>
-                            <video 
-                                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
-                                className={styles.modalVideo} 
-                                controls 
-                                autoPlay 
+                            <video
+                                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                                className={styles.modalVideo}
+                                controls
+                                autoPlay
                             />
                         </div>
                         <div className={styles.modalDetails}>
@@ -400,14 +401,14 @@ function DashboardLayout() {
                                 <h3 className={styles.modalTitle}>{activeVideo.name}</h3>
                                 <p className={styles.modalDesc}>{activeVideo.description}</p>
                             </div>
-                            
+
                             <div className={styles.votingSection}>
                                 <div className={styles.votingTitle}>
                                     🗳️ Cast Votes on this Reel
                                 </div>
                                 <div className={styles.votingControls}>
-                                    <button 
-                                        className={styles.votingBtn} 
+                                    <button
+                                        className={styles.votingBtn}
                                         onClick={() => handleCastVote(activeVideo.id, -1)}
                                         disabled={!(allocations[activeVideo.id] > 0)}
                                     >
@@ -416,8 +417,8 @@ function DashboardLayout() {
                                     <span className={styles.votingCount}>
                                         {allocations[activeVideo.id] || 0} Votes
                                     </span>
-                                    <button 
-                                        className={styles.votingBtn} 
+                                    <button
+                                        className={styles.votingBtn}
                                         onClick={() => handleCastVote(activeVideo.id, 1)}
                                         disabled={!(user && (user.votesRemaining ?? 0) > 0)}
                                     >
