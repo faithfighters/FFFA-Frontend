@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import { ShieldCheck, HeartHandshake, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
@@ -22,6 +23,10 @@ const staggerContainer: Variants = {
 };
 
 export default function Home() {
+  const { user } = useAuth();
+  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
+  const donateHref = !user ? '/join' : `${adminUrl}/admin`;
+
   return (
     <main className={styles.main}>
       {/* ===== HERO SECTION ===== */}
@@ -57,7 +62,7 @@ export default function Home() {
             </motion.p>
 
             <motion.div className={styles.heroCtas} variants={fadeInUp}>
-              <Link href="/join" className={styles.heroDonateBtn}>
+              <Link href={donateHref} className={styles.heroDonateBtn} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>
                 Donate
               </Link>
               <Link href="/join" className={styles.heroJoinBtn}>
@@ -132,7 +137,7 @@ export default function Home() {
                 </p>
 
                 <div className={styles.lmsCtas}>
-                  <Link href="/join" className={styles.donatePill}>Donate</Link>
+                  <Link href={donateHref} className={styles.donatePill} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>Donate</Link>
                   <Link href="/join" className={styles.joinPill}>Join Now</Link>
                 </div>
               </motion.div>

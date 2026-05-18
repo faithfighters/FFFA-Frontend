@@ -26,9 +26,7 @@ export default function Header() {
 
   const donateHref = !user
     ? '/join'
-    : isAdmin
-    ? `${adminUrl}/admin`
-    : '/vote';
+    : `${adminUrl}/admin`;
 
   // Hide navigation on auth pages and coming-soon
   const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/coming-soon';
@@ -76,7 +74,8 @@ export default function Header() {
             <a
               href={donateHref}
               className={styles.topDonateBtn}
-              {...(isAdmin && user ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              target={user ? "_blank" : undefined}
+              rel={user ? "noopener noreferrer" : undefined}
             >
               Donate
             </a>
