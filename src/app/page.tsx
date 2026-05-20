@@ -24,7 +24,8 @@ const staggerContainer: Variants = {
 
 export default function Home() {
   const { user } = useAuth();
-  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
+  // const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
+  const adminUrl = 'https://stage-admin.faithfightersforamerica.com'
   const donateHref = !user ? '/join' : `${adminUrl}/admin`;
 
   return (
@@ -95,10 +96,10 @@ export default function Home() {
                 />
                 <div className={styles.videoOverlay}>
                   <div className={styles.playIcon}>
-                    <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M8 5v14l11-7z" /></svg>
                   </div>
                   <div className={styles.volumeIcon}>
-                    <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" /></svg>
                   </div>
                 </div>
               </div>
@@ -149,7 +150,7 @@ export default function Home() {
       {/* ===== WHAT WE DO SECTION ===== */}
       <section className={styles.whatWeDo}>
         <div className="container">
-          <motion.div 
+          <motion.div
             className={styles.whatWeDoHeader}
             initial="hidden"
             whileInView="visible"
@@ -163,7 +164,7 @@ export default function Home() {
             <h2 className={styles.whatWeDoTitle}>WHAT WE DO</h2>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className={styles.whatWeDoGrid}
             initial="hidden"
             whileInView="visible"
@@ -246,7 +247,7 @@ export default function Home() {
       <section className={styles.reelCampaign}>
         <div className="container">
           <div className={styles.reelGrid}>
-            <motion.div 
+            <motion.div
               className={styles.reelLeft}
               initial="hidden"
               whileInView="visible"
@@ -265,7 +266,7 @@ export default function Home() {
             </motion.div>
 
             <div className={styles.reelCarouselArea}>
-              <button 
+              <button
                 className={`${styles.reelNavBtn} ${styles.reelNavLeft}`}
                 onClick={() => {
                   const container = document.getElementById('reels-container');
@@ -278,8 +279,8 @@ export default function Home() {
               >
                 <ChevronLeft size={24} />
               </button>
-              
-              <div 
+
+              <div
                 id="reels-container"
                 className={styles.reelCardGrid}
               >
@@ -292,8 +293,8 @@ export default function Home() {
                   { img: 'reel3.png', title: "Youth sports scholarship fund for underprivileged kids...", progress: 90 },
                   { img: 'reel1.png', title: "Mental health awareness seminar: Donate to support...", progress: 55 }
                 ].map((reel, idx) => (
-                  <motion.div 
-                    key={idx} 
+                  <motion.div
+                    key={idx}
                     className={styles.reelCard}
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -315,7 +316,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <button 
+              <button
                 className={`${styles.reelNavBtn} ${styles.reelNavRight}`}
                 onClick={() => {
                   const container = document.getElementById('reels-container');
@@ -337,31 +338,31 @@ export default function Home() {
       <section className={styles.impactStory}>
         <div className="container">
           <div className={styles.impactGrid}>
-            <motion.div 
-               className={styles.impactImages}
-               initial={{ opacity: 0, scale: 0.9 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true, margin: "-100px" }}
-               transition={{ duration: 1, ease: "easeOut" }}
+            <motion.div
+              className={styles.impactImages}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, ease: "easeOut" }}
             >
               <div className={styles.impactImgWrapperMain}>
-                <Image 
-                  src="/images/flag-2.png" 
-                  alt="American Flag" 
-                  fill 
-                  className={styles.impactImgBlend} 
+                <Image
+                  src="/images/flag-2.png"
+                  alt="American Flag"
+                  fill
+                  className={styles.impactImgBlend}
                 />
               </div>
               <div className={styles.impactImgWrapperSub}>
-                <Image 
-                  src="/images/prayer-hands-2.png" 
-                  alt="Praying Hands" 
-                  fill 
-                  className={styles.impactImg} 
+                <Image
+                  src="/images/prayer-hands-2.png"
+                  alt="Praying Hands"
+                  fill
+                  className={styles.impactImg}
                 />
               </div>
             </motion.div>
-            <motion.div 
+            <motion.div
               className={styles.impactContent}
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}

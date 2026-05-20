@@ -8,7 +8,8 @@ import { useAuth } from '@/context/AuthContext';
 import { PLAN_CONFIG, PlanKey } from '@/lib/types';
 import styles from './page.module.css';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+// const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_URL = 'https://stage-api.faithfightersforamerica.com';
 
 const floatingDonors = [
     { name: 'Jordan S.', amount: '$400', image: 'https://i.pravatar.cc/150?u=1' },
@@ -48,7 +49,7 @@ function RegisterForm() {
 
                 // 1. Calculate the current center of the container
                 const containerCenter = el.scrollLeft + (el.clientWidth / 2);
-                
+
                 // 2. Find which card is currently closest to the center
                 let closestIndex = 0;
                 let minDistance = Infinity;
@@ -64,7 +65,7 @@ function RegisterForm() {
 
                 // 3. Target exactly one card ahead
                 const nextIndex = closestIndex + 1;
-                
+
                 if (nextIndex >= cards.length) {
                     // Seamlessly loop back to start without animation
                     el.scrollTo({ left: 0, behavior: 'instant' } as any);
@@ -76,7 +77,7 @@ function RegisterForm() {
             }
         }, 3500);
         return () => clearInterval(interval);
-    }, []);    const handleSubmit = async (e: React.FormEvent) => {
+    }, []); const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setLoading(true);

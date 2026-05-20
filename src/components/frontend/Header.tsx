@@ -22,8 +22,8 @@ export default function Header() {
   const pathname = usePathname();
   const { user, isAdmin, logout } = useAuth();
   const firstName = user?.name?.split(' ')[0] || '';
-  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
-
+  // const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
+  const adminUrl = 'https://stage-admin.faithfightersforamerica.com';
   const donateHref = !user
     ? '/join'
     : `${adminUrl}/admin`;
