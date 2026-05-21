@@ -1,0 +1,168 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
+import styles from './Header.module.css';
+
+const navLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Join The Movement', href: '/join' },
+  { label: 'Media', href: '/media' },
+  { label: 'Store', href: '/store' },
+  { label: 'Volunteer', href: '/volunteer' },
+  { label: 'Contact', href: '/contact' },
+];
+
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const { user, logout } = useAuth();
+  const adminUrl = 'https://stage-admin.faithfightersforamerica.com';
+  const donateHref = !user ? '/login' : `${adminUrl}/admin`;
+
+  const handleDonateClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!user) return; // Navigate normally to /login
+    e.preventDefault();
+
+    const newTab = window.open('', '_blank');
+    if (newTab) {
+      newTab.document.write('<p style="font-family: sans-serif; text-align: center; margin-top: 10%;">Redirecting securely to the donation portal...</p>');
+    }
+
+    try {
+      const res = await fetch('/api/auth/sso-token', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const { token } = await res.json();
+        if (newTab) {
+          newTab.location.href = `${adminUrl}/sso-login?token=${encodeURIComponent(token)}`;
+        }
+      } else {
+        if (newTab) {
+          newTab.location.href = `${adminUrl}/login?error=sso_failed`;
+        }
+      }
+    } catch (err) {
+      if (newTab) {
+        newTab.location.href = `${adminUrl}/login`;
+      }
+    }
+  };
+
+  // Hide navigation on auth pages
+  const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/coming-soon';
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${isAuthPage ? styles.authPage : ''}`}>
+      <div className={styles.container}>
+        <Link href="/" className={styles.logo}>
+          <div className={styles.logoIcon}>
+            <Image
+              src="/images/fffa-logo.png"
+              alt="FFFA Logo"
+              width={100}
+              height={140}
+              priority
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+        </Link>
+
+        {!isAuthPage && (
+        <div className={styles.navWrapper}>
+          {/* Top White Navigation Bar */}
+          <div className={styles.topNav}>
+            <nav className={styles.nav}>
+              <ul className={styles.navList}>
+                {navLinks.map((link, index) => (
+                  <li key={link.href} className={styles.navItem}>
+                    <Link
+                      href={link.href}
+                      className={`${styles.navLink} ${pathname === link.href ? styles.navLinkActive : ''}`}
+                    >
+                      {link.label}
+                    </Link>
+                    {index < navLinks.length - 1 && <span className={styles.separator}>|</span>}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <Link href={donateHref} className={styles.topDonateBtn} onClick={handleDonateClick} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>
+              Donate
+            </Link>
+          </div>
+
+          {/* Secondary Actions Bar */}
+          <div className={styles.secondaryActions}>
+            <Link href="/support" className={styles.supportLink}>
+              Support Us
+            </Link>
+            <div className={styles.actionButtons}>
+              <Link href="/login" className={styles.loginBtn}>
+                Login
+              </Link>
+              <Link href="/register" className={styles.joinBtn}>
+                Join Now
+              </Link>
+            </div>
+          </div>
+        </div>
+        )}
+
+        {!isAuthPage && (
+        <button
+          className={styles.menuToggle}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerOpen : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+        )}
+      </div>
+
+      {/* Mobile Navigation */}
+      <nav className={`${styles.mobileNav} ${isMenuOpen ? styles.mobileNavOpen : ''}`}>
+        <ul className={styles.mobileNavList}>
+          {navLinks.map((link) => (
+            <li key={link.href} className={styles.mobileNavItem}>
+              <Link
+                href={link.href}
+                className={`${styles.mobileNavLink} ${pathname === link.href ? styles.mobileNavLinkActive : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+          <li className={styles.mobileNavItem}>
+            <Link href="/login" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
+          </li>
+          <li className={styles.mobileNavItem}>
+            <Link href="/register" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
+          </li>
+        </ul>
+      </nav>
+
+      {isMenuOpen && (
+        <div className={styles.overlay} onClick={() => setIsMenuOpen(false)} />
+      )}
+    </header>
+  );
+}
