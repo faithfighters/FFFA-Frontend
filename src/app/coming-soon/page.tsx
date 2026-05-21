@@ -3,10 +3,46 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
 
 export default function ComingSoonPage() {
     const [mounted, setMounted] = useState(false);
+    const { user } = useAuth();
+    const adminUrl = 'https://stage-admin.faithfightersforamerica.com';
+    const donateHref = !user ? '/login' : `${adminUrl}/admin`;
+
+    const handleDonateClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (!user) return; // Navigate normally to /login
+        e.preventDefault();
+
+        // Open a blank tab immediately to bypass popup blockers
+        const newTab = window.open('', '_blank');
+        if (newTab) {
+            newTab.document.write('<p style="font-family: sans-serif; text-align: center; margin-top: 10%;">Redirecting securely to the donation portal...</p>');
+        }
+
+        try {
+            const res = await fetch('/api/auth/sso-token', {
+                method: 'POST',
+                credentials: 'include',
+            });
+            if (res.ok) {
+                const { token } = await res.json();
+                if (newTab) {
+                    newTab.location.href = `${adminUrl}/sso-login?token=${encodeURIComponent(token)}`;
+                }
+            } else {
+                if (newTab) {
+                    newTab.location.href = `${adminUrl}/login?error=sso_failed`;
+                }
+            }
+        } catch (err) {
+            if (newTab) {
+                newTab.location.href = `${adminUrl}/login`;
+            }
+        }
+    };
 
     useEffect(() => {
         setMounted(true);
@@ -55,7 +91,7 @@ export default function ComingSoonPage() {
 
                 {/* Buttons (Figma: Group 1000002459 + Group 1000002462) */}
                 <div className={styles.actions}>
-                    <Link href="/join" className={styles.donateBtn}>
+                    <Link href={donateHref} className={styles.donateBtn} onClick={handleDonateClick} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>
                         Donate
                     </Link>
                     <Link href="/join" className={styles.joinBtn}>

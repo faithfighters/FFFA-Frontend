@@ -24,9 +24,39 @@ export default function Header() {
   const firstName = user?.name?.split(' ')[0] || '';
   // const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
   const adminUrl = 'https://stage-admin.faithfightersforamerica.com';
-  const donateHref = !user
-    ? '/join'
-    : `${adminUrl}/admin`;
+  const donateHref = !user ? '/login' : `${adminUrl}/admin`;
+
+  const handleDonateClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!user) return; // Navigate normally to /login
+    e.preventDefault();
+
+    // Open a blank tab immediately to bypass popup blockers
+    const newTab = window.open('', '_blank');
+    if (newTab) {
+      newTab.document.write('<p style="font-family: sans-serif; text-align: center; margin-top: 10%;">Redirecting securely to the donation portal...</p>');
+    }
+
+    try {
+      const res = await fetch('/api/auth/sso-token', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const { token } = await res.json();
+        if (newTab) {
+          newTab.location.href = `${adminUrl}/sso-login?token=${encodeURIComponent(token)}`;
+        }
+      } else {
+        if (newTab) {
+          newTab.location.href = `${adminUrl}/login?error=sso_failed`;
+        }
+      }
+    } catch (err) {
+      if (newTab) {
+        newTab.location.href = `${adminUrl}/login`;
+      }
+    }
+  };
 
   // Hide navigation on auth pages and coming-soon
   const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/coming-soon';
@@ -74,6 +104,7 @@ export default function Header() {
             <a
               href={donateHref}
               className={styles.topDonateBtn}
+              onClick={handleDonateClick}
               target={user ? "_blank" : undefined}
               rel={user ? "noopener noreferrer" : undefined}
             >

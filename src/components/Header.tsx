@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import styles from './Header.module.css';
 
 const navLinks = [
@@ -20,6 +21,40 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { user, logout } = useAuth();
+  const adminUrl = 'https://stage-admin.faithfightersforamerica.com';
+  const donateHref = !user ? '/login' : `${adminUrl}/admin`;
+
+  const handleDonateClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!user) return; // Navigate normally to /login
+    e.preventDefault();
+
+    const newTab = window.open('', '_blank');
+    if (newTab) {
+      newTab.document.write('<p style="font-family: sans-serif; text-align: center; margin-top: 10%;">Redirecting securely to the donation portal...</p>');
+    }
+
+    try {
+      const res = await fetch('/api/auth/sso-token', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const { token } = await res.json();
+        if (newTab) {
+          newTab.location.href = `${adminUrl}/sso-login?token=${encodeURIComponent(token)}`;
+        }
+      } else {
+        if (newTab) {
+          newTab.location.href = `${adminUrl}/login?error=sso_failed`;
+        }
+      }
+    } catch (err) {
+      if (newTab) {
+        newTab.location.href = `${adminUrl}/login`;
+      }
+    }
+  };
 
   // Hide navigation on auth pages
   const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/coming-soon';
@@ -65,7 +100,7 @@ export default function Header() {
                 ))}
               </ul>
             </nav>
-            <Link href="/join" className={styles.topDonateBtn}>
+            <Link href={donateHref} className={styles.topDonateBtn} onClick={handleDonateClick} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>
               Donate
             </Link>
           </div>

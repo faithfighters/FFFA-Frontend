@@ -26,7 +26,39 @@ export default function Home() {
   const { user } = useAuth();
   // const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || 'http://localhost:3001';
   const adminUrl = 'https://stage-admin.faithfightersforamerica.com'
-  const donateHref = !user ? '/join' : `${adminUrl}/admin`;
+  const donateHref = !user ? '/login' : `${adminUrl}/admin`;
+
+  const handleDonateClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!user) return; // Navigate normally to /login
+    e.preventDefault();
+
+    // Open a blank tab immediately to bypass popup blockers
+    const newTab = window.open('', '_blank');
+    if (newTab) {
+      newTab.document.write('<p style="font-family: sans-serif; text-align: center; margin-top: 10%;">Redirecting securely to the donation portal...</p>');
+    }
+
+    try {
+      const res = await fetch('/api/auth/sso-token', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const { token } = await res.json();
+        if (newTab) {
+          newTab.location.href = `${adminUrl}/sso-login?token=${encodeURIComponent(token)}`;
+        }
+      } else {
+        if (newTab) {
+          newTab.location.href = `${adminUrl}/login?error=sso_failed`;
+        }
+      }
+    } catch (err) {
+      if (newTab) {
+        newTab.location.href = `${adminUrl}/login`;
+      }
+    }
+  };
 
   return (
     <main className={styles.main}>
@@ -63,7 +95,7 @@ export default function Home() {
             </motion.p>
 
             <motion.div className={styles.heroCtas} variants={fadeInUp}>
-              <Link href={donateHref} className={styles.heroDonateBtn} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>
+              <Link href={donateHref} className={styles.heroDonateBtn} onClick={handleDonateClick} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>
                 Donate
               </Link>
               <Link href="/join" className={styles.heroJoinBtn}>
@@ -138,7 +170,7 @@ export default function Home() {
                 </p>
 
                 <div className={styles.lmsCtas}>
-                  <Link href={donateHref} className={styles.donatePill} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>Donate</Link>
+                  <Link href={donateHref} className={styles.donatePill} onClick={handleDonateClick} target={user ? "_blank" : undefined} rel={user ? "noopener noreferrer" : undefined}>Donate</Link>
                   <Link href="/join" className={styles.joinPill}>Join Now</Link>
                 </div>
               </motion.div>
