@@ -1,0 +1,148 @@
+.footer {
+    background-color: #0b1626;
+    padding: 80px 0 0;
+    color: #FFFFFF;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.mainContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    padding-bottom: 60px;
+}
+
+.brand {
+    padding-right: 40px;
+}
+
+.brandDescription {
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #B0BCC8;
+    margin-top: 20px;
+}
+
+.columnTitle {
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    display: block;
+}
+
+.linkList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.linkList li {
+    margin-bottom: 12px;
+}
+
+.link {
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 14px;
+    color: #B0BCC8;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.link:hover {
+    color: #FFFFFF;
+}
+
+.contactItem {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 14px;
+    color: #B0BCC8;
+}
+
+.socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.socialLink {
+    width: 44px;
+    height: 44px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #031423;
+    transition: transform 0.2s;
+}
+
+.socialLink:hover {
+    transform: translateY(-3px);
+}
+
+.socialLink:focus-visible {
+    outline: 2px solid #007AFF;
+    outline-offset: 2px;
+}
+
+.copyright {
+    background-color: #020617;
+    padding: 24px 0;
+    text-align: center;
+}
+
+.copyright p {
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 1000px) {
+    .mainContent {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .mainContent {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .footer {
+        padding-top: 48px;
+    }
+
+    .brand {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 0 16px;
+    }
+}

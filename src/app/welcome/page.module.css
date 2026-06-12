@@ -1,0 +1,153 @@
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    padding: 40px 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 28px;
+    padding: 56px 48px 48px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.card[data-animating='true'] {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 36px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.dotActive {
+    background: #dc2626;
+    width: 24px;
+    border-radius: 4px;
+}
+
+.dotDone {
+    background: #cbd5e1;
+}
+
+.icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #0f172a;
+    margin: 0 0 16px;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+}
+
+.body {
+    font-size: 16px;
+    color: #475569;
+    line-height: 1.65;
+    margin: 0 0 32px;
+}
+
+.voteBox {
+    background: linear-gradient(135deg, #fff5f5, #fff1f2);
+    border: 2px solid #fecaca;
+    border-radius: 20px;
+    padding: 24px 32px;
+    margin: 0 0 32px;
+    display: inline-block;
+    min-width: 180px;
+}
+
+.voteCount {
+    font-size: 56px;
+    font-weight: 900;
+    color: #dc2626;
+    line-height: 1;
+}
+
+.voteLabel {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.voteSub {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s, transform 0.15s;
+    margin-bottom: 16px;
+}
+
+.btn:hover {
+    background: #b91c1c;
+    transform: translateY(-1px);
+}
+
+.skip {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.skip:hover {
+    color: #64748b;
+}
+
+@media (max-width: 600px) {
+    .card {
+        padding: 40px 24px 36px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .icon {
+        font-size: 52px;
+    }
+}
