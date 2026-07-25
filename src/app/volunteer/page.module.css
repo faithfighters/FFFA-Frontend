@@ -1,0 +1,192 @@
+.introSection {
+    padding-bottom: var(--space-2xl);
+    background: #0b0a12;
+    color: #fff;
+}
+
+.rolesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+}
+
+.howSection {
+    background: #0b0a12;
+    color: #fff;
+}
+
+.stepsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    text-align: center;
+}
+
+.step {
+    padding: var(--space-xl);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+}
+
+.stepNumber {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto var(--space-md);
+}
+
+.step h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    color: #fff;
+}
+
+.step p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+}
+
+.formSection {
+    background: #0b0a12;
+    color: #fff;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input {
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.input::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(232, 116, 59, 0.08), transparent);
+    transition: left 0.6s ease;
+}
+
+.input:hover {
+    border-color: rgba(248, 195, 143, 0.4);
+    transform: translateY(-1px);
+}
+
+.input:hover::before {
+    left: 100%;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #ff5a1f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(255, 90, 31, 0.25), 0 0 20px rgba(255, 90, 31, 0.12);
+}
+
+.input:focus::before {
+    left: 100%;
+}
+
+/* Style native select options (browser-limited) */
+.input option {
+    background: #1a1825;
+    color: #fff;
+}
+
+.successCard {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    border-radius: 16px;
+    padding: var(--space-3xl);
+    text-align: center;
+}
+
+.successIcon {
+    width: 64px;
+    height: 64px;
+    background: #22c55e;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto var(--space-lg);
+}
+
+.successCard h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: var(--space-sm);
+}
+
+.successCard p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+
+    .rolesGrid,
+    .stepsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .rolesGrid,
+    .stepsGrid {
+        grid-template-columns: 1fr;
+    }
+}

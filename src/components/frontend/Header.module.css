@@ -1,0 +1,470 @@
+/* ===== PREMIUM HEADER STYLES ===== */
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent !important;
+    transition: all var(--transition-base);
+}
+
+.scrolled {
+    position: fixed;
+    background-color: rgba(2, 6, 23, 0.4) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: var(--shadow-md);
+}
+
+.scrolled .topNav {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
+.scrolled .container {
+    height: 70px;
+    align-items: center;
+}
+
+.scrolled .logoIcon img {
+    height: 50px !important;
+    width: auto !important;
+    transition: all 0.3s ease;
+}
+
+.scrolled .logo {
+    padding-top: 0;
+}
+
+.scrolled .secondaryActions {
+    padding-top: 0;
+}
+
+/* Hide header entirely on coming-soon / auth pages */
+.authPage {
+    display: none !important;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    height: 140px;
+    /* Slightly reduced to keep everything tight to the top */
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    z-index: 1100;
+    flex-shrink: 0;
+    margin-right: 20px;
+    padding-top: 23px;
+    /* Figma: top 23px */
+}
+
+.logoIcon {
+    display: flex;
+    align-items: flex-start;
+    transition: transform var(--transition-base);
+}
+
+.logoIcon:hover {
+    transform: scale(1.05);
+}
+
+.navWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    /* Remove gap between top bar and secondary row */
+    max-width: 100%;
+}
+
+.topNav {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 0 0 14px 14px;
+    /* Figma: 0 0 14 14 */
+    padding-left: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 45px;
+    /* Figma height 45px */
+    margin-top: 0;
+}
+
+.nav {
+    display: flex;
+    padding: 0 10px 0 20px;
+}
+
+.navList {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+}
+
+.navLink {
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-transform: none;
+    padding: 0 12px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+    display: inline-block;
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 12px;
+    right: 12px;
+    height: 2px;
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+    border-radius: 1px;
+}
+
+.navLink:hover {
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+.navLink:hover::after {
+    transform: scaleX(1);
+}
+
+.navLink:focus-visible {
+    outline: 2px solid #007AFF;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.navLinkActive {
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    display: inline-block;
+}
+
+.navLinkActive::after {
+    transform: scaleX(1) !important;
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%) !important;
+}
+
+.separator {
+    color: #000000;
+    font-weight: 300;
+    margin: 0 4px;
+    opacity: 0.6;
+}
+
+.topDonateBtn {
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding: 0 35px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 0 0 14px 0;
+    box-shadow: 0 4px 15px rgba(231, 66, 27, 0.3);
+}
+
+.topDonateBtn:hover {
+    background: linear-gradient(135deg, #f9cb9c 0%, #c43210 100%);
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 20px rgba(231, 66, 27, 0.5);
+}
+
+.topDonateBtn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.secondaryActions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 21px;
+    /* Figma: secondary rows start at 66px. Top bar is 45px. 66-45=21 */
+    position: relative;
+    right: 0;
+}
+
+.supportLink {
+    color: var(--color-white);
+    font-size: 0.9rem;
+    /* Reduced slightly for premium feel */
+    font-weight: 700;
+    text-transform: uppercase;
+    /* Match other navigation vibes */
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Make it visible over the flag/images */
+    display: inline-block;
+}
+
+.supportLink:hover {
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateY(-1px);
+    text-shadow: none;
+}
+
+.actionButtons {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.loginBtn {
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    color: #ffffff;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 35px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 66, 27, 0.4);
+}
+
+.loginBtn:hover {
+    background: linear-gradient(135deg, #f9cb9c 0%, #c43210 100%);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(231, 66, 27, 0.6);
+}
+
+.loginBtn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.joinBtn {
+    background-color: #ffffff;
+    color: #0b1626;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.joinBtn:hover {
+    background-color: #f8fafc;
+    transform: translateY(-1px);
+}
+
+.joinBtn:focus-visible {
+    outline: 2px solid #007AFF;
+    outline-offset: 2px;
+}
+
+.menuToggle {
+    display: none;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.menuToggle:focus-visible {
+    outline: 2px solid var(--color-blue, #007AFF);
+    outline-offset: 2px;
+}
+
+.menuToggle:hover {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-white);
+    margin: 5px 0;
+    transition: 0.4s;
+    border-radius: 2px;
+}
+
+.mobileNav {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .nav {
+        padding: 0 var(--space-md);
+    }
+
+    .separator {
+        margin: 0 var(--space-xs);
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        align-items: center;
+        padding: 0 clamp(1rem, 5vw, 2rem);
+        height: 80px;
+    }
+
+    .logo {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .logoIcon img {
+        width: 50px !important;
+        height: auto !important;
+    }
+
+    .navWrapper {
+        display: none;
+    }
+
+    .menuToggle {
+        display: flex;
+        z-index: 2000;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .mobileNav {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        height: 100vh;
+        background: rgba(10, 12, 20, 0.7);
+        backdrop-filter: blur(48px) saturate(140%);
+        -webkit-backdrop-filter: blur(48px) saturate(140%);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        z-index: 1900;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 100px 40px;
+        box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6);
+        overflow-y: auto;
+    }
+
+    .mobileNavOpen {
+        right: 0;
+    }
+
+    .mobileNavList {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+
+    .mobileNavItem {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 15px;
+    }
+
+    .mobileNavLink {
+        color: var(--color-white);
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .mobileNavLink:hover {
+        background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .mobileNavLinkActive {
+        background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        display: inline-block;
+    }
+
+    .overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1800;
+    }
+}
+
+@media (max-width: 480px) {
+    .logoIcon img {
+        width: 50px !important;
+    }
+
+    .mobileNav {
+        width: 92%;
+        padding: 80px 24px;
+    }
+
+    .mobileNavLink {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .mobileNav {
+        width: 100%;
+        padding: 80px 20px;
+    }
+}

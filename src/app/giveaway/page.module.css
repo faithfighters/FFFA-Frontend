@@ -1,0 +1,117 @@
+.heroBanner {
+    text-align: center;
+    background: #0b0a12;
+}
+
+.giveawayTitle {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin: var(--space-lg) 0;
+    text-transform: uppercase;
+}
+
+.giveawaySubtitle {
+    font-size: 1.125rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.entrySection {
+    background: #0b0a12;
+}
+
+.entryGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+}
+
+.entryInfo h2 { color: white; }
+
+.rulesBlock {
+    margin-top: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.ruleItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.ruleIcon {
+    color: #F8C38F;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.entryCard {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: var(--space-3xl);
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.prizeBadge {
+    font-size: 4rem;
+    margin-bottom: var(--space-lg);
+    color: #F8C38F;
+}
+
+.entryCard h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: var(--space-md);
+}
+
+.entryCard p {
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+}
+
+.entryNote {
+    font-size: 0.8rem !important;
+    color: rgba(255,255,255,0.45) !important;
+    margin-top: var(--space-md) !important;
+}
+
+.termsSection {
+    background: #0b0a12;
+}
+
+.termsTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: var(--space-lg);
+}
+
+.termsText {
+    color: rgba(255,255,255,0.7);
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .entryGrid { grid-template-columns: 1fr; gap: var(--space-xl); }
+    .entryCard { padding: var(--space-xl); }
+    .prizeBadge { font-size: 3rem; }
+}

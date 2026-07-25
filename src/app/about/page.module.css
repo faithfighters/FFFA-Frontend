@@ -1,0 +1,217 @@
+/* ===== ABOUT PAGE STYLES ===== */
+
+/* --- Two Column Layout --- */
+.twoColumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+}
+
+.textCol {
+    order: 1;
+}
+
+.imageCol {
+    order: 2;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.sectionImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+}
+
+.imageCol:hover .sectionImage {
+    transform: scale(1.03);
+}
+
+.contentBlock {
+    margin: var(--space-xl) 0;
+}
+
+.contentBlock p {
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--space-md);
+}
+
+.contentBlock strong {
+    color: #F8C38F;
+}
+
+/* --- Sections background --- */
+.whoWeAre,
+.ourStory,
+.howWeOperate,
+.leadership {
+    background: #0b0a12;
+    color: #fff;
+}
+
+/* --- Our Story (reversed columns) --- */
+.ourStory .imageCol {
+    order: 1;
+}
+
+.ourStory .textCol {
+    order: 2;
+}
+
+/* --- How We Operate --- */
+.operateGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
+}
+
+/* --- Leadership --- */
+.leaderGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
+}
+
+.leaderCard {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-2xl);
+    text-align: center;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.leaderCard::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(248, 195, 143, 0.04), transparent);
+    transform: rotate(45deg);
+    transition: all var(--transition-slow);
+    opacity: 0;
+}
+
+.leaderCard:hover {
+    transform: translateY(-12px) scale(1.04);
+    box-shadow: 0 40px 80px -20px rgba(231, 66, 27, 0.3), 0 0 60px rgba(231, 66, 27, 0.15);
+    border-color: rgba(248, 195, 143, 0.25);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.leaderCard:hover::before {
+    animation: shimmer 0.8s ease;
+    opacity: 1;
+}
+
+.leaderAvatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-lg);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.leaderCard:hover .leaderAvatar {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px rgba(231, 66, 27, 0.4), 0 0 80px rgba(231, 66, 27, 0.2);
+}
+
+.leaderAvatar::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c0642a, #a33010);
+}
+
+.leaderInitials {
+    position: relative;
+    z-index: 1;
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.leaderName {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: var(--space-xs);
+}
+
+.leaderRole {
+    font-size: var(--font-size-sm);
+    color: #F8C38F;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--space-sm);
+}
+
+.leaderBio {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-top: var(--space-sm);
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .operateGrid,
+    .leaderGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .twoColumn {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+
+    .imageCol,
+    .ourStory .imageCol {
+        order: 1;
+    }
+
+    .textCol,
+    .ourStory .textCol {
+        order: 2;
+    }
+
+    .contentBlock p {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 560px) {
+    .operateGrid,
+    .leaderGrid {
+        grid-template-columns: 1fr;
+    }
+}
