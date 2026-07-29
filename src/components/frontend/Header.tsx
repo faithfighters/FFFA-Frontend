@@ -22,7 +22,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const firstName = user?.name?.split(' ')[0] || '';
   const donateHref = '/donation';
 
@@ -89,14 +89,9 @@ export default function Header() {
               Support Us
             </Link>
             {user ? (
-              <>
-                <Link href="/dashboard" className={styles.loginBtn}>
-                  Hi, {firstName}
-                </Link>
-                <button className={styles.joinBtn} onClick={() => logout()} style={{ border: 'none', cursor: 'pointer' }}>
-                  Logout
-                </button>
-              </>
+              <Link href="/dashboard" className={styles.joinBtn}>
+                Hi, {firstName}
+              </Link>
             ) : (
               <Link href="/login" className={styles.joinBtn}>Login</Link>
             )}
@@ -154,13 +149,7 @@ export default function Header() {
               Dashboard
             </Link>
           </li>
-          {user ? (
-            <li className={styles.mobileNavItem}>
-              <button className={styles.mobileNavLink} onClick={() => { haptics.warning(); logout(); setIsMenuOpen(false); }} style={{ background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left' }}>
-                Logout ({firstName})
-              </button>
-            </li>
-          ) : (
+          {user ? null : (
             <>
               <li className={styles.mobileNavItem}>
                 <Link href="/login" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
