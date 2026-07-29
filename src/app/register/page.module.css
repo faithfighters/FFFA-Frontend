@@ -13,6 +13,88 @@
     position: relative;
     background: #0b0a12;
     overflow-x: hidden;
+    padding-top: var(--header-height);
+}
+
+/* ── Hero — matches About/Store/Contact/etc ── */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--header-height) + 56px) 0 48px;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+}
+
+.heroDots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+    pointer-events: none;
+}
+
+.heroInner {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.heroLead {
+    margin-top: 16px;
+    font-size: 15px;
+    color: #C6D2EA;
+    line-height: 1.6;
+    max-width: 40ch;
+}
+
+@media (min-width: 640px) {
+    .heroTitle {
+        font-size: 48px;
+    }
+}
+
+@media (max-width: 400px) {
+    .heroTitle {
+        font-size: 32px;
+    }
 }
 
 /* Full-screen background */
@@ -348,6 +430,7 @@
 .helpSelect {
     composes: helpInput;
     appearance: none;
+    color-scheme: dark;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
@@ -374,7 +457,7 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background: radial-gradient(1000px 560px at 50% -15%, #16203c 0%, #0a0d17 46%, #06080f 100%);
+    background: #0b0a12;
 }
 
 /* ── Donor register (?intent=donate) — same dark/serif design language,
@@ -383,13 +466,13 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background: radial-gradient(1000px 560px at 50% -15%, #16203c 0%, #0a0d17 46%, #06080f 100%);
+    background: #0b0a12;
 }
 
 .donorHero {
     max-width: 620px;
     text-align: left;
-    padding: 20px 0;
+    padding: 0 0 20px;
 }
 
 .donorFormCol {
@@ -399,7 +482,7 @@
 
 .donorHeroHeading {
     font-family: var(--font-fraunces), Georgia, serif;
-    font-size: 34px;
+    font-size: 36px;
     font-weight: 700;
     color: #ffffff;
     letter-spacing: -0.3px;
@@ -416,17 +499,20 @@
 }
 
 .helpHeroContainer {
-    padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 40px;
 }
 
 .helpMainContainer {
-    padding-top: 0;
+    padding-top: 48px;
 }
 
 /* ── Hero band: full-bleed dot texture + warm glow, like the reference's .phero ── */
 .helpHeroBand {
     position: relative;
     overflow: hidden;
+    padding-top: calc(var(--header-height) + 56px);
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
 }
 
 .helpHeroBand::before {
@@ -455,7 +541,7 @@
 
 .helpTopHero {
     max-width: 620px;
-    padding: 20px 0 20px;
+    padding: 0 0 20px;
 }
 
 .helpLogoWrap {
@@ -479,16 +565,16 @@
 }
 
 .helpEyebrowGold {
-    color: #F0C879;
+    color: #E0A93C;
 }
 
 .helpEyebrowRed {
-    color: #ff5a1f;
+    color: #E0A93C;
 }
 
 .helpHeroHeading {
     font-family: var(--font-fraunces), Georgia, serif;
-    font-size: 33px;
+    font-size: 36px;
     font-weight: 700;
     color: #ffffff;
     letter-spacing: -0.3px;
@@ -680,11 +766,11 @@
     }
 
     .helpHeroContainer {
-        padding-bottom: 0;
+        padding-bottom: 48px;
     }
 
     .helpMainContainer {
-        padding-top: 0;
+        padding-top: 48px;
     }
 
     .helpCardsGrid {

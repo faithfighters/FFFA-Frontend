@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Montserrat } from 'next/font/google';
+import { Inter, Montserrat, Fraunces } from 'next/font/google';
 import Header from '@/components/frontend/Header';
 import Footer from '@/components/frontend/Footer';
 import BottomTabBar from '@/components/frontend/BottomTabBar';
@@ -20,6 +20,14 @@ const montserrat = Montserrat({
   display: 'swap',
 });
 
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'Faith Fighters For America – One Nation – One Spirit – One Mission',
   description:
@@ -36,7 +44,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${fraunces.variable}`} suppressHydrationWarning>
       <body style={{ fontFamily: 'var(--font-inter), var(--font-montserrat), sans-serif' }}>
         <AuthProvider>
           <Header />

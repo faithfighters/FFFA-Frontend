@@ -20,8 +20,18 @@ const CAMPAIGNS = [
 
 export default function CampaignsContent() {
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+    const [playingInline, setPlayingInline] = useState<string | null>(null);
     const { user } = useAuth();
     const missionHref = user ? '/dashboard/campaigns' : '/login';
+
+    const handleVideoClick = (title: string, file: string) => {
+        const src = `${VIDEO_BASE}${file}`;
+        if (window.matchMedia('(min-width: 1024px)').matches) {
+            setPlayingInline(title);
+        } else {
+            setLightboxSrc(src);
+        }
+    };
 
     return (
         <>
@@ -46,22 +56,34 @@ export default function CampaignsContent() {
                     <div className={styles.campGrid}>
                         {CAMPAIGNS.map((c) => (
                             <div key={c.title} className={styles.campCard}>
-                                <div
-                                    className={styles.campMedia}
-                                    onClick={() => setLightboxSrc(`${VIDEO_BASE}${c.file}`)}
-                                >
-                                    <Image
-                                        src={c.img}
-                                        alt={c.title}
-                                        fill
-                                        sizes="(max-width: 900px) 100vw, 33vw"
-                                        style={{ objectFit: 'cover' }}
-                                    />
-                                    <div className={styles.campPlayBtn}>
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                                {playingInline === c.title ? (
+                                    <div className={styles.campMedia}>
+                                        <video
+                                            src={`${VIDEO_BASE}${c.file}`}
+                                            controls
+                                            autoPlay
+                                            playsInline
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                        />
                                     </div>
-                                    <span className={styles.fundedBadge}>✓ Funded</span>
-                                </div>
+                                ) : (
+                                    <div
+                                        className={styles.campMedia}
+                                        onClick={() => handleVideoClick(c.title, c.file)}
+                                    >
+                                        <Image
+                                            src={c.img}
+                                            alt={c.title}
+                                            fill
+                                            sizes="(max-width: 900px) 100vw, 33vw"
+                                            style={{ objectFit: 'cover' }}
+                                        />
+                                        <div className={styles.campPlayBtn}>
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                                        </div>
+                                        <span className={styles.fundedBadge}>✓ Funded</span>
+                                    </div>
+                                )}
                                 <div className={styles.campBody}>
                                     <h4>{c.title}</h4>
                                     <p>{c.desc}</p>

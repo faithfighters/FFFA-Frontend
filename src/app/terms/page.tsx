@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import PageBanner from '@/components/frontend/PageBanner';
 import legalStyles from '../privacy-policy/page.module.css';
 
 export const metadata: Metadata = {
@@ -10,17 +9,18 @@ export const metadata: Metadata = {
 export default function TermsPage() {
     return (
         <>
-            <PageBanner
-                title="Terms & Conditions"
-                backgroundImage="/images/hero-flag.png"
-                breadcrumbs={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Terms & Conditions', href: '/terms' },
-                ]}
-            />
+            <section className={legalStyles.hero}>
+                <div className={legalStyles.heroDots} />
+                <div className="container">
+                    <div className={legalStyles.heroInner}>
+                        <span className={legalStyles.eyebrow}>Legal</span>
+                        <h1 className={legalStyles.heroTitle}>Terms & Conditions</h1>
+                    </div>
+                </div>
+            </section>
 
             <section className={`section ${legalStyles.legalSection}`}>
-                <div className="container" style={{ maxWidth: '860px', margin: '0 auto' }}>
+                <div className="container">
                     <p className={legalStyles.lastUpdated}>Last Updated: January 2, 2026</p>
 
                     <div className={legalStyles.legalContent}>

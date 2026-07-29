@@ -219,21 +219,18 @@ function RegisterForm() {
     if (intent === 'help') {
         return (
             <div className={`${fraunces.variable} ${styles.helpPage}`}>
-                <div className={styles.helpHeroBand}>
-                    <div className={`${styles.helpContainer} ${styles.helpHeroContainer}`}>
-                        {/* Top hero */}
-                        <div className={styles.helpTopHero}>
-                            <div className={styles.helpLogoWrap}>
-                                <img src="/images/FFFA_logo_Horizontal.svg" alt="Faith Fighters logo" className={styles.helpLogo} />
-                            </div>
-                            <span className={styles.helpEyebrowGold}>— Need Help</span>
-                            <h1 className={styles.helpHeroHeading}>We&apos;re Here for You</h1>
-                            <p className={styles.helpHeroSub}>
+                <section className={styles.hero}>
+                    <div className={styles.heroDots} />
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Need Help</span>
+                            <h1 className={styles.heroTitle}>We&apos;re Here for You</h1>
+                            <p className={styles.heroLead}>
                                 If you or someone you know is in need, reach out. No situation is too small for compassion.
                             </p>
                         </div>
                     </div>
-                </div>
+                </section>
 
                 <div className={`${styles.helpContainer} ${styles.helpMainContainer}`}>
                     {/* How we help */}
@@ -415,23 +412,20 @@ function RegisterForm() {
 
     return (
         <div className={`${fraunces.variable} ${styles.donorPage}`}>
-            <div className={styles.helpHeroBand}>
-                <div className={`${styles.helpContainer} ${styles.helpHeroContainer}`}>
-                    {/* Hero / branding section */}
-                    <div className={styles.donorHero}>
-                        <div className={styles.helpLogoWrap}>
-                            <img src="/images/FFFA_logo_Horizontal.svg" alt="Faith Fighters logo" className={styles.helpLogo} />
-                        </div>
-                        <span className={styles.helpEyebrowGold}>— Join the Movement</span>
-                        <h1 className={styles.donorHeroHeading}>
+            <section className={styles.hero}>
+                <div className={styles.heroDots} />
+                <div className="container">
+                    <div className={styles.heroInner}>
+                        <span className={styles.eyebrow}>Join the Movement</span>
+                        <h1 className={styles.heroTitle}>
                             One Spirit. One Mission.
                         </h1>
-                        <p className={styles.helpHeroSub}>
+                        <p className={styles.heroLead}>
                             Create your account to track your giving, join missions, and stand with 10,000+ Americans.
                         </p>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <div className={`${styles.helpContainer} ${styles.helpMainContainer}`}>
             <div className={styles.donorFormCol}>

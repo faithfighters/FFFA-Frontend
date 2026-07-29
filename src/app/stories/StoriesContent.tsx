@@ -20,6 +20,15 @@ const STORIES = [
 
 export default function StoriesContent() {
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+    const [playingInline, setPlayingInline] = useState<string | null>(null);
+
+    const handleVideoClick = (key: string, src: string) => {
+        if (typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches) {
+            setPlayingInline(key);
+        } else {
+            setLightboxSrc(src);
+        }
+    };
 
     return (
         <>
@@ -45,27 +54,40 @@ export default function StoriesContent() {
                         <span className={styles.liveDot} />
                         Featured film
                     </span>
-                    <div
-                        className={styles.featuredVideo}
-                        onClick={() => setLightboxSrc(FEATURED_VIDEO)}
-                    >
-                        <video
-                            className={styles.featuredVideoMedia}
-                            src={`${FEATURED_VIDEO}#t=2`}
-                            muted
-                            playsInline
-                            preload="metadata"
-                        />
-                        <div className={styles.featuredOverlay}>
-                            <div className={styles.featuredPlayBtn}>
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                    {playingInline === 'featured' ? (
+                        <div className={styles.featuredVideo}>
+                            <video
+                                src={FEATURED_VIDEO}
+                                controls
+                                autoPlay
+                                playsInline
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                        </div>
+                    ) : (
+                        <div
+                            className={styles.featuredVideo}
+                            onClick={() => handleVideoClick('featured', FEATURED_VIDEO)}
+                        >
+                            <video
+                                className={styles.featuredVideoMedia}
+                                src={`${FEATURED_VIDEO}#t=2`}
+                                poster="/images/video-thumbnail.png"
+                                muted
+                                playsInline
+                                preload="metadata"
+                            />
+                            <div className={styles.featuredOverlay}>
+                                <div className={styles.featuredPlayBtn}>
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                                </div>
+                            </div>
+                            <div className={styles.featuredCaption}>
+                                <span className={styles.captionDot} />
+                                Our Story · A Nation United · 1:53
                             </div>
                         </div>
-                        <div className={styles.featuredCaption}>
-                            <span className={styles.captionDot} />
-                            Our Story · A Nation United · 1:53
-                        </div>
-                    </div>
+                    )}
                 </div>
             </section>
 
@@ -79,26 +101,38 @@ export default function StoriesContent() {
                     </div>
                     <div className={styles.reelGrid}>
                         {STORIES.map((story) => (
-                            <div
-                                key={story.title}
-                                className={styles.reelCard}
-                                onClick={() => setLightboxSrc(`${VIDEO_BASE}${story.file}`)}
-                            >
-                                <Image
-                                    src={story.img}
-                                    alt={story.title}
-                                    fill
-                                    sizes="(max-width: 900px) 50vw, 33vw"
-                                    style={{ objectFit: 'cover' }}
-                                />
-                                <div className={styles.reelPlayBtn}>
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                            playingInline === story.title ? (
+                                <div key={story.title} className={styles.reelCard}>
+                                    <video
+                                        src={`${VIDEO_BASE}${story.file}`}
+                                        controls
+                                        autoPlay
+                                        playsInline
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                    />
                                 </div>
-                                <div className={styles.reelCaption}>
-                                    <span className={styles.captionDot} />
-                                    {story.title} · {story.duration}
+                            ) : (
+                                <div
+                                    key={story.title}
+                                    className={styles.reelCard}
+                                    onClick={() => handleVideoClick(story.title, `${VIDEO_BASE}${story.file}`)}
+                                >
+                                    <Image
+                                        src={story.img}
+                                        alt={story.title}
+                                        fill
+                                        sizes="(max-width: 900px) 50vw, 33vw"
+                                        style={{ objectFit: 'cover' }}
+                                    />
+                                    <div className={styles.reelPlayBtn}>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                                    </div>
+                                    <div className={styles.reelCaption}>
+                                        <span className={styles.captionDot} />
+                                        {story.title} · {story.duration}
+                                    </div>
                                 </div>
-                            </div>
+                            )
                         ))}
                     </div>
                 </div>
@@ -124,7 +158,7 @@ export default function StoriesContent() {
                 <div onClick={() => setLightboxSrc(null)} className={styles.lightboxOverlay}>
                     <div onClick={(e) => e.stopPropagation()} className={styles.lightboxInner}>
                         <button onClick={() => setLightboxSrc(null)} aria-label="Close video" className={styles.lightboxClose}>✕</button>
-                        <video src={lightboxSrc} controls autoPlay className={styles.lightboxVideo} />
+                        <video src={lightboxSrc} controls autoPlay playsInline className={styles.lightboxVideo} />
                     </div>
                 </div>
             )}

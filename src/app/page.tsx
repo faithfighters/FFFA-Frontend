@@ -60,10 +60,20 @@ const WHAT_WE_DO = [
     { icon: BookOpen, title: 'Stories of Impact', desc: 'Real testimonies from the people you help, turning generosity into a story that inspires us all.' },
 ];
 
-function VideoFacade({ src, caption, onOpen }: { src: string; caption: string; onOpen: () => void }) {
+function VideoFacade({ src, caption, onOpen, inline }: { src: string; caption: string; onOpen: () => void; inline?: boolean }) {
+    const [playingInline, setPlayingInline] = useState(false);
+
+    if (inline && playingInline) {
+        return (
+            <div className={styles.videoFacade}>
+                <video className={styles.videoFacadeMedia} src={src} controls autoPlay playsInline />
+            </div>
+        );
+    }
+
     return (
-        <div className={styles.videoFacade} onClick={onOpen}>
-            <video className={styles.videoFacadeMedia} src={`${src}#t=2`} muted playsInline preload="metadata" />
+        <div className={styles.videoFacade} onClick={() => (inline ? setPlayingInline(true) : onOpen())}>
+            <video className={styles.videoFacadeMedia} src={`${src}#t=2`} poster="/images/video-thumbnail.png" muted playsInline preload="metadata" />
             <div className={styles.videoFacadeOverlay}>
                 <motion.div className={styles.videoPlayBtn} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                     <Play size={22} fill="white" color="white" />
@@ -86,6 +96,15 @@ function StatItem({ target, prefix, suffix, label }: { target: number; prefix?: 
 
 export default function Home() {
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+    const [playingCampaign, setPlayingCampaign] = useState<string | null>(null);
+
+    const handleCampaignVideoClick = (key: string, video: string) => {
+        if (window.matchMedia('(min-width: 1024px)').matches) {
+            setPlayingCampaign(key);
+        } else {
+            setLightboxSrc(video);
+        }
+    };
     const { user } = useAuth();
     const campaignsHref = user ? '/dashboard/campaigns' : '/login';
 
@@ -132,7 +151,7 @@ export default function Home() {
                         </motion.div>
 
                         <motion.div className={styles.heroMedia} variants={fadeInRight} initial="hidden" animate="visible">
-                            <VideoFacade src={HERO_VIDEO} caption="One Nation. One Mission. · 1:53" onOpen={() => setLightboxSrc(HERO_VIDEO)} />
+                            <VideoFacade src={HERO_VIDEO} caption="One Nation. One Mission. · 1:53" onOpen={() => setLightboxSrc(HERO_VIDEO)} inline />
                         </motion.div>
                     </div>
                 </div>
@@ -252,17 +271,29 @@ export default function Home() {
                     >
                         {STORIES.slice(0, 3).map((story) => (
                             <motion.div key={story.key} className={styles.campaignCard} variants={fadeInUp}>
-                                <div className={styles.campaignThumb}>
-                                    <Image src={STORY_IMG[story.key]} alt={story.title} fill className={styles.campaignImg} />
-                                    <button
-                                        className={styles.campaignPlayBtn}
-                                        onClick={() => setLightboxSrc(story.video)}
-                                        aria-label={`Watch ${story.title}`}
-                                    >
-                                        <Play size={20} fill="white" color="white" />
-                                    </button>
-                                    <span className={styles.campaignBadge}>✓ Funded</span>
-                                </div>
+                                {playingCampaign === story.key ? (
+                                    <div className={styles.campaignThumb}>
+                                        <video
+                                            src={story.video}
+                                            controls
+                                            autoPlay
+                                            playsInline
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className={styles.campaignThumb}>
+                                        <Image src={STORY_IMG[story.key]} alt={story.title} fill className={styles.campaignImg} />
+                                        <button
+                                            className={styles.campaignPlayBtn}
+                                            onClick={() => handleCampaignVideoClick(story.key, story.video)}
+                                            aria-label={`Watch ${story.title}`}
+                                        >
+                                            <Play size={20} fill="white" color="white" />
+                                        </button>
+                                        <span className={styles.campaignBadge}>✓ Funded</span>
+                                    </div>
+                                )}
                                 <div className={styles.campaignBody}>
                                     <h4>{story.title}</h4>
                                     <p>{story.desc}</p>
@@ -370,7 +401,7 @@ export default function Home() {
                         <button onClick={() => setLightboxSrc(null)} aria-label="Close video" className={styles.lightboxClose}>
                             ✕
                         </button>
-                        <video src={lightboxSrc} controls autoPlay className={styles.lightboxVideo} />
+                        <video src={lightboxSrc} controls autoPlay playsInline className={styles.lightboxVideo} />
                     </div>
                 </div>
             )}
