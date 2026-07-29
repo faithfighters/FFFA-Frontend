@@ -1,19 +1,26 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 import styles from './page.module.css';
 import { haptics } from '@/lib/haptics';
 
-const donationOptions = [
-  { amount: '$5', value: 5 },
-  { amount: '$15', value: 15 },
-  { amount: '$25', value: 25 },
-  { amount: '$50', value: 50 },
-  { amount: '$70', value: 70 },
-  { amount: '$100', value: 100 },
+const amountOptions = [
+  { value: 25, label: '1 family meal' },
+  { value: 50, label: 'Shelter kit' },
+  { value: 100, label: 'Youth mentor' },
+  { value: 250, label: 'Relief supplies' },
+  { value: 500, label: 'Rebuild fund' },
+];
+
+const causeOptions = [
+  "Where it's needed most",
+  'Disaster Relief',
+  'Youth Programs',
+  'Medical Relief',
+  'Food Security',
+  'Housing',
 ];
 
 function PurchaseCelebrationModal({ onClose }: { onClose: () => void }) {
@@ -188,7 +195,10 @@ export default function DonationContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [showCelebration, setShowCelebration] = useState(false);
-  const [loading, setLoading] = useState<number | 'custom' | null>(null);
+  const [selected, setSelected] = useState<number | 'custom'>(100);
+  const [customAmount, setCustomAmount] = useState('');
+  const [cause, setCause] = useState(causeOptions[0]);
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
@@ -198,132 +208,153 @@ export default function DonationContent() {
     }
   }, [searchParams, router]);
 
-  const handleDonate = async (amount: number, target: number) => {
-    if (!amount || amount <= 0) {
-      setErrorMessage('Please enter a valid amount.');
-      return;
-    }
+  const handleDonate = async () => {
     setErrorMessage('');
-    setLoading(target);
+
+    if (selected === 'custom') {
+      const amount = Number(customAmount);
+      if (!amount || amount <= 0) {
+        setErrorMessage('Please enter a valid amount.');
+        return;
+      }
+    }
+
+    setLoading(true);
     haptics.tap();
 
     try {
+      const body = selected === 'custom' ? { amount: Number(customAmount) } : { amount: selected };
       const res = await fetch('/api/stripe/donate-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount }),
+        body: JSON.stringify(body),
       });
       const data = await res.json();
       if (res.ok && data.url) {
         window.location.href = data.url;
       } else {
         setErrorMessage(data.message || 'Unable to start checkout. Please try again.');
-        setLoading(null);
+        setLoading(false);
       }
     } catch (err) {
       setErrorMessage('Network error. Please try again.');
-      setLoading(null);
+      setLoading(false);
     }
   };
 
-  const handleCustomDonate = async () => {
-    setErrorMessage('');
-    setLoading('custom');
-    haptics.tap();
-
-    try {
-      const res = await fetch('/api/stripe/donate-checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}), // Empty body = let customer choose price on Stripe page
-      });
-      const data = await res.json();
-      if (res.ok && data.url) {
-        window.location.href = data.url;
-      } else {
-        setErrorMessage(data.message || 'Unable to start checkout. Please try again.');
-        setLoading(null);
-      }
-    } catch (err) {
-      setErrorMessage('Network error. Please try again.');
-      setLoading(null);
-    }
-  };
+  const donateLabel = selected === 'custom'
+    ? (customAmount ? `$${customAmount}` : '')
+    : `$${selected}`;
 
   return (
     <>
-      {/* ===== SUPPORT OUR CAUSE SECTION ===== */}
-      <section className={`section ${styles.introSection}`}>
+      {/* ===== HERO ===== */}
+      <section className={styles.hero}>
+        <div className={styles.heroDots} />
         <div className="container">
-          <div className={styles.twoColumn}>
-            <div className={styles.imageCol}>
-              <Image
-                src="/images/donate-img.jpg"
-                alt="Support Our Cause"
-                fill
-                priority
-                className={styles.donateImage}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-            <div className={styles.textCol}>
-              <span className="section-label section-label--red" style={{ color: 'rgba(255,255,255,0.55)' }}>Donation</span>
-              <h2 className="heading-lg">Support Our Cause</h2>
-              <div className={styles.contentBlock}>
-                <p>
-                  Your support helps us continue our mission to strengthen faith, unity, and purpose
-                  across America. Every contribution — no matter the size — fuels our outreach
-                  programs, community initiatives, and campaigns that remind people of the power
-                  of faith in action.
-                </p>
-                <p>
-                  By donating, you become part of a movement dedicated to rebuilding the moral
-                  and spiritual foundation of our nation. Together, we can light the path toward a
-                  stronger, more faithful America.
-                </p>
-              </div>
+          <div className={styles.heroInner}>
+            <span className={styles.eyebrow}>Give Today</span>
+            <h1 className={styles.heroTitle}>Your gift, made visible</h1>
+            <p className={styles.heroLead}>
+              100% transparent. Every dollar tracked to a mission you can follow from start to finish.
+            </p>
+          </div>
+        </div>
+      </section>
 
-              {/* Dynamic custom amount donation button (redirects to Stripe with custom_unit_amount enabled) */}
+      {/* ===== DONATE CARD ===== */}
+      <section className={`section ${styles.donateSection}`}>
+        <div className="container">
+          <div className={styles.donateCard}>
+            <label className={styles.amountLabel}>Choose an amount</label>
+            <div className={styles.amtGrid}>
+              {amountOptions.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  className={`${styles.amtBtn} ${selected === opt.value ? styles.amtBtnActive : ''}`}
+                  onClick={() => setSelected(opt.value)}
+                >
+                  <b>${opt.value}</b>
+                  <small>{opt.label}</small>
+                </button>
+              ))}
               <button
-                disabled={loading !== null}
-                onClick={handleCustomDonate}
-                className={styles.donateNowBtn}
+                type="button"
+                className={`${styles.amtBtn} ${selected === 'custom' ? styles.amtBtnActive : ''}`}
+                onClick={() => setSelected('custom')}
               >
-                {loading === 'custom' ? 'Loading...' : 'Donate Now'}
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '4px' }}>
-                  <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <b className={styles.customIcon}>✎</b>
+                <small>Custom</small>
               </button>
-              {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
+            </div>
+
+            {selected === 'custom' && (
+              <div className={styles.customWrap}>
+                <label className={styles.fieldLabel}>Custom amount</label>
+                <input
+                  type="number"
+                  className={styles.customInput}
+                  placeholder="Enter amount ($)"
+                  min={1}
+                  value={customAmount}
+                  onChange={(e) => setCustomAmount(e.target.value)}
+                />
+              </div>
+            )}
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>Direct my gift to</label>
+              <select className={styles.select} value={cause} onChange={(e) => setCause(e.target.value)}>
+                {causeOptions.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              type="button"
+              className={styles.donateBtn}
+              onClick={handleDonate}
+              disabled={loading || (selected === 'custom' && !customAmount)}
+            >
+              {loading ? 'Loading…' : (
+                <>Donate {donateLabel} <span className={styles.donateBtnArrow}>→</span></>
+              )}
+            </button>
+
+            {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
+
+            <div className={styles.secureNote}>
+              <span className={styles.secureIcon}>🔒</span>
+              <span>Secure checkout via Stripe. You&apos;ll receive a tax-deductible receipt and a link to follow your mission.</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== DONATION OPTIONS GRID SECTION ===== */}
-      <section className={`section ${styles.optionsSection}`}>
+      {/* ===== BENEFIT ROWS ===== */}
+      <section className={`section ${styles.benefitsSection}`}>
         <div className="container">
-          <div className={styles.optionsHeader}>
-            <span className="section-label section-label--red" style={{ display: 'inline-block', color: 'rgba(255,255,255,0.55)', margin: '0 auto var(--space-md) auto' }}>Select Amount</span>
-            <h2 className="heading-md">Choose Your Contribution</h2>
-            <p className="text-body text-body--light" style={{ marginTop: '12px' }}>
-              Select a predefined amount below to contribute directly via our secure checkout platform.
-            </p>
-          </div>
-          <div className={styles.grid}>
-            {donationOptions.map((opt) => (
-              <div key={opt.value} className={styles.card}>
-                <div className={styles.amount}>{opt.amount}</div>
-                <div className={styles.cardLabel}>Faith Fighters support</div>
-                <button
-                  onClick={() => handleDonate(opt.value, opt.value)}
-                  disabled={loading !== null}
-                  className={styles.cardBtn}
-                >
-                  {loading === opt.value ? 'Loading...' : 'Donate'}
-                </button>
+          <div className={styles.benefitsGrid}>
+            <div className={styles.benefitRow}>
+              <div className={styles.benefitIcon}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
               </div>
-            ))}
+              <div>
+                <h4>Tracked to the dollar</h4>
+                <p>Follow your gift to the exact mission it funds.</p>
+              </div>
+            </div>
+            <div className={styles.benefitRow}>
+              <div className={`${styles.benefitIcon} ${styles.benefitIconGold}`}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+              </div>
+              <div>
+                <h4>Boots on the ground</h4>
+                <p>963 missions delivered by real volunteers.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

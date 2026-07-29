@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import PageBanner from '@/components/frontend/PageBanner';
 import Newsletter from '@/components/frontend/Newsletter';
 import DonationContent from './DonationContent';
 
@@ -13,15 +12,6 @@ export const metadata: Metadata = {
 export default function DonationPage() {
   return (
     <>
-      <PageBanner
-        title="Donation"
-        backgroundImage="/images/hero-flag.png"
-        breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Donation', href: '/donation' },
-        ]}
-      />
-
       <Suspense fallback={null}>
         <DonationContent />
       </Suspense>
