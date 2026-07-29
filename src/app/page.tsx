@@ -65,8 +65,8 @@ function VideoFacade({ src, caption, onOpen, inline }: { src: string; caption: s
 
     if (inline && playingInline) {
         return (
-            <div className={styles.videoFacade}>
-                <video className={styles.videoFacadeMedia} src={src} controls autoPlay playsInline />
+            <div className={styles.videoFacade} style={{ background: '#000' }}>
+                <video className={styles.videoFacadeMedia} style={{ objectFit: 'contain' }} src={src} controls autoPlay playsInline />
             </div>
         );
     }
@@ -272,13 +272,13 @@ export default function Home() {
                         {STORIES.slice(0, 3).map((story) => (
                             <motion.div key={story.key} className={styles.campaignCard} variants={fadeInUp}>
                                 {playingCampaign === story.key ? (
-                                    <div className={styles.campaignThumb}>
+                                    <div className={styles.campaignThumb} style={{ background: '#000' }}>
                                         <video
                                             src={story.video}
                                             controls
                                             autoPlay
                                             playsInline
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                                         />
                                     </div>
                                 ) : (
