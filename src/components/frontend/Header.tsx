@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import styles from './Header.module.css';
 import { haptics } from '@/lib/haptics';
 
-const navLinks = [
+const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: 'Home', href: '/' },
   { label: 'About us', href: '/about' },
   { label: 'Campaigns', href: '/campaigns' },
