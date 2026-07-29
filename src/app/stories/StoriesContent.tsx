@@ -13,8 +13,8 @@ const STORIES = [
     { title: 'Bills Paid', file: 'video8.mp4', duration: '0:57', img: '/images/img-01.jpg' },
     { title: 'Car Payment Paid', file: 'video4.mp4', duration: '0:34', img: '/images/img-02.jpg' },
     { title: 'Hotel Stay Covered', file: 'video5.mp4', duration: '1:12', img: '/images/img-03.jpg' },
-    { title: 'Prayers Answered', file: 'video11.mp4', duration: '0:32', img: '/images/img-04.jpg' },
-    { title: 'Rent Covered', file: 'video7.mp4', duration: '0:27', img: '/images/img-05.png' },
+    { title: 'Prayers Answered', file: 'video11.mp4', duration: '0:32', img: '/images/img-05.png' },
+    { title: 'Rent Covered', file: 'video7.mp4', duration: '0:27', img: '/images/img-05.jpg' },
     { title: 'Student Loans Paid Off', file: 'video6.mp4', duration: '0:29', img: '/images/img-06.jpg' },
 ];
 
