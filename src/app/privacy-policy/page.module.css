@@ -1,0 +1,60 @@
+/* Shared by privacy-policy, refund-policy, and terms pages */
+
+.legalSection {
+    background: #0b0a12 !important;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.lastUpdated {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.legalContent {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+}
+
+.legalContent p { margin-bottom: var(--space-md); }
+
+.legalContent h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin: var(--space-2xl) 0 var(--space-md);
+    padding-bottom: var(--space-xs);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+    display: inline-block;
+
+    /* Gradient text on section headings */
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.legalContent ul {
+    list-style: disc;
+    padding-left: var(--space-xl);
+    margin-bottom: var(--space-md);
+}
+
+.legalContent ul li { margin-bottom: var(--space-xs); }
+
+.legalContent a {
+    color: #F8C38F;
+    text-decoration: underline;
+    text-decoration-color: rgba(248, 195, 143, 0.4);
+}
+
+.legalContent a:hover {
+    color: #E7421B;
+    text-decoration-color: #E7421B;
+}
+
+.legalContent strong {
+    color: #fff;
+}

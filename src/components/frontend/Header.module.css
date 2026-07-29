@@ -1,0 +1,399 @@
+/* ===== HEADER — matches faith-fighters-site static reference ===== */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(9, 12, 22, 0.78);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition: all var(--transition-base);
+}
+
+.scrolled {
+    background: rgba(6, 8, 15, 0.92);
+    box-shadow: var(--shadow-md);
+}
+
+/* Hide header entirely on coming-soon / auth pages */
+.authPage {
+    display: none !important;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 26px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 14px var(--space-xl);
+    height: 72px;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    z-index: 1100;
+    flex-shrink: 0;
+}
+
+.logoIcon {
+    display: flex;
+    align-items: center;
+    transition: transform var(--transition-base);
+}
+
+.logoIcon img {
+    width: 190px;
+    height: auto;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+.logoIcon:hover {
+    transform: scale(1.03);
+}
+
+.navWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: 24px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.navList {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 24px;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+}
+
+.navLink {
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #C7D0E2;
+    text-transform: none;
+    padding: 4px 0;
+    transition: color 0.15s ease;
+    white-space: nowrap;
+    position: relative;
+    display: inline-block;
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(100deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.navLink:hover {
+    color: #ffffff;
+}
+
+.navLink:hover::after {
+    transform: scaleX(1);
+}
+
+.navLink:focus-visible {
+    outline: 2px solid #007AFF;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.navLinkActive {
+    color: #ffffff !important;
+}
+
+.navLinkActive::after {
+    transform: scaleX(1) !important;
+}
+
+.ctaGroup {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+}
+
+.supportLink {
+    color: #C7D0E2;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.supportLink:hover {
+    color: #E0A93C;
+}
+
+.loginBtn {
+    color: #ffffff;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14.5px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.loginBtn:hover {
+    color: #E0A93C;
+}
+
+.loginBtn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.joinBtn {
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 9px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.joinBtn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+}
+
+.joinBtn:focus-visible {
+    outline: 2px solid #007AFF;
+    outline-offset: 2px;
+}
+
+.topDonateBtn {
+    background: linear-gradient(100deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13.5px;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 22px;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(228, 90, 40, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.topDonateBtn:hover {
+    filter: brightness(1.07);
+    box-shadow: 0 6px 18px rgba(228, 90, 40, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.topDonateBtn:active {
+    transform: translateY(1px);
+}
+
+.topDonateBtn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.menuToggle {
+    display: none;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.menuToggle:focus-visible {
+    outline: 2px solid var(--color-blue, #007AFF);
+    outline-offset: 2px;
+}
+
+.menuToggle:hover {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-white);
+    margin: 5px 0;
+    transition: 0.4s;
+    border-radius: 2px;
+}
+
+.mobileNav {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .nav {
+        padding: 0 var(--space-md);
+    }
+
+    .separator {
+        margin: 0 var(--space-xs);
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 clamp(1rem, 5vw, 2rem);
+        height: 80px;
+    }
+
+    .logo {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .logoIcon img {
+        width: 130px !important;
+        height: auto !important;
+    }
+
+    .navWrapper {
+        display: none;
+    }
+
+    .menuToggle {
+        display: flex;
+        z-index: 2000;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .mobileNav {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        height: 100vh;
+        background: rgba(10, 12, 20, 0.7);
+        backdrop-filter: blur(48px) saturate(140%);
+        -webkit-backdrop-filter: blur(48px) saturate(140%);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        z-index: 1900;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 100px 40px;
+        box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6);
+        overflow-y: auto;
+    }
+
+    .mobileNavOpen {
+        right: 0;
+    }
+
+    .mobileNavList {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+
+    .mobileNavItem {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 15px;
+    }
+
+    .mobileNavLink {
+        color: var(--color-white);
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .mobileNavLink:hover {
+        background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .mobileNavLinkActive {
+        background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        display: inline-block;
+    }
+
+    .overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1800;
+    }
+}
+
+@media (max-width: 480px) {
+    .logoIcon img {
+        width: 110px !important;
+        height: auto !important;
+    }
+
+    .mobileNav {
+        width: 92%;
+        padding: 80px 24px;
+    }
+
+    .mobileNavLink {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .mobileNav {
+        width: 100%;
+        padding: 80px 20px;
+    }
+}

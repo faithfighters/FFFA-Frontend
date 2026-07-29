@@ -1,0 +1,287 @@
+/* ===== CONTACT PAGE — matches faith-fighters-site static reference ===== */
+
+.hero,
+.contactSection {
+    background: #0b0a12;
+    color: #fff;
+    padding: 56px 0 !important;
+}
+
+/* ── Hero ── */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--header-height) + 56px) 0 48px !important;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+}
+
+.heroDots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+    pointer-events: none;
+}
+
+.heroInner {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.heroLead {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #C6D2EA;
+    max-width: 56ch;
+}
+
+.sectionTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin: 4px 0 24px;
+}
+
+/* ── Layout ── */
+.contactSection {
+    padding-top: 8px !important;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+}
+
+/* ── Ways to connect ── */
+.infoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.infoCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+a.infoCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.5);
+}
+
+.infoIcon {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(228, 75, 52, 0.16);
+    color: #E24B34;
+}
+
+.infoIconGold {
+    background: rgba(224, 169, 60, 0.16);
+    color: #E0A93C;
+}
+
+.infoCard h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 4px;
+}
+
+.infoCard p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #C7D0E2;
+    margin: 0;
+}
+
+.socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.socialLink {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #C7D0E2;
+    transition: all 0.2s ease;
+}
+
+.socialLink:hover {
+    background: rgba(224, 169, 60, 0.14);
+    color: #E0A93C;
+}
+
+/* ── Form ── */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 18px;
+    padding: 24px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.formLabel {
+    font-size: 13px;
+    font-weight: 600;
+    color: #C7D0E2;
+}
+
+.formInput,
+.formTextarea {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #fff;
+    font-family: inherit;
+}
+
+.formTextarea {
+    resize: vertical;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.formInput:focus,
+.formTextarea:focus {
+    outline: none;
+    border-color: #E0A93C;
+}
+
+.errorText {
+    color: #f87171;
+    font-size: 13px;
+    margin: -4px 0 0;
+}
+
+.successMsg {
+    background: rgba(40, 165, 107, 0.12);
+    border: 1px solid rgba(40, 165, 107, 0.3);
+    color: #4ade80;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.submitBtn {
+    margin-top: 4px;
+    padding: 15px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(228, 90, 40, 0.4);
+    transition: filter 0.2s ease;
+}
+
+.submitBtn:hover {
+    filter: brightness(1.08);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ── Responsive ── */
+@media (min-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+    }
+}
+
+@media (max-width: 900px) {
+    .heroTitle {
+        font-size: 36px;
+    }
+
+    .sectionTitle {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 560px) {
+    .infoGrid {
+        grid-template-columns: 1fr;
+    }
+}

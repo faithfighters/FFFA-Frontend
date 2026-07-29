@@ -1,0 +1,238 @@
+.newsletter {
+    position: relative;
+    background: #05040a;
+    background-image:
+        linear-gradient(rgba(11, 10, 18, 0.85), rgba(11, 10, 18, 0.85)),
+        url('/images/newsletter-bg.png');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    overflow: hidden;
+    color: #FFFFFF;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.titleArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutLabelWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #F8C38F;
+    text-transform: uppercase;
+}
+
+.labelUnderline {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    margin-top: 5px;
+}
+
+.title {
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.formArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.description {
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+    max-width: 600px;
+}
+
+.form {
+    display: flex;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    overflow: hidden;
+    height: 55px;
+}
+
+.inputWrap {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    pointer-events: none;
+}
+
+.input {
+    flex: 1;
+    width: 100%;
+    padding: 0 20px 0 46px;
+    background: transparent;
+    border: none;
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    outline: none;
+}
+
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.submitBtn {
+    height: 100%;
+    padding: 0 25px;
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    color: #FFFFFF;
+    border: none;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s ease;
+    border-radius: 50px;
+}
+
+.submitBtn:hover {
+    opacity: 0.88;
+}
+
+.noSpam {
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 15px;
+}
+
+@media (max-width: 1024px) {
+    .newsletter {
+        padding: 60px 0;
+    }
+    .container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+        padding: 0 30px;
+    }
+    .aboutLabelWrapper {
+        align-items: center;
+    }
+    .title {
+        font-size: clamp(28px, 8vw, 44px);
+    }
+    .description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .newsletter {
+        padding: 60px 0 80px;
+    }
+    .container {
+        padding: 0 20px;
+        gap: 25px;
+    }
+    .form {
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        gap: 12px;
+        overflow: visible;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: 0;
+    }
+    .inputWrap {
+        width: 100%;
+    }
+    .input {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1.5px solid rgba(255, 255, 255, 0.22);
+        height: 56px;
+        border-radius: 99px !important;
+        width: 100%;
+        text-align: left;
+        font-size: 15px;
+        transition: border-color 0.3s ease, background 0.3s ease;
+        padding: 0 20px 0 50px;
+    }
+    .input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    .input:focus {
+        border-color: #E7421B;
+        background: rgba(255, 255, 255, 0.14);
+        outline: none;
+    }
+    .submitBtn {
+        height: 46px;
+        border-radius: 99px !important;
+        width: 100%;
+        justify-content: center;
+        box-shadow: 0 8px 16px rgba(231, 66, 27, 0.35);
+        font-size: 13px;
+        letter-spacing: 0.5px;
+    }
+    .description {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 25px;
+        color: rgba(255, 255, 255, 0.75);
+    }
+    .title {
+        font-size: 28px;
+        margin-top: 10px;
+    }
+}
