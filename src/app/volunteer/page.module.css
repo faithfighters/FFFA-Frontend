@@ -97,7 +97,7 @@
 
 /* ── Six ways to serve ── */
 .rolesSection {
-    padding-top: 8px !important;
+    padding-top: 48px !important;
 }
 
 .rolesGrid {
@@ -258,6 +258,12 @@
     font-size: 14px;
     color: #fff;
     font-family: inherit;
+    color-scheme: dark;
+}
+
+select.input option {
+    background-color: #161B2A;
+    color: #fff;
 }
 
 .input::placeholder {

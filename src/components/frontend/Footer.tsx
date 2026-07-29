@@ -25,7 +25,6 @@ const getInvolvedLinks = [
 const legalLinks = [
     { label: 'Privacy', href: '/privacy-policy' },
     { label: 'Terms', href: '/terms' },
-    { label: 'Refund Policy', href: '/refund' },
 ];
 
 const socialLinks = [
@@ -37,7 +36,7 @@ const socialLinks = [
 
 export default function Footer() {
     const pathname = usePathname();
-    const hideOnRoutes = ['/coming-soon', '/login', '/register', '/subscribe'];
+    const hideOnRoutes = ['/coming-soon', '/subscribe'];
     if (hideOnRoutes.includes(pathname) || pathname.startsWith('/dashboard')) return null;
 
     return (
@@ -47,11 +46,11 @@ export default function Footer() {
                     {/* Column 1: Brand */}
                     <div className={styles.brand}>
                         <Image
-                            src="/images/logo-white.png"
+                            src="/images/FFFA_logo_Horizontal.svg"
                             alt="Faith Fighters For America"
-                            width={100}
-                            height={120}
-                            style={{ objectFit: 'contain' }}
+                            width={180}
+                            height={44}
+                            style={{ objectFit: 'contain', height: 'auto' }}
                         />
                         <p className={styles.brandDescription}>
                             Uniting communities with compassion — making every act of giving a shared and

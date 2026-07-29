@@ -6,16 +6,18 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background: radial-gradient(1000px 560px at 50% -15%, #16203c 0%, #0a0d17 46%, #06080f 100%);
+    background: #0b0a12;
 }
 
-/* ── Full-bleed dot texture + warm glow hero band, like /register ── */
-.heroBand {
+/* ── Hero — matches About/Store/Contact/etc ── */
+.hero {
     position: relative;
     overflow: hidden;
+    padding: calc(var(--header-height) + 56px) 0 48px;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
 }
 
-.heroBand::before {
+.hero::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -24,8 +26,7 @@
     pointer-events: none;
 }
 
-.heroBand::after {
-    content: "";
+.heroDots {
     position: absolute;
     inset: 0;
     opacity: 0.4;
@@ -34,9 +35,47 @@
     pointer-events: none;
 }
 
-.heroBand > * {
+.heroInner {
     position: relative;
     z-index: 2;
+    max-width: 620px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.heroLead {
+    margin-top: 16px;
+    font-size: 15px;
+    color: #C6D2EA;
+    line-height: 1.6;
+    max-width: 40ch;
 }
 
 .container {
@@ -47,62 +86,13 @@
     padding: 40px 20px 60px;
 }
 
-.heroContainer {
-    padding-bottom: 0;
-}
-
 .mainContainer {
-    padding-top: 0;
+    padding-top: 48px;
 }
 
 .formCol {
     max-width: 620px;
     margin: 0 auto;
-}
-
-/* ── Hero branding ── */
-.heroSection {
-    max-width: 620px;
-    text-align: left;
-    padding: 20px 0;
-}
-
-.logoWrap {
-    margin-bottom: 20px;
-}
-
-.logoIcon {
-    height: 26px;
-    width: auto;
-    display: block;
-}
-
-.eyebrow {
-    display: block;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #F0C879;
-    margin-bottom: 14px;
-}
-
-.heroHeadline {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-size: 34px;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -0.3px;
-    line-height: 1.15;
-    margin: 0 0 10px;
-}
-
-.heroSub {
-    font-size: 15px;
-    color: #C6D2EA;
-    line-height: 1.6;
-    max-width: 40ch;
-    margin: 0;
 }
 
 /* ── Form card ── */
@@ -314,18 +304,14 @@
    DESKTOP / TABLET  (≥ 640px)
    ════════════════════════════════════════════════════════════ */
 @media (min-width: 640px) {
-    .heroHeadline {
-        font-size: 40px;
-    }
-
-    .logoIcon {
-        height: 30px;
+    .heroTitle {
+        font-size: 48px;
     }
 }
 
 /* ── Small mobile ── */
 @media (max-width: 400px) {
-    .heroHeadline {
-        font-size: 30px;
+    .heroTitle {
+        font-size: 32px;
     }
 }

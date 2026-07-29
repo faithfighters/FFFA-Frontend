@@ -54,22 +54,18 @@ export default function LoginPage() {
 
     return (
         <div className={`${fraunces.variable} ${styles.loginPage}`}>
-            <div className={styles.heroBand}>
-                <div className={`${styles.container} ${styles.heroContainer}`}>
-                    {/* Hero / branding section */}
-                    <div className={styles.heroSection}>
-                        <div className={styles.logoWrap}>
-                            <img src="/images/FFFA_logo_Horizontal.svg" alt="Faith Fighters logo" className={styles.logoIcon} />
-                        </div>
-
-                        <span className={styles.eyebrow}>— Welcome Back</span>
-                        <h1 className={styles.heroHeadline}>One Spirit. One Mission.</h1>
-                        <p className={styles.heroSub}>
+            <section className={styles.hero}>
+                <div className={styles.heroDots} />
+                <div className="container">
+                    <div className={styles.heroInner}>
+                        <span className={styles.eyebrow}>Welcome Back</span>
+                        <h1 className={styles.heroTitle}>One Spirit. One Mission.</h1>
+                        <p className={styles.heroLead}>
                             Sign in to track your giving, follow your missions, and stand with 10,000+ Americans.
                         </p>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <div className={`${styles.container} ${styles.mainContainer}`}>
             <div className={styles.formCol}>

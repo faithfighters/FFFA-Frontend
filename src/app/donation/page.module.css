@@ -79,7 +79,7 @@
 
 /* ── Donate card ── */
 .donateSection {
-    padding-top: 8px !important;
+    padding-top: 48px !important;
 }
 
 .donateCard {
@@ -172,6 +172,12 @@
     font-size: 14px;
     color: #fff;
     font-family: inherit;
+    color-scheme: dark;
+}
+
+.select option {
+    background-color: #161B2A;
+    color: #fff;
 }
 
 .customInput::placeholder {
