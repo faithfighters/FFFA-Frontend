@@ -15,7 +15,6 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: 'Store', href: '/store' },
   { label: 'Volunteer', href: '/volunteer' },
   { label: 'Contact', href: '/contact' },
-  { label: '#FFFA', href: '/join' },
   { label: 'Need Help', href: '/register?intent=help' },
 ];
 
