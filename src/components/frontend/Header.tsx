@@ -85,9 +85,6 @@ export default function Header() {
           </nav>
 
           <div className={styles.ctaGroup}>
-            <Link href="/support" className={styles.supportLink}>
-              Support Us
-            </Link>
             {user ? (
               <Link href="/dashboard" className={styles.joinBtn}>
                 Hi, {firstName}
