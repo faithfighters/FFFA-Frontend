@@ -13,8 +13,8 @@ export const STORY_IMG: Record<string, string> = {
     bills: '/images/img-01.jpg',
     car: '/images/img-02.jpg',
     hotel: '/images/img-03.jpg',
-    prayers: '/images/img-04.jpg',
-    rent: '/images/img-05.png',
+    prayers: '/images/img-05.png',
+    rent: '/images/img-05.jpg',
     student: '/images/img-06.jpg',
 };
 
