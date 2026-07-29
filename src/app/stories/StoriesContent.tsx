@@ -14,7 +14,7 @@ const STORIES = [
     { title: 'Car Payment Paid', file: 'video4.mp4', duration: '0:34', img: '/images/img-02.jpg' },
     { title: 'Hotel Stay Covered', file: 'video5.mp4', duration: '1:12', img: '/images/img-03.jpg' },
     { title: 'Prayers Answered', file: 'video11.mp4', duration: '0:32', img: '/images/img-04.jpg' },
-    { title: 'Rent Covered', file: 'video7.mp4', duration: '0:27', img: '/images/img-05.jpg' },
+    { title: 'Rent Covered', file: 'video7.mp4', duration: '0:27', img: '/images/img-05.png' },
     { title: 'Student Loans Paid Off', file: 'video6.mp4', duration: '0:29', img: '/images/img-06.jpg' },
 ];
 
@@ -55,13 +55,13 @@ export default function StoriesContent() {
                         Featured film
                     </span>
                     {playingInline === 'featured' ? (
-                        <div className={styles.featuredVideo}>
+                        <div className={styles.featuredVideo} style={{ background: '#000' }}>
                             <video
                                 src={FEATURED_VIDEO}
                                 controls
                                 autoPlay
                                 playsInline
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                             />
                         </div>
                     ) : (
@@ -102,13 +102,13 @@ export default function StoriesContent() {
                     <div className={styles.reelGrid}>
                         {STORIES.map((story) => (
                             playingInline === story.title ? (
-                                <div key={story.title} className={styles.reelCard}>
+                                <div key={story.title} className={styles.reelCard} style={{ background: '#000' }}>
                                     <video
                                         src={`${VIDEO_BASE}${story.file}`}
                                         controls
                                         autoPlay
                                         playsInline
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                                     />
                                 </div>
                             ) : (

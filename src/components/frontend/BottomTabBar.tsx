@@ -17,7 +17,7 @@ export default function BottomTabBar() {
     const pathname = usePathname();
 
     // Hidden on auth pages and the dashboard, matching Header.tsx's own scope rules.
-    const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/subscribe' || pathname === '/coming-soon' || pathname === '/forgot-password';
+    const isAuthPage = pathname === '/subscribe' || pathname === '/coming-soon' || pathname === '/forgot-password';
     const isDashboard = pathname.startsWith('/dashboard');
     if (isAuthPage || isDashboard) return null;
 
