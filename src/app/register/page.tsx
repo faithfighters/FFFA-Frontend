@@ -52,8 +52,9 @@ function RegisterForm() {
     const userType: 'donor' | 'recipient' = intent === 'help' ? 'recipient' : 'donor';
 
     useEffect(() => {
-        if (!authLoading && user && !postVerifyRedirecting) router.replace('/');
-    }, [user, authLoading, postVerifyRedirecting, router]);
+        if (authLoading || !user || postVerifyRedirecting) return;
+        router.replace(intent === 'help' ? '/dashboard/submit' : '/');
+    }, [user, authLoading, postVerifyRedirecting, intent, router]);
 
     useEffect(() => {
         if (step !== 'otp' || timer <= 0) return;
