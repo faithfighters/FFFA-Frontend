@@ -1,0 +1,179 @@
+{
+  "users": [
+    {
+      "id": "admin-001",
+      "name": "Admin User",
+      "email": "admin@faithfightersforamerica.com",
+      "passwordHash": "$2b$12$w7aD.9IyAsmNWnd/wx/ce.7bIWBQNy4TT3dLBw9pxGx2IjuPurhG.",
+      "role": "admin",
+      "plan": "faith_builder",
+      "votesRemaining": 0,
+      "votesTotal": 1,
+      "joinedAt": "2026-03-10T12:14:09.111Z"
+    }
+  ],
+  "causes": [
+    {
+      "id": "cause-001",
+      "name": "Veterans Housing Initiative",
+      "description": "Providing safe and stable housing for veterans and their families who are experiencing homelessness or housing instability.",
+      "category": "Veterans",
+      "totalVotes": 143,
+      "goalAmount": 25000,
+      "raisedAmount": 18431.96,
+      "image": "/images/praying-hands.png",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cause-002",
+      "name": "Youth Mentorship Programs",
+      "description": "Empowering the next generation through faith-based mentorship, after-school programs, and leadership development.",
+      "category": "Youth",
+      "totalVotes": 98,
+      "goalAmount": 15000,
+      "raisedAmount": 9200,
+      "image": "/images/handshake-flag.png",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cause-003",
+      "name": "Community Food Banks",
+      "description": "Stocking local food banks to ensure no family in our community goes without a meal.",
+      "category": "Food Security",
+      "totalVotes": 87,
+      "goalAmount": 10000,
+      "raisedAmount": 7800,
+      "image": "/images/praying-hands.png",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cause-004",
+      "name": "Disaster Relief Fund",
+      "description": "Rapid response assistance for families affected by natural disasters, fires, and other emergencies.",
+      "category": "Disaster Relief",
+      "totalVotes": 74,
+      "goalAmount": 20000,
+      "raisedAmount": 12600,
+      "image": "/images/handshake-flag.png",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cause-005",
+      "name": "Rural Healthcare Access",
+      "description": "Funding mobile clinics and telehealth services for medically underserved rural communities.",
+      "category": "Healthcare",
+      "totalVotes": 61,
+      "goalAmount": 30000,
+      "raisedAmount": 8400,
+      "image": "/images/praying-hands.png",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cause-006",
+      "name": "First Responder Support",
+      "description": "Supporting our heroes in blue, firefighters, and emergency medical services with mental health and financial resources.",
+      "category": "First Responders",
+      "totalVotes": 55,
+      "goalAmount": 18000,
+      "raisedAmount": 6200,
+      "image": "/images/handshake-flag.png",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "videos": [
+    {
+      "id": "video-001",
+      "title": "How Faith Fighters Changed Our Family's Life",
+      "description": "After the flood destroyed our home, we didn't know where to turn. Faith Fighters For America stepped in and changed everything.",
+      "thumbnailUrl": "/images/hero-flag.png",
+      "videoUrl": "#",
+      "authorId": "user-sample-001",
+      "authorName": "Sarah Johnson",
+      "causeTag": "Disaster Relief",
+      "status": "approved",
+      "submittedAt": "2026-02-15T10:00:00.000Z"
+    },
+    {
+      "id": "video-002",
+      "title": "Our Veterans Deserve Better",
+      "description": "A powerful testimony about how the Veterans Housing Initiative helped three families find stable homes.",
+      "thumbnailUrl": "/images/handshake-flag.png",
+      "videoUrl": "#",
+      "authorId": "user-sample-002",
+      "authorName": "James Martinez",
+      "causeTag": "Veterans",
+      "status": "approved",
+      "submittedAt": "2026-02-10T14:30:00.000Z"
+    },
+    {
+      "id": "video-003",
+      "title": "Youth Mentorship: Changing the Next Generation",
+      "description": "Coach K speaks about the power of faith-based mentorship in transforming young lives.",
+      "thumbnailUrl": "/images/praying-hands.png",
+      "videoUrl": "#",
+      "authorId": "admin-001",
+      "authorName": "Kevin Jones",
+      "causeTag": "Youth",
+      "status": "approved",
+      "submittedAt": "2026-01-20T09:00:00.000Z"
+    },
+    {
+      "id": "video-004",
+      "title": "Community Food Drive Success Story",
+      "description": "See how our members' votes helped feed over 1,200 families this past Thanksgiving.",
+      "thumbnailUrl": "/images/handshake-flag.png",
+      "videoUrl": "#",
+      "authorId": "user-sample-003",
+      "authorName": "Mary Thompson",
+      "causeTag": "Food Security",
+      "status": "pending",
+      "submittedAt": "2026-03-01T16:45:00.000Z"
+    }
+  ],
+  "votingCycles": [
+    {
+      "id": "cycle-001",
+      "name": "Q1 2026 Donation Cycle",
+      "startDate": "2026-01-01T00:00:00.000Z",
+      "endDate": "2026-03-31T23:59:59.000Z",
+      "status": "active",
+      "causes": [
+        "cause-001",
+        "cause-002",
+        "cause-003",
+        "cause-004",
+        "cause-005",
+        "cause-006"
+      ]
+    }
+  ],
+  "votes": [
+    {
+      "id": "vote-1773144895068-cause-001",
+      "userId": "user-1773144849110-o672fge",
+      "causeId": "cause-001",
+      "cycleId": "cycle-001",
+      "count": 1,
+      "createdAt": "2026-03-10T12:14:55.068Z"
+    }
+  ],
+  "subscriptions": [],
+  "payouts": [
+    {
+      "id": "payout-001",
+      "causeId": "cause-001",
+      "causeName": "Veterans Housing Initiative",
+      "amount": 18400,
+      "paymentMethod": "ach",
+      "status": "pending",
+      "cycleId": "cycle-001",
+      "createdAt": "2026-03-01T00:00:00.000Z"
+    }
+  ]
+}

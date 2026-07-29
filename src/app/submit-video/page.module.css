@@ -1,0 +1,295 @@
+/* ===== SUBMIT VIDEO PAGE ===== */
+.submitPage {
+    min-height: 100vh;
+    background: #0b0a12;
+    padding: calc(var(--header-height) + var(--space-2xl)) 0 var(--space-3xl);
+}
+
+.pageHeader {
+    margin-bottom: var(--space-2xl);
+}
+
+.form {
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* Drop Zone */
+.dropZone {
+    border: 2px dashed rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    padding: var(--space-3xl);
+    text-align: center;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.dropZone::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(248, 195, 143, 0.04), transparent);
+    transform: rotate(45deg);
+    transition: all var(--transition-slow);
+    opacity: 0;
+}
+
+.dropZone:hover {
+    border-color: #F8C38F;
+    background: rgba(248, 195, 143, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(248, 195, 143, 0.12), 0 0 20px rgba(248, 195, 143, 0.06);
+}
+
+.dropZone:hover::before {
+    animation: shimmer 0.8s ease;
+    opacity: 1;
+}
+
+.dropZoneActive {
+    border-color: #F8C38F;
+    background: rgba(248, 195, 143, 0.04);
+}
+
+.dropZoneHasFile {
+    border-color: #F8C38F;
+    background: rgba(248, 195, 143, 0.06);
+    padding: var(--space-xl);
+}
+
+.dropIcon {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.dropText {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.dropOr {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.35);
+    margin: var(--space-md) 0;
+}
+
+.browseBtn {
+    cursor: pointer;
+}
+
+.dropHint {
+    font-size: var(--font-size-xs);
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: var(--space-md);
+}
+
+.fileInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.fileIcon {
+    font-size: 2rem;
+    color: #F8C38F;
+}
+
+.fileNameText {
+    font-weight: 600;
+    color: #ffffff;
+    flex: 1;
+    text-align: left;
+}
+
+.removeFile {
+    background: none;
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: var(--space-sm);
+    border: none;
+    transition: color 0.2s;
+}
+
+.removeFile:hover {
+    color: #E7421B;
+}
+
+/* Form Fields */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input,
+.textarea {
+    padding: 14px 18px;
+    font-size: var(--font-size-base);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    transition: all var(--transition-fast);
+    color: #ffffff;
+    font-family: inherit;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.input:hover,
+.textarea:hover {
+    border-color: rgba(248, 195, 143, 0.3);
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: #ff5a1f;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(255, 90, 31, 0.18);
+}
+
+/* select options inherit dark bg via OS — force color at least */
+.input option {
+    background: #1a1825;
+    color: #ffffff;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: var(--font-family);
+}
+
+.submitBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px !important;
+}
+
+.submitBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Success */
+.successCard {
+    max-width: 550px;
+    margin: var(--space-3xl) auto;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: var(--space-3xl);
+    text-align: center;
+}
+
+.successIcon {
+    font-size: 4rem;
+    margin-bottom: var(--space-lg);
+}
+
+/* Form layout */
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+}
+
+@media (max-width: 640px) {
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sectionTitle {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: var(--space-sm);
+    margin-bottom: 0;
+}
+
+/* Bill type selector */
+.billTypeGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+    .billTypeGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .billTypeGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+.billTypeBtn {
+    padding: var(--space-md);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.billTypeBtn:hover {
+    border-color: #F8C38F;
+    background: rgba(248, 195, 143, 0.06);
+    color: #F8C38F;
+}
+
+.billTypeBtnActive {
+    border-color: #E7421B;
+    background: rgba(231, 66, 27, 0.12);
+    color: #F8C38F;
+}

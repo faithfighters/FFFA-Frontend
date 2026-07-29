@@ -1,0 +1,248 @@
+/* ===== STORE PAGE — matches faith-fighters-site static reference ===== */
+
+.hero,
+.productsSection,
+.benefitsSection {
+    background: #0b0a12;
+    color: #fff;
+    padding: 56px 0 !important;
+}
+
+/* ── Hero ── */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--header-height) + 56px) 0 48px !important;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+}
+
+.heroDots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+    pointer-events: none;
+}
+
+.heroInner {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.heroLead {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #C6D2EA;
+    max-width: 56ch;
+}
+
+.sectionTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: #fff;
+    letter-spacing: -0.01em;
+}
+
+.sectionHeaderCenter {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 36px;
+}
+
+.sectionHeaderCenter .eyebrow {
+    justify-content: center;
+}
+
+.sectionSub {
+    margin-top: 10px;
+    color: #8A93A8;
+    font-size: 15px;
+}
+
+/* ── Product grid ── */
+.productsSection {
+    padding-top: 8px !important;
+}
+
+.productGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.productCard {
+    display: block;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.productCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+}
+
+.productImage {
+    position: relative;
+    aspect-ratio: 1;
+    background: linear-gradient(160deg, #f4f1ea, #e6ded0);
+}
+
+.productInfo {
+    padding: 14px;
+}
+
+.productInfo b {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.productPrice {
+    display: block;
+    margin-top: 4px;
+    font-weight: 700;
+    color: #E0A93C;
+    font-size: 1.05rem;
+}
+
+.fullStoreBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 22px;
+    padding: 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(228, 90, 40, 0.4);
+    transition: filter 0.2s ease;
+}
+
+.fullStoreBtn:hover {
+    filter: brightness(1.08);
+}
+
+/* ── Benefit rows ── */
+.benefitsSection {
+    padding-top: 6px !important;
+}
+
+.benefitsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.benefitRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.benefitIcon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(224, 169, 60, 0.16);
+    color: #E0A93C;
+}
+
+.benefitIconRed {
+    background: rgba(228, 75, 52, 0.16);
+    color: #E24B34;
+}
+
+.benefitRow h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 4px;
+}
+
+.benefitRow p {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #C7D0E2;
+    margin: 0;
+}
+
+/* ── Responsive ── */
+@media (min-width: 1024px) {
+    .productGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .heroTitle {
+        font-size: 36px;
+    }
+
+    .sectionTitle {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 560px) {
+    .benefitsGrid {
+        grid-template-columns: 1fr;
+    }
+}

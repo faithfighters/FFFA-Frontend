@@ -1,0 +1,224 @@
+/* ===== LEADERBOARD PAGE ===== */
+
+/* Stats Bar */
+.statsBar {
+    background: #0b0a12;
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+    text-align: center;
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.statValue {
+    font-size: var(--font-size-3xl);
+    font-weight: 900;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.statLabel {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Leaderboard Table */
+.leaderboard {
+    background: #0b0a12;
+}
+
+.table {
+    margin-top: var(--space-2xl);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.tableHeader,
+.tableRow {
+    display: grid;
+    grid-template-columns: 80px 2fr 1fr 100px 1.5fr 120px;
+    align-items: center;
+    padding: var(--space-lg) var(--space-xl);
+}
+
+.tableHeader {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tableRow {
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background var(--transition-fast);
+    color: #ffffff;
+}
+
+.tableRow:last-child {
+    border-bottom: none;
+}
+
+.tableRow:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.topThree {
+    background: rgba(248, 195, 143, 0.04);
+}
+
+.topThree:hover {
+    background: rgba(248, 195, 143, 0.08);
+}
+
+.rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.medal {
+    font-size: var(--font-size-2xl);
+}
+
+.rankNum {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.colCause strong {
+    color: #ffffff;
+}
+
+.categoryBadge {
+    display: inline-block;
+    background: rgba(248, 195, 143, 0.12);
+    color: #F8C38F;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-full);
+}
+
+.voteCount {
+    font-weight: 800;
+    color: #ffffff;
+    font-size: var(--font-size-lg);
+}
+
+.progressBar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    border-radius: 4px;
+    transition: width var(--transition-slow);
+}
+
+.progressText {
+    font-size: var(--font-size-xs);
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 4px;
+    display: block;
+}
+
+.colProgress {
+    display: flex;
+    flex-direction: column;
+}
+
+.raisedAmount {
+    font-weight: 700;
+    color: #F8C38F;
+    font-size: var(--font-size-base);
+}
+
+@media (max-width: 1024px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tableHeader,
+    .tableRow {
+        grid-template-columns: 60px 1.5fr 100px 1fr 100px;
+    }
+
+    .colCategory {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .tableHeader,
+    .tableRow {
+        grid-template-columns: 60px 1.5fr 90px 1fr;
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .colProgress {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .statsGrid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg);
+    }
+
+    .tableHeader,
+    .tableRow {
+        grid-template-columns: 50px 1fr 80px 80px;
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .colProgress {
+        display: none;
+    }
+
+    .colCategory {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .tableHeader,
+    .tableRow {
+        grid-template-columns: 40px 1fr 70px;
+        padding: var(--space-sm);
+        font-size: 13px;
+    }
+
+    .colVotes {
+        display: none;
+    }
+}
