@@ -64,10 +64,23 @@ export function fireConfetti(canvas: HTMLCanvasElement) {
     return () => cancelAnimationFrame(frameId);
 }
 
-/** Real recorded crowd-cheer clip — used for every celebration moment (per-vote success, 100%-goal). */
+/** Real recorded crowd-cheer clip — used for the per-vote success modal. */
 export function playCheerSound() {
     try {
         const audio = new Audio('/images/dennish18-crowd-cheering-143103.mp3');
+        audio.volume = 0.55;
+        audio.play().catch(() => {
+            // Autoplay may be blocked until the user interacts with the page — fail silently.
+        });
+    } catch {
+        // Audio may be unavailable in this environment — fail silently.
+    }
+}
+
+/** Firecracker-cracking clip — used specifically for the 100%-goal-reached celebration. */
+export function playFireworksSound() {
+    try {
+        const audio = new Audio('/images/dragon-studio-fireworks-07-419025.mp3');
         audio.volume = 0.55;
         audio.play().catch(() => {
             // Autoplay may be blocked until the user interacts with the page — fail silently.

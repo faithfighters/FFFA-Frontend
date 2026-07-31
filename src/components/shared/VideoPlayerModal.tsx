@@ -5,9 +5,10 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { haptics } from '@/lib/haptics';
 import { useAuth } from '@/context/AuthContext';
-import { fireConfetti, playCheerSound } from '@/lib/celebrate';
+import { fireConfetti, playCheerSound, playFireworksSound } from '@/lib/celebrate';
 import Lottie from 'lottie-react';
 import confettiAnimation from '../../../public/images/Confetti.json';
+import fireworksAnimation from '../../../public/images/firecrackers gif png.json';
 
 interface Video {
     id: string;
@@ -150,6 +151,7 @@ export default function VideoPlayerModal({
     const [voteError, setVoteError] = useState('');
     const [showVoteSuccessModal, setShowVoteSuccessModal] = useState(false);
     const [showGoalCelebration, setShowGoalCelebration] = useState(false);
+    const [showDelayedFireworks, setShowDelayedFireworks] = useState(false);
     const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
     const [voteBursts, setVoteBursts] = useState<{ id: number; particles: { dx: number; dy: number; delay: number }[] }[]>([]);
 
@@ -235,7 +237,10 @@ export default function VideoPlayerModal({
     // 100%-goal celebration — reset the "already fired" guard whenever the overlay closes
     const celebrationFiredRef = useRef(false);
     useEffect(() => {
-        if (!showGoalCelebration) celebrationFiredRef.current = false;
+        if (!showGoalCelebration) {
+            celebrationFiredRef.current = false;
+            setShowDelayedFireworks(false);
+        }
     }, [showGoalCelebration]);
 
     // Per-vote success modal — cheer plays once per showing, guarded the same way.
@@ -1428,7 +1433,7 @@ export default function VideoPlayerModal({
                             src="/images/fffa file 1 (1).png"
                             alt=""
                             style={{
-                                width: '34px', height: '34px', objectFit: 'contain',
+                                width: '68px', height: '68px', objectFit: 'contain',
                                 animation: 'voteHandFloat 1.5s cubic-bezier(0.16,1,0.3,1) forwards',
                                 filter: 'drop-shadow(0 0 6px rgba(248,195,143,0.9)) drop-shadow(0 0 14px rgba(231,66,27,0.6))',
                             }}
@@ -1457,9 +1462,9 @@ export default function VideoPlayerModal({
                     }
                     @keyframes voteHandFloat {
                         0% { opacity: 0; transform: translateY(0) scale(0.6); }
-                        15% { opacity: 1; transform: translateY(-8px) scale(1.05); }
-                        75% { opacity: 1; transform: translateY(-70px) scale(1); }
-                        100% { opacity: 0; transform: translateY(-96px) scale(0.9); }
+                        15% { opacity: 1; transform: translateY(-8px) scale(1); }
+                        75% { opacity: 1; transform: translateY(-70px) scale(1.35); }
+                        100% { opacity: 0; transform: translateY(-96px) scale(1.5); }
                     }
                     @keyframes voteParticleDrift {
                         0% { opacity: 0; transform: translate(0, 0) scale(0.4); }
@@ -1493,6 +1498,16 @@ export default function VideoPlayerModal({
                             animationData={confettiAnimation}
                             loop={false}
                             style={{ position: 'absolute', top: '-12%', left: 0, right: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
+                        />
+                        <Lottie
+                            animationData={confettiAnimation}
+                            loop={false}
+                            style={{ position: 'absolute', top: '-25%', left: '-40%', width: '90%', height: '90%', pointerEvents: 'none', zIndex: 1 }}
+                        />
+                        <Lottie
+                            animationData={confettiAnimation}
+                            loop={false}
+                            style={{ position: 'absolute', top: '-25%', left: '40%', width: '90%', height: '90%', pointerEvents: 'none', zIndex: 1 }}
                         />
 
                         {/* Top Section */}
@@ -1644,12 +1659,25 @@ export default function VideoPlayerModal({
                                 confettiCanvasRef.current = el;
                                 if (el && !celebrationFiredRef.current) {
                                     celebrationFiredRef.current = true;
-                                    playCheerSound();
+                                    playFireworksSound();
                                     fireConfetti(el);
+                                    setTimeout(() => setShowDelayedFireworks(true), 500);
                                 }
                             }}
                             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
                         />
+                        <Lottie
+                            animationData={fireworksAnimation}
+                            loop={false}
+                            style={{ position: 'absolute', top: '-15%', left: '-30%', width: '80%', height: '80%', pointerEvents: 'none', zIndex: 1 }}
+                        />
+                        {showDelayedFireworks && (
+                            <Lottie
+                                animationData={fireworksAnimation}
+                                loop={false}
+                                style={{ position: 'absolute', top: '-15%', left: '50%', width: '80%', height: '80%', pointerEvents: 'none', zIndex: 1 }}
+                            />
+                        )}
 
                         {/* Top Section */}
                         <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', textAlign: 'center' }}>
