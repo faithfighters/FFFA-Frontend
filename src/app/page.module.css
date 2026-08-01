@@ -130,25 +130,6 @@
     transform: translateY(-2px);
 }
 
-.heroJoinBtn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 11px 20px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 13px;
-    text-decoration: none;
-    transition: transform 0.15s;
-}
-
-.heroJoinBtn:hover {
-    transform: translateY(-2px);
-}
-
 .heroTrust {
     display: flex;
     align-items: center;
@@ -238,53 +219,34 @@
     font-weight: 600;
 }
 
-/* ── Stat strip ── */
-.statStrip {
+/* ── Join Now CTA strip ── */
+.joinNowStrip {
     position: relative;
     z-index: 2;
     margin: -20px auto 0;
     width: 100%;
-    background: var(--hp-card);
-    border: 1px solid var(--hp-line);
-    border-radius: 16px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: center;
     padding: 14px 6px;
 }
 
-.statItem {
-    text-align: center;
-    padding: 4px;
-    position: relative;
-}
-
-.statItem:not(:first-child)::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 15%;
-    height: 70%;
-    width: 1px;
-    background: var(--hp-line);
-}
-
-.statValue {
-    display: block;
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-weight: 700;
-    font-size: 24px;
+.joinNowBigBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 56px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 50%, #E4531F 100%);
     color: #ffffff;
+    font-weight: 800;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 20px 50px rgba(228, 75, 52, 0.4);
+    transition: transform 0.15s;
 }
 
-.statLabel {
-    display: block;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--hp-muted);
-    margin-top: 4px;
+.joinNowBigBtn:hover {
+    transform: translateY(-2px);
 }
 
 /* ── Mobile-only video section ── */
@@ -725,13 +687,8 @@
         display: none;
     }
 
-    .statStrip {
-        grid-template-columns: repeat(3, 1fr);
+    .joinNowStrip {
         padding: 28px 8px;
-    }
-
-    .statValue {
-        font-size: 32px;
     }
 
     .testimonialGrid {
