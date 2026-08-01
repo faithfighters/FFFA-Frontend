@@ -74,6 +74,27 @@ function DashboardContent() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Google-signup donors land here with ?startCheckout=<plan> — same Stripe checkout
+    // the regular email/password donor flow kicks off right after OTP verification.
+    useEffect(() => {
+        const plan = searchParams.get('startCheckout');
+        if (!plan || !user || user.plan) return;
+        router.replace('/dashboard');
+        fetch('/api/stripe/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ plan }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.url) window.location.href = data.url;
+                else router.push('/dashboard/subscription?checkout=retry');
+            })
+            .catch(() => router.push('/dashboard/subscription?checkout=retry'));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
+
     useEffect(() => {
         if (user) {
             setVotesRemaining(user.votesRemaining ?? 0);
