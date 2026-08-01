@@ -1,6 +1,7 @@
 /* ===== MEDIA PAGE ===== */
 .featured {
-    background: var(--color-white);
+    background: #0b0a12;
+    color: #ffffff;
 }
 
 .featuredGrid {
@@ -20,8 +21,26 @@
     cursor: pointer;
 }
 
-.thumbImg {
+.videoButton {
+    display: block;
+    border: 0;
+    padding: 0;
+    background: #0b0a12;
+    text-align: left;
+    font: inherit;
+}
+
+.thumbImg,
+.thumbVideo {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
+}
+
+.thumbVideo {
+    position: absolute;
+    inset: 0;
 }
 
 .playBtn,
@@ -40,7 +59,7 @@
 
 .playBtn:hover,
 .playBtnSmall:hover {
-    background: rgba(220, 38, 38, 0.4);
+    background: rgba(231, 66, 27, 0.45);
     backdrop-filter: blur(8px);
     transform: scale(1.05);
 }
@@ -63,8 +82,8 @@
 .tag,
 .tagSmall {
     display: inline-block;
-    background: var(--color-red);
-    color: white;
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    color: #fff;
     font-size: var(--font-size-xs);
     font-weight: 700;
     text-transform: uppercase;
@@ -74,7 +93,7 @@
 }
 
 .tagSmall {
-    font-size: 10px;
+    font-size: 12px;
     padding: 3px 10px;
 }
 
@@ -82,20 +101,26 @@
     font-size: var(--font-size-2xl);
     font-weight: 800;
     margin: var(--space-md) 0 var(--space-sm);
-    color: var(--color-dark);
+    color: #ffffff;
 }
 
 .featuredDesc {
     font-size: var(--font-size-lg);
-    color: var(--color-gray-500);
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
 }
 
 .featuredMeta,
 .videoMeta {
     font-size: var(--font-size-sm);
-    color: var(--color-gray-300);
+    color: rgba(255, 255, 255, 0.45);
     margin-top: var(--space-sm);
+}
+
+/* Gallery section — overrides section--light to stay dark */
+.gallery {
+    background: #0b0a12 !important;
+    color: #ffffff;
 }
 
 /* Gallery Grid */
@@ -107,34 +132,77 @@
 }
 
 .videoCard {
-    background: var(--color-white);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--border-radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
     transition: all var(--transition-base);
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
 }
 
 .videoCard:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    border-color: rgba(248, 195, 143, 0.25);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
 
 .videoThumbSmall {
+    display: block;
     position: relative;
     width: 100%;
     aspect-ratio: 16/9;
     overflow: hidden;
+    background: #0b0a12;
 }
 
 .videoInfo {
+    display: block;
     padding: var(--space-lg);
 }
 
 .videoTitle {
+    display: block;
     font-size: var(--font-size-base);
     font-weight: 700;
-    color: var(--color-dark);
+    color: #ffffff;
     margin-top: var(--space-sm);
+}
+
+.emptyThumb {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b0a12;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+}
+
+.emptyState {
+    text-align: center;
+    padding: var(--space-3xl);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .featured {
+        padding-top: var(--space-3xl);
+    }
+
+    .featuredGrid {
+        gap: var(--space-xl);
+    }
+
+    .featuredTitle {
+        font-size: var(--font-size-xl);
+    }
 }
 
 @media (max-width: 1024px) {

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import PageBanner from '@/components/frontend/PageBanner';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -10,17 +9,18 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
     return (
         <>
-            <PageBanner
-                title="Privacy Policy"
-                backgroundImage="/images/hero-flag.png"
-                breadcrumbs={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Privacy Policy', href: '/privacy-policy' },
-                ]}
-            />
+            <section className={styles.hero}>
+                <div className={styles.heroDots} />
+                <div className="container">
+                    <div className={styles.heroInner}>
+                        <span className={styles.eyebrow}>Legal</span>
+                        <h1 className={styles.heroTitle}>Privacy Policy</h1>
+                    </div>
+                </div>
+            </section>
 
             <section className={`section ${styles.legalSection}`}>
-                <div className="container" style={{ maxWidth: '860px', margin: '0 auto' }}>
+                <div className="container">
                     <p className={styles.lastUpdated}>Last Updated: February 5, 2026</p>
 
                     <div className={styles.legalContent}>

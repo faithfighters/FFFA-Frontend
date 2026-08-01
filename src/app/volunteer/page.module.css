@@ -1,148 +1,369 @@
-.introSection { padding-bottom: var(--space-2xl); }
+/* ===== VOLUNTEER PAGE — matches faith-fighters-site static reference ===== */
 
-.rolesGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
+.hero,
+.rolesSection,
+.formSection {
+    background: #0b0a12;
+    color: #fff;
+    padding: 56px 0 !important;
 }
 
-.howSection {}
+/* ── Hero ── */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--header-height) + 56px) 0 48px !important;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+}
 
-.stepsGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+}
+
+.heroDots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+    pointer-events: none;
+}
+
+.heroInner {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.heroLead {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #C6D2EA;
+    max-width: 56ch;
+}
+
+.sectionTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: #fff;
+    letter-spacing: -0.01em;
+}
+
+.sectionHeaderCenter {
     text-align: center;
+    max-width: 640px;
+    margin: 0 auto 36px;
+}
+
+.sectionHeaderCenter .eyebrow {
+    justify-content: center;
+}
+
+/* ── Six ways to serve ── */
+.rolesSection {
+    padding-top: 48px !important;
+}
+
+.rolesGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.roleRow {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.roleRow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.5);
+}
+
+.roleImage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+}
+
+.roleBody {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+}
+
+.roleIcon {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(228, 75, 52, 0.16);
+    color: #E24B34;
+}
+
+.roleIconGold {
+    background: rgba(224, 169, 60, 0.16);
+    color: #E0A93C;
+}
+
+.roleBody h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 4px;
+}
+
+.roleBody p {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #C7D0E2;
+    margin: 0;
+}
+
+.roleChevron {
+    margin-left: auto;
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── How it works / Sign up ── */
+.formSection {
+    padding-top: 8px !important;
+}
+
+.splitGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+}
+
+.stepsList {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 28px;
 }
 
 .step {
-    padding: var(--space-xl);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
 }
 
 .stepNumber {
-    width: 56px;
-    height: 56px;
-    background: var(--color-red);
-    color: white;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
+    background: rgba(224, 169, 60, 0.14);
+    border: 1px solid rgba(224, 169, 60, 0.35);
+    color: #E0A93C;
     font-weight: 700;
-    margin: 0 auto var(--space-md);
+    font-size: 14px;
+    display: grid;
+    place-items: center;
 }
 
 .step h4 {
-    font-size: 1.1rem;
+    font-size: 15.5px;
     font-weight: 700;
-    margin-bottom: var(--space-sm);
-    color: var(--color-dark);
+    color: #fff;
+    margin: 0 0 4px;
 }
 
 .step p {
-    color: var(--color-gray-600);
-    line-height: 1.7;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #C7D0E2;
+    margin: 0;
 }
 
-.formSection {}
-
-.form { display: flex; flex-direction: column; gap: var(--space-lg); }
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 18px;
+    padding: 24px;
+    margin-top: 28px;
+}
 
 .formRow {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
+    gap: 14px;
 }
 
-.formGroup { display: flex; flex-direction: column; gap: var(--space-xs); }
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
 
 .label {
-    font-size: var(--font-size-sm);
+    font-size: 13px;
     font-weight: 600;
-    color: var(--color-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: #C7D0E2;
 }
 
 .input {
-    padding: 14px 16px;
-    border: 2px solid var(--color-gray-200);
-    border-radius: 8px;
-    font-size: 1rem;
-    background: white;
-    color: var(--color-dark);
-    transition: all var(--transition-fast);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #fff;
     font-family: inherit;
-    position: relative;
-    overflow: hidden;
+    color-scheme: dark;
 }
 
-.input::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.05), transparent);
-    transition: left 0.6s ease;
+select.input option {
+    background-color: #161B2A;
+    color: #fff;
 }
 
-.input:hover {
-    border-color: rgba(220, 38, 38, 0.3);
-    transform: translateY(-1px);
-}
-
-.input:hover::before {
-    left: 100%;
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
 }
 
 .input:focus {
     outline: none;
-    border-color: var(--color-red);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px -5px rgba(220, 38, 38, 0.2), 0 0 20px rgba(220, 38, 38, 0.1);
+    border-color: #E0A93C;
 }
 
-.input:focus::before {
-    left: 100%;
+.errorText {
+    color: #f87171;
+    font-size: 13px;
+    margin: -4px 0 0;
+}
+
+.submitBtn {
+    margin-top: 4px;
+    padding: 15px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(228, 90, 40, 0.4);
+    transition: filter 0.2s ease;
+}
+
+.submitBtn:hover {
+    filter: brightness(1.08);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .successCard {
-    background: white;
-    border: 2px solid #22c55e;
-    border-radius: 16px;
-    padding: var(--space-3xl);
     text-align: center;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 18px;
+    padding: 40px 24px;
+    margin-top: 28px;
 }
 
 .successIcon {
-    width: 64px;
-    height: 64px;
-    background: #22c55e;
-    color: white;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    margin: 0 auto var(--space-lg);
+    background: rgba(40, 165, 107, 0.16);
+    color: #28A56B;
+    font-size: 24px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 16px;
 }
 
 .successCard h3 {
-    font-size: 1.5rem;
+    font-size: 18px;
     font-weight: 700;
-    color: var(--color-dark);
-    margin-bottom: var(--space-sm);
+    color: #fff;
+    margin: 0 0 8px;
 }
 
 .successCard p {
-    color: var(--color-gray-600);
-    line-height: 1.7;
+    font-size: 14px;
+    color: #C7D0E2;
+    margin: 0;
 }
 
-@media (max-width: 768px) {
-    .rolesGrid, .stepsGrid { grid-template-columns: 1fr; }
-    .formRow { grid-template-columns: 1fr; }
+/* ── Responsive ── */
+@media (min-width: 900px) {
+    .rolesGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .splitGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .heroTitle {
+        font-size: 36px;
+    }
+
+    .sectionTitle {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 560px) {
+    .formRow {
+        grid-template-columns: 1fr;
+    }
 }

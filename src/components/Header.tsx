@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import styles from './Header.module.css';
 
 const navLinks = [
@@ -20,9 +21,15 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { user, logout } = useAuth();
+  const donateHref = '/donation';
+
+  const handleDonateClick = () => {
+    // Navigation handled by href
+  };
 
   // Hide navigation on auth pages
-  const isAuthPage = pathname === '/login' || pathname === '/register';
+  const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/coming-soon';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -65,7 +72,7 @@ export default function Header() {
                 ))}
               </ul>
             </nav>
-            <Link href="/join" className={styles.topDonateBtn}>
+            <Link href={donateHref} className={styles.topDonateBtn}>
               Donate
             </Link>
           </div>
@@ -79,7 +86,7 @@ export default function Header() {
               <Link href="/login" className={styles.loginBtn}>
                 Login
               </Link>
-              <Link href="/join" className={styles.joinBtn}>
+              <Link href="/register" className={styles.joinBtn}>
                 Join Now
               </Link>
             </div>
@@ -120,7 +127,7 @@ export default function Header() {
             <Link href="/login" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Login</Link>
           </li>
           <li className={styles.mobileNavItem}>
-            <Link href="/join" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
+            <Link href="/register" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>Join Now</Link>
           </li>
         </ul>
       </nav>

@@ -1,0 +1,158 @@
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b0a12;
+    padding: 40px 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    padding: 56px 48px 48px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.card[data-animating='true'] {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 36px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.dotActive {
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    width: 24px;
+    border-radius: 4px;
+}
+
+.dotDone {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 16px;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+}
+
+.body {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.65;
+    margin: 0 0 32px;
+}
+
+.voteBox {
+    background: rgba(248, 195, 143, 0.08);
+    border: 2px solid rgba(248, 195, 143, 0.25);
+    border-radius: 20px;
+    padding: 24px 32px;
+    margin: 0 0 32px;
+    display: inline-block;
+    min-width: 180px;
+}
+
+.voteCount {
+    font-size: 56px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.voteLabel {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.voteSub {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 6px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.2s, transform 0.15s;
+    margin-bottom: 16px;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.skip {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: underline;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.skip:hover {
+    color: #F8C38F;
+}
+
+@media (max-width: 600px) {
+    .card {
+        padding: 40px 24px 36px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .icon {
+        font-size: 52px;
+    }
+}

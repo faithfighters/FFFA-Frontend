@@ -8,9 +8,5 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
     apiVersion: '2026-02-25.clover',
 });
 
-// Map plan keys to Stripe price IDs (set in .env.local)
-export const STRIPE_PRICE_IDS: Record<string, string> = {
-    faith_builder: process.env.STRIPE_PRICE_FAITH_BUILDER || '',
-    faith_hero: process.env.STRIPE_PRICE_FAITH_HERO || '',
-    faith_fighter: process.env.STRIPE_PRICE_FAITH_FIGHTER || '',
-};
+export const STRIPE_PRICE_PLAN = process.env.STRIPE_PRICE_PLAN || '';
+export const STRIPE_PRICE_WELCOME_KIT = process.env.STRIPE_PRICE_WELCOME_KIT || '';

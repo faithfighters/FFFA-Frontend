@@ -1,0 +1,258 @@
+/* ===== CAMPAIGNS PAGE — matches faith-fighters-site static reference ===== */
+
+.hero,
+.campaignsSection {
+    background: #0b0a12;
+    color: #fff;
+    padding: 56px 0 !important;
+}
+
+/* ── Hero ── */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--header-height) + 56px) 0 48px !important;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+}
+
+.heroDots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+    pointer-events: none;
+}
+
+.heroInner {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.heroLead {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #C6D2EA;
+    max-width: 56ch;
+}
+
+/* ── Campaign grid ── */
+.campaignsSection {
+    padding-top: 48px !important;
+}
+
+.campGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.campCard {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.campCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.5);
+}
+
+.campMedia {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    cursor: pointer;
+    background: #0b0f1a;
+}
+
+.campMedia::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+}
+
+.campPlayBtn {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 18px rgba(228, 90, 40, 0.5);
+}
+
+.fundedBadge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 4;
+    background: rgba(40, 165, 107, 0.92);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 5px 11px;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.campBody {
+    padding: 18px;
+}
+
+.campBody h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px;
+}
+
+.campBody p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #C7D0E2;
+    margin: 0;
+}
+
+.missionBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14.5px;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(228, 90, 40, 0.35);
+    transition: filter 0.2s ease;
+}
+
+.missionBtn:hover {
+    filter: brightness(1.08);
+}
+
+/* ── Video lightbox ── */
+.lightboxOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--header-height) + 16px) 20px 16px;
+}
+
+.lightboxInner {
+    position: relative;
+    width: 100%;
+    max-width: 780px;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightboxClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightboxVideo {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    background: #000;
+    object-fit: contain;
+}
+
+@media (max-width: 900px) {
+    .lightboxOverlay {
+        padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    }
+}
+
+/* ── Responsive ── */
+@media (min-width: 1024px) {
+    .campGrid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+}
+
+@media (max-width: 900px) {
+    .heroTitle {
+        font-size: 36px;
+    }
+}

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import PageBanner from '@/components/frontend/PageBanner';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
@@ -11,186 +10,188 @@ export const metadata: Metadata = {
         'Learn about our mission, vision, story, and the leadership team driving Faith Fighters For America forward.',
 };
 
+const valueCards = [
+    {
+        img: '/images/img-07.jpg',
+        icon: '✝',
+        title: 'Mission',
+        text: 'We unite communities with compassion, making every act of giving a shared and visible moment of kindness.',
+    },
+    {
+        img: '/images/img-08.jpg',
+        icon: '◎',
+        title: 'Vision',
+        text: 'A transparent movement where everyone can see and celebrate how helping neighbors becomes a story that inspires us all.',
+    },
+];
+
+const tags = ['Integrity', 'Courage', 'Compassion', 'Faith', 'Freedom'];
+
+const coreValues = [
+    {
+        icon: '◎',
+        title: 'Open Impact',
+        text: 'Transparency and quantifiable outcomes that demonstrate the tangible difference we make together.',
+    },
+    {
+        icon: '📍',
+        title: 'Local First',
+        text: 'Community-level transformation strengthens the broader nation, one neighborhood at a time.',
+    },
+    {
+        icon: '🛡',
+        title: 'Stewardship',
+        text: 'Faith-guided responsibility in managing every resource entrusted to us.',
+    },
+];
+
 const leadershipTeam = [
     {
         name: 'Kevin Jones "Coach K"',
-        role: 'Founder, CEO',
-        initials: 'KJ',
-        bio: 'A seasoned entrepreneur with 25+ years in entertainment and multiple successful business ventures, Kevin pairs compassion with accountability and execution to drive FFFA\'s mission forward.',
+        role: 'Founder & CEO',
+        img: '/images/kevin-jones.jpg',
+        bio: '25+ years in entertainment and entrepreneurship, leading the movement\'s vision.',
     },
     {
         name: 'James Price',
-        role: 'Co-Founder, Treasurer',
-        initials: 'JP',
-        bio: 'A former automotive and restaurant industry professional from eastern North Carolina, James brings a decade-long mentorship background in community organizations to FFFA\'s financial stewardship.',
+        role: 'Co-Founder & Treasurer',
+        img: '/images/james-price.jpg',
+        bio: 'Automotive & restaurant background with deep community mentorship experience.',
     },
     {
         name: 'Billy Gleason Jr.',
-        role: 'Co-Founder, Secretary',
-        initials: 'BG',
-        bio: 'A martial arts instructor and community leader, Billy focuses on discipline, character development, and personal responsibility through traditional training methods and community engagement.',
+        role: 'Co-Founder & Secretary',
+        img: '/images/billy-gleason-jr.jpg',
+        bio: 'Martial arts instructor focused on character and accountability.',
     },
 ];
 
 export default function AboutPage() {
     return (
         <>
-            <PageBanner
-                title="About Us"
-                backgroundImage="/images/hero-flag.png"
-                breadcrumbs={[
-                    { label: 'Home', href: '/' },
-                    { label: 'About Us', href: '/about' },
-                ]}
-            />
-
-            {/* ===== WHO WE ARE ===== */}
-            <section className={`section section--light ${styles.whoWeAre}`}>
+            {/* ===== HERO ===== */}
+            <section className={styles.hero}>
+                <div className={styles.heroDots} />
                 <div className="container">
-                    <div className={styles.twoColumn}>
-                        <div className={styles.textCol}>
-                            <span className="section-label section-label--red">About Us</span>
-                            <h2 className="heading-lg">Who We Are</h2>
-                            <div className={styles.contentBlock}>
-                                <p>
-                                    <strong>Mission:</strong> &ldquo;Faith Fighters For America unites communities
-                                    with compassion, making every act of giving a shared and visible
-                                    moment of kindness.&rdquo;
-                                </p>
-                                <p>
-                                    <strong>Vision:</strong> &ldquo;Our vision is to create a transparent movement
-                                    where everyone can see and celebrate how helping neighbors becomes
-                                    a story that inspires us all.&rdquo;
-                                </p>
+                    <div className={styles.heroInner}>
+                        <span className={styles.eyebrow}>Who We Are</span>
+                        <h1 className={styles.heroTitle}>About Faith Fighters</h1>
+                        <p className={styles.heroLead}>
+                            A movement built on the conviction that a nation grows strong when its
+                            people stand united in faith and service.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== MISSION / VISION ===== */}
+            <section className={`section ${styles.valuesSection}`}>
+                <div className="container">
+                    <div className={styles.valueGrid}>
+                        {valueCards.map((v) => (
+                            <div key={v.title} className={styles.valueCard}>
+                                <div className={styles.valueImage}>
+                                    <Image src={v.img} alt={v.title} fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
+                                </div>
+                                <div className={styles.valueCaption}>
+                                    <div className={styles.valueIcon}>{v.icon}</div>
+                                    <div>
+                                        <h4>{v.title}</h4>
+                                        <p>{v.text}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <Link href="/contact" className="btn btn--primary">
-                                Contact Us
-                                <span className="btn-arrow">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </span>
-                            </Link>
-                        </div>
-                        <div className={styles.imageCol}>
-                            <Image
-                                src="/images/praying-hands.png"
-                                alt="Praying hands painted with American flag"
-                                width={500}
-                                height={500}
-                                className={styles.sectionImage}
-                            />
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
             {/* ===== OUR STORY ===== */}
-            <section className={`section ${styles.ourStory}`}>
+            <section className={`section ${styles.storySection}`}>
                 <div className="container">
-                    <div className={styles.twoColumn}>
-                        <div className={styles.imageCol}>
-                            <Image
-                                src="/images/handshake-flag.png"
-                                alt="Handshake with American flag"
-                                width={500}
-                                height={500}
-                                className={styles.sectionImage}
-                            />
-                        </div>
-                        <div className={styles.textCol}>
-                            <span className="section-label section-label--red">Our Journey</span>
-                            <h2 className="heading-lg">Our Story</h2>
-                            <div className={styles.contentBlock}>
-                                <p>
-                                    Faith Fighters for America is a movement born from the belief that a
-                                    nation&apos;s true power lies in the unity and faith of its people. We stand
-                                    to inspire Americans to uphold the values that built this country —
-                                    integrity, courage, compassion, and unwavering belief in God and freedom.
-                                </p>
-                                <p>
-                                    Together, we strive to restore hope, strengthen communities, and remind
-                                    every citizen that faith is not just personal — it&apos;s the foundation of our
-                                    shared destiny. One nation. One spirit. One mission.
-                                </p>
-                            </div>
-                            <Link href="/contact" className="btn btn--primary">
-                                Contact Us
-                                <span className="btn-arrow">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </span>
-                            </Link>
-                        </div>
+                    <span className={styles.eyebrow}>Our Story</span>
+                    <h2 className={styles.sectionTitle}>Strength from unity</h2>
+                    <p className={styles.storyLead}>
+                        Faith Fighters For America was born from a simple conviction: national strength
+                        emerges from a unified citizenry and shared faith. We encourage Americans to
+                        embody integrity, courage, compassion, and devotion to God and freedom —
+                        restoring optimism and reinforcing the communities we call home.
+                    </p>
+                    <div className={styles.tagRow}>
+                        {tags.map((t) => (
+                            <span key={t} className={styles.tag}>{t}</span>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* ===== HOW WE OPERATE ===== */}
-            <section className={`section section--dark ${styles.howWeOperate}`}>
+            {/* ===== CORE VALUES ===== */}
+            <section className={`section ${styles.operateSection}`}>
                 <div className="container">
-                    <span className="section-label section-label--red">Check Out</span>
-                    <h2 className="heading-lg">How We Operate</h2>
-                    <div className={styles.operateGrid}>
-                        <div className="card">
-                            <div className="card__icon">
-                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#e61e2a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M12 6v6l4 2" />
-                                </svg>
+                    <div className={styles.sectionHeaderCenter}>
+                        <span className={styles.eyebrow}>How We Operate</span>
+                        <h2 className={styles.sectionTitle}>Our core values</h2>
+                    </div>
+                    <div className={styles.operateRows}>
+                        {coreValues.map((v) => (
+                            <div key={v.title} className={styles.operateRow}>
+                                <div className={styles.operateIcon}>{v.icon}</div>
+                                <div>
+                                    <h4>{v.title}</h4>
+                                    <p>{v.text}</p>
+                                </div>
                             </div>
-                            <h4 className="card__title" style={{ color: 'white' }}>Open Impact</h4>
-                            <p className="card__text">
-                                We believe in transparency and measurable results, showing exactly
-                                how every effort makes a difference.
-                            </p>
-                        </div>
-                        <div className="card">
-                            <div className="card__icon">
-                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#e61e2a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                                    <polyline points="9 22 9 12 15 12 15 22" />
-                                </svg>
-                            </div>
-                            <h4 className="card__title" style={{ color: 'white' }}>Local First</h4>
-                            <p className="card__text">
-                                Real change begins at home — we prioritise empowering local
-                                communities to strengthen the nation from the ground up.
-                            </p>
-                        </div>
-                        <div className="card">
-                            <div className="card__icon">
-                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#e61e2a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                </svg>
-                            </div>
-                            <h4 className="card__title" style={{ color: 'white' }}>Stewardship</h4>
-                            <p className="card__text">
-                                Guided by faith and responsibility, we honour every resource
-                                entrusted to us to serve the greater good.
-                            </p>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
             {/* ===== LEADERSHIP ===== */}
-            <section className={`section section--light ${styles.leadership}`}>
+            <section className={`section ${styles.leadershipSection}`}>
                 <div className="container">
-                    <span className="section-label section-label--red">Leadership</span>
-                    <h2 className="heading-lg">Who Leads Us</h2>
+                    <div className={styles.sectionHeaderCenter}>
+                        <span className={styles.eyebrow}>Leadership</span>
+                        <h2 className={styles.sectionTitle}>Meet the team</h2>
+                    </div>
                     <div className={styles.leaderGrid}>
                         {leadershipTeam.map((member) => (
                             <div key={member.name} className={styles.leaderCard}>
                                 <div className={styles.leaderAvatar}>
-                                    <span className={styles.leaderInitials}>{member.initials}</span>
+                                    <Image src={member.img} alt={member.name} fill sizes="84px" style={{ objectFit: 'cover' }} />
                                 </div>
                                 <h4 className={styles.leaderName}>{member.name}</h4>
                                 <p className={styles.leaderRole}>{member.role}</p>
                                 <p className={styles.leaderBio}>{member.bio}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ===== QUOTE + CTA ===== */}
+            <section className={`section ${styles.quoteSection}`}>
+                <div className="container">
+                    <div className={styles.quoteCard}>
+                        <div className={styles.quoteMark}>&ldquo;</div>
+                        <p className={styles.quoteText}>
+                            We believe spiritual conviction is both a personal practice and a communal
+                            foundation — the bedrock of a stronger America.
+                        </p>
+                        <div className={styles.quoteWho}>
+                            <span className={styles.quoteAvatar}>FF</span>
+                            <div>
+                                <b>The FFFA Team</b>
+                                <span>Sarasota, Florida</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.ctaRow}>
+                        <Link href="/register?intent=donate" className="btn btn--primary">
+                            Join the Mission
+                        </Link>
+                        <Link href="/volunteer" className="btn btn--outline">
+                            Volunteer
+                        </Link>
                     </div>
                 </div>
             </section>

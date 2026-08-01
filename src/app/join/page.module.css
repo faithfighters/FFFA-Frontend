@@ -1,26 +1,153 @@
 /* ===== JOIN / PRICING PAGE ===== */
 .pricingSection {
-    background-color: var(--color-gray-light);
+    background-color: #0b0a12;
+    color: #ffffff;
 }
 
 .pricingSubtext {
     font-size: var(--font-size-lg);
-    color: var(--color-gray-500);
+    color: rgba(255, 255, 255, 0.7);
     margin-top: var(--space-md);
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.pricingGrid {
+/* ── Single plan card (two-column) ── */
+.planCard {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
-    align-items: stretch;
+    grid-template-columns: 280px 1fr;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
 }
 
+/* Left dark panel */
+.planLeft {
+    background: linear-gradient(160deg, #1a1525 0%, #0b0a12 100%);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.popularBadge {
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 24px;
+}
+
+.planName {
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 16px;
+}
+
+.planPrice {
+    display: flex;
+    align-items: flex-start;
+    gap: 2px;
+    margin-bottom: 20px;
+}
+
+.pricingDollar {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    margin-top: 8px;
+}
+
+.pricingAmount {
+    font-size: 72px;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+}
+
+.planPeriod {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
+
+.planTagline {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    margin: 0 0 32px;
+    flex: 1;
+}
+
+/* Right dark panel */
+.planRight {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 40px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 40px;
+    align-content: start;
+}
+
+.featureGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.featureGroupLabel {
+    font-size: 12px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin: 0 0 4px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+.featureCheck {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    margin-top: 1px;
+}
+
+/* Legacy kept for pricingCard / pricingCardFeatured used by motion.div */
 .pricingCard {
-    background-color: var(--color-white);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--border-radius-xl);
     padding: var(--space-2xl);
     box-shadow: var(--shadow-sm);
@@ -28,105 +155,11 @@
     flex-direction: column;
     position: relative;
     transition: all var(--transition-base);
-    border: 2px solid transparent;
-}
-
-.pricingCard:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
 }
 
 .pricingCardFeatured {
-    border-color: var(--color-red);
+    border-color: rgba(248, 195, 143, 0.4);
     box-shadow: var(--shadow-md);
-    transform: scale(1.05);
-}
-
-.pricingCardFeatured:hover {
-    transform: scale(1.05) translateY(-8px);
-}
-
-.popularBadge {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--color-red);
-    color: var(--color-white);
-    font-size: var(--font-size-xs);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 6px 20px;
-    border-radius: var(--border-radius-full);
-}
-
-.pricingHeader {
-    text-align: center;
-    padding-bottom: var(--space-xl);
-    border-bottom: 1px solid var(--color-gray-100);
-    margin-bottom: var(--space-xl);
-}
-
-.pricingName {
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--color-gray-500);
-    margin-bottom: var(--space-md);
-}
-
-.pricingPrice {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 2px;
-}
-
-.pricingDollar {
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    color: var(--color-dark);
-    margin-top: 8px;
-}
-
-.pricingAmount {
-    font-size: 4rem;
-    font-weight: 900;
-    color: var(--color-dark);
-    line-height: 1;
-}
-
-.pricingCents {
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    color: var(--color-dark);
-    margin-top: 8px;
-}
-
-.pricingPeriod {
-    font-size: var(--font-size-sm);
-    color: var(--color-gray-500);
-    align-self: flex-end;
-    margin-bottom: 6px;
-}
-
-.pricingFeatures {
-    list-style: none;
-    flex: 1;
-    margin-bottom: var(--space-xl);
-}
-
-.pricingFeatures li {
-    padding: var(--space-sm) 0;
-    font-size: var(--font-size-base);
-    color: var(--color-gray-700);
-    border-bottom: 1px solid var(--color-gray-light);
-}
-
-.pricingFeatures li:last-child {
-    border-bottom: none;
 }
 
 .featuresGrid {
@@ -135,28 +168,211 @@
     gap: var(--space-xl);
 }
 
+/* ── Faith Builder Welcome Kit ── */
+.kitSection {
+    padding: 80px 0;
+    background: #0b0a12;
+    position: relative;
+    overflow: hidden;
+}
+
+.kitBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(248, 195, 143, 0.1);
+    border: 1px solid rgba(248, 195, 143, 0.3);
+    color: #F8C38F;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin: 0 auto 36px;
+    display: flex;
+    width: fit-content;
+}
+
+.kitCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.kitImageWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 340px;
+}
+
+.kitGlow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(231, 66, 27, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.kitBoxImage {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 32px 48px rgba(0, 0, 0, 0.55));
+}
+
+.kitFistAccent {
+    position: absolute;
+    bottom: -12px;
+    right: -12px;
+    z-index: 2;
+    opacity: 0.22;
+}
+
+.kitContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.kitEyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #F8C38F;
+    margin: 0 0 14px;
+}
+
+.kitHeading {
+    font-size: 38px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin: 0 0 18px;
+}
+
+.kitHeadingRed {
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.kitSubtext {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    margin: 0 0 32px;
+}
+
+.kitItems {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.kitItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+.kitItemIcon {
+    width: 32px;
+    height: 32px;
+    background: rgba(248, 195, 143, 0.1);
+    border: 1px solid rgba(248, 195, 143, 0.25);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #F8C38F;
+}
+
+.kitFooter {
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.kitNote {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+}
+
+/* ── Responsive ── */
 @media (max-width: 1024px) {
-    .pricingGrid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .pricingCardFeatured {
-        transform: none;
-    }
-
-    .pricingCardFeatured:hover {
-        transform: translateY(-8px);
-    }
-
     .featuresGrid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+@media (max-width: 860px) {
+    .planCard {
+        grid-template-columns: 1fr;
+    }
+
+    .planRight {
+        grid-template-columns: 1fr;
+        padding: 32px 28px;
+        gap: 20px;
+    }
+
+    .planLeft {
+        padding: 36px 28px 32px;
+    }
+}
+
 @media (max-width: 640px) {
+    .planRight {
+        grid-template-columns: 1fr;
+    }
+
     .featuresGrid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 860px) {
+    .kitCard {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .kitImageWrap {
+        min-height: 260px;
+    }
+
+    .kitHeading {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 640px) {
+    .kitSection {
+        padding: 60px 0;
+    }
+
+    .kitHeading {
+        font-size: 26px;
+    }
+
+    .kitBoxImage {
+        max-width: 280px;
     }
 }

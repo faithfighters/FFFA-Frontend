@@ -1,14 +1,30 @@
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
+import { Inter, Montserrat, Fraunces } from 'next/font/google';
 import Header from '@/components/frontend/Header';
 import Footer from '@/components/frontend/Footer';
+import BottomTabBar from '@/components/frontend/BottomTabBar';
 import { AuthProvider } from '@/context/AuthContext';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   variable: '--font-montserrat',
+  display: 'swap',
+});
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
   display: 'swap',
 });
 
@@ -28,12 +44,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={montserrat.variable} suppressHydrationWarning>
-      <body style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${fraunces.variable}`} suppressHydrationWarning>
+      <body style={{ fontFamily: 'var(--font-inter), var(--font-montserrat), sans-serif' }}>
         <AuthProvider>
           <Header />
           <main>{children}</main>
           <Footer />
+          <BottomTabBar />
         </AuthProvider>
       </body>
     </html>

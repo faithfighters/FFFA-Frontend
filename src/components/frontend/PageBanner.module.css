@@ -1,23 +1,35 @@
 .banner {
     position: relative;
-    min-height: 400px;
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     background-size: cover;
     background-position: center;
-    background-color: var(--color-dark-navy);
-    margin-top: var(--header-height);
+    background-color: #0b0a12;
+    padding-top: var(--header-height);
+    overflow: hidden;
 }
 
 .banner::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg,
-            rgba(30, 58, 95, 0.3) 0%,
-            rgba(11, 14, 20, 0.2) 100%);
+    opacity: 0.5;
+    background:
+        linear-gradient(135deg, rgba(11, 10, 18, 0.75) 0%, rgba(11, 10, 18, 0.55) 100%),
+        radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+}
+
+.banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
     pointer-events: none;
 }
 
@@ -53,23 +65,23 @@
 }
 
 .separator {
-    color: var(--color-gray-300);
+    color: rgba(255, 255, 255, 0.3);
     font-size: var(--font-size-lg);
 }
 
 .crumb {
     font-size: var(--font-size-lg);
-    color: var(--color-white);
+    color: rgba(255, 255, 255, 0.5);
     transition: color var(--transition-fast);
 }
 
 .crumb:hover {
-    color: var(--color-red);
+    color: #F8C38F;
 }
 
 .crumbActive {
     font-size: var(--font-size-lg);
-    color: var(--color-red);
+    color: #F8C38F;
     font-weight: 600;
 }
 
@@ -87,10 +99,35 @@
 
 @media (max-width: 768px) {
     .banner {
-        min-height: 300px;
+        min-height: 280px;
+    }
+
+    .container {
+        padding: var(--space-2xl) var(--space-lg);
     }
 
     .title {
         font-size: var(--font-size-3xl);
+    }
+
+    .crumb,
+    .crumbActive,
+    .separator {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        min-height: 240px;
+    }
+
+    .container {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    .title {
+        font-size: var(--font-size-2xl);
+        letter-spacing: 0;
     }
 }

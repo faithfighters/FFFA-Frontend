@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { Video, FolderOpen, Hospital, Zap, Home, FileText, Flame } from 'lucide-react';
 import ProtectedRoute from '@/components/shared/ProtectedRoute';
 import styles from './page.module.css';
+import { haptics } from '@/lib/haptics';
 
 export default function SubmitVideoPage() {
     return (
@@ -30,8 +32,10 @@ function SubmitVideoContent() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [causeTag, setCauseTag] = useState('');
+    const [videoFile, setVideoFile] = useState<File | null>(null);
     const [fileName, setFileName] = useState('');
     const [isDragging, setIsDragging] = useState(false);
+    const [uploading, setUploading] = useState(false);
 
     // Submitter info
     const [submitterPhone, setSubmitterPhone] = useState('');
@@ -57,19 +61,66 @@ function SubmitVideoContent() {
         e.preventDefault();
         setIsDragging(false);
         const file = e.dataTransfer.files[0];
-        if (file) setFileName(file.name);
+        if (file) {
+            setVideoFile(file);
+            setFileName(file.name);
+        }
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        if (file) setFileName(file.name);
+        if (file) {
+            haptics.tap();
+            setVideoFile(file);
+            setFileName(file.name);
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        haptics.tap();
         setError('');
+
+        if (!videoFile) {
+            setError('Please select a video file to upload.');
+            return;
+        }
+
         setLoading(true);
         try {
+            // Step 1: Get presigned S3 upload URL
+            setUploading(true);
+            const presignRes = await fetch('/api/upload/presign', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({
+                    contentType: videoFile.type,
+                    fileSizeBytes: videoFile.size,
+                    folder: 'videos',
+                }),
+            });
+            const presignData = await presignRes.json();
+            if (!presignRes.ok) {
+                haptics.error();
+                setError(presignData.message || presignData.error || 'Failed to get upload URL.');
+                return;
+            }
+
+            // Step 2: Upload file directly to S3 using the presigned URL
+            const s3Res = await fetch(presignData.uploadUrl, {
+                method: 'PUT',
+                headers: { 'Content-Type': videoFile.type },
+                body: videoFile,
+            });
+            setUploading(false);
+            if (!s3Res.ok) {
+                haptics.error();
+                setError('Video upload to storage failed. Please try again.');
+                return;
+            }
+
+            // Step 3: Submit the video record with the public URL
             const payload: Record<string, unknown> = {
                 title,
                 description,
@@ -79,7 +130,7 @@ function SubmitVideoContent() {
                 targetAmount: targetAmount ? Number(targetAmount) : undefined,
                 submitterPhone,
                 submitterEmail,
-                videoUrl: '#pending-upload',
+                videoUrl: presignData.publicUrl,
             };
 
             if (billType) {
@@ -100,13 +151,17 @@ function SubmitVideoContent() {
             });
             const data = await res.json();
             if (!res.ok) {
+                haptics.error();
                 setError(data.error || data.message || 'Submission failed.');
                 return;
             }
+            haptics.success();
             setSubmitted(true);
         } catch {
+            haptics.error();
             setError('Network error. Please try again.');
         } finally {
+            setUploading(false);
             setLoading(false);
         }
     };
@@ -116,7 +171,7 @@ function SubmitVideoContent() {
             <div className={styles.submitPage}>
                 <div className="container">
                     <div className={styles.successCard}>
-                        <div className={styles.successIcon}>🎬</div>
+                        <div className={styles.successIcon}><Video size={52} color="#F8C38F" /></div>
                         <h2 className="heading-lg">Video Submitted!</h2>
                         <p className="text-body" style={{ marginTop: 'var(--space-md)' }}>
                             Your video <strong>&ldquo;{title}&rdquo;</strong> has been submitted for review.
@@ -137,7 +192,7 @@ function SubmitVideoContent() {
                 </div>
 
                 {error && (
-                    <div style={{ background: '#fee2e2', border: '1px solid #ef4444', borderRadius: 8, padding: 'var(--space-md)', marginBottom: 'var(--space-lg)', color: '#dc2626' }}>
+                    <div style={{ background: 'rgba(231,66,27,0.1)', border: '1px solid rgba(231,66,27,0.35)', borderRadius: 8, padding: 'var(--space-md)', marginBottom: 'var(--space-lg)', color: '#F8C38F' }}>
                         {error}
                     </div>
                 )}
@@ -153,13 +208,13 @@ function SubmitVideoContent() {
                     >
                         {fileName ? (
                             <div className={styles.fileInfo}>
-                                <span className={styles.fileIcon}>🎥</span>
+                                <Video size={20} className={styles.fileIcon} />
                                 <span className={styles.fileNameText}>{fileName}</span>
-                                <button type="button" className={styles.removeFile} onClick={() => setFileName('')}>✕</button>
+                                <button type="button" className={styles.removeFile} onClick={() => { setFileName(''); setVideoFile(null); }}>✕</button>
                             </div>
                         ) : (
                             <>
-                                <div className={styles.dropIcon}>📁</div>
+                                <FolderOpen size={40} className={styles.dropIcon} />
                                 <p className={styles.dropText}>Drag &amp; drop your video here</p>
                                 <p className={styles.dropOr}>or</p>
                                 <label className={`btn btn--primary ${styles.browseBtn}`}>
@@ -180,7 +235,7 @@ function SubmitVideoContent() {
                         </div>
                         <div className={styles.formGroup}>
                             <label className={styles.label}>Cause Category *</label>
-                            <select className={styles.input} value={causeTag} onChange={(e) => setCauseTag(e.target.value)} required>
+                            <select className={styles.input} value={causeTag} onChange={(e) => { haptics.select(); setCauseTag(e.target.value); }} required>
                                 <option value="">Select a cause category</option>
                                 {CAUSE_TAGS.map((tag) => (
                                     <option key={tag} value={tag}>{tag}</option>
@@ -224,8 +279,8 @@ function SubmitVideoContent() {
                     </div>
 
                     {/* ── Bill / Payment Destination ── */}
-                    <h3 className={styles.sectionTitle}>Payment Destination <span style={{ fontWeight: 400, fontSize: '0.875rem', color: 'var(--color-gray-500)' }}>(Bill Pay Details)</span></h3>
-                    <p style={{ color: 'var(--color-gray-500)', fontSize: '0.875rem', marginBottom: 'var(--space-lg)' }}>
+                    <h3 className={styles.sectionTitle}>Payment Destination <span style={{ fontWeight: 400, fontSize: '0.875rem', color: 'rgba(255,255,255,0.4)' }}>(Bill Pay Details)</span></h3>
+                    <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.875rem', marginBottom: 'var(--space-lg)' }}>
                         Tell us where to send the funds so we can pay the institution directly.
                     </p>
 
@@ -239,10 +294,10 @@ function SubmitVideoContent() {
                                     className={`${styles.billTypeBtn} ${billType === t ? styles.billTypeBtnActive : ''}`}
                                     onClick={() => setBillType(t)}
                                 >
-                                    {t === 'hospital' && '🏥 Hospital Bill'}
-                                    {t === 'utility' && '💡 Utility Bill'}
-                                    {t === 'rent' && '🏠 Rent / Eviction'}
-                                    {t === 'other' && '📄 Other'}
+                                    {t === 'hospital' && <><Hospital size={14} style={{ marginRight: 5 }} />Hospital Bill</>}
+                                    {t === 'utility' && <><Zap size={14} style={{ marginRight: 5 }} />Utility Bill</>}
+                                    {t === 'rent' && <><Home size={14} style={{ marginRight: 5 }} />Rent / Eviction</>}
+                                    {t === 'other' && <><FileText size={14} style={{ marginRight: 5 }} />Other</>}
                                 </button>
                             ))}
                         </div>
@@ -288,9 +343,9 @@ function SubmitVideoContent() {
                     <button
                         type="submit"
                         className={`btn btn--primary ${styles.submitBtn}`}
-                        disabled={loading || !title || !causeTag || !description || !beneficiaryName || !targetAmount || !urgencyReason}
+                        disabled={loading || !videoFile || !title || !causeTag || !description || !beneficiaryName || !targetAmount || !urgencyReason}
                     >
-                        {loading ? 'Submitting...' : 'Submit for Review'}
+                        {uploading ? 'Uploading video...' : loading ? 'Submitting...' : 'Submit for Review'}
                     </button>
                 </form>
             </div>

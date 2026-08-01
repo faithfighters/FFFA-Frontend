@@ -1,200 +1,408 @@
-/* ===== ABOUT PAGE STYLES ===== */
+/* ===== ABOUT PAGE — matches faith-fighters-site static reference ===== */
 
-/* --- Two Column Layout --- */
-.twoColumn {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3xl);
-    align-items: center;
+.hero,
+.valuesSection,
+.storySection,
+.operateSection,
+.leadershipSection,
+.quoteSection {
+    background: #0b0a12;
+    color: #fff;
+    padding: 56px 0 !important;
 }
 
-.textCol {
-    order: 1;
-}
-
-.imageCol {
-    order: 2;
+/* ── Hero ── */
+.hero {
     position: relative;
     overflow: hidden;
-    border-radius: var(--border-radius-xl);
-    box-shadow: var(--shadow-lg);
+    padding: calc(var(--header-height) + 56px) 0 48px !important;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
 }
 
-.sectionImage {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform var(--transition-slow);
+.valuesSection {
+    padding-top: 48px !important;
 }
 
-.imageCol:hover .sectionImage {
-    transform: scale(1.03);
+.storySection {
+    padding-top: 8px !important;
 }
 
-.contentBlock {
-    margin: var(--space-xl) 0;
+.quoteSection {
+    padding-top: 8px !important;
+    padding-bottom: 64px !important;
 }
 
-.contentBlock p {
-    font-size: var(--font-size-lg);
-    line-height: 1.7;
-    color: var(--color-gray-700);
-    margin-bottom: var(--space-md);
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
 }
 
-.contentBlock strong {
-    color: var(--color-dark);
+.heroDots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+    pointer-events: none;
 }
 
-/* --- Our Story (reversed columns) --- */
-.ourStory .imageCol {
-    order: 1;
+.heroInner {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
 }
 
-.ourStory .textCol {
-    order: 2;
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
 }
 
-/* --- How We Operate --- */
-.operateGrid {
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.heroLead {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #C6D2EA;
+    max-width: 56ch;
+}
+
+.sectionTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: #fff;
+    letter-spacing: -0.01em;
+}
+
+.sectionHeaderCenter {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 40px;
+}
+
+.sectionHeaderCenter .eyebrow,
+.sectionHeaderCenter .eyebrow::before {
+    justify-content: center;
+}
+
+.sectionHeaderCenter .eyebrow {
+    justify-content: center;
+}
+
+/* ── Mission / Vision value cards ── */
+.valueGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
-    margin-top: var(--space-2xl);
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
 }
 
-/* --- Leadership --- */
+.valueCard {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: #161B2A;
+}
+
+.valueImage {
+    position: relative;
+    aspect-ratio: 4 / 3;
+}
+
+.valueCaption {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 22px;
+}
+
+.valueIcon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(224, 169, 60, 0.14);
+    color: #E0A93C;
+    font-size: 18px;
+}
+
+.valueCaption h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 6px;
+}
+
+.valueCaption p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #C7D0E2;
+    margin: 0;
+}
+
+/* ── Our Story ── */
+.storySection {
+    padding-top: 8px;
+}
+
+.storyLead {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #C7D0E2;
+    max-width: 72ch;
+}
+
+.tagRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.tag {
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #E0A93C;
+}
+
+/* ── Core Values (stacked rows) ── */
+.operateRows {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.operateRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 22px 26px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.operateIcon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(224, 169, 60, 0.14);
+    color: #E0A93C;
+    font-size: 19px;
+}
+
+.operateRow h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 6px;
+}
+
+.operateRow p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #C7D0E2;
+    margin: 0;
+}
+
+/* ── Leadership ── */
 .leaderGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
-    margin-top: var(--space-2xl);
+    gap: 20px;
 }
 
 .leaderCard {
-    background-color: var(--color-white);
-    border-radius: var(--border-radius-lg);
-    padding: var(--space-2xl);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 32px 24px;
     text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-base);
-    position: relative;
-    overflow: hidden;
-}
-
-.leaderCard::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(220, 38, 38, 0.03), transparent);
-    transform: rotate(45deg);
-    transition: all var(--transition-slow);
-    opacity: 0;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
 }
 
 .leaderCard:hover {
-    transform: translateY(-12px) scale(1.04);
-    box-shadow: 0 40px 80px -20px rgba(220, 38, 38, 0.25), 0 0 60px rgba(220, 38, 38, 0.15), 0 0 100px rgba(220, 38, 38, 0.08);
-    border: 1px solid rgba(220, 38, 38, 0.2);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
-}
-
-.leaderCard:hover::before {
-    animation: shimmer 0.8s ease;
-    opacity: 1;
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.5);
 }
 
 .leaderAvatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-dark-navy), var(--color-blue-dark));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--space-lg);
     position: relative;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
     overflow: hidden;
-    transition: all var(--transition-base);
-}
-
-.leaderCard:hover .leaderAvatar {
-    transform: scale(1.08);
-    box-shadow: 0 0 40px rgba(220, 38, 38, 0.3), 0 0 80px rgba(220, 38, 38, 0.15);
-    background: linear-gradient(135deg, var(--color-red) 0%, #dc2626 50%, #b91c1c 100%);
-}
-
-.leaderAvatar::before {
-    content: '';
-    position: absolute;
-    inset: 3px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-dark-navy), #2d4a7a);
-}
-
-.leaderInitials {
-    position: relative;
-    z-index: 1;
-    font-size: var(--font-size-2xl);
-    font-weight: 800;
-    color: var(--color-white);
-    letter-spacing: 2px;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    margin: 0 auto 18px;
+    border: 2px solid rgba(224, 169, 60, 0.4);
 }
 
 .leaderName {
-    font-size: var(--font-size-lg);
+    font-size: 17px;
     font-weight: 700;
-    color: var(--color-dark);
-    margin-bottom: var(--space-xs);
+    color: #fff;
+    margin: 0 0 4px;
 }
 
 .leaderRole {
-    font-size: var(--font-size-sm);
-    color: var(--color-red);
-    font-weight: 600;
+    font-size: 12.5px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: var(--space-sm);
+    letter-spacing: 0.06em;
+    color: #E0A93C;
+    margin: 0 0 12px;
 }
 
 .leaderBio {
-    font-size: 0.875rem;
-    color: var(--color-gray-600);
+    font-size: 14px;
     line-height: 1.6;
-    margin-top: var(--space-sm);
+    color: #C7D0E2;
+    margin: 0;
 }
 
-@keyframes shimmer {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+/* ── Quote + CTA ── */
+.quoteSection {
+    padding-top: 6px;
 }
 
-/* --- Responsive --- */
-@media (max-width: 1024px) {
+.quoteCard {
+    position: relative;
+    background: linear-gradient(160deg, #16203c 0%, #0e1526 100%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 22px;
+    padding: 44px 40px;
+    max-width: 820px;
+    margin: 0 auto;
+}
 
-    .operateGrid,
+.quoteMark {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-size: 56px;
+    line-height: 1;
+    color: #E0A93C;
+    opacity: 0.6;
+    margin-bottom: 4px;
+}
+
+.quoteText {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #fff;
+    margin: 0;
+}
+
+.quoteWho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.quoteAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #E4531F, #C93A25);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.quoteWho b {
+    display: block;
+    color: #fff;
+    font-size: 14.5px;
+}
+
+.quoteWho span {
+    display: block;
+    color: #8A93A8;
+    font-size: 13px;
+}
+
+.ctaRow {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .valueGrid {
+        grid-template-columns: 1fr;
+    }
+
     .leaderGrid {
         grid-template-columns: 1fr;
-        max-width: 500px;
+    }
+
+    .heroTitle {
+        font-size: 36px;
+    }
+
+    .sectionTitle {
+        font-size: 26px;
+    }
+
+    .quoteText {
+        font-size: 19px;
+    }
+
+    .ctaRow {
+        flex-direction: column;
     }
 }
 
-@media (max-width: 768px) {
-    .twoColumn {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
+@media (max-width: 560px) {
+    .operateRow {
+        flex-direction: column;
+        gap: 12px;
     }
 
-    .imageCol,
-    .ourStory .imageCol {
-        order: 1;
-    }
-
-    .textCol,
-    .ourStory .textCol {
-        order: 2;
+    .quoteCard {
+        padding: 32px 24px;
     }
 }

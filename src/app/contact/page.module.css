@@ -1,269 +1,287 @@
-/* ===== CONTACT PAGE STYLES ===== */
+/* ===== CONTACT PAGE — matches faith-fighters-site static reference ===== */
 
+.hero,
 .contactSection {
-    padding: var(--space-4xl) 0;
+    background: #0b0a12;
+    color: #fff;
+    padding: 56px 0 !important;
+}
+
+/* ── Hero ── */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--header-height) + 56px) 0 48px !important;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+}
+
+.heroDots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+    pointer-events: none;
+}
+
+.heroInner {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.heroLead {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #C6D2EA;
+    max-width: 56ch;
+}
+
+.sectionTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin: 4px 0 24px;
+}
+
+/* ── Layout ── */
+.contactSection {
+    padding-top: 48px !important;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3xl);
-    align-items: flex-start;
+    grid-template-columns: 1fr;
+    gap: 48px;
 }
 
-/* --- Info Column --- */
-.infoCol {
-    padding: var(--space-xl) 0;
+/* ── Ways to connect ── */
+.infoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
 }
 
-.infoTitle {
-    font-size: var(--font-size-3xl);
-    font-weight: 800;
-    color: var(--color-dark);
-    margin-bottom: var(--space-lg);
-}
-
-.infoDesc {
-    font-size: var(--font-size-lg);
-    line-height: 1.7;
-    color: var(--color-gray-700);
-    margin-bottom: var(--space-2xl);
-}
-
-.infoItems {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
-    margin-bottom: var(--space-2xl);
-}
-
-.infoItem {
+.infoCard {
     display: flex;
     align-items: flex-start;
-    gap: var(--space-md);
+    gap: 14px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+a.infoCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.5);
 }
 
 .infoIcon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: rgba(230, 30, 42, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-shrink: 0;
-    color: var(--color-red);
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(228, 75, 52, 0.16);
+    color: #E24B34;
 }
 
-.infoText {
-    font-size: var(--font-size-base);
-    color: var(--color-gray-700);
-    line-height: 1.6;
+.infoIconGold {
+    background: rgba(224, 169, 60, 0.16);
+    color: #E0A93C;
 }
 
-.infoLink {
-    font-size: var(--font-size-base);
-    color: var(--color-dark);
-    font-weight: 500;
-    transition: color var(--transition-fast);
+.infoCard h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 4px;
 }
 
-.infoLink:hover {
-    color: var(--color-red);
+.infoCard p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #C7D0E2;
+    margin: 0;
 }
 
-/* --- Social Links --- */
 .socials {
     display: flex;
-    gap: var(--space-sm);
+    gap: 12px;
+    margin-top: 24px;
 }
 
 .socialLink {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: var(--color-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-white);
-    transition: all var(--transition-base);
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #C7D0E2;
+    transition: all 0.2s ease;
 }
 
 .socialLink:hover {
-    background-color: var(--color-red);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-glow-red);
+    background: rgba(224, 169, 60, 0.14);
+    color: #E0A93C;
 }
 
-/* --- Form Column --- */
-.formCol {
-    position: relative;
-}
-
-.formCard {
-    background-color: var(--color-white);
-    border-radius: var(--border-radius-xl);
-    padding: var(--space-2xl);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--color-gray-100);
-}
-
-.formTitle {
-    font-size: var(--font-size-2xl);
-    font-weight: 700;
-    color: var(--color-dark);
-    margin-bottom: var(--space-xl);
-}
-
-.successMsg {
-    background-color: #ecfdf5;
-    color: #065f46;
-    padding: var(--space-md);
-    border-radius: var(--border-radius-md);
-    font-weight: 600;
-    margin-bottom: var(--space-lg);
-    animation: fadeIn 0.3s ease;
-}
-
+/* ── Form ── */
 .form {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
-}
-
-.formRow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
+    gap: 16px;
+    background: #161B2A;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 18px;
+    padding: 24px;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: 6px;
 }
 
 .formLabel {
-    font-size: var(--font-size-sm);
+    font-size: 13px;
     font-weight: 600;
-    color: var(--color-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: #C7D0E2;
 }
 
-.formInput {
-    padding: 14px 18px;
-    font-size: var(--font-size-base);
-    color: var(--color-dark);
-    background-color: var(--color-gray-light);
-    border-radius: var(--border-radius-md);
-    border: 2px solid transparent;
-    transition: all 0.8s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.formInput::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
-    transition: left 0.8s ease;
-}
-
-.formInput:hover {
-    border-color: rgba(59, 130, 246, 0.3);
-    background-color: rgba(255, 255, 255, 0.95);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
-}
-
-.formInput:hover::before {
-    left: 100%;
-}
-
-.formInput:focus {
-    outline: none;
-    border-color: var(--color-blue);
-    background-color: var(--color-white);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px -5px rgba(59, 130, 246, 0.25), 0 0 30px rgba(59, 130, 246, 0.15);
-}
-
-.formInput:focus::before {
-    left: 100%;
+.formInput,
+.formTextarea {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #fff;
+    font-family: inherit;
 }
 
 .formTextarea {
-    padding: 14px 18px;
-    font-size: var(--font-size-base);
-    color: var(--color-dark);
-    background-color: var(--color-gray-light);
-    border-radius: var(--border-radius-md);
-    border: 2px solid transparent;
     resize: vertical;
-    font-family: var(--font-family);
-    transition: all 0.8s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-.formTextarea::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
-    transition: left 0.8s ease;
+.formInput::placeholder,
+.formTextarea::placeholder {
+    color: rgba(255, 255, 255, 0.35);
 }
 
-.formTextarea:hover {
-    border-color: rgba(59, 130, 246, 0.3);
-    background-color: rgba(255, 255, 255, 0.95);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
-}
-
-.formTextarea:hover::before {
-    left: 100%;
-}
-
+.formInput:focus,
 .formTextarea:focus {
     outline: none;
-    border-color: var(--color-blue);
-    background-color: var(--color-white);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px -5px rgba(59, 130, 246, 0.25), 0 0 30px rgba(59, 130, 246, 0.15);
+    border-color: #E0A93C;
 }
 
-.formTextarea:focus::before {
-    left: 100%;
+.errorText {
+    color: #f87171;
+    font-size: 13px;
+    margin: -4px 0 0;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+.successMsg {
+    background: rgba(40, 165, 107, 0.12);
+    border: 1px solid rgba(40, 165, 107, 0.3);
+    color: #4ade80;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
 }
 
-/* --- Responsive --- */
-@media (max-width: 768px) {
+.submitBtn {
+    margin-top: 4px;
+    padding: 15px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(228, 90, 40, 0.4);
+    transition: filter 0.2s ease;
+}
+
+.submitBtn:hover {
+    filter: brightness(1.08);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ── Responsive ── */
+@media (min-width: 900px) {
     .grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+    }
+}
+
+@media (max-width: 900px) {
+    .heroTitle {
+        font-size: 36px;
     }
 
-    .formRow {
+    .sectionTitle {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 560px) {
+    .infoGrid {
         grid-template-columns: 1fr;
     }
 }

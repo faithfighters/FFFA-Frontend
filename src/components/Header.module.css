@@ -103,14 +103,22 @@
     padding: 12px 15px;
     transition: all 0.3s ease;
     white-space: nowrap;
+    display: inline-block;
 }
 
 .navLink:hover {
-    color: var(--color-red);
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .navLinkActive {
-    color: var(--color-red) !important;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    display: inline-block;
 }
 
 .separator {
@@ -121,19 +129,21 @@
 }
 
 .topDonateBtn {
-    background-color: #ff0000;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
     color: var(--color-white);
     font-weight: 800;
     font-size: 0.9rem;
     padding: 12px 35px;
     text-transform: uppercase;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     margin-left: 10px;
+    box-shadow: 0 4px 15px rgba(231, 66, 27, 0.3);
 }
 
 .topDonateBtn:hover {
-    background-color: #cc0000;
+    background: linear-gradient(135deg, #f9cb9c 0%, #c43210 100%);
+    box-shadow: 0 6px 20px rgba(231, 66, 27, 0.5);
 }
 
 .secondaryActions {
@@ -148,11 +158,15 @@
     font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
 .supportLink:hover {
-    opacity: 0.8;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .actionButtons {
@@ -162,7 +176,7 @@
 }
 
 .loginBtn {
-    background-color: #ff0000;
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
     color: var(--color-white);
     font-weight: 800;
     font-size: 0.95rem;
@@ -170,12 +184,13 @@
     border-radius: 14px;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(231, 66, 27, 0.4);
 }
 
 .loginBtn:hover {
-    background-color: #cc0000;
+    background: linear-gradient(135deg, #f9cb9c 0%, #c43210 100%);
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(231, 66, 27, 0.6);
 }
 
 .joinBtn {
@@ -290,10 +305,23 @@
         font-weight: 700;
         text-decoration: none;
         letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .mobileNavLink:hover {
+        background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .mobileNavLinkActive {
-        color: var(--color-red);
+        background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        display: inline-block;
     }
 
     .overlay {

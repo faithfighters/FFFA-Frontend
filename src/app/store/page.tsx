@@ -1,94 +1,104 @@
 import type { Metadata } from 'next';
-import PageBanner from '@/components/frontend/PageBanner';
-import Newsletter from '@/components/frontend/Newsletter';
+import Image from 'next/image';
 import styles from './page.module.css';
+import Newsletter from '@/components/frontend/Newsletter';
 
 export const metadata: Metadata = {
     title: 'Store – Faith Fighters For America',
     description: 'Shop with purpose. Every purchase from our store helps fund faith-driven initiatives that uplift communities and strengthen America\'s spirit.',
 };
 
-const comingSoonCategories = [
-    { icon: '👕', name: 'Apparel', desc: 'T-shirts, hoodies, and hats bearing the FFFA crest and message.' },
-    { icon: '📿', name: 'Accessories', desc: 'Bracelets, pins, keychains, and more to show your faith.' },
-    { icon: '✝️', name: 'Faith-Inspired', desc: 'Books, devotionals, and items to strengthen your spiritual walk.' },
-    { icon: '🇺🇸', name: 'Patriot Collection', desc: 'Celebrate your love of God and country with our patriotic line.' },
+const SHOP = 'https://shop.faithfightersforamerica.com/';
+
+const products = [
+    { name: "Men's Faith Tee", price: '30', img: '/images/serve-img.jpg', url: `${SHOP}products/wake-up-with-faith-mens-shirts` },
+    { name: "Women's Faith Tank", price: '25', img: '/images/serve-img-2.jpg', url: `${SHOP}products/wake-up-with-faith-female-tanktops` },
+    { name: 'Faith Fighters Hat', price: '25', img: '/images/serve-img-3.jpg', url: `${SHOP}products/wake-up-with-faith-hats` },
+    { name: 'Wake Up With Faith Coffee', price: '25', img: '/images/serve-img-4.jpg', url: `${SHOP}products/wake-up-with-faith-cofee` },
 ];
 
 export default function StorePage() {
     return (
         <>
-            <PageBanner
-                title="Store"
-                backgroundImage="/images/hero-flag.png"
-                breadcrumbs={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Store', href: '/store' },
-                ]}
-            />
-
-            {/* Coming Soon Banner */}
-            <section className={`section ${styles.heroSection}`}>
-                <div className="container" style={{ textAlign: 'center' }}>
-                    <div className={styles.badge}>Coming Soon</div>
-                    <h2 className="heading-lg">Shop With Purpose</h2>
-                    <p className={styles.subtitle}>
-                        Every purchase from our store helps fund faith-driven initiatives that uplift
-                        communities and strengthen America&apos;s spirit.
-                    </p>
+            {/* ===== HERO ===== */}
+            <section className={styles.hero}>
+                <div className={styles.heroDots} />
+                <div className="container">
+                    <div className={styles.heroInner}>
+                        <span className={styles.eyebrow}>Official Store</span>
+                        <h1 className={styles.heroTitle}>Wear the Mission</h1>
+                        <p className={styles.heroLead}>
+                            Every purchase funds faith-driven initiatives that uplift communities and
+                            strengthen America&apos;s spirit.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Product Categories Preview */}
-            <section className={`section section--dark ${styles.categoriesSection}`}>
+            {/* ===== PRODUCT GRID ===== */}
+            <section className={`section ${styles.productsSection}`}>
                 <div className="container">
-                    <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
-                        <span className="section-label section-label--red" style={{ display: 'inline-block' }}>Preview</span>
-                        <h2 className="heading-lg">What&apos;s Coming</h2>
+                    <div className={styles.sectionHeaderCenter}>
+                        <span className={styles.eyebrow}>Shop the Collection</span>
+                        <h2 className={styles.sectionTitle}>Wear your faith</h2>
+                        <p className={styles.sectionSub}>Tap a product to shop it directly.</p>
                     </div>
-                    <div className={styles.categoriesGrid}>
-                        {comingSoonCategories.map((cat) => (
-                            <div key={cat.name} className="card">
-                                <div className="card__icon" style={{ fontSize: '2.5rem', background: 'none' }}>{cat.icon}</div>
-                                <h4 className="card__title" style={{ color: 'white' }}>{cat.name}</h4>
-                                <p className="card__text">{cat.desc}</p>
-                            </div>
+
+                    <div className={styles.productGrid}>
+                        {products.map((product) => (
+                            <a
+                                key={product.name}
+                                href={product.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.productCard}
+                            >
+                                <div className={styles.productImage}>
+                                    <Image
+                                        src={product.img}
+                                        alt={product.name}
+                                        fill
+                                        sizes="(max-width: 768px) 50vw, 25vw"
+                                        style={{ objectFit: 'cover' }}
+                                    />
+                                </div>
+                                <div className={styles.productInfo}>
+                                    <b>{product.name}</b>
+                                    <span className={styles.productPrice}>${product.price}</span>
+                                </div>
+                            </a>
                         ))}
                     </div>
+
+                    <a href={SHOP} target="_blank" rel="noopener noreferrer" className={styles.fullStoreBtn}>
+                        Visit the Full Store
+                    </a>
                 </div>
             </section>
 
-            {/* Policy Highlights */}
-            <section className={`section ${styles.policySection}`}>
+            {/* ===== BENEFIT ROWS ===== */}
+            <section className={`section ${styles.benefitsSection}`}>
                 <div className="container">
-                    <div className={styles.policyGrid}>
-                        <div className={styles.policyItem}>
-                            <div className={styles.policyIcon}>🔄</div>
-                            <h4>14-Day Returns</h4>
-                            <p>Unused items in original condition accepted within 14 days of purchase.</p>
+                    <div className={styles.benefitsGrid}>
+                        <div className={styles.benefitRow}>
+                            <div className={styles.benefitIcon}>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><path d="M16 8h4l3 3v5h-7V8z" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+                            </div>
+                            <div>
+                                <h4>Ships to all 50 states</h4>
+                                <p>Fast, tracked delivery nationwide.</p>
+                            </div>
                         </div>
-                        <div className={styles.policyItem}>
-                            <div className={styles.policyIcon}>🚚</div>
-                            <h4>U.S. Shipping</h4>
-                            <p>We ship to all 50 states. International shipping coming soon.</p>
-                        </div>
-                        <div className={styles.policyItem}>
-                            <div className={styles.policyIcon}>💙</div>
-                            <h4>Purpose-Driven</h4>
-                            <p>Proceeds support our community programs and national faith initiatives.</p>
+                        <div className={styles.benefitRow}>
+                            <div className={`${styles.benefitIcon} ${styles.benefitIconRed}`}>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                            </div>
+                            <div>
+                                <h4>Funds the mission</h4>
+                                <p>Proceeds support faith-driven missions.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {/* Newsletter Alert */}
-            <section className={`section section--navy ${styles.alertSection}`}>
-                <div className="container" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
-                    <h2 className="heading-lg" style={{ color: 'white' }}>Be First To Know</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-xl)' }}>
-                        Subscribe to our newsletter and be the first to know when our store launches
-                        with exclusive early-access deals.
-                    </p>
                 </div>
             </section>
 

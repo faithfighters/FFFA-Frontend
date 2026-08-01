@@ -142,9 +142,9 @@ export default function FAQsPage() {
             <section className={`section ${styles.faqSection}`}>
                 <div className="container" style={{ maxWidth: '860px', margin: '0 auto' }}>
                     <div style={{ textAlign: 'center', marginBottom: 'var(--space-3xl)' }}>
-                        <span className="section-label section-label--red" style={{ display: 'inline-block' }}>Help Center</span>
+                        <span className="section-label section-label--red" style={{ display: 'inline-block', color: 'rgba(255,255,255,0.55)' }}>Help Center</span>
                         <h2 className="heading-lg">Frequently Asked Questions</h2>
-                        <p className="text-body">
+                        <p className="text-body" style={{ color: 'rgba(255,255,255,0.65)' }}>
                             Find answers to the most common questions about donations, membership, and our platform.
                         </p>
                     </div>
