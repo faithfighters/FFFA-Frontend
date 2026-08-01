@@ -37,11 +37,6 @@ export default function Header() {
   const pathname = usePathname();
   const { user } = useAuth();
   const firstName = user?.name?.split(' ')[0] || '';
-  const donateHref = '/donation';
-
-  const handleDonateClick = () => {
-    // Navigate directly to the donation page
-  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -105,9 +100,6 @@ export default function Header() {
             ) : (
               <Link href="/login" className={styles.joinBtn}>Login</Link>
             )}
-            <Link href={donateHref} className={styles.topDonateBtn}>
-              Donate
-            </Link>
           </div>
         </div>
 
