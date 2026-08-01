@@ -1,137 +1,144 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { Fraunces } from 'next/font/google';
 import { useAuth } from '@/context/AuthContext';
+import { Eye, EyeOff } from 'lucide-react';
 import styles from './page.module.css';
+import { haptics } from '@/lib/haptics';
+import AuthTabs from '@/components/shared/AuthTabs';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
-
-const floatingDonors = [
-    { name: 'Jordan S.', amount: '$400' },
-    { name: 'Maria T.', amount: '$250' },
-    { name: 'David R.', amount: '$180' },
-    { name: 'Sarah K.', amount: '$400' },
-    { name: 'Alex M.', amount: '$320' },
-    { name: 'Lisa P.', amount: '$150' },
-    { name: 'James W.', amount: '$500' },
-    { name: 'Emma C.', amount: '$275' },
-];
+const fraunces = Fraunces({
+    subsets: ['latin'],
+    weight: ['600', '700', '800'],
+    style: ['normal', 'italic'],
+    variable: '--font-fraunces',
+    display: 'swap',
+});
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, user, isLoading: authLoading } = useAuth();
     const router = useRouter();
+
+    useEffect(() => {
+        if (!authLoading && user) router.replace('/dashboard');
+    }, [user, authLoading, router]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setLoading(true);
+        haptics.tap();
         const result = await login(email, password);
         if (result.success) {
+            haptics.success();
             router.push('/dashboard');
         } else {
+            haptics.error();
             setError(result.error || 'Invalid credentials. Please try again.');
         }
         setLoading(false);
     };
 
     const handleGoogleSSO = () => {
-        window.location.href = `${API_URL}/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+        haptics.tap();
+        window.location.href = `/api/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
     };
 
     return (
-        <div className={styles.loginPage}>
-            {/* Grid background */}
-            <div className={styles.gridBg} />
-
-            {/* Floating Avatar Ring */}
-            <div className={styles.avatarRing}>
-                {floatingDonors.map((donor, i) => (
-                    <div key={i} className={styles.floatingAvatar}>
-                        <div className={styles.avatarImg}>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                                <circle cx="12" cy="8" r="4" />
-                                <path d="M5 20c0-4 3.5-7 7-7s7 3 7 7" />
-                            </svg>
-                        </div>
-                        <span className={styles.avatarLabel}>{donor.name}</span>
-                        <span className={styles.avatarDonation}>
-                            Donated <strong>{donor.amount}</strong>🔥
-                        </span>
+        <div className={`${fraunces.variable} ${styles.loginPage}`}>
+            <section className={styles.hero}>
+                <div className={styles.heroDots} />
+                <div className="container">
+                    <div className={styles.heroInner}>
+                        <span className={styles.eyebrow}>Welcome Back</span>
+                        <h1 className={styles.heroTitle}>One Spirit. One Mission.</h1>
+                        <p className={styles.heroLead}>
+                            Sign in to track your giving, follow your missions, and stand with 10,000+ Americans.
+                        </p>
                     </div>
-                ))}
-            </div>
-
-            <div className={styles.card}>
-                {/* Brand icon */}
-                <div className={styles.brandIcon}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="7" y1="17" x2="17" y2="7" />
-                        <polyline points="7 7 17 7 17 17" />
-                    </svg>
                 </div>
+            </section>
 
-                <h1 className={styles.title}>Sign in with email</h1>
-                <p className={styles.subtitle}>
-                    Make a new doc to bring your words, data, and teams together. For free.
-                </p>
+            <div className={`${styles.container} ${styles.mainContainer}`}>
+            <div className={styles.formCol}>
 
+            <AuthTabs active="login" />
+
+            {/* Form card */}
+            <div className={styles.card}>
                 {error && <div className={styles.error}>{error}</div>}
 
                 <form onSubmit={handleSubmit} className={styles.form}>
+                    {/* Email */}
                     <div className={styles.fieldRow}>
-                        <div className={styles.labelRow}>
-                            <label htmlFor="email" className={styles.label}>Email</label>
-                        </div>
+                        <label className={styles.fieldLabel} htmlFor="email">Email Address</label>
                         <input
                             id="email" type="email" className={styles.input}
-                            placeholder="you@example.com"
-                            value={email} onChange={(e) => setEmail(e.target.value)}
+                            placeholder="you@email.com"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                             required suppressHydrationWarning
                         />
                     </div>
 
+                    {/* Password */}
                     <div className={styles.fieldRow}>
                         <div className={styles.labelRow}>
-                            <label htmlFor="password" className={styles.label}>Password</label>
-                            <a href="#" className={styles.forgotLink}>Forgot password?</a>
+                            <label className={styles.fieldLabel} htmlFor="password">Password</label>
+                            <Link href="/forgot-password" className={styles.forgotLink}>Forgot password?</Link>
                         </div>
-                        <input
-                            id="password" type="password" className={styles.input}
-                            placeholder="Enter your password"
-                            value={password} onChange={(e) => setPassword(e.target.value)}
-                            required suppressHydrationWarning
-                        />
+                        <div className={styles.inputWrap}>
+                            <input
+                                id="password" type={showPassword ? 'text' : 'password'} className={styles.input}
+                                style={{ paddingRight: '46px' }}
+                                placeholder="••••••••"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                required suppressHydrationWarning
+                            />
+                            <button type="button" className={styles.inputSuffix} onClick={() => setShowPassword(v => !v)} aria-label={showPassword ? 'Hide password' : 'Show password'}>
+                                {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" className={styles.submitBtn} disabled={loading}>
-                        {loading ? 'Signing in…' : 'Get started'}
+                        {loading ? 'Signing in…' : 'Sign In'}
                     </button>
                 </form>
 
                 <div className={styles.divider}>
                     <span className={styles.dividerLine} />
-                    <span className={styles.dividerText}>Or sign in with</span>
+                    <span className={styles.dividerText}>or continue with</span>
                     <span className={styles.dividerLine} />
                 </div>
 
-                <div className={styles.socialRow}>
-                    <button type="button" className={styles.socialBtn} style={{ width: '100%' }} onClick={handleGoogleSSO} aria-label="Google">
-                        Sign in with Google
-                    </button>
-                </div>
+                <button type="button" className={styles.googleBtn} onClick={handleGoogleSSO}>
+                    <svg width="20" height="20" viewBox="0 0 24 24">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Continue with Google
+                </button>
 
                 <p className={styles.footer}>
-                    New to Faith Fighter of America?{' '}
-                    <a href="/register" className={styles.footerLink}>
-                        Create an account
-                    </a>
+                    New to Faith Fighters?{' '}
+                    <Link href="/register" className={styles.footerLink}>Create an account</Link>
                 </p>
             </div>
+
+            </div>{/* end formCol */}
+            </div>{/* end container/mainContainer */}
         </div>
     );
 }

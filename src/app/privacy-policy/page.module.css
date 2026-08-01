@@ -1,15 +1,83 @@
-.legalSection {}
+/* Shared by privacy-policy, refund-policy, and terms pages */
+
+/* ── Hero — matches About/Stories/Contact/etc ── */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--header-height) + 56px) 0 48px !important;
+    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+    color: #fff;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+}
+
+.heroDots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+    pointer-events: none;
+}
+
+.heroInner {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin-bottom: 18px;
+}
+
+.eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: #E0A93C;
+}
+
+.heroTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.legalSection {
+    background: #0b0a12 !important;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 56px 0 !important;
+}
 
 .lastUpdated {
-    color: var(--color-gray-400);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 0.875rem;
     margin-bottom: var(--space-2xl);
     padding-bottom: var(--space-lg);
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .legalContent {
-    color: var(--color-gray-700);
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.8;
 }
 
@@ -18,11 +86,17 @@
 .legalContent h2 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--color-dark);
+    color: #fff;
     margin: var(--space-2xl) 0 var(--space-md);
     padding-bottom: var(--space-xs);
-    border-bottom: 2px solid var(--color-red);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
     display: inline-block;
+
+    /* Gradient text on section headings */
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .legalContent ul {
@@ -34,6 +108,16 @@
 .legalContent ul li { margin-bottom: var(--space-xs); }
 
 .legalContent a {
-    color: var(--color-red);
+    color: #F8C38F;
     text-decoration: underline;
+    text-decoration-color: rgba(248, 195, 143, 0.4);
+}
+
+.legalContent a:hover {
+    color: #E7421B;
+    text-decoration-color: #E7421B;
+}
+
+.legalContent strong {
+    color: #fff;
 }

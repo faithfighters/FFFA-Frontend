@@ -1,0 +1,191 @@
+/* ===== ACTIVITIES PAGE STYLING ===== */
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.titleSection {
+    margin-bottom: 28px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Stats Grid */
+.statsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.statCard {
+    background: rgba(19, 17, 28, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.statNumber {
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.statNumberOrange {
+    color: #E7421B;
+}
+
+.statNumberGreen {
+    color: #10b981;
+}
+
+.statLabel {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Section Header */
+.sectionHeader {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.35);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-left: 4px;
+}
+
+/* Timeline Container */
+.timelineContainer {
+    position: relative;
+    background: rgba(19, 17, 28, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Vertical Timeline Line */
+.timelineLine {
+    position: absolute;
+    left: 48px; /* Total left offset = 20px container padding + 8px item padding + 20px half icon width */
+    top: 60px;  /* Starts exactly at the center of the first icon */
+    bottom: 60px; /* Ends exactly at the center of the last icon */
+    width: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 0;
+}
+
+/* Timeline Item */
+.timelineItem {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 8px;
+    box-sizing: border-box;
+}
+
+.iconWrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-sizing: border-box;
+}
+
+/* Color schemes for icon wrappers */
+.iconOrange {
+    background: rgba(231, 66, 27, 0.12);
+    color: #ff7b5a;
+}
+
+.iconGreen {
+    background: rgba(16, 185, 129, 0.12);
+    color: #4ade80;
+}
+
+.iconYellow {
+    background: rgba(245, 158, 11, 0.12);
+    color: #fbbf24;
+}
+
+.iconBlue {
+    background: rgba(59, 130, 246, 0.12);
+    color: #60a5fa;
+}
+
+.iconPurple {
+    background: rgba(139, 92, 246, 0.12);
+    color: #a78bfa;
+}
+
+.itemContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.itemTitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itemDesc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itemTime {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.badge {
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.badgeNegative {
+    color: #ff7b5a;
+}
+
+.badgePositive {
+    color: #4ade80;
+}

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import PageBanner from '@/components/frontend/PageBanner';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
+import { Bike, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: 'Give Away – Faith Fighters For America',
@@ -33,7 +34,7 @@ export default function GiveawayPage() {
             </section>
 
             {/* Entry Section */}
-            <section className={`section section--dark ${styles.entrySection}`}>
+            <section className={`section ${styles.entrySection}`}>
                 <div className="container">
                     <div className={styles.entryGrid}>
                         <div className={styles.entryInfo}>
@@ -41,33 +42,33 @@ export default function GiveawayPage() {
                             <h2 className="heading-lg">Enter The Giveaway</h2>
                             <div className={styles.rulesBlock}>
                                 <div className={styles.ruleItem}>
-                                    <span className={styles.ruleIcon}>✓</span>
+                                    <span className={styles.ruleIcon}><CheckCircle2 size={16} color="#F8C38F" /></span>
                                     <span>No purchase necessary to enter or win</span>
                                 </div>
                                 <div className={styles.ruleItem}>
-                                    <span className={styles.ruleIcon}>✓</span>
+                                    <span className={styles.ruleIcon}><CheckCircle2 size={16} color="#F8C38F" /></span>
                                     <span>Open to U.S. residents 18 years of age or older</span>
                                 </div>
                                 <div className={styles.ruleItem}>
-                                    <span className={styles.ruleIcon}>✓</span>
+                                    <span className={styles.ruleIcon}><CheckCircle2 size={16} color="#F8C38F" /></span>
                                     <span>One entry per person</span>
                                 </div>
                                 <div className={styles.ruleItem}>
-                                    <span className={styles.ruleIcon}>✓</span>
+                                    <span className={styles.ruleIcon}><CheckCircle2 size={16} color="#F8C38F" /></span>
                                     <span>Winner selected by random drawing</span>
                                 </div>
                                 <div className={styles.ruleItem}>
-                                    <span className={styles.ruleIcon}>✓</span>
+                                    <span className={styles.ruleIcon}><CheckCircle2 size={16} color="#F8C38F" /></span>
                                     <span>Winner notified within 72 hours of drawing</span>
                                 </div>
                                 <div className={styles.ruleItem}>
-                                    <span className={styles.ruleIcon}>✓</span>
+                                    <span className={styles.ruleIcon}><CheckCircle2 size={16} color="#F8C38F" /></span>
                                     <span>Prize is non-transferable</span>
                                 </div>
                             </div>
                         </div>
                         <div className={styles.entryCard}>
-                            <div className={styles.prizeBadge}>🏍️</div>
+                            <div className={styles.prizeBadge}><Bike size={48} color="#F8C38F" /></div>
                             <h3>Custom Harley-Davidson</h3>
                             <p>Two exclusive motorcycle giveaway opportunities. Enter via our official GiveButter platform for a chance to win.</p>
                             <a
@@ -102,7 +103,7 @@ export default function GiveawayPage() {
                     </p>
                     <p className={styles.termsText}>
                         For full terms and conditions, please visit our{' '}
-                        <a href="/terms" style={{ color: 'var(--color-red)' }}>Terms &amp; Conditions</a> page.
+                        <a href="/terms" style={{ color: '#F8C38F' }}>Terms &amp; Conditions</a> page.
                     </p>
                 </div>
             </section>

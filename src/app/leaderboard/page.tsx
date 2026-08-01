@@ -3,10 +3,11 @@ import PageBanner from '@/components/frontend/PageBanner';
 import Newsletter from '@/components/frontend/Newsletter';
 import { Cause } from '@/lib/types';
 import styles from './page.module.css';
+import { Trophy, Award } from 'lucide-react';
 
 async function getLeaderboardData() {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://stage.faithfightersforamerica.com');
         const res = await fetch(`${baseUrl}/api/leaderboard`, { cache: 'no-store' });
         if (!res.ok) throw new Error('Failed');
         return res.json();
@@ -71,7 +72,7 @@ export default async function LeaderboardPage() {
                             <span className={styles.colRaised}>Raised</span>
                         </div>
                         {sorted.length === 0 && (
-                            <div style={{ textAlign: 'center', padding: 'var(--space-3xl)', color: 'var(--color-gray-400)' }}>
+                            <div style={{ textAlign: 'center', padding: 'var(--space-3xl)', color: 'rgba(255,255,255,0.4)' }}>
                                 No active causes yet.
                             </div>
                         )}
@@ -80,9 +81,9 @@ export default async function LeaderboardPage() {
                             return (
                                 <div key={cause.id} className={`${styles.tableRow} ${i < 3 ? styles.topThree : ''}`}>
                                     <span className={`${styles.colRank} ${styles.rank}`}>
-                                        {i === 0 && <span className={styles.medal}>🥇</span>}
-                                        {i === 1 && <span className={styles.medal}>🥈</span>}
-                                        {i === 2 && <span className={styles.medal}>🥉</span>}
+                                        {i === 0 && <span className={styles.medal}><Trophy size={18} color="#f59e0b" /></span>}
+                                        {i === 1 && <span className={styles.medal}><Award size={18} color="#94a3b8" /></span>}
+                                        {i === 2 && <span className={styles.medal}><Award size={18} color="#b45309" /></span>}
                                         {i > 2 && <span className={styles.rankNum}>{i + 1}</span>}
                                     </span>
                                     <span className={styles.colCause}>

@@ -7,21 +7,26 @@ import { useEffect } from 'react';
 interface ProtectedRouteProps {
     children: React.ReactNode;
     adminOnly?: boolean;
+    /** Blocks "need help" recipients who haven't purchased a membership plan yet — redirects to /join. */
+    requiresSubscription?: boolean;
 }
 
-export default function ProtectedRoute({ children, adminOnly = false }: ProtectedRouteProps) {
+export default function ProtectedRoute({ children, adminOnly = false, requiresSubscription = false }: ProtectedRouteProps) {
     const { user, isLoading, isAdmin } = useAuth();
     const router = useRouter();
+    const isPaywalled = !!user && requiresSubscription && user.userType === 'recipient' && !user.plan;
 
     useEffect(() => {
         if (!isLoading) {
             if (!user) {
                 router.push('/login');
             } else if (adminOnly && !isAdmin) {
-                router.push('/dashboard');
+                router.push('/');
+            } else if (isPaywalled) {
+                router.push('/join');
             }
         }
-    }, [user, isLoading, isAdmin, adminOnly, router]);
+    }, [user, isLoading, isAdmin, adminOnly, isPaywalled, router]);
 
     if (isLoading) {
         return (
@@ -34,7 +39,7 @@ export default function ProtectedRoute({ children, adminOnly = false }: Protecte
         );
     }
 
-    if (!user || (adminOnly && !isAdmin)) return null;
+    if (!user || (adminOnly && !isAdmin) || isPaywalled) return null;
 
     return <>{children}</>;
 }

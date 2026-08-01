@@ -1,0 +1,449 @@
+/* ===== LEADERBOARD REDESIGN ===== */
+
+.leaderboardContainer {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 60px;
+    background: #0b0a12;
+    overflow: hidden;
+}
+
+/* Full-screen background elements */
+.bgImage {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bgOverlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(11, 10, 18, 0.4) 0%,
+        rgba(11, 10, 18, 0.75) 45%,
+        rgba(11, 10, 18, 0.98) 95%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ── Hero Banner with Sunset Flag ───────────────────────────────── */
+.leaderboardHero {
+    position: relative;
+    z-index: 2;
+    margin-top: -80px; /* bleeds behind header */
+    padding-top: 100px;
+    min-height: 200px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 24px;
+    overflow: hidden;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.heroTitle {
+    font-size: 32px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────── */
+.tabContainer {
+    display: flex;
+    gap: 12px;
+}
+
+.tabButton {
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.tabActive {
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 16px rgba(231, 66, 27, 0.35);
+}
+
+.tabInactive {
+    background: rgba(15, 13, 23, 0.6);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.tabInactive:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+/* ── Podium Section ─────────────────────────────────────────────── */
+.podiumContainer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px;
+    margin: 40px auto 32px;
+    max-width: 600px;
+    padding: 0 16px;
+}
+
+.podiumCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    border-radius: 20px;
+    background: rgba(19, 17, 28, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    box-sizing: border-box;
+}
+
+.podiumCardRank1 {
+    width: 36%;
+    padding: 24px 12px 20px;
+    border: 1.5px solid rgba(251, 191, 36, 0.2);
+    box-shadow: 0 12px 32px rgba(251, 191, 36, 0.1);
+    transform: translateY(-8px);
+}
+
+.podiumCardRank2 {
+    width: 32%;
+    padding: 16px 10px 16px;
+}
+
+.podiumCardRank3 {
+    width: 32%;
+    padding: 16px 10px 16px;
+}
+
+.avatarWrapper {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.podiumAvatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.podiumAvatarRank1 {
+    width: 90px;
+    height: 90px;
+    border: 3.5px solid #fbbf24;
+    box-shadow: 0 0 16px rgba(251, 191, 36, 0.35);
+}
+
+.podiumAvatarRank2 {
+    width: 76px;
+    height: 76px;
+    border: 3px solid #cbd5e1;
+}
+
+.podiumAvatarRank3 {
+    width: 76px;
+    height: 76px;
+    border: 3px solid #fdba74;
+}
+
+.rankBadge {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.rankBadge1 {
+    background: #fbbf24;
+}
+
+.rankBadge2 {
+    background: #94a3b8;
+}
+
+.rankBadge3 {
+    background: #ea580c;
+}
+
+.podiumName {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.podiumRole {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.podiumScore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+}
+
+.scoreValue {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.scoreLabel {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+    margin-top: 1px;
+}
+
+/* ── Standings List ─────────────────────────────────────────────── */
+.standingsContainer {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.standingsCard {
+    background: rgba(19, 17, 28, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.standingRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+}
+
+.standingRow:last-child {
+    border-bottom: none;
+}
+
+.rowLeft {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    flex: 1;
+}
+
+.standingRank {
+    font-size: 14px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.5);
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.standingAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.standingInfoBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.standingName {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.standingRole {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.standingScore {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+/* ── Initials Fallback Styling ──────────────────────────────────── */
+.podiumInitials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.podiumInitialsRank1 {
+    font-size: 28px;
+}
+
+.podiumInitialsRank2,
+.podiumInitialsRank3 {
+    font-size: 24px;
+}
+
+.standingInitials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+/* ── Desktop: center hero content and make the category switcher pop ── */
+@media (min-width: 769px) {
+    .heroContent {
+        align-items: center;
+        text-align: center;
+    }
+    .heroTitle {
+        font-size: 40px;
+    }
+    .tabContainer {
+        margin-top: 4px;
+        padding: 6px;
+        border-radius: 14px;
+        background: rgba(15, 13, 23, 0.55);
+        border: 1.5px solid rgba(248, 195, 143, 0.35);
+        box-shadow: 0 0 0 4px rgba(231, 66, 27, 0.08), 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+    .tabButton {
+        padding: 12px 32px;
+        font-size: 14px;
+    }
+}
+
+/* ── Responsive Styling ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .leaderboardHero {
+        margin-top: -64px;
+        padding-top: 80px;
+    }
+}
+
+@media (max-width: 520px) {
+    .heroTitle {
+        font-size: 28px;
+    }
+    .podiumContainer {
+        gap: 8px;
+    }
+    .podiumAvatarRank1 {
+        width: 72px;
+        height: 72px;
+    }
+    .podiumAvatarRank2, .podiumAvatarRank3 {
+        width: 60px;
+        height: 60px;
+    }
+    .podiumInitialsRank1 {
+        font-size: 22px;
+    }
+    .podiumInitialsRank2, .podiumInitialsRank3 {
+        font-size: 18px;
+    }
+    .podiumCardRank1 {
+        padding: 16px 8px 14px;
+    }
+    .podiumCardRank2, .podiumCardRank3 {
+        padding: 12px 6px 12px;
+    }
+    .podiumName {
+        font-size: 12px;
+    }
+    .scoreValue {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+    .podiumContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+    .podiumCardRank1, .podiumCardRank2, .podiumCardRank3 {
+        width: 100%;
+        max-width: 220px;
+        transform: none;
+        padding: 16px 12px;
+    }
+}

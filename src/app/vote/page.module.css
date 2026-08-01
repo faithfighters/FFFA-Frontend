@@ -1,7 +1,7 @@
 /* ===== VOTE PAGE ===== */
 .votePage {
     min-height: 100vh;
-    background: var(--color-gray-light);
+    background: #0b0a12;
     padding: calc(var(--header-height) + var(--space-2xl)) 0 var(--space-3xl);
 }
 
@@ -18,15 +18,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: var(--color-white);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     padding: var(--space-lg) var(--space-2xl);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-sm);
+    border-radius: 16px;
 }
 
 .counterLabel {
     font-size: var(--font-size-xs);
-    color: var(--color-gray-500);
+    color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -34,13 +34,16 @@
 .counterValue {
     font-size: var(--font-size-4xl);
     font-weight: 900;
-    color: var(--color-red);
+    background: linear-gradient(135deg, #F8C38F 0%, #E7421B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     line-height: 1;
 }
 
 .counterOf {
     font-size: var(--font-size-sm);
-    color: var(--color-gray-300);
+    color: rgba(255, 255, 255, 0.35);
 }
 
 /* Causes Grid */
@@ -51,22 +54,22 @@
 }
 
 .causeCard {
-    background: var(--color-white);
-    border-radius: var(--border-radius-lg);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
     transition: all var(--transition-base);
-    border: 2px solid transparent;
 }
 
 .causeCard:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .causeCardActive {
-    border-color: var(--color-red);
-    box-shadow: var(--shadow-glow-red);
+    border-color: #E7421B;
+    box-shadow: 0 0 0 2px rgba(231, 66, 27, 0.25), 0 12px 40px rgba(231, 66, 27, 0.15);
 }
 
 .causeImage {
@@ -85,8 +88,8 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--color-blue);
-    background: rgba(59, 130, 246, 0.1);
+    color: #F8C38F;
+    background: rgba(248, 195, 143, 0.12);
     padding: 3px 10px;
     border-radius: var(--border-radius-full);
 }
@@ -94,13 +97,13 @@
 .causeName {
     font-size: var(--font-size-lg);
     font-weight: 700;
-    color: var(--color-dark);
+    color: #ffffff;
     margin: var(--space-sm) 0;
 }
 
 .causeDesc {
     font-size: var(--font-size-sm);
-    color: var(--color-gray-500);
+    color: rgba(255, 255, 255, 0.55);
     line-height: 1.6;
     margin-bottom: var(--space-md);
 }
@@ -113,14 +116,14 @@
 .causeProgressBar {
     width: 100%;
     height: 6px;
-    background: var(--color-gray-100);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 3px;
     overflow: hidden;
 }
 
 .causeProgressFill {
     height: 100%;
-    background: linear-gradient(90deg, #16a34a, #22c55e);
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
     border-radius: 3px;
 }
 
@@ -129,7 +132,7 @@
     justify-content: space-between;
     margin-top: 6px;
     font-size: var(--font-size-xs);
-    color: var(--color-gray-500);
+    color: rgba(255, 255, 255, 0.45);
 }
 
 /* Vote Controls */
@@ -144,9 +147,9 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 2px solid var(--color-gray-200);
-    background: var(--color-white);
-    color: var(--color-dark);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
     font-size: var(--font-size-lg);
     font-weight: 700;
     cursor: pointer;
@@ -162,18 +165,18 @@
     left: 50%;
     width: 0;
     height: 0;
-    background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(248, 195, 143, 0.15) 0%, transparent 70%);
     transition: all 0.4s ease;
     transform: translate(-50%, -50%);
     border-radius: 50%;
 }
 
 .voteBtn:hover:not(:disabled) {
-    background: var(--color-red);
-    color: var(--color-white);
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    color: #fff;
     transform: scale(1.15) rotate(5deg);
-    box-shadow: 0 8px 25px -5px rgba(220, 38, 38, 0.4), 0 0 20px rgba(220, 38, 38, 0.2);
-    border-color: var(--color-red);
+    box-shadow: 0 8px 25px -5px rgba(231, 66, 27, 0.4), 0 0 20px rgba(231, 66, 27, 0.2);
+    border-color: transparent;
 }
 
 .voteBtn:hover:not(:disabled)::before {
@@ -189,7 +192,7 @@
 .voteCount {
     font-size: var(--font-size-2xl);
     font-weight: 900;
-    color: var(--color-dark);
+    color: #ffffff;
     min-width: 30px;
     text-align: center;
 }
@@ -200,25 +203,29 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--color-dark);
-    color: var(--color-white);
+    background: rgba(11, 10, 18, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #ffffff;
     padding: var(--space-lg) var(--space-xl);
+    padding-bottom: calc(var(--space-lg) + env(safe-area-inset-bottom, 0px));
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 100;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Success */
 .successCard {
     max-width: 550px;
     margin: var(--space-3xl) auto;
-    background: var(--color-white);
-    border-radius: var(--border-radius-xl);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     padding: var(--space-3xl);
     text-align: center;
-    box-shadow: var(--shadow-md);
 }
 
 .successIcon {
@@ -235,13 +242,14 @@
     display: flex;
     justify-content: space-between;
     padding: var(--space-sm) 0;
-    border-bottom: 1px solid var(--color-gray-100);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     font-size: var(--font-size-base);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .summaryCount {
     font-weight: 700;
-    color: var(--color-red);
+    color: #F8C38F;
 }
 
 @media (max-width: 1024px) {
@@ -250,14 +258,75 @@
     }
 }
 
+@media (max-width: 768px) {
+    .voteHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .voteCounter {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        gap: 12px;
+    }
+
+    .counterValue {
+        font-size: 2.5rem;
+    }
+
+    .votePage {
+        padding-bottom: calc(var(--space-3xl) + 70px);
+    }
+}
+
 @media (max-width: 640px) {
+    .causesGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    .causeBody {
+        padding: var(--space-md);
+    }
+
+    .causeName {
+        font-size: var(--font-size-base);
+    }
+
+    .causeDesc {
+        display: none; /* hide on mobile to save space */
+    }
+
+    .voteControls {
+        gap: var(--space-md);
+    }
+
+    .voteBtn {
+        width: 48px;
+        height: 48px;
+        font-size: var(--font-size-xl);
+    }
+
+    .submitBar {
+        gap: var(--space-md);
+        padding: 12px 16px;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .submitBar p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
     .causesGrid {
         grid-template-columns: 1fr;
     }
 
-    .submitBar {
-        flex-direction: column;
-        gap: var(--space-md);
-        text-align: center;
+    .voteCounter {
+        padding: 14px 16px;
     }
 }

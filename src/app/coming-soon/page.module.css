@@ -1,0 +1,207 @@
+/* ===== COMING SOON PAGE ===== */
+
+/* Full-screen container */
+.page {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #0b0a12;
+}
+
+/* Background image */
+.bgWrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.bgImage {
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* Left-side dark gradient overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(271.53deg, rgba(11, 10, 18, 0) -0.75%, rgba(11, 10, 18, 0.55) 98.39%);
+}
+
+/* ── Logo ── */
+.logoWrapper {
+    position: absolute;
+    top: 46px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.logo {
+    object-fit: contain;
+    display: block;
+}
+
+/* ── Main content block ── */
+/* Mirrors Figma group: left:204px, top:239px, width:1031px */
+.content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -48%);
+    width: min(1031px, calc(100vw - 40px));
+    z-index: 2;
+
+    /* fade-in on mount */
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.contentVisible {
+    opacity: 1;
+}
+
+/* ── Tagline row ── */
+.tagline {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+}
+
+.tagBlue,
+.tagWhite,
+.tagRed {
+    font-family: var(--font-roboto), 'Arial Black', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: clamp(1.4rem, 3.5vw, 3.125rem); /* 50px at 1440 */
+    line-height: 1.18;
+    text-transform: uppercase;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Keep brand tagline colors — these are intentional identity colors */
+.tagBlue  { color: #F8C38F; }
+.tagWhite { color: #FFFFFF; }
+.tagRed   { color: #E7421B; }
+
+/* ── COMING SOON heading ── */
+.comingSoon {
+    font-family: var(--font-roboto), 'Arial Black', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: clamp(4rem, 10.4vw, 9.375rem); /* 150px at 1440 */
+    line-height: 1.17;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0 0 2.75rem 0;
+}
+
+/* ── Buttons ── */
+.actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Donate – orange-red gradient pill */
+.donateBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 45px;
+    background: linear-gradient(90deg, #F8C38F 0%, #E7421B 100%);
+    border-radius: 50px;
+    border: none;
+    color: #fff;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.donateBtn:hover {
+    opacity: 0.88;
+    transform: translateY(-2px);
+}
+
+/* Join Now – outline pill */
+.joinBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 45px;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    color: #fff;
+    font-family: var(--font-roboto), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.joinBtn:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+}
+
+/* ── Bottom-right star ── */
+.starDecoration {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 2;
+    opacity: 0.7;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .logoWrapper {
+        top: 24px;
+    }
+
+    .tagline {
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tagBlue,
+    .tagWhite,
+    .tagRed {
+        font-size: clamp(1rem, 5vw, 1.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .tagline {
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: flex-start;
+    }
+
+    .comingSoon {
+        font-size: clamp(3rem, 16vw, 5rem);
+        text-align: left;
+    }
+
+    .actions {
+        justify-content: flex-start;
+    }
+}
