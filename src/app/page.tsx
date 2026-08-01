@@ -8,7 +8,6 @@ import { Fraunces } from 'next/font/google';
 import { Sparkles, ArrowRight, Play, Star, ShieldCheck, HeartHandshake, BookOpen, ChevronRight } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import { useAuth } from '@/context/AuthContext';
-import { useCountUp } from '@/hooks/useCountUp';
 import { STORIES, STORY_IMG, PRODUCTS } from './homeData';
 import styles from './page.module.css';
 
@@ -84,16 +83,6 @@ function VideoFacade({ src, caption, onOpen, inline }: { src: string; caption: s
     );
 }
 
-function StatItem({ target, prefix, suffix, label }: { target: number; prefix?: string; suffix?: string; label: string }) {
-    const { ref, display } = useCountUp(target, { prefix, suffix });
-    return (
-        <div ref={ref} className={styles.statItem}>
-            <span className={styles.statValue}>{display}</span>
-            <span className={styles.statLabel}>{label}</span>
-        </div>
-    );
-}
-
 export default function Home() {
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
     const [playingCampaign, setPlayingCampaign] = useState<string | null>(null);
@@ -134,9 +123,6 @@ export default function Home() {
 
                             <motion.div className={styles.heroCtas} variants={fadeInUp}>
                                 <Link href="/donation" className={styles.heroGiveBtn}>Give Today</Link>
-                                <Link href="/register?intent=donate" className={styles.heroJoinBtn}>
-                                    Join Now <ArrowRight size={16} />
-                                </Link>
                             </motion.div>
 
                             <motion.div variants={fadeInUp} className={styles.heroTrust}>
@@ -157,18 +143,18 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ===== STAT STRIP ===== */}
+            {/* ===== JOIN NOW CTA ===== */}
             <div className="container">
                 <motion.div
-                    className={styles.statStrip}
+                    className={styles.joinNowStrip}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={fadeInUp}
                 >
-                    <StatItem target={10000} suffix="+" label="Members" />
-                    <StatItem target={126477} prefix="$" label="Donated" />
-                    <StatItem target={963} label="Missions" />
+                    <Link href="/register?intent=donate" className={styles.joinNowBigBtn}>
+                        Join Now <ArrowRight size={20} />
+                    </Link>
                 </motion.div>
             </div>
 
