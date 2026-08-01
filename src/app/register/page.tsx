@@ -179,8 +179,7 @@ function RegisterForm() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/login_backgrounf_img.svg" alt="" className={styles.bgImage} aria-hidden />
                 <div className={styles.bgOverlay} />
-                <div style={{ flex: 1 }} />
-                <div className={styles.cardCentered} style={{ margin: '0 16px 40px' }}>
+                <div className={styles.cardCentered} style={{ margin: '0 16px' }}>
                     <h1 className={styles.title}>Verify your email</h1>
                     <p className={styles.subtitle}>
                         We sent a 6-digit code to <strong style={{ color: '#ffffff' }}>{email}</strong>.
@@ -212,6 +211,9 @@ function RegisterForm() {
                         ← Back to registration
                     </button>
                 </div>
+                <p style={{ position: 'relative', zIndex: 2, textAlign: 'center', fontSize: '12px', color: 'rgba(255,255,255,0.35)', margin: '32px 16px 24px' }}>
+                    © {new Date().getFullYear()} Faith Fighters For America
+                </p>
             </div>
         );
     }
