@@ -170,7 +170,10 @@ function RegisterForm() {
 
     const handleGoogleSSO = () => {
         haptics.tap();
-        window.location.href = `/api/auth/google?redirect=${encodeURIComponent(window.location.origin + '/dashboard')}`;
+        // Donor signups go straight to Stripe checkout after auth, same as the regular
+        // email/password flow — the dashboard picks up ?startCheckout and kicks it off.
+        const dest = intent === 'help' ? '/dashboard' : '/dashboard?startCheckout=faith_fighter';
+        window.location.href = `/api/auth/google?redirect=${encodeURIComponent(window.location.origin + dest)}`;
     };
 
     if (step === 'otp') {
