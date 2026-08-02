@@ -97,9 +97,10 @@
     }
 }
 
-/* Full-screen background */
+/* Background, scoped to the .loginPage section — not fixed, so it scrolls
+   away normally instead of permanently covering the footer beneath it. */
 .bgImage {
-    position: fixed;
+    position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
@@ -110,7 +111,7 @@
 }
 
 .bgOverlay {
-    position: fixed;
+    position: absolute;
     inset: 0;
     background: linear-gradient(170deg,
             rgba(5, 4, 10, 0.10) 0%,
