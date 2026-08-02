@@ -1,12 +1,15 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import VideoPlayerModal from '@/components/shared/VideoPlayerModal';
 import { Play, Flame, ArrowRight, Trophy, Users, Zap, TrendingUp, Film, Clock, CheckCircle2, Calendar, ChevronRight, X } from 'lucide-react';
 import styles from './page.module.css';
 import { haptics } from '@/lib/haptics';
+import { fireConfetti, playFireworksSound } from '@/lib/celebrate';
+import Lottie from 'lottie-react';
+import fireworksAnimation from '../../../public/images/firecrackers gif png.json';
 
 interface DashStats {
     totalVotes: number;
@@ -469,6 +472,9 @@ function DashboardContent() {
 }
 
 function PurchaseCelebrationModal({ onClose, message }: { onClose: () => void; message: string }) {
+    const celebrationFiredRef = useRef(false);
+    const [showDelayedFireworks, setShowDelayedFireworks] = useState(false);
+
     return (
         <div 
             style={{
@@ -517,6 +523,30 @@ function PurchaseCelebrationModal({ onClose, message }: { onClose: () => void; m
                     background: 'linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 35%, rgba(0,0,0,0.05) 55%, transparent 65%)',
                     pointerEvents: 'none',
                 }} />
+
+                <canvas
+                    ref={(el) => {
+                        if (el && !celebrationFiredRef.current) {
+                            celebrationFiredRef.current = true;
+                            playFireworksSound();
+                            fireConfetti(el);
+                            setTimeout(() => setShowDelayedFireworks(true), 500);
+                        }
+                    }}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}
+                />
+                <Lottie
+                    animationData={fireworksAnimation}
+                    loop={false}
+                    style={{ position: 'absolute', top: '-15%', left: '-30%', width: '80%', height: '80%', pointerEvents: 'none', zIndex: 1 }}
+                />
+                {showDelayedFireworks && (
+                    <Lottie
+                        animationData={fireworksAnimation}
+                        loop={false}
+                        style={{ position: 'absolute', top: '-15%', left: '50%', width: '80%', height: '80%', pointerEvents: 'none', zIndex: 1 }}
+                    />
+                )}
 
                 <button
                     onClick={onClose}
