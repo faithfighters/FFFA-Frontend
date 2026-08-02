@@ -234,14 +234,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
-    padding: 28px 24px;
-    border-radius: 20px;
+    padding: 18px 24px;
+    border-radius: 16px;
     background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 50%, #E4531F 100%);
     color: #ffffff;
     font-weight: 800;
-    font-size: 26px;
+    font-size: 18px;
     text-decoration: none;
     box-shadow: 0 20px 50px rgba(228, 75, 52, 0.4);
     transition: transform 0.15s;
@@ -694,10 +694,9 @@
     }
 
     .joinNowBigBtn {
-        max-width: 720px;
-        padding: 36px 40px;
-        font-size: 34px;
-        border-radius: 24px;
+        padding: 22px 32px;
+        font-size: 22px;
+        border-radius: 16px;
     }
 
     .testimonialGrid {

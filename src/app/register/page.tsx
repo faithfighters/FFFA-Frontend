@@ -214,9 +214,6 @@ function RegisterForm() {
                         ← Back to registration
                     </button>
                 </div>
-                <p style={{ position: 'relative', zIndex: 2, textAlign: 'center', fontSize: '12px', color: 'rgba(255,255,255,0.35)', margin: '32px 16px 24px' }}>
-                    © {new Date().getFullYear()} Faith Fighters For America
-                </p>
             </div>
         );
     }
