@@ -65,18 +65,41 @@ export function fireConfetti(canvas: HTMLCanvasElement) {
 }
 
 /**
- * Plays a clip; if the browser blocks autoplay because this call didn't
- * originate from a direct user gesture (e.g. it fired from a redirect-back
- * page load rather than a click), retry once on the visitor's next tap —
- * still lands within the same celebration moment instead of staying silent.
+ * Fetches and buffers a clip as soon as this module loads (well before any
+ * celebration fires), so the later play() call starts sound immediately
+ * instead of waiting on a fresh network fetch at the exact celebration moment.
  */
-function playWithAutoplayFallback(src: string, volume: number) {
+function preload(src: string): HTMLAudioElement | null {
+    if (typeof Audio === 'undefined') return null; // SSR guard
+    const audio = new Audio(src);
+    audio.preload = 'auto';
+    audio.load();
+    return audio;
+}
+
+const cheerAudio = preload('/images/dennish18-crowd-cheering-143103.mp3');
+const fireworksAudio = preload('/images/dragon-studio-fireworks-07-419025.mp3');
+
+/**
+ * Plays a preloaded clip immediately; if the browser blocks autoplay because
+ * this call didn't originate from a direct user gesture (e.g. it fired from
+ * a redirect-back page load rather than a click), retry on the visitor's
+ * very next interaction of any kind — still lands within the same
+ * celebration moment instead of staying silent until an arbitrary later tap.
+ */
+function playPreloaded(audio: HTMLAudioElement | null, volume: number) {
+    if (!audio) return;
     try {
-        const audio = new Audio(src);
+        audio.currentTime = 0;
         audio.volume = volume;
         audio.play().catch(() => {
-            const retry = () => audio.play().catch(() => {});
-            document.addEventListener('pointerdown', retry, { once: true });
+            const events = ['pointerdown', 'keydown', 'touchstart', 'wheel'] as const;
+            const retry = () => {
+                audio.currentTime = 0;
+                audio.play().catch(() => {});
+                events.forEach(evt => document.removeEventListener(evt, retry));
+            };
+            events.forEach(evt => document.addEventListener(evt, retry, { once: true }));
         });
     } catch {
         // Audio may be unavailable in this environment — fail silently.
@@ -85,10 +108,10 @@ function playWithAutoplayFallback(src: string, volume: number) {
 
 /** Real recorded crowd-cheer clip — used for the per-vote success modal. */
 export function playCheerSound() {
-    playWithAutoplayFallback('/images/dennish18-crowd-cheering-143103.mp3', 0.55);
+    playPreloaded(cheerAudio, 0.55);
 }
 
 /** Firecracker-cracking clip — used for the 100%-goal-reached celebration and purchase-success modal. */
 export function playFireworksSound() {
-    playWithAutoplayFallback('/images/dragon-studio-fireworks-07-419025.mp3', 0.55);
+    playPreloaded(fireworksAudio, 0.55);
 }
