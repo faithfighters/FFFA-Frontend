@@ -501,7 +501,7 @@ function PurchaseCelebrationModal({ onClose, message }: { onClose: () => void; m
                     height: 'min(640px, 90vh)',
                     borderRadius: '24px',
                     overflow: 'hidden',
-                    backgroundImage: 'url(/images/vote_celebration.svg)',
+                    backgroundImage: 'url(/images/vote_celebration.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     display: 'flex',
