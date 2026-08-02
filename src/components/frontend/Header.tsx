@@ -90,7 +90,10 @@ export default function Header() {
                 </li>
               ))}
               <li className={styles.navItem}>
-                <Link href="/donation" className={styles.topDonateBtn}>
+                <Link
+                  href="/donation"
+                  className={`${styles.navLink} ${pathname === '/donation' ? styles.navLinkActive : ''}`}
+                >
                   Give Today
                 </Link>
               </li>
