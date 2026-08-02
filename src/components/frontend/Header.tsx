@@ -68,7 +68,7 @@ export default function Header() {
         <div className={styles.navWrapper}>
           <nav className={styles.nav}>
             <ul className={styles.navList}>
-              {navLinks.map((link) => (
+              {navLinks.slice(0, -1).map((link) => (
                 <li key={link.href} className={styles.navItem}>
                   {link.external ? (
                     <a
@@ -87,6 +87,21 @@ export default function Header() {
                       {link.label}
                     </Link>
                   )}
+                </li>
+              ))}
+              <li className={styles.navItem}>
+                <Link href="/donation" className={styles.topDonateBtn}>
+                  Give Today
+                </Link>
+              </li>
+              {navLinks.slice(-1).map((link) => (
+                <li key={link.href} className={styles.navItem}>
+                  <Link
+                    href={link.href}
+                    className={`${styles.navLink} ${pathname === link.href ? styles.navLinkActive : ''}`}
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
