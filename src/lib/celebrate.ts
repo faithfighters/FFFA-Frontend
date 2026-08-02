@@ -64,28 +64,31 @@ export function fireConfetti(canvas: HTMLCanvasElement) {
     return () => cancelAnimationFrame(frameId);
 }
 
-/** Real recorded crowd-cheer clip — used for the per-vote success modal. */
-export function playCheerSound() {
+/**
+ * Plays a clip; if the browser blocks autoplay because this call didn't
+ * originate from a direct user gesture (e.g. it fired from a redirect-back
+ * page load rather than a click), retry once on the visitor's next tap —
+ * still lands within the same celebration moment instead of staying silent.
+ */
+function playWithAutoplayFallback(src: string, volume: number) {
     try {
-        const audio = new Audio('/images/dennish18-crowd-cheering-143103.mp3');
-        audio.volume = 0.55;
+        const audio = new Audio(src);
+        audio.volume = volume;
         audio.play().catch(() => {
-            // Autoplay may be blocked until the user interacts with the page — fail silently.
+            const retry = () => audio.play().catch(() => {});
+            document.addEventListener('pointerdown', retry, { once: true });
         });
     } catch {
         // Audio may be unavailable in this environment — fail silently.
     }
 }
 
-/** Firecracker-cracking clip — used specifically for the 100%-goal-reached celebration. */
+/** Real recorded crowd-cheer clip — used for the per-vote success modal. */
+export function playCheerSound() {
+    playWithAutoplayFallback('/images/dennish18-crowd-cheering-143103.mp3', 0.55);
+}
+
+/** Firecracker-cracking clip — used for the 100%-goal-reached celebration and purchase-success modal. */
 export function playFireworksSound() {
-    try {
-        const audio = new Audio('/images/dragon-studio-fireworks-07-419025.mp3');
-        audio.volume = 0.55;
-        audio.play().catch(() => {
-            // Autoplay may be blocked until the user interacts with the page — fail silently.
-        });
-    } catch {
-        // Audio may be unavailable in this environment — fail silently.
-    }
+    playWithAutoplayFallback('/images/dragon-studio-fireworks-07-419025.mp3', 0.55);
 }
