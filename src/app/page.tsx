@@ -121,10 +121,6 @@ export default function Home() {
                                 and lifting up those in need through faith-driven action.
                             </motion.p>
 
-                            <motion.div className={styles.heroCtas} variants={fadeInUp}>
-                                <Link href="/donation" className={styles.heroGiveBtn}>Give Today</Link>
-                            </motion.div>
-
                             <motion.div variants={fadeInUp} className={styles.heroTrust}>
                                 <div className={styles.heroAvatarStack}>
                                     <span className={styles.heroAvatar}>K</span>
