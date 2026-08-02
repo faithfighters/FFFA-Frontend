@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import styles from './Header.module.css';
 import { haptics } from '@/lib/haptics';
 import {
-  Home as HomeIcon, Shield, RectangleHorizontal, BarChart3, ShoppingBag, User, Heart, Mail, X,
+  Home as HomeIcon, Shield, RectangleHorizontal, BarChart3, ShoppingBag, User, Heart, Mail, X, Gift,
 } from 'lucide-react';
 import { FaFacebookF, FaTiktok, FaYoutube } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -144,7 +144,7 @@ export default function Header() {
         </div>
 
         <ul className={styles.mobileNavList}>
-          {navLinks.map((link) => (
+          {navLinks.slice(0, -1).map((link) => (
             <li key={link.href} className={styles.mobileNavItem}>
               {link.external ? (
                 <a
@@ -169,6 +169,28 @@ export default function Header() {
               )}
             </li>
           ))}
+          <li className={styles.mobileNavItem}>
+            <Link
+              href="/donation"
+              className={`${styles.mobileNavLink} ${pathname === '/donation' ? styles.mobileNavLinkActive : ''}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <span className={styles.mobileNavIcon}><Gift size={20} /></span>
+              Give Today
+            </Link>
+          </li>
+          {navLinks.slice(-1).map((link) => (
+            <li key={link.href} className={styles.mobileNavItem}>
+              <Link
+                href={link.href}
+                className={`${styles.mobileNavLink} ${pathname === link.href ? styles.mobileNavLinkActive : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className={styles.mobileNavIcon}>{link.icon}</span>
+                {link.label}
+              </Link>
+            </li>
+          ))}
           {user && (
             <li className={styles.mobileNavItem}>
               <Link
@@ -183,16 +205,13 @@ export default function Header() {
           )}
         </ul>
 
-        <div className={styles.mobileCtas}>
-          <Link href="/donation" className={styles.mobileDonateBtn} onClick={() => setIsMenuOpen(false)}>
-            Donate Now
-          </Link>
-          {!user && (
+        {!user && (
+          <div className={styles.mobileCtas}>
             <Link href="/login" className={styles.mobileLoginBtn} onClick={() => setIsMenuOpen(false)}>
               Login / Join
             </Link>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className={styles.mobileSocials}>
           {socialLinks.map((social) => (
