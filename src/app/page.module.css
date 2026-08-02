@@ -104,32 +104,6 @@
     margin: 0 0 20px;
 }
 
-.heroCtas {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 18px;
-}
-
-.heroGiveBtn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 11px 20px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 50%, #E4531F 100%);
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 13px;
-    text-decoration: none;
-    box-shadow: 0 8px 20px rgba(228, 75, 52, 0.3);
-    transition: transform 0.15s;
-}
-
-.heroGiveBtn:hover {
-    transform: translateY(-2px);
-}
-
 .heroTrust {
     display: flex;
     align-items: center;
