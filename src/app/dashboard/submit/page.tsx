@@ -105,6 +105,10 @@ export default function DashboardSubmitPage() {
         if (!beneficiaryName.trim()) { haptics.error(); setError('Please enter the name of the person or family in need.'); return; }
         if (!targetAmount || Number(targetAmount) <= 0) { haptics.error(); setError('Please enter a target funding amount.'); return; }
         if (!urgencyReason.trim()) { haptics.error(); setError('Please explain why this request is urgent.'); return; }
+        if (!billType) { haptics.error(); setError('Please select a bill type.'); return; }
+        if (!institutionName.trim()) { haptics.error(); setError('Please enter the institution/company name.'); return; }
+        if (!billAddress.trim()) { haptics.error(); setError('Please enter the billing address.'); return; }
+        if (!billPhone.trim()) { haptics.error(); setError('Please enter the billing phone number.'); return; }
 
         const allowedTypes = ['video/mp4', 'video/quicktime', 'video/webm', 'video/x-msvideo'];
         if (!allowedTypes.includes(file.type)) { setError('Please upload an MP4, MOV, WebM, or AVI file.'); return; }
