@@ -1,11 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Newsletter from '@/components/frontend/Newsletter';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
+
+const DESKTOP_HERO_IMAGES = [
+    '/images/desktop1.png',
+    '/images/desktop2.png',
+    '/images/desktop3.png',
+];
+
+const MOBILE_HERO_IMAGES = [
+    '/images/hands_bg_team.svg',
+    '/images/america_hands_join.png',
+    '/images/team_img.svg',
+];
 
 const VIDEO_BASE = 'https://faithfightersamerica.com/';
 
@@ -19,10 +31,18 @@ const CAMPAIGNS = [
 ];
 
 export default function CampaignsContent() {
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
     const [playingInline, setPlayingInline] = useState<string | null>(null);
     const { user } = useAuth();
     const missionHref = user ? '/dashboard/campaigns' : '/login';
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
 
     const handleVideoClick = (title: string, file: string) => {
         const src = `${VIDEO_BASE}${file}`;
@@ -37,15 +57,38 @@ export default function CampaignsContent() {
         <>
             {/* ===== HERO ===== */}
             <section className={styles.hero}>
-                <div className={styles.heroDots} />
-                <div className="container">
-                    <div className={styles.heroInner}>
-                        <span className={styles.eyebrow}>Campaigns</span>
-                        <h1 className={styles.heroTitle}>Fund a Mission</h1>
-                        <p className={styles.heroLead}>
-                            Choose a cause close to your heart. Track its progress. See exactly where
-                            your giving goes.
-                        </p>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+                    {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                    {MOBILE_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Campaigns</span>
+                            <h1 className={styles.heroTitle}>Fund a Mission</h1>
+                            <p className={styles.heroLead}>
+                                Choose a cause close to your heart. Track its progress. See exactly where
+                                your giving goes.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
