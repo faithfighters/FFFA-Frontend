@@ -10,6 +10,18 @@ import styles from './page.module.css';
 import { haptics } from '@/lib/haptics';
 import AuthTabs from '@/components/shared/AuthTabs';
 
+const DESKTOP_HERO_IMAGES = [
+    '/images/desktop1.png',
+    '/images/desktop2.png',
+    '/images/desktop3.png',
+];
+
+const MOBILE_HERO_IMAGES = [
+    '/images/hands_bg_team.svg',
+    '/images/america_hands_join.png',
+    '/images/team_img.svg',
+];
+
 const fraunces = Fraunces({
     subsets: ['latin'],
     weight: ['600', '700', '800'],
@@ -19,6 +31,7 @@ const fraunces = Fraunces({
 });
 
 export default function LoginPage() {
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -26,6 +39,13 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const { login, user, isLoading: authLoading } = useAuth();
     const router = useRouter();
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
 
     useEffect(() => {
         if (!authLoading && user) router.replace('/dashboard');
@@ -55,14 +75,37 @@ export default function LoginPage() {
     return (
         <div className={`${fraunces.variable} ${styles.loginPage}`}>
             <section className={styles.hero}>
-                <div className={styles.heroDots} />
-                <div className="container">
-                    <div className={styles.heroInner}>
-                        <span className={styles.eyebrow}>Welcome Back</span>
-                        <h1 className={styles.heroTitle}>One Spirit. One Mission.</h1>
-                        <p className={styles.heroLead}>
-                            Sign in to track your giving, follow your missions, and stand with 10,000+ Americans.
-                        </p>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+                    {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                    {MOBILE_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Welcome Back</span>
+                            <h1 className={styles.heroTitle}>One Spirit. One Mission.</h1>
+                            <p className={styles.heroLead}>
+                                Sign in to track your giving, follow your missions, and stand with 10,000+ Americans.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>

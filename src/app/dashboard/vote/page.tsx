@@ -74,7 +74,7 @@ export default function DashboardVotePage() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body: JSON.stringify({ plan: user?.plan || 'faith_fighter' }),
+                body: JSON.stringify({ plan: 'faith_fighter' }),
             });
             const data = await res.json();
             if (res.ok && data.url) window.location.href = data.url;
@@ -259,7 +259,7 @@ export default function DashboardVotePage() {
 
                         {maxVotes === 0 && (
                             <div style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(96,165,250,0.35)', borderRadius: '12px', padding: '16px', marginBottom: '24px', color: '#60a5fa', textAlign: 'center' }}>
-                                You need an active subscription to vote. <a href="/join" style={{ fontWeight: 700, color: '#f87171' }}>Get your membership →</a>
+                                You need an active subscription to vote. <a href="/register?intent=donate" style={{ fontWeight: 700, color: '#f87171' }}>Get your membership →</a>
                             </div>
                         )}
 

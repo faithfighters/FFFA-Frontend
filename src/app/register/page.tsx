@@ -13,6 +13,18 @@ import { haptics } from '@/lib/haptics';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://stage.faithfightersforamerica.com');
 
+const DESKTOP_HERO_IMAGES = [
+    '/images/desktop1.png',
+    '/images/desktop2.png',
+    '/images/desktop3.png',
+];
+
+const MOBILE_HERO_IMAGES = [
+    '/images/hands_bg_team.svg',
+    '/images/america_hands_join.png',
+    '/images/team_img.svg',
+];
+
 const fraunces = Fraunces({
     subsets: ['latin'],
     weight: ['600', '700', '800'],
@@ -22,6 +34,7 @@ const fraunces = Fraunces({
 });
 
 function RegisterForm() {
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -61,6 +74,13 @@ function RegisterForm() {
         const interval = setInterval(() => setTimer(prev => prev - 1), 1000);
         return () => clearInterval(interval);
     }, [step, timer]);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
 
     // Password validation
     const hasMinLength = password.length >= 8;
@@ -222,14 +242,37 @@ function RegisterForm() {
         return (
             <div className={`${fraunces.variable} ${styles.helpPage}`}>
                 <section className={styles.hero}>
-                    <div className={styles.heroDots} />
-                    <div className="container">
-                        <div className={styles.heroInner}>
-                            <span className={styles.eyebrow}>Need Help</span>
-                            <h1 className={styles.heroTitle}>We&apos;re Here for You</h1>
-                            <p className={styles.heroLead}>
-                                If you or someone you know is in need, reach out. No situation is too small for compassion.
-                            </p>
+                    <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+                        {DESKTOP_HERO_IMAGES.map((src, index) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                key={src}
+                                src={src}
+                                alt=""
+                                className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                            />
+                        ))}
+                    </div>
+                    <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                        {MOBILE_HERO_IMAGES.map((src, index) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                key={src}
+                                src={src}
+                                alt=""
+                                className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                            />
+                        ))}
+                    </div>
+                    <div style={{ position: 'relative', zIndex: 3 }}>
+                        <div className="container">
+                            <div className={styles.heroInner}>
+                                <span className={styles.eyebrow}>Need Help</span>
+                                <h1 className={styles.heroTitle}>We&apos;re Here for You</h1>
+                                <p className={styles.heroLead}>
+                                    If you or someone you know is in need, reach out. No situation is too small for compassion.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -415,16 +458,39 @@ function RegisterForm() {
     return (
         <div className={`${fraunces.variable} ${styles.donorPage}`}>
             <section className={styles.hero}>
-                <div className={styles.heroDots} />
-                <div className="container">
-                    <div className={styles.heroInner}>
-                        <span className={styles.eyebrow}>Join the Movement</span>
-                        <h1 className={styles.heroTitle}>
-                            One Spirit. One Mission.
-                        </h1>
-                        <p className={styles.heroLead}>
-                            Create your account to track your giving, join missions, and stand with 10,000+ Americans.
-                        </p>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+                    {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                    {MOBILE_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Join the Movement</span>
+                            <h1 className={styles.heroTitle}>
+                                One Spirit. One Mission.
+                            </h1>
+                            <p className={styles.heroLead}>
+                                Create your account to track your giving, join missions, and stand with 10,000+ Americans.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>

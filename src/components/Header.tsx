@@ -10,7 +10,6 @@ import styles from './Header.module.css';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Join The Movement', href: '/join' },
   { label: 'Media', href: '/media' },
   { label: 'Store', href: '/store' },
   { label: 'Volunteer', href: '/volunteer' },
