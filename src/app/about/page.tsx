@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { HeartHandshake } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
@@ -168,22 +169,29 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* ===== QUOTE + CTA ===== */}
+            {/* ===== READY TO MAKE AN IMPACT ===== */}
             <section className={`section ${styles.quoteSection}`}>
                 <div className="container">
-                    <div className={styles.quoteCard}>
-                        <div className={styles.quoteMark}>&ldquo;</div>
-                        <p className={styles.quoteText}>
-                            We believe spiritual conviction is both a personal practice and a communal
-                            foundation — the bedrock of a stronger America.
-                        </p>
-                        <div className={styles.quoteWho}>
-                            <span className={styles.quoteAvatar}>FF</span>
-                            <div>
-                                <b>The FFFA Team</b>
-                                <span>Sarasota, Florida</span>
-                            </div>
+                    <div className={styles.impactCard}>
+                        <div className={styles.impactIconRow}>
+                            <span className={styles.impactLine} />
+                            <HeartHandshake size={30} className={styles.impactIcon} />
+                            <span className={styles.impactLine} />
                         </div>
+                        <h3 className={styles.impactTitle}>
+                            Ready to Make an <em>Impact?</em>
+                        </h3>
+                        <p className={styles.impactText}>
+                            Faith Fighters for America empowers everyday people to create
+                            extraordinary change through kindness, service, and transparent giving.
+                        </p>
+                        <span className={styles.impactDivider} />
+                        <p className={styles.impactText}>
+                            Together, we connect people who want to help with those who need it most,
+                            building <em>stronger communities</em> and <em>changing lives</em>&mdash;one act of kindness at a time.
+                        </p>
+                        <span className={styles.impactDivider} />
+                        <p className={styles.impactTagline}>One Nation. One Spirit. One Mission.</p>
                     </div>
                     <div className={styles.ctaRow}>
                         <Link href="/register?intent=donate" className="btn btn--primary">

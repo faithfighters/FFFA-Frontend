@@ -16,15 +16,6 @@
     background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.5;
-    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
-    pointer-events: none;
-}
-
 .heroDots {
     position: absolute;
     inset: 0;
@@ -32,6 +23,16 @@
     background-size: 24px 24px;
     background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
     pointer-events: none;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .heroInner {

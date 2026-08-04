@@ -19,28 +19,6 @@
     background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
 }
 
-.valuesSection {
-    padding-top: 48px !important;
-}
-
-.storySection {
-    padding-top: 8px !important;
-}
-
-.quoteSection {
-    padding-top: 8px !important;
-    padding-bottom: 64px !important;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.5;
-    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
-    pointer-events: none;
-}
-
 .heroDots {
     position: absolute;
     inset: 0;
@@ -54,6 +32,29 @@
     position: relative;
     z-index: 2;
     max-width: 780px;
+}
+
+.valuesSection {
+    padding-top: 48px !important;
+}
+
+.storySection {
+    padding-top: 8px !important;
+}
+
+.quoteSection {
+    padding-top: 96px !important;
+    padding-bottom: 64px !important;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .eyebrow {
@@ -302,64 +303,79 @@
     padding-top: 6px;
 }
 
-.quoteCard {
+.impactCard {
     position: relative;
-    background: linear-gradient(160deg, #16203c 0%, #0e1526 100%);
+    text-align: center;
+    background: radial-gradient(circle at 15% 10%, rgba(224, 169, 60, 0.08), transparent 55%),
+        linear-gradient(160deg, #16203c 0%, #0e1526 100%);
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 22px;
-    padding: 44px 40px;
-    max-width: 820px;
+    padding: 48px 40px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.quoteMark {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-size: 56px;
-    line-height: 1;
-    color: #E0A93C;
-    opacity: 0.6;
-    margin-bottom: 4px;
-}
-
-.quoteText {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-style: italic;
-    font-size: 22px;
-    line-height: 1.5;
-    color: #fff;
-    margin: 0;
-}
-
-.quoteWho {
+.impactIconRow {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 24px;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 20px;
 }
 
-.quoteAvatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(135deg, #E4531F, #C93A25);
-    color: #fff;
-    font-weight: 700;
-    font-size: 13px;
+.impactLine {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #E0A93C, transparent);
+}
+
+.impactIcon {
+    color: #E0A93C;
     flex-shrink: 0;
 }
 
-.quoteWho b {
-    display: block;
+.impactTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.2;
     color: #fff;
-    font-size: 14.5px;
+    margin: 0 0 20px;
 }
 
-.quoteWho span {
+.impactTitle em {
+    font-style: normal;
+    color: #E0A93C;
+}
+
+.impactText {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: #C7D0E2;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.impactText em {
+    font-style: normal;
+    color: #E0A93C;
+}
+
+.impactDivider {
     display: block;
-    color: #8A93A8;
-    font-size: 13px;
+    width: 60px;
+    height: 1px;
+    background: rgba(224, 169, 60, 0.4);
+    margin: 22px auto;
+}
+
+.impactTagline {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E0A93C;
+    margin: 0;
 }
 
 .ctaRow {
@@ -387,8 +403,13 @@
         font-size: 26px;
     }
 
-    .quoteText {
-        font-size: 19px;
+
+    .impactTitle {
+        font-size: 24px;
+    }
+
+    .impactText {
+        font-size: 14.5px;
     }
 
     .ctaRow {
@@ -402,7 +423,16 @@
         gap: 12px;
     }
 
-    .quoteCard {
+    .heroImages {
+        height: 240px;
+        margin-top: 24px;
+    }
+
+    .impactCard {
         padding: 32px 24px;
+    }
+
+    .impactLine {
+        width: 32px;
     }
 }

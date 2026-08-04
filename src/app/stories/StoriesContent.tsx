@@ -141,13 +141,81 @@ export default function StoriesContent() {
             {/* ===== SHARE YOUR STORY ===== */}
             <section className={`section ${styles.shareSection}`}>
                 <div className="container">
-                    <div className={styles.noteBox}>
-                        <span className={styles.noteIcon}>ⓘ</span>
-                        <span>Have a story to share? Submissions from members and beneficiaries are featured here every week.</span>
+                    <div className={styles.storyCard}>
+                        <div className={styles.cardIconBox}>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </div>
+
+                        <div className={styles.cardContent}>
+                            <h2 className={styles.cardTitle}>
+                                Your story can <span className={styles.highlight}>inspire</span> someone today.
+                            </h2>
+                            <p className={styles.cardDescription}>
+                                Whether you've received help or want to share how giving back has impacted your life — your story matters.
+                            </p>
+                            <Link href="/register?intent=help" className={styles.shareBtn}>
+                                Share your story
+                            </Link>
+                        </div>
                     </div>
-                    <Link href="/register?intent=help" className={styles.shareBtn}>
-                        Share your story
-                    </Link>
+
+                    <div className={styles.benefitsRow}>
+                        <div className={styles.benefitItem}>
+                            <div className={styles.benefitIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <span className={styles.benefitLabel}>Inspire others</span>
+                        </div>
+
+                        <span className={styles.benefitDivider} />
+
+                        <div className={styles.benefitItem}>
+                            <div className={styles.benefitIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </div>
+                            <span className={styles.benefitLabel}>Encourage hope</span>
+                        </div>
+
+                        <span className={styles.benefitDivider} />
+
+                        <div className={styles.benefitItem}>
+                            <div className={styles.benefitIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <span className={styles.benefitLabel}>Build community</span>
+                        </div>
+
+                        <span className={styles.benefitDivider} />
+
+                        <div className={styles.benefitItem}>
+                            <div className={styles.benefitIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 2v10l7 7"></path>
+                                </svg>
+                            </div>
+                            <span className={styles.benefitLabel}>Create change</span>
+                        </div>
+                    </div>
+
+                    <div className={styles.noteBox}>
+                        <span className={styles.noteIcon}>✓</span>
+                        <span>Every submission is reviewed before being featured.</span>
+                    </div>
                 </div>
             </section>
 
