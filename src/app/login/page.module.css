@@ -14,7 +14,59 @@
     position: relative;
     overflow: hidden;
     padding: calc(var(--header-height) + 56px) 0 48px;
-    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+    background: #020B18;
+    display: flex;
+    align-items: center;
+    min-height: 220px;
+}
+
+/* Desktop shows images on right side, mobile shows full-width */
+.heroBgDesktopOnly {
+    display: none;
+}
+
+.heroBgMobileOnly {
+    display: block;
+}
+
+@media (min-width: 521px) {
+    .heroBgDesktopOnly {
+        display: block;
+    }
+    .heroBgMobileOnly {
+        display: none;
+    }
+}
+
+.heroBgContainer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.heroBgImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+@media (min-width: 521px) {
+    .heroBgImage {
+        object-fit: contain;
+        object-position: right center;
+    }
+}
+
+.heroBgImage.heroBgActive {
+    opacity: 1;
 }
 
 .heroDots {

@@ -19,27 +19,53 @@
     background: #020B18;
     display: flex;
     align-items: center;
-    min-height: 380px;
+    min-height: 220px;
+}
+
+/* Desktop shows images on right side, mobile shows full-width */
+.heroBgDesktopOnly {
+    display: none;
+}
+
+.heroBgMobileOnly {
+    display: block;
+}
+
+@media (min-width: 521px) {
+    .heroBgDesktopOnly {
+        display: block;
+    }
+    .heroBgMobileOnly {
+        display: none;
+    }
 }
 
 .heroBgContainer {
     position: absolute;
-    right: 0;
-    top: 0;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
     height: 100%;
-    width: 50%;
     overflow: hidden;
 }
 
+
 .heroBgImage {
     position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
+    inset: 0;
     width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     opacity: 0;
-    transition: opacity 0.8s ease-in-out;
+    transition: opacity 1.2s ease-in-out;
+}
+
+@media (min-width: 521px) {
+    .heroBgImage {
+        object-fit: contain;
+        object-position: right center;
+    }
 }
 
 .heroBgImage.heroBgActive {

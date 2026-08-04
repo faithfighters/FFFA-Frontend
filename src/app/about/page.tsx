@@ -13,6 +13,11 @@ const DESKTOP_HERO_IMAGES = [
     '/images/desktop3.png',
 ];
 
+const MOBILE_HERO_IMAGES = [
+    '/images/hands_bg_team.svg',
+    '/images/america_hands_join.png',
+    '/images/team_img.svg',
+];
 
 const valueCards = [
     {
@@ -84,8 +89,19 @@ export default function AboutPage() {
         <>
             {/* ===== HERO ===== */}
             <section className={styles.hero}>
-                <div className={styles.heroBgContainer}>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
                     {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                    {MOBILE_HERO_IMAGES.map((src, index) => (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                             key={src}
