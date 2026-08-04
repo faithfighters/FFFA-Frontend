@@ -24,19 +24,22 @@
 
 .heroBgContainer {
     position: absolute;
-    inset: 0;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 50%;
     overflow: hidden;
 }
 
 .heroBgImage {
     position: absolute;
-    inset: 0;
-    width: 100%;
+    top: 0;
+    right: 0;
     height: 100%;
+    width: 100%;
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
-    filter: blur(4px) brightness(0.4);
 }
 
 .heroBgImage.heroBgActive {
