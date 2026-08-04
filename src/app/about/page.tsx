@@ -1,15 +1,18 @@
-import type { Metadata } from 'next';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { HeartHandshake } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
-export const metadata: Metadata = {
-    title: 'About Us – Faith Fighters For America',
-    description:
-        'Learn about our mission, vision, story, and the leadership team driving Faith Fighters For America forward.',
-};
+const DESKTOP_HERO_IMAGES = [
+    '/images/desktop1.png',
+    '/images/desktop2.png',
+    '/images/desktop3.png',
+];
+
 
 const valueCards = [
     {
@@ -68,19 +71,40 @@ const leadershipTeam = [
 ];
 
 export default function AboutPage() {
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <>
             {/* ===== HERO ===== */}
             <section className={styles.hero}>
-                <div className={styles.heroDots} />
-                <div className="container">
-                    <div className={styles.heroInner}>
-                        <span className={styles.eyebrow}>Who We Are</span>
-                        <h1 className={styles.heroTitle}>About Faith Fighters</h1>
-                        <p className={styles.heroLead}>
-                            A movement built on the conviction that a nation grows strong when its
-                            people stand united in faith and service.
-                        </p>
+                <div className={styles.heroBgContainer}>
+                    {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Who We Are</span>
+                            <h1 className={styles.heroTitle}>About Faith Fighters</h1>
+                            <p className={styles.heroLead}>
+                                A movement built on the conviction that a nation grows strong when its
+                                people stand united in faith and service.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
