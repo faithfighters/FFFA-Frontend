@@ -19,7 +19,7 @@
     background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
     display: flex;
     align-items: center;
-    min-height: 600px;
+    min-height: 380px;
 }
 
 .heroBgContainer {
