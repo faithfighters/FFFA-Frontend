@@ -1,11 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
+const DESKTOP_HERO_IMAGES = [
+    '/images/desktop1.png',
+    '/images/desktop2.png',
+    '/images/desktop3.png',
+];
+
+const MOBILE_HERO_IMAGES = [
+    '/images/hands_bg_team.svg',
+    '/images/america_hands_join.png',
+    '/images/team_img.svg',
+];
+
 export default function ContactContent() {
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -15,6 +28,13 @@ export default function ContactContent() {
     const [submitted, setSubmitted] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -48,15 +68,38 @@ export default function ContactContent() {
         <>
             {/* ===== HERO ===== */}
             <section className={styles.hero}>
-                <div className={styles.heroDots} />
-                <div className="container">
-                    <div className={styles.heroInner}>
-                        <span className={styles.eyebrow}>Get in Touch</span>
-                        <h1 className={styles.heroTitle}>Contact Us</h1>
-                        <p className={styles.heroLead}>
-                            Questions, ideas, or want to get involved? Reach out and join us in
-                            strengthening faith and unity across America.
-                        </p>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+                    {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                    {MOBILE_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Get in Touch</span>
+                            <h1 className={styles.heroTitle}>Contact Us</h1>
+                            <p className={styles.heroLead}>
+                                Questions, ideas, or want to get involved? Reach out and join us in
+                                strengthening faith and unity across America.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -12,17 +12,68 @@
 .hero {
     position: relative;
     overflow: hidden;
-    padding: calc(var(--header-height) + 56px) 0 64px;
-    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+    padding: calc(var(--header-height) + 56px) 0 48px !important;
+    background: #020B18;
+    display: flex;
+    align-items: center;
+    min-height: 220px;
 }
 
-.hero::before {
-    content: '';
+/* Desktop shows images on right side, mobile shows full-width */
+.heroBgDesktopOnly {
+    display: none;
+}
+
+.heroBgMobileOnly {
+    display: block;
+}
+
+@media (min-width: 521px) {
+    .heroBgDesktopOnly {
+        display: block;
+    }
+    .heroBgMobileOnly {
+        display: none;
+    }
+}
+
+.heroBgContainer {
     position: absolute;
     inset: 0;
-    opacity: 0.5;
-    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
-    pointer-events: none;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Desktop: images on right side */
+@media (min-width: 521px) {
+    .heroBgContainer {
+        right: 0;
+        width: 50%;
+    }
+}
+
+.heroBgImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+@media (min-width: 521px) {
+    .heroBgImage {
+        object-fit: contain;
+        object-position: right center;
+    }
+}
+
+.heroBgImage.heroBgActive {
+    opacity: 1;
 }
 
 .heroDots {
@@ -32,6 +83,16 @@
     background-size: 24px 24px;
     background-image: radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
     pointer-events: none;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background: radial-gradient(600px 340px at 85% 0, rgba(228, 90, 40, 0.38), transparent 60%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .heroInner {
@@ -271,45 +332,150 @@
 
 /* ── Share your story ── */
 .shareSection {
-    padding-top: 6px;
+    padding-top: 48px;
+    padding-bottom: 48px;
 }
 
-.noteBox {
+.storyCard {
     display: flex;
-    gap: 10px;
     align-items: flex-start;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px dashed rgba(255, 255, 255, 0.15);
-    border-radius: 14px;
-    padding: 16px;
-    font-size: 13.5px;
-    color: #8A93A8;
+    gap: 40px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 48px;
+    backdrop-filter: blur(10px);
 }
 
-.noteIcon {
+.cardIconBox {
     flex-shrink: 0;
-    color: #E0A93C;
-}
-
-.shareBtn {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    border: 1px solid rgba(228, 83, 31, 0.3);
+    background: rgba(228, 83, 31, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    margin-top: 18px;
-    padding: 16px;
-    border-radius: 14px;
-    background: #161B2A;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #E4531F;
+}
+
+.cardContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cardTitle {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.25;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.cardTitle .highlight {
+    color: #E4531F;
+}
+
+.cardDescription {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #C6D2EA;
+    margin: 0;
+    max-width: 500px;
+}
+
+.shareBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 42%, #E4531F 100%);
+    border: none;
     color: #fff;
     font-weight: 700;
     font-size: 15px;
     text-decoration: none;
-    transition: background 0.2s ease;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 24px rgba(228, 83, 31, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: fit-content;
 }
 
 .shareBtn:hover {
-    background: #1E2540;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(228, 83, 31, 0.4);
+}
+
+.benefitsRow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 32px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.benefitItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    flex: 1;
+    padding: 0 16px;
+}
+
+.benefitIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(228, 83, 31, 0.1);
+    color: #E4531F;
+    flex-shrink: 0;
+}
+
+.benefitLabel {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #C6D2EA;
+    white-space: nowrap;
+}
+
+.benefitDivider {
+    width: 1px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.noteBox {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #8A93A8;
+    margin-top: 16px;
+}
+
+.noteIcon {
+    flex-shrink: 0;
+    color: #28A56B;
+    font-weight: 700;
 }
 
 /* ── Video lightbox ── */
@@ -390,10 +556,71 @@
     .featuredVideo {
         aspect-ratio: 16 / 10;
     }
+
+    .storyCard {
+        padding: 36px;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .cardTitle {
+        font-size: 32px;
+    }
+
+    .cardIconBox {
+        width: 100px;
+        height: 100px;
+    }
+
+    .benefitsRow {
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 560px) {
     .reelGrid {
         grid-template-columns: 1fr;
+    }
+
+    .heroInner {
+        max-width: 100%;
+    }
+
+    .storyCard {
+        padding: 24px;
+        gap: 24px;
+    }
+
+    .cardIconBox {
+        width: 80px;
+        height: 80px;
+    }
+
+    .cardTitle {
+        font-size: 24px;
+    }
+
+    .cardDescription {
+        font-size: 14px;
+    }
+
+    .benefitsRow {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding-bottom: 16px;
+    }
+
+    .benefitItem {
+        padding: 0;
+        gap: 8px;
+    }
+
+    .benefitDivider {
+        display: none;
+    }
+
+    .shareBtn {
+        width: 100%;
     }
 }

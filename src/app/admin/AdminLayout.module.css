@@ -1,0 +1,173 @@
+/* ===== ADMIN LAYOUT ===== */
+.adminContainer {
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+    background: var(--color-gray-light);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: var(--color-dark);
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebarHeader {
+    padding: var(--space-xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.logoBadge {
+    background: var(--color-red);
+    color: white;
+    font-weight: 900;
+    font-size: var(--font-size-sm);
+    padding: 8px;
+    border-radius: var(--border-radius-sm);
+    letter-spacing: 1px;
+}
+
+.roleLabel {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-gray-300);
+    letter-spacing: 0.5px;
+}
+
+.sidebarNav {
+    flex: 1;
+    padding: var(--space-lg) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.navLink {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: 12px var(--space-xl);
+    color: var(--color-gray-300);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    border-left: 3px solid transparent;
+}
+
+.navLink:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-white);
+}
+
+.navLinkActive {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-white);
+    border-left-color: var(--color-red);
+}
+
+.navIcon {
+    font-size: 1.25rem;
+}
+
+.sidebarFooter {
+    padding: var(--space-lg) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logoutBtn {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+}
+
+.logoutBtn:hover {
+    color: var(--color-red);
+}
+
+/* Main Content */
+.mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.topbar {
+    height: 70px;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-2xl);
+}
+
+.pageTitle {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.adminProfile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-gray-700);
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contentWrapper {
+    padding: var(--space-2xl);
+    flex: 1;
+    overflow-y: auto;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 80px;
+    }
+
+    .sidebarHeader {
+        justify-content: center;
+    }
+
+    .roleLabel,
+    .navLink span:not(.navIcon) {
+        display: none;
+    }
+
+    .navLink {
+        justify-content: center;
+        padding: 12px 0;
+    }
+
+    .topbar {
+        padding: 0 var(--space-xl);
+    }
+
+    .contentWrapper {
+        padding: var(--space-xl);
+    }
+}

@@ -1,14 +1,23 @@
-import type { Metadata } from 'next';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { HeartHandshake } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
-export const metadata: Metadata = {
-    title: 'About Us – Faith Fighters For America',
-    description:
-        'Learn about our mission, vision, story, and the leadership team driving Faith Fighters For America forward.',
-};
+const DESKTOP_HERO_IMAGES = [
+    '/images/desktop1.png',
+    '/images/desktop2.png',
+    '/images/desktop3.png',
+];
+
+const MOBILE_HERO_IMAGES = [
+    '/images/hands_bg_team.svg',
+    '/images/america_hands_join.png',
+    '/images/team_img.svg',
+];
 
 const valueCards = [
     {
@@ -67,19 +76,51 @@ const leadershipTeam = [
 ];
 
 export default function AboutPage() {
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <>
             {/* ===== HERO ===== */}
             <section className={styles.hero}>
-                <div className={styles.heroDots} />
-                <div className="container">
-                    <div className={styles.heroInner}>
-                        <span className={styles.eyebrow}>Who We Are</span>
-                        <h1 className={styles.heroTitle}>About Faith Fighters</h1>
-                        <p className={styles.heroLead}>
-                            A movement built on the conviction that a nation grows strong when its
-                            people stand united in faith and service.
-                        </p>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+                    {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                    {MOBILE_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Who We Are</span>
+                            <h1 className={styles.heroTitle}>About Faith Fighters</h1>
+                            <p className={styles.heroLead}>
+                                A movement built on the conviction that a nation grows strong when its
+                                people stand united in faith and service.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -168,22 +209,29 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* ===== QUOTE + CTA ===== */}
+            {/* ===== READY TO MAKE AN IMPACT ===== */}
             <section className={`section ${styles.quoteSection}`}>
                 <div className="container">
-                    <div className={styles.quoteCard}>
-                        <div className={styles.quoteMark}>&ldquo;</div>
-                        <p className={styles.quoteText}>
-                            We believe spiritual conviction is both a personal practice and a communal
-                            foundation — the bedrock of a stronger America.
-                        </p>
-                        <div className={styles.quoteWho}>
-                            <span className={styles.quoteAvatar}>FF</span>
-                            <div>
-                                <b>The FFFA Team</b>
-                                <span>Sarasota, Florida</span>
-                            </div>
+                    <div className={styles.impactCard}>
+                        <div className={styles.impactIconRow}>
+                            <span className={styles.impactLine} />
+                            <HeartHandshake size={30} className={styles.impactIcon} />
+                            <span className={styles.impactLine} />
                         </div>
+                        <h3 className={styles.impactTitle}>
+                            Ready to Make an <em>Impact?</em>
+                        </h3>
+                        <p className={styles.impactText}>
+                            Faith Fighters for America empowers everyday people to create
+                            extraordinary change through kindness, service, and transparent giving.
+                        </p>
+                        <span className={styles.impactDivider} />
+                        <p className={styles.impactText}>
+                            Together, we connect people who want to help with those who need it most,
+                            building <em>stronger communities</em> and <em>changing lives</em>&mdash;one act of kindness at a time.
+                        </p>
+                        <span className={styles.impactDivider} />
+                        <p className={styles.impactTagline}>One Nation. One Spirit. One Mission.</p>
                     </div>
                     <div className={styles.ctaRow}>
                         <Link href="/register?intent=donate" className="btn btn--primary">
