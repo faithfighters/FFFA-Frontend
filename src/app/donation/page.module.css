@@ -49,8 +49,9 @@
 /* Desktop: images on right side */
 @media (min-width: 521px) {
     .heroBgContainer {
+        left: auto;
         right: 0;
-        width: 50%;
+        width: 100%;
     }
 }
 
