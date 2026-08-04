@@ -90,7 +90,7 @@ export default function ContactContent() {
                         />
                     ))}
                 </div>
-                <div style={{ position: 'relative', zIndex: 3 }}>
+                <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
                             <span className={styles.eyebrow}>Get in Touch</span>

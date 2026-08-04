@@ -97,7 +97,7 @@ export default function LoginPage() {
                         />
                     ))}
                 </div>
-                <div style={{ position: 'relative', zIndex: 3 }}>
+                <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
                             <span className={styles.eyebrow}>Welcome Back</span>
