@@ -6,6 +6,18 @@ import { X } from 'lucide-react';
 import styles from './page.module.css';
 import { haptics } from '@/lib/haptics';
 
+const DESKTOP_HERO_IMAGES = [
+  '/images/desktop1.png',
+  '/images/desktop2.png',
+  '/images/desktop3.png',
+];
+
+const MOBILE_HERO_IMAGES = [
+  '/images/hands_bg_team.svg',
+  '/images/america_hands_join.png',
+  '/images/team_img.svg',
+];
+
 const amountOptions = [
   { value: 25, label: '1 family meal' },
   { value: 50, label: 'Shelter kit' },
@@ -200,6 +212,7 @@ export default function DonationContent() {
   const [cause, setCause] = useState(causeOptions[0]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
 
   useEffect(() => {
     if (searchParams.get('status') === 'success') {
@@ -207,6 +220,13 @@ export default function DonationContent() {
       router.replace('/donation');
     }
   }, [searchParams, router]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleDonate = async () => {
     setErrorMessage('');
@@ -250,14 +270,37 @@ export default function DonationContent() {
     <>
       {/* ===== HERO ===== */}
       <section className={styles.hero}>
-        <div className={styles.heroDots} />
-        <div className="container">
-          <div className={styles.heroInner}>
-            <span className={styles.eyebrow}>Give Today</span>
-            <h1 className={styles.heroTitle}>Your gift, made visible</h1>
-            <p className={styles.heroLead}>
-              100% transparent. Every dollar tracked to a mission you can follow from start to finish.
-            </p>
+        <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+          {DESKTOP_HERO_IMAGES.map((src, index) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={src}
+              src={src}
+              alt=""
+              className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+            />
+          ))}
+        </div>
+        <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+          {MOBILE_HERO_IMAGES.map((src, index) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={src}
+              src={src}
+              alt=""
+              className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+            />
+          ))}
+        </div>
+        <div style={{ position: 'relative', zIndex: 3 }}>
+          <div className="container">
+            <div className={styles.heroInner}>
+              <span className={styles.eyebrow}>Give Today</span>
+              <h1 className={styles.heroTitle}>Your gift, made visible</h1>
+              <p className={styles.heroLead}>
+                100% transparent. Every dollar tracked to a mission you can follow from start to finish.
+              </p>
+            </div>
           </div>
         </div>
       </section>

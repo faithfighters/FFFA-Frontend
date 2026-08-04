@@ -1,25 +1,47 @@
-import type { Metadata } from 'next';
-import PageBanner from '@/components/frontend/PageBanner';
-import JoinContent from './JoinContent';
+'use client';
 
-export const metadata: Metadata = {
-    title: 'Join The Movement – Faith Fighters For America',
-    description:
-        'Choose your Faith Fighters membership plan. 80% of every dollar goes directly to the causes your community votes for.',
-};
+import { useEffect } from 'react';
+import { useAuth } from '@/context/AuthContext';
 
 export default function JoinPage() {
+    const { user } = useAuth();
+
+    useEffect(() => {
+        const initiateCheckout = async () => {
+            try {
+                const res = await fetch('/api/stripe/checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ plan: 'faith_fighter' }),
+                });
+                const data = await res.json();
+                if (res.ok && data.url) {
+                    window.location.href = data.url;
+                }
+            } catch {
+                window.location.href = '/';
+            }
+        };
+
+        if (user) {
+            initiateCheckout();
+        } else {
+            window.location.href = '/register';
+        }
+    }, [user]);
+
     return (
-        <>
-            <PageBanner
-                title="Join The Movement"
-                backgroundImage="/images/hero-flag.png"
-                breadcrumbs={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Join The Movement', href: '/join' },
-                ]}
-            />
-            <JoinContent />
-        </>
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '100vh',
+            background: '#020B18',
+            color: '#fff',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+        }}>
+            <p>Redirecting to checkout...</p>
+        </div>
     );
 }

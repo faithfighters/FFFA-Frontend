@@ -1,11 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import {
     CalendarDays, Globe, Heart, Camera, Truck, DollarSign, ChevronRight,
 } from 'lucide-react';
+
+const DESKTOP_HERO_IMAGES = [
+    '/images/desktop1.png',
+    '/images/desktop2.png',
+    '/images/desktop3.png',
+];
+
+const MOBILE_HERO_IMAGES = [
+    '/images/hands_bg_team.svg',
+    '/images/america_hands_join.png',
+    '/images/team_img.svg',
+];
 
 const roles = [
     { title: 'Event Crew', desc: 'Setup, greeting guests, and event support.', icon: <CalendarDays size={20} />, img: '/images/serve-event.jpg', accent: 'red' },
@@ -19,6 +31,7 @@ const roles = [
 const availabilityOptions = ['Weekdays', 'Weekends', 'Flexible'];
 
 export default function VolunteerContent() {
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [form, setForm] = useState({
         fullName: '',
         email: '',
@@ -30,6 +43,13 @@ export default function VolunteerContent() {
     const [submitted, setSubmitted] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -68,15 +88,38 @@ export default function VolunteerContent() {
         <>
             {/* ===== HERO ===== */}
             <section className={styles.hero}>
-                <div className={styles.heroDots} />
-                <div className="container">
-                    <div className={styles.heroInner}>
-                        <span className={styles.eyebrow}>Volunteer</span>
-                        <h1 className={styles.heroTitle}>Serve Your Community</h1>
-                        <p className={styles.heroLead}>
-                            One hour a week or a full weekend — bring your time and talents and make a
-                            real difference.
-                        </p>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+                    {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                    {MOBILE_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Volunteer</span>
+                            <h1 className={styles.heroTitle}>Serve Your Community</h1>
+                            <p className={styles.heroLead}>
+                                One hour a week or a full weekend — bring your time and talents and make a
+                                real difference.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
