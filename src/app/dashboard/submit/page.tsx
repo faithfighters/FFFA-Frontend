@@ -365,7 +365,7 @@ export default function DashboardSubmitPage() {
 
                 {/* ── Section 4: Payment Destination ── */}
                 <div className={styles.formCard}>
-                    <h3>Payment Destination <span style={{ fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.4)' }}>(optional — bill pay details)</span></h3>
+                    <h3>Payment Destination <span style={{ fontWeight: 400, fontSize: '13px', color: '#F8C38F' }}>(required — bill pay details)</span></h3>
                     <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px', marginTop: '-8px', marginBottom: '16px' }}>
                         Tell us where to send the funds so we can pay the institution directly.
                     </p>
@@ -404,20 +404,22 @@ export default function DashboardSubmitPage() {
                                         {billType === 'utility' && 'Utility Company Name'}
                                         {billType === 'rent' && 'Landlord / Property Management'}
                                         {billType === 'other' && 'Institution / Payee Name'}
+                                        <span style={{ color: '#E7421B' }}> *</span>
                                     </label>
-                                    <input className={styles.formInput} type="text" value={institutionName} onChange={e => setInstitutionName(e.target.value)} placeholder="e.g. Memorial Hospital" />
+                                    <input className={styles.formInput} type="text" value={institutionName} onChange={e => setInstitutionName(e.target.value)} placeholder="e.g. Memorial Hospital" required />
                                 </div>
                                 <div className={styles.formGroup} style={{ marginBottom: 0 }}>
-                                    <label className={styles.formLabel}>Phone Number</label>
-                                    <input className={styles.formInput} type="tel" value={billPhone} onChange={e => setBillPhone(e.target.value)} placeholder="(555) 000-0000" />
+                                    <label className={styles.formLabel}>Phone Number<span style={{ color: '#E7421B' }}> *</span></label>
+                                    <input className={styles.formInput} type="tel" value={billPhone} onChange={e => setBillPhone(e.target.value)} placeholder="(555) 000-0000" required />
                                 </div>
                             </div>
                             <div className={styles.formGrid} style={{ marginBottom: 0 }}>
                                 <div className={styles.formGroup} style={{ marginBottom: 0 }}>
                                     <label className={styles.formLabel}>
                                         {billType === 'rent' ? 'Payment Portal / Mailing Address' : 'Address'}
+                                        <span style={{ color: '#E7421B' }}> *</span>
                                     </label>
-                                    <input className={styles.formInput} type="text" value={billAddress} onChange={e => setBillAddress(e.target.value)} placeholder="123 Main St, City, State 00000" />
+                                    <input className={styles.formInput} type="text" value={billAddress} onChange={e => setBillAddress(e.target.value)} placeholder="123 Main St, City, State 00000" required />
                                 </div>
                                 <div className={styles.formGroup} style={{ marginBottom: 0 }}>
                                     <label className={styles.formLabel}>
