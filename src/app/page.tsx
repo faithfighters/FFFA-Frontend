@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import { Fraunces } from 'next/font/google';
-import { Sparkles, ArrowRight, Play, Star, ShieldCheck, HeartHandshake, BookOpen, ChevronRight } from 'lucide-react';
+import { Sparkles, ArrowRight, Play, Star, ShieldCheck, HeartHandshake, BookOpen, ChevronRight, Users, Heart } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import { useAuth } from '@/context/AuthContext';
 import { STORIES, STORY_IMG, PRODUCTS } from './homeData';
@@ -122,13 +122,7 @@ export default function Home() {
                             </motion.p>
 
                             <motion.div variants={fadeInUp} className={styles.heroTrust}>
-                                <div className={styles.heroAvatarStack}>
-                                    <span className={styles.heroAvatar}>K</span>
-                                    <span className={styles.heroAvatar}>J</span>
-                                    <span className={styles.heroAvatar}>B</span>
-                                    <span className={`${styles.heroAvatar} ${styles.heroAvatarPlus}`}>+</span>
-                                </div>
-                                <span>Joined by <b>10,000+</b> members nationwide</span>
+                                <span>Join the Founding Members</span>
                             </motion.div>
                         </motion.div>
 
@@ -299,19 +293,41 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ===== SCRIPTURE VERSE ===== */}
-            <section className={styles.verse}>
+            {/* ===== OUR PURPOSE ===== */}
+            <section className={styles.purpose}>
                 <div className="container">
                     <motion.div
+                        className={styles.purposeInner}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeInUp}
                     >
-                        <p className={styles.verseText}>
-                            &ldquo;Let us not grow weary in doing good, for in due season we will reap, if we do not give up.&rdquo;
+                        <span className={styles.purposeEyebrow}>Our Purpose</span>
+                        <h2 className={styles.purposeTitle}>
+                            Making <em>Kindness</em> Visible.
+                        </h2>
+                        <p className={styles.purposeLead}>
+                            We unite communities through transparent giving and meaningful action,
+                            connecting people who want to help with those who need it most.
                         </p>
-                        <span className={styles.verseRef}>Galatians 6:9</span>
+                        <div className={styles.purposeStats}>
+                            <div className={styles.purposeStat}>
+                                <Users size={26} />
+                                <span>Stronger Communities</span>
+                            </div>
+                            <div className={styles.purposeStat}>
+                                <Heart size={26} />
+                                <span>Real Compassion</span>
+                            </div>
+                            <div className={styles.purposeStat}>
+                                <HeartHandshake size={26} />
+                                <span>Lasting Impact</span>
+                            </div>
+                        </div>
+                        <div className={styles.purposeTagline}>
+                            One Nation. One Spirit. One Mission.
+                        </div>
                     </motion.div>
                 </div>
             </section>
