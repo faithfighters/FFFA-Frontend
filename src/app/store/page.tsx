@@ -1,12 +1,21 @@
-import type { Metadata } from 'next';
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import Newsletter from '@/components/frontend/Newsletter';
 
-export const metadata: Metadata = {
-    title: 'Store – Faith Fighters For America',
-    description: 'Shop with purpose. Every purchase from our store helps fund faith-driven initiatives that uplift communities and strengthen America\'s spirit.',
-};
+const DESKTOP_HERO_IMAGES = [
+    '/images/desktop1.png',
+    '/images/desktop2.png',
+    '/images/desktop3.png',
+];
+
+const MOBILE_HERO_IMAGES = [
+    '/images/hands_bg_team.svg',
+    '/images/america_hands_join.png',
+    '/images/team_img.svg',
+];
 
 const SHOP = 'https://shop.faithfightersforamerica.com/';
 
@@ -18,19 +27,51 @@ const products = [
 ];
 
 export default function StorePage() {
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroImageIndex((prev) => (prev + 1) % DESKTOP_HERO_IMAGES.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <>
             {/* ===== HERO ===== */}
             <section className={styles.hero}>
-                <div className={styles.heroDots} />
-                <div className="container">
-                    <div className={styles.heroInner}>
-                        <span className={styles.eyebrow}>Official Store</span>
-                        <h1 className={styles.heroTitle}>Wear the Mission</h1>
-                        <p className={styles.heroLead}>
-                            Every purchase funds faith-driven initiatives that uplift communities and
-                            strengthen America&apos;s spirit.
-                        </p>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgDesktopOnly}`}>
+                    {DESKTOP_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div className={`${styles.heroBgContainer} ${styles.heroBgMobileOnly}`}>
+                    {MOBILE_HERO_IMAGES.map((src, index) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            className={`${styles.heroBgImage} ${index === currentHeroImageIndex ? styles.heroBgActive : ''}`}
+                        />
+                    ))}
+                </div>
+                <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div className="container">
+                        <div className={styles.heroInner}>
+                            <span className={styles.eyebrow}>Official Store</span>
+                            <h1 className={styles.heroTitle}>Wear the Mission</h1>
+                            <p className={styles.heroLead}>
+                                Every purchase funds faith-driven initiatives that uplift communities and
+                                strengthen America&apos;s spirit.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>

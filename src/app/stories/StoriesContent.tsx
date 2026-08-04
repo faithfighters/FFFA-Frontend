@@ -35,9 +35,9 @@ const STORIES = [
 export default function StoriesContent() {
     const { user } = useAuth();
     const router = useRouter();
+    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
     const [playingInline, setPlayingInline] = useState<string | null>(null);
-    const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
 
     useEffect(() => {
         const timer = setInterval(() => {
