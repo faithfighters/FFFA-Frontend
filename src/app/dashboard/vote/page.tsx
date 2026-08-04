@@ -74,7 +74,7 @@ export default function DashboardVotePage() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body: JSON.stringify({ plan: user?.plan || 'faith_fighter' }),
+                body: JSON.stringify({ plan: 'faith_fighter' }),
             });
             const data = await res.json();
             if (res.ok && data.url) window.location.href = data.url;

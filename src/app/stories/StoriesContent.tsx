@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import Newsletter from '@/components/frontend/Newsletter';
 import styles from './page.module.css';
 
@@ -19,6 +21,8 @@ const STORIES = [
 ];
 
 export default function StoriesContent() {
+    const { user } = useAuth();
+    const router = useRouter();
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
     const [playingInline, setPlayingInline] = useState<string | null>(null);
 
@@ -155,9 +159,19 @@ export default function StoriesContent() {
                             <p className={styles.cardDescription}>
                                 Whether you've received help or want to share how giving back has impacted your life — your story matters.
                             </p>
-                            <Link href="/register?intent=help" className={styles.shareBtn}>
+                            <button
+                                onClick={() => {
+                                    if (user) {
+                                        router.push('/dashboard/testimonials');
+                                    } else {
+                                        router.push('/register?intent=help');
+                                    }
+                                }}
+                                className={styles.shareBtn}
+                                style={{ cursor: 'pointer', background: 'inherit', border: 'none', padding: 'inherit', width: 'fit-content' }}
+                            >
                                 Share your story
-                            </Link>
+                            </button>
                         </div>
                     </div>
 
