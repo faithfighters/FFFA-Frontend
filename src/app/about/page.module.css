@@ -16,7 +16,7 @@
     position: relative;
     overflow: hidden;
     padding: calc(var(--header-height) + 56px) 0 48px !important;
-    background: linear-gradient(160deg, #121c34 0%, #0a0e1a 55%, #080a12 100%);
+    background: #020B18;
     display: flex;
     align-items: center;
     min-height: 380px;
