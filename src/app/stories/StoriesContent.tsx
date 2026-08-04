@@ -211,7 +211,6 @@ export default function StoriesContent() {
                                     }
                                 }}
                                 className={styles.shareBtn}
-                                style={{ cursor: 'pointer', background: 'inherit', border: 'none', padding: 'inherit', width: 'fit-content' }}
                             >
                                 Share your story
                             </button>
