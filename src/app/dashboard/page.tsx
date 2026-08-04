@@ -234,7 +234,7 @@ function DashboardContent() {
                                 Browse Campaigns
                             </button>
                         ) : (
-                            <button onClick={() => { haptics.tap(); router.push('/dashboard/subscription'); }} className={styles.heroBtnPrimary}>
+                            <button onClick={() => { haptics.tap(); fetch('/api/stripe/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'include', body: JSON.stringify({ plan: 'faith_fighter' }) }).then(res => res.json()).then(data => { if (data.url) window.location.href = data.url; else router.push('/dashboard/subscription?checkout=retry'); }).catch(() => router.push('/dashboard/subscription?checkout=retry')); }} className={styles.heroBtnPrimary}>
                                 Purchase Plan
                             </button>
                         )}
