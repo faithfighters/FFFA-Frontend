@@ -264,7 +264,7 @@ function RegisterForm() {
                             />
                         ))}
                     </div>
-                    <div style={{ position: 'relative', zIndex: 3 }}>
+                    <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                         <div className="container">
                             <div className={styles.heroInner}>
                                 <span className={styles.eyebrow}>Need Help</span>
@@ -480,7 +480,7 @@ function RegisterForm() {
                         />
                     ))}
                 </div>
-                <div style={{ position: 'relative', zIndex: 3 }}>
+                <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
                             <span className={styles.eyebrow}>Join the Movement</span>

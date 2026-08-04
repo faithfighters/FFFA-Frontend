@@ -111,7 +111,7 @@ export default function AboutPage() {
                         />
                     ))}
                 </div>
-                <div style={{ position: 'relative', zIndex: 3 }}>
+                <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
                             <span className={styles.eyebrow}>Who We Are</span>
