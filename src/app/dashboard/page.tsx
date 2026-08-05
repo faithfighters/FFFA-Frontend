@@ -57,6 +57,7 @@ function DashboardContent() {
     }, []);
 
     const [showCelebration, setShowCelebration] = useState(false);
+    const celebrationFiredRef = useRef(false);
     const [showHowItWorks, setShowHowItWorks] = useState(false);
     const [communityMilestone, setCommunityMilestone] = useState<{ id: string } | null>(null);
 
@@ -178,6 +179,13 @@ function DashboardContent() {
                 <div className={styles.statsGrid}>
                     {[...Array(4)].map((_, i) => <div key={i} className={styles.statSkeleton} />)}
                 </div>
+                {showCelebration && (
+                    <PurchaseCelebrationModal
+                        onClose={() => setShowCelebration(false)}
+                        message="Your membership subscription was activated successfully! You now have voting power and full video access."
+                        firedRef={celebrationFiredRef}
+                    />
+                )}
             </div>
         );
     }
@@ -393,6 +401,7 @@ function DashboardContent() {
             {showCelebration && (
                 <PurchaseCelebrationModal
                     onClose={() => setShowCelebration(false)}
+                    firedRef={celebrationFiredRef}
                     message="Your membership subscription was activated successfully! You now have voting power and full video access."
                 />
             )}
@@ -471,8 +480,8 @@ function DashboardContent() {
     );
 }
 
-function PurchaseCelebrationModal({ onClose, message }: { onClose: () => void; message: string }) {
-    const celebrationFiredRef = useRef(false);
+function PurchaseCelebrationModal({ onClose, message, firedRef }: { onClose: () => void; message: string; firedRef: React.MutableRefObject<boolean> }) {
+    const celebrationFiredRef = firedRef;
     const [showDelayedFireworks, setShowDelayedFireworks] = useState(false);
 
     return (
