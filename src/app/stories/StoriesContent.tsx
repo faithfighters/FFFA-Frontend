@@ -205,7 +205,7 @@ export default function StoriesContent() {
                             <button
                                 onClick={() => {
                                     if (user) {
-                                        router.push('/dashboard/testimonials');
+                                        router.push('/dashboard/requests');
                                     } else {
                                         router.push('/register?intent=help');
                                     }
