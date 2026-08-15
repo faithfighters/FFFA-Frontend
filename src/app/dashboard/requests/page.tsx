@@ -13,6 +13,8 @@ interface AssistanceRequest {
     amountRequested: number;
     amountApproved?: number;
     amountPaid?: number;
+    voteCount?: number;
+    requiredVotes?: number;
     paymentDate?: string;
     paymentMethod?: string;
     paymentReferenceNumber?: string;
@@ -92,13 +94,29 @@ export default function MyRequestsPage() {
             {requests.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '60px 20px', background: '#15131f', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.06)' }}>
                     <HeartHandshake size={36} color="rgba(255,255,255,0.25)" style={{ marginBottom: '12px' }} />
-                    <p style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 600, margin: 0 }}>No assistance requests yet.</p>
+                    <p style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 600, margin: '0 0 16px' }}>No assistance requests yet.</p>
+                    <button
+                        onClick={() => router.push('/dashboard/submit')}
+                        style={{
+                            padding: '11px 22px', borderRadius: '50px', border: 'none',
+                            background: 'linear-gradient(135deg, #F8C38F 0%, #E7421B 100%)',
+                            color: '#ffffff', fontWeight: 700, fontSize: '13px', cursor: 'pointer', fontFamily: 'inherit',
+                        }}
+                    >
+                        Request Help
+                    </button>
                 </div>
             ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {requests.map(r => {
                         const sc = STATUS_COLORS[r.status] || STATUS_COLORS.submitted;
                         const canTestify = TESTIMONIAL_ELIGIBLE.includes(r.status);
+                        const showVoteProgress = !!r.requiredVotes && r.requiredVotes > 0 &&
+                            !['submitted', 'under_review'].includes(r.status);
+                        const votePct = showVoteProgress
+                            ? Math.min(100, Math.round(((r.voteCount || 0) / r.requiredVotes!) * 100))
+                            : 0;
+                        const isFullyVoted = showVoteProgress && (r.voteCount || 0) >= r.requiredVotes!;
                         return (
                             <div
                                 key={r.id}
@@ -126,6 +144,22 @@ export default function MyRequestsPage() {
                                 <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)' }}>
                                     Requested ${r.amountRequested.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                                 </div>
+                                {showVoteProgress && (
+                                    <div>
+                                        <div style={{ height: '6px', borderRadius: '3px', background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                                            <div style={{
+                                                height: '100%', width: `${votePct}%`, borderRadius: '3px',
+                                                background: isFullyVoted ? '#4ade80' : 'linear-gradient(90deg, #F8C38F, #E7421B)',
+                                                transition: 'width 0.3s ease',
+                                            }} />
+                                        </div>
+                                        <div style={{ fontSize: '12px', color: isFullyVoted ? '#4ade80' : 'rgba(255,255,255,0.45)', fontWeight: 600, marginTop: '4px' }}>
+                                            {isFullyVoted
+                                                ? 'Fully voted — 100% funded'
+                                                : `${r.voteCount || 0} of ${r.requiredVotes} votes (${votePct}%)`}
+                                        </div>
+                                    </div>
+                                )}
                                 {canTestify && (
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#F8C38F', fontSize: '13px', fontWeight: 700, marginTop: '4px' }}>
                                         Share your testimonial <ChevronRight size={14} />
@@ -158,6 +192,12 @@ function RequestDetailModal({
     const sc = STATUS_COLORS[request.status] || STATUS_COLORS.submitted;
     const canTestify = TESTIMONIAL_ELIGIBLE.includes(request.status);
     const hasTestimonial = request.testimonial?.status === 'submitted';
+    const showVoteProgress = !!request.requiredVotes && request.requiredVotes > 0 &&
+        !['submitted', 'under_review'].includes(request.status);
+    const votePct = showVoteProgress
+        ? Math.min(100, Math.round(((request.voteCount || 0) / request.requiredVotes!) * 100))
+        : 0;
+    const isFullyVoted = showVoteProgress && (request.voteCount || 0) >= request.requiredVotes!;
 
     return (
         <div
@@ -257,6 +297,29 @@ function RequestDetailModal({
                                 {request.paymentDestination.phone && <DetailRow label="Phone" value={request.paymentDestination.phone} />}
                                 {request.paymentDestination.address && <DetailRow label="Address" value={request.paymentDestination.address} />}
                                 {request.paymentDestination.accountNumber && <DetailRow label="Account / Reference #" value={request.paymentDestination.accountNumber} />}
+                            </div>
+                        </div>
+                    )}
+
+                    {showVoteProgress && (
+                        <div style={{ marginBottom: '20px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                    Voting Progress
+                                </span>
+                                <span style={{ fontSize: '12px', fontWeight: 700, color: isFullyVoted ? '#4ade80' : '#F8C38F' }}>
+                                    {isFullyVoted ? 'Fully Voted' : `${votePct}%`}
+                                </span>
+                            </div>
+                            <div style={{ height: '8px', borderRadius: '4px', background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                                <div style={{
+                                    height: '100%', width: `${votePct}%`, borderRadius: '4px',
+                                    background: isFullyVoted ? '#4ade80' : 'linear-gradient(90deg, #F8C38F, #E7421B)',
+                                    transition: 'width 0.3s ease',
+                                }} />
+                            </div>
+                            <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', marginTop: '6px' }}>
+                                {request.voteCount || 0} of {request.requiredVotes} votes received
                             </div>
                         </div>
                     )}
