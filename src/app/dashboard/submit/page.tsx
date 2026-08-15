@@ -351,7 +351,7 @@ export default function DashboardSubmitPage() {
                         <label className={styles.formLabel}>Urgency Reason *</label>
                         <textarea className={styles.formTextarea} value={urgencyReason} onChange={e => setUrgencyReason(e.target.value)} placeholder="e.g. Medical emergency — surgery scheduled next week; family has no insurance coverage…" required />
                     </div>
-                    <div className={styles.formGrid} style={{ marginBottom: 0 }}>
+                    <div className={styles.formGrid}>
                         <div className={styles.formGroup} style={{ marginBottom: 0 }}>
                             <label className={styles.formLabel}>Your Phone Number</label>
                             <input className={styles.formInput} type="tel" value={submitterPhone} onChange={e => setSubmitterPhone(e.target.value)} placeholder="(555) 000-0000" />
@@ -413,7 +413,7 @@ export default function DashboardSubmitPage() {
                                     <input className={styles.formInput} type="tel" value={billPhone} onChange={e => setBillPhone(e.target.value)} placeholder="(555) 000-0000" required />
                                 </div>
                             </div>
-                            <div className={styles.formGrid} style={{ marginBottom: 0 }}>
+                            <div className={styles.formGrid}>
                                 <div className={styles.formGroup} style={{ marginBottom: 0 }}>
                                     <label className={styles.formLabel}>
                                         {billType === 'rent' ? 'Payment Portal / Mailing Address' : 'Address'}
