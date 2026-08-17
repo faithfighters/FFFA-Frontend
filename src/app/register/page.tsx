@@ -66,7 +66,7 @@ function RegisterForm() {
 
     useEffect(() => {
         if (authLoading || !user || postVerifyRedirecting) return;
-        router.replace(intent === 'help' ? '/dashboard/submit' : '/');
+        router.replace(intent === 'help' ? '/dashboard/submit' : '/dashboard');
     }, [user, authLoading, postVerifyRedirecting, intent, router]);
 
     useEffect(() => {

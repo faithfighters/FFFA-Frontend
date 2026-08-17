@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { HeartHandshake } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
+import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
 
 const DESKTOP_HERO_IMAGES = [
@@ -76,6 +77,7 @@ const leadershipTeam = [
 ];
 
 export default function AboutPage() {
+    const { user } = useAuth();
     const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
 
     useEffect(() => {
@@ -234,8 +236,8 @@ export default function AboutPage() {
                         <p className={styles.impactTagline}>One Nation. One Spirit. One Mission.</p>
                     </div>
                     <div className={styles.ctaRow}>
-                        <Link href="/register?intent=donate" className="btn btn--primary">
-                            Join the Mission
+                        <Link href={user ? '/dashboard' : '/register?intent=donate'} className="btn btn--primary">
+                            {user ? 'Go to Dashboard' : 'Join the Mission'}
                         </Link>
                         <Link href="/volunteer" className="btn btn--outline">
                             Volunteer

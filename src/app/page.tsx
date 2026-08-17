@@ -142,8 +142,8 @@ export default function Home() {
                     viewport={{ once: true }}
                     variants={fadeInUp}
                 >
-                    <Link href="/register?intent=donate" className={styles.joinNowBigBtn}>
-                        Join Now <ArrowRight size={20} />
+                    <Link href={user ? '/dashboard' : '/register?intent=donate'} className={styles.joinNowBigBtn}>
+                        {user ? 'Go to Dashboard' : 'Join Now'} <ArrowRight size={20} />
                     </Link>
                 </motion.div>
             </div>
