@@ -43,9 +43,7 @@ export default function TermsPage() {
                             current billing period.
                         </p>
                         <ul>
-                            <li>Faith Builder: $39.95/month — 1 vote per cycle</li>
-                            <li>Faith Hero: $59.95/month — 2 votes per cycle</li>
-                            <li>Faith Fighter: $79.95/month — 3 votes per cycle (weighted)</li>
+                            <li>Faith Fighter: $30/month — 30 votes per cycle</li>
                         </ul>
 
                         <h2>3. Donations</h2>
