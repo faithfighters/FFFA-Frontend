@@ -63,9 +63,10 @@ interface ParticipationReport {
 type Tab = 'overview' | 'financial' | 'voting' | 'participation';
 
 const PLAN_LABELS: Record<string, string> = {
-  basic: 'Basic ($39.95)',
-  standard: 'Standard ($59.95)',
-  premium: 'Premium ($79.95)',
+  faith_fighter: 'Faith Fighter ($30)',
+  // Legacy aliases — same $30 plan, kept so old subscription records still label correctly.
+  faith_builder: 'Faith Fighter ($30)',
+  faith_hero: 'Faith Fighter ($30)',
 };
 
 export default function AdminAnalyticsPage() {
