@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { HeartHandshake } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import { useAuth } from '@/context/AuthContext';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { ABOUT_DEFAULTS } from './aboutContent';
 import styles from './page.module.css';
 
 const DESKTOP_HERO_IMAGES = [
@@ -20,64 +22,9 @@ const MOBILE_HERO_IMAGES = [
     '/images/team_img.svg',
 ];
 
-const valueCards = [
-    {
-        img: '/images/img-07.jpg',
-        icon: '✝',
-        title: 'Mission',
-        text: 'We unite communities with compassion, making every act of giving a shared and visible moment of kindness.',
-    },
-    {
-        img: '/images/img-08.jpg',
-        icon: '◎',
-        title: 'Vision',
-        text: 'A transparent movement where everyone can see and celebrate how helping neighbors becomes a story that inspires us all.',
-    },
-];
-
-const tags = ['Integrity', 'Courage', 'Compassion', 'Faith', 'Freedom'];
-
-const coreValues = [
-    {
-        icon: '◎',
-        title: 'Open Impact',
-        text: 'Transparency and quantifiable outcomes that demonstrate the tangible difference we make together.',
-    },
-    {
-        icon: '📍',
-        title: 'Local First',
-        text: 'Community-level transformation strengthens the broader nation, one neighborhood at a time.',
-    },
-    {
-        icon: '🛡',
-        title: 'Stewardship',
-        text: 'Faith-guided responsibility in managing every resource entrusted to us.',
-    },
-];
-
-const leadershipTeam = [
-    {
-        name: 'Kevin Jones "Coach K"',
-        role: 'Founder & CEO',
-        img: '/images/kevin-jones.jpg',
-        bio: '25+ years in entertainment and entrepreneurship, leading the movement\'s vision.',
-    },
-    {
-        name: 'James Price',
-        role: 'Co-Founder & Treasurer',
-        img: '/images/james-price.jpg',
-        bio: 'Automotive & restaurant background with deep community mentorship experience.',
-    },
-    {
-        name: 'Billy Gleason Jr.',
-        role: 'Co-Founder & Secretary',
-        img: '/images/billy-gleason-jr.jpg',
-        bio: 'Martial arts instructor focused on character and accountability.',
-    },
-];
-
 export default function AboutPage() {
     const { user } = useAuth();
+    const content = useSiteContent('about', ABOUT_DEFAULTS);
     const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
 
     useEffect(() => {
@@ -116,11 +63,10 @@ export default function AboutPage() {
                 <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
-                            <span className={styles.eyebrow}>Who We Are</span>
-                            <h1 className={styles.heroTitle}>About Faith Fighters</h1>
+                            <span className={styles.eyebrow}>{content.heroEyebrow}</span>
+                            <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
                             <p className={styles.heroLead}>
-                                A movement built on the conviction that a nation grows strong when its
-                                people stand united in faith and service.
+                                {content.heroLead}
                             </p>
                         </div>
                     </div>
@@ -131,10 +77,10 @@ export default function AboutPage() {
             <section className={`section ${styles.valuesSection}`}>
                 <div className="container">
                     <div className={styles.valueGrid}>
-                        {valueCards.map((v) => (
+                        {content.missionVisionCards.map((v) => (
                             <div key={v.title} className={styles.valueCard}>
                                 <div className={styles.valueImage}>
-                                    <Image src={v.img} alt={v.title} fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
+                                    <Image src={v.image} alt={v.title} fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
                                 </div>
                                 <div className={styles.valueCaption}>
                                     <div className={styles.valueIcon}>{v.icon}</div>
@@ -152,16 +98,13 @@ export default function AboutPage() {
             {/* ===== OUR STORY ===== */}
             <section className={`section ${styles.storySection}`}>
                 <div className="container">
-                    <span className={styles.eyebrow}>Our Story</span>
-                    <h2 className={styles.sectionTitle}>Strength from unity</h2>
+                    <span className={styles.eyebrow}>{content.storyEyebrow}</span>
+                    <h2 className={styles.sectionTitle}>{content.storyTitle}</h2>
                     <p className={styles.storyLead}>
-                        Faith Fighters For America was born from a simple conviction: national strength
-                        emerges from a unified citizenry and shared faith. We encourage Americans to
-                        embody integrity, courage, compassion, and devotion to God and freedom —
-                        restoring optimism and reinforcing the communities we call home.
+                        {content.storyLead}
                     </p>
                     <div className={styles.tagRow}>
-                        {tags.map((t) => (
+                        {content.storyTagsCsv.split(',').map(t => t.trim()).filter(Boolean).map((t) => (
                             <span key={t} className={styles.tag}>{t}</span>
                         ))}
                     </div>
@@ -172,11 +115,11 @@ export default function AboutPage() {
             <section className={`section ${styles.operateSection}`}>
                 <div className="container">
                     <div className={styles.sectionHeaderCenter}>
-                        <span className={styles.eyebrow}>How We Operate</span>
-                        <h2 className={styles.sectionTitle}>Our core values</h2>
+                        <span className={styles.eyebrow}>{content.coreValuesEyebrow}</span>
+                        <h2 className={styles.sectionTitle}>{content.coreValuesTitle}</h2>
                     </div>
                     <div className={styles.operateRows}>
-                        {coreValues.map((v) => (
+                        {content.coreValues.map((v) => (
                             <div key={v.title} className={styles.operateRow}>
                                 <div className={styles.operateIcon}>{v.icon}</div>
                                 <div>
@@ -193,14 +136,14 @@ export default function AboutPage() {
             <section className={`section ${styles.leadershipSection}`}>
                 <div className="container">
                     <div className={styles.sectionHeaderCenter}>
-                        <span className={styles.eyebrow}>Leadership</span>
-                        <h2 className={styles.sectionTitle}>Meet the team</h2>
+                        <span className={styles.eyebrow}>{content.leadershipEyebrow}</span>
+                        <h2 className={styles.sectionTitle}>{content.leadershipTitle}</h2>
                     </div>
                     <div className={styles.leaderGrid}>
-                        {leadershipTeam.map((member) => (
+                        {content.leadershipTeam.map((member) => (
                             <div key={member.name} className={styles.leaderCard}>
                                 <div className={styles.leaderAvatar}>
-                                    <Image src={member.img} alt={member.name} fill sizes="84px" style={{ objectFit: 'cover' }} />
+                                    <Image src={member.image} alt={member.name} fill sizes="84px" style={{ objectFit: 'cover' }} />
                                 </div>
                                 <h4 className={styles.leaderName}>{member.name}</h4>
                                 <p className={styles.leaderRole}>{member.role}</p>
@@ -221,26 +164,24 @@ export default function AboutPage() {
                             <span className={styles.impactLine} />
                         </div>
                         <h3 className={styles.impactTitle}>
-                            Ready to Make an <em>Impact?</em>
+                            {content.impactTitle}
                         </h3>
                         <p className={styles.impactText}>
-                            Faith Fighters for America empowers everyday people to create
-                            extraordinary change through kindness, service, and transparent giving.
+                            {content.impactText1}
                         </p>
                         <span className={styles.impactDivider} />
                         <p className={styles.impactText}>
-                            Together, we connect people who want to help with those who need it most,
-                            building <em>stronger communities</em> and <em>changing lives</em>&mdash;one act of kindness at a time.
+                            {content.impactText2}
                         </p>
                         <span className={styles.impactDivider} />
-                        <p className={styles.impactTagline}>One Nation. One Spirit. One Mission.</p>
+                        <p className={styles.impactTagline}>{content.impactTagline}</p>
                     </div>
                     <div className={styles.ctaRow}>
                         <Link href={user ? '/dashboard' : '/register?intent=donate'} className="btn btn--primary">
-                            {user ? 'Go to Dashboard' : 'Join the Mission'}
+                            {user ? 'Go to Dashboard' : content.joinMissionLabel}
                         </Link>
                         <Link href="/volunteer" className="btn btn--outline">
-                            Volunteer
+                            {content.volunteerBtnLabel}
                         </Link>
                     </div>
                 </div>
