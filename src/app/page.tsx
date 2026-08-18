@@ -8,6 +8,8 @@ import { Fraunces } from 'next/font/google';
 import { Sparkles, ArrowRight, Play, Star, ShieldCheck, HeartHandshake, BookOpen, ChevronRight, Users, Heart } from 'lucide-react';
 import Newsletter from '@/components/frontend/Newsletter';
 import { useAuth } from '@/context/AuthContext';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { HOME_DEFAULTS } from './homeContent';
 import { STORIES, STORY_IMG, PRODUCTS } from './homeData';
 import styles from './page.module.css';
 
@@ -36,30 +38,11 @@ const staggerContainer: Variants = {
     visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
 };
 
-const TESTIMONIALS = [
-    {
-        quote: "I couldn't even begin to imagine what my outcome would have been if it wasn't for Faith Fighters For America.",
-        bio: "Mum-of-four Nikki Benstead needed the charity's help when her horse spooked and reared up, falling backwards on top of her.",
-        name: 'Nikki Benstead',
-        role: 'Mission beneficiary',
-        initials: 'NB',
-    },
-    {
-        quote: "They didn't just send help — they showed up, prayed with us, and helped us rebuild. We finally felt seen.",
-        bio: 'After a house fire took everything, the Alvarez family turned to Faith Fighters for emergency housing and hope.',
-        name: 'Maria Alvarez',
-        role: 'Mission beneficiary',
-        initials: 'MA',
-    },
-];
+// Icons aren't CMS-editable in this phase — matched positionally to
+// content.whatWeDo, whose title/desc text does come from the CMS.
+const WHAT_WE_DO_ICONS = [ShieldCheck, HeartHandshake, BookOpen];
 
-const WHAT_WE_DO = [
-    { icon: ShieldCheck, title: 'Transparent Giving', desc: 'Every dollar is tracked and every mission is shared, so you always see the difference you make.' },
-    { icon: HeartHandshake, title: 'Community Action', desc: 'Boots-on-the-ground missions — food drives, shelter support, disaster relief — in neighborhoods nationwide.' },
-    { icon: BookOpen, title: 'Stories of Impact', desc: 'Real testimonies from the people you help, turning generosity into a story that inspires us all.' },
-];
-
-function VideoFacade({ src, caption, onOpen, inline }: { src: string; caption: string; onOpen: () => void; inline?: boolean }) {
+function VideoFacade({ src, caption, poster, onOpen, inline }: { src: string; caption: string; poster: string; onOpen: () => void; inline?: boolean }) {
     const [playingInline, setPlayingInline] = useState(false);
 
     if (inline && playingInline) {
@@ -72,7 +55,7 @@ function VideoFacade({ src, caption, onOpen, inline }: { src: string; caption: s
 
     return (
         <div className={styles.videoFacade} onClick={() => (inline ? setPlayingInline(true) : onOpen())}>
-            <video className={styles.videoFacadeMedia} src={`${src}#t=2`} poster="/images/video-thumbnail.png" muted playsInline preload="metadata" />
+            <video className={styles.videoFacadeMedia} src={`${src}#t=2`} poster={poster} muted playsInline preload="metadata" />
             <div className={styles.videoFacadeOverlay}>
                 <motion.div className={styles.videoPlayBtn} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                     <Play size={22} fill="white" color="white" />
@@ -96,6 +79,7 @@ export default function Home() {
     };
     const { user } = useAuth();
     const campaignsHref = user ? '/dashboard/campaigns' : '/login';
+    const content = useSiteContent('home', HOME_DEFAULTS);
 
     return (
         <main className={`${fraunces.variable} ${styles.main}`}>
@@ -107,27 +91,26 @@ export default function Home() {
                         <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
                             <motion.div variants={fadeInUp} className={styles.heroBadge}>
                                 <Sparkles size={14} />
-                                <span>963 Missions Completed</span>
+                                <span>{content.heroBadgeText}</span>
                             </motion.div>
 
                             <motion.h1 className={styles.heroTitle} variants={staggerContainer}>
-                                <motion.span className={styles.heroLineNation} variants={fadeInUp}>One Nation.</motion.span>
-                                <motion.span className={styles.heroLineSpirit} variants={fadeInUp}>One Spirit.</motion.span>
-                                <motion.span className={styles.heroLineMission} variants={fadeInUp}>One Mission.</motion.span>
+                                <motion.span className={styles.heroLineNation} variants={fadeInUp}>{content.heroTitleLine1}</motion.span>
+                                <motion.span className={styles.heroLineSpirit} variants={fadeInUp}>{content.heroTitleLine2}</motion.span>
+                                <motion.span className={styles.heroLineMission} variants={fadeInUp}>{content.heroTitleLine3}</motion.span>
                             </motion.h1>
 
                             <motion.p className={styles.heroLead} variants={fadeInUp}>
-                                A national movement of everyday Americans strengthening communities, restoring unity,
-                                and lifting up those in need through faith-driven action.
+                                {content.heroLead}
                             </motion.p>
 
                             <motion.div variants={fadeInUp} className={styles.heroTrust}>
-                                <span>Join the Founding Members</span>
+                                <span>{content.heroTrustText}</span>
                             </motion.div>
                         </motion.div>
 
                         <motion.div className={styles.heroMedia} variants={fadeInRight} initial="hidden" animate="visible">
-                            <VideoFacade src={HERO_VIDEO} caption="One Nation. One Mission. · 1:53" onOpen={() => setLightboxSrc(HERO_VIDEO)} inline />
+                            <VideoFacade src={HERO_VIDEO} caption={content.heroVideoCaption} poster={content.heroVideoPoster} onOpen={() => setLightboxSrc(HERO_VIDEO)} inline />
                         </motion.div>
                     </div>
                 </div>
@@ -143,7 +126,7 @@ export default function Home() {
                     variants={fadeInUp}
                 >
                     <Link href={user ? '/dashboard' : '/register?intent=donate'} className={styles.joinNowBigBtn}>
-                        {user ? 'Go to Dashboard' : 'Join Now'} <ArrowRight size={20} />
+                        {user ? 'Go to Dashboard' : content.joinNowLabel} <ArrowRight size={20} />
                     </Link>
                 </motion.div>
             </div>
@@ -151,7 +134,7 @@ export default function Home() {
             {/* ===== MOBILE-ONLY VIDEO ===== */}
             <section className={styles.mobileVideoSection}>
                 <div className="container">
-                    <VideoFacade src={HERO_VIDEO} caption="One Nation. One Mission. · 1:53" onOpen={() => setLightboxSrc(HERO_VIDEO)} />
+                    <VideoFacade src={HERO_VIDEO} caption={content.heroVideoCaption} poster={content.heroVideoPoster} onOpen={() => setLightboxSrc(HERO_VIDEO)} />
                 </div>
             </section>
 
@@ -165,7 +148,7 @@ export default function Home() {
                         viewport={{ once: true }}
                         variants={staggerContainer}
                     >
-                        {TESTIMONIALS.map((t) => (
+                        {content.testimonials.map((t) => (
                             <motion.div key={t.name} className={styles.testimonialCard} variants={fadeInUp}>
                                 <div className={styles.starsRow}>
                                     {[...Array(5)].map((_, j) => <Star key={j} size={14} fill="#E24B34" color="#E24B34" />)}
@@ -195,8 +178,8 @@ export default function Home() {
                         viewport={{ once: true, margin: '-100px' }}
                         variants={fadeInUp}
                     >
-                        <span className={styles.eyebrow}>— What We Do</span>
-                        <h2 className={styles.sectionTitle}>Faith in action, made visible</h2>
+                        <span className={styles.eyebrow}>{content.whatWeDoEyebrow}</span>
+                        <h2 className={styles.sectionTitle}>{content.whatWeDoTitle}</h2>
                     </motion.div>
 
                     <motion.div
@@ -206,20 +189,23 @@ export default function Home() {
                         viewport={{ once: true, margin: '-50px' }}
                         variants={staggerContainer}
                     >
-                        {WHAT_WE_DO.map((feature) => (
-                            <motion.div
-                                key={feature.title}
-                                className={styles.whatWeDoCard}
-                                variants={fadeInUp}
-                                whileHover={{ y: -8 }}
-                            >
-                                <div className={styles.whatWeDoIcon}>
-                                    <feature.icon size={24} />
-                                </div>
-                                <h4 className={styles.whatWeDoTitle}>{feature.title}</h4>
-                                <p className={styles.whatWeDoText}>{feature.desc}</p>
-                            </motion.div>
-                        ))}
+                        {content.whatWeDo.map((feature, i) => {
+                            const Icon = WHAT_WE_DO_ICONS[i] ?? ShieldCheck;
+                            return (
+                                <motion.div
+                                    key={feature.title}
+                                    className={styles.whatWeDoCard}
+                                    variants={fadeInUp}
+                                    whileHover={{ y: -8 }}
+                                >
+                                    <div className={styles.whatWeDoIcon}>
+                                        <Icon size={24} />
+                                    </div>
+                                    <h4 className={styles.whatWeDoTitle}>{feature.title}</h4>
+                                    <p className={styles.whatWeDoText}>{feature.desc}</p>
+                                </motion.div>
+                            );
+                        })}
                     </motion.div>
                 </div>
             </section>
@@ -234,8 +220,8 @@ export default function Home() {
                         viewport={{ once: true, margin: '-100px' }}
                         variants={fadeInUp}
                     >
-                        <span className={styles.eyebrow}>— Active Campaigns</span>
-                        <h2 className={styles.sectionTitle}>Fund a mission today</h2>
+                        <span className={styles.eyebrow}>{content.campaignsEyebrow}</span>
+                        <h2 className={styles.sectionTitle}>{content.campaignsTitle}</h2>
                     </motion.div>
 
                     <motion.div
@@ -287,7 +273,7 @@ export default function Home() {
                         className={styles.sectionCta}
                     >
                         <Link href={campaignsHref} className={styles.seeAllBtn}>
-                            See all campaigns <ChevronRight size={16} />
+                            {content.campaignsSeeAllLabel} <ChevronRight size={16} />
                         </Link>
                     </motion.div>
                 </div>
@@ -303,30 +289,29 @@ export default function Home() {
                         viewport={{ once: true }}
                         variants={fadeInUp}
                     >
-                        <span className={styles.purposeEyebrow}>Our Purpose</span>
+                        <span className={styles.purposeEyebrow}>{content.purposeEyebrow}</span>
                         <h2 className={styles.purposeTitle}>
-                            Making <em>Kindness</em> Visible.
+                            {content.purposeTitle}
                         </h2>
                         <p className={styles.purposeLead}>
-                            We unite communities through transparent giving and meaningful action,
-                            connecting people who want to help with those who need it most.
+                            {content.purposeLead}
                         </p>
                         <div className={styles.purposeStats}>
                             <div className={styles.purposeStat}>
                                 <Users size={26} />
-                                <span>Stronger Communities</span>
+                                <span>{content.purposeStat1}</span>
                             </div>
                             <div className={styles.purposeStat}>
                                 <Heart size={26} />
-                                <span>Real Compassion</span>
+                                <span>{content.purposeStat2}</span>
                             </div>
                             <div className={styles.purposeStat}>
                                 <HeartHandshake size={26} />
-                                <span>Lasting Impact</span>
+                                <span>{content.purposeStat3}</span>
                             </div>
                         </div>
                         <div className={styles.purposeTagline}>
-                            One Nation. One Spirit. One Mission.
+                            {content.purposeTagline}
                         </div>
                     </motion.div>
                 </div>
@@ -342,9 +327,9 @@ export default function Home() {
                         viewport={{ once: true, margin: '-100px' }}
                         variants={fadeInUp}
                     >
-                        <span className={styles.eyebrow}>— Official Store</span>
-                        <h2 className={styles.sectionTitle}>Wear the mission</h2>
-                        <p className={styles.sectionSub}>Every purchase funds faith-driven initiatives.</p>
+                        <span className={styles.eyebrow}>{content.storeEyebrow}</span>
+                        <h2 className={styles.sectionTitle}>{content.storeTitle}</h2>
+                        <p className={styles.sectionSub}>{content.storeSubtitle}</p>
                     </motion.div>
 
                     <motion.div
@@ -383,7 +368,7 @@ export default function Home() {
                         className={styles.sectionCta}
                     >
                         <a href="https://shop.faithfightersforamerica.com/" target="_blank" rel="noopener noreferrer" className={styles.visitStoreBtn}>
-                            Visit the store <ChevronRight size={16} />
+                            {content.storeCtaLabel} <ChevronRight size={16} />
                         </a>
                     </motion.div>
                 </div>
