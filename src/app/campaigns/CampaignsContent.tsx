@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Newsletter from '@/components/frontend/Newsletter';
 import { useAuth } from '@/context/AuthContext';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { CAMPAIGNS_DEFAULTS } from './campaignsDefaults';
 import styles from './page.module.css';
 
 const DESKTOP_HERO_IMAGES = [
@@ -19,22 +21,12 @@ const MOBILE_HERO_IMAGES = [
     '/images/team_img.svg',
 ];
 
-const VIDEO_BASE = 'https://faithfightersamerica.com/';
-
-const CAMPAIGNS = [
-    { title: 'Bills Paid', file: 'video8.mp4', img: '/images/img-01.jpg', desc: 'A family caught up on overdue utilities and kept the power on.' },
-    { title: 'Car Payment Paid', file: 'video4.mp4', img: '/images/img-02.jpg', desc: 'A worker kept the car that gets them to their job every day.' },
-    { title: 'Hotel Stay Covered', file: 'video5.mp4', img: '/images/img-03.jpg', desc: 'A family off the street and into a safe, warm place for the night.' },
-    { title: 'Prayers Answered', file: 'video11.mp4', img: '/images/img-05.png', desc: 'When hope had run out, the community showed up in force.' },
-    { title: 'Rent Covered', file: 'video7.mp4', img: '/images/img-05.jpg', desc: 'A family kept their home when the rent came due.' },
-    { title: 'Student Loans Paid Off', file: 'video6.mp4', img: '/images/img-06.jpg', desc: 'A graduate set free from the weight of student debt.' },
-];
-
 export default function CampaignsContent() {
     const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
     const [playingInline, setPlayingInline] = useState<string | null>(null);
     const { user } = useAuth();
+    const content = useSiteContent('campaigns', CAMPAIGNS_DEFAULTS);
     const missionHref = user ? '/dashboard/campaigns' : '/login';
 
     useEffect(() => {
@@ -44,12 +36,11 @@ export default function CampaignsContent() {
         return () => clearInterval(timer);
     }, []);
 
-    const handleVideoClick = (title: string, file: string) => {
-        const src = `${VIDEO_BASE}${file}`;
+    const handleVideoClick = (title: string, videoUrl: string) => {
         if (window.matchMedia('(min-width: 1024px)').matches) {
             setPlayingInline(title);
         } else {
-            setLightboxSrc(src);
+            setLightboxSrc(videoUrl);
         }
     };
 
@@ -82,11 +73,10 @@ export default function CampaignsContent() {
                 <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
-                            <span className={styles.eyebrow}>Campaigns</span>
-                            <h1 className={styles.heroTitle}>Fund a Mission</h1>
+                            <span className={styles.eyebrow}>{content.heroEyebrow}</span>
+                            <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
                             <p className={styles.heroLead}>
-                                Choose a cause close to your heart. Track its progress. See exactly where
-                                your giving goes.
+                                {content.heroLead}
                             </p>
                         </div>
                     </div>
@@ -97,12 +87,12 @@ export default function CampaignsContent() {
             <section className={`section ${styles.campaignsSection}`}>
                 <div className="container">
                     <div className={styles.campGrid}>
-                        {CAMPAIGNS.map((c) => (
+                        {content.campaigns.map((c) => (
                             <div key={c.title} className={styles.campCard}>
                                 {playingInline === c.title ? (
                                     <div className={styles.campMedia} style={{ background: '#000' }}>
                                         <video
-                                            src={`${VIDEO_BASE}${c.file}`}
+                                            src={c.videoUrl}
                                             controls
                                             autoPlay
                                             playsInline
@@ -112,10 +102,10 @@ export default function CampaignsContent() {
                                 ) : (
                                     <div
                                         className={styles.campMedia}
-                                        onClick={() => handleVideoClick(c.title, c.file)}
+                                        onClick={() => handleVideoClick(c.title, c.videoUrl)}
                                     >
                                         <Image
-                                            src={c.img}
+                                            src={c.image}
                                             alt={c.title}
                                             fill
                                             sizes="(max-width: 900px) 100vw, 33vw"
@@ -131,7 +121,7 @@ export default function CampaignsContent() {
                                     <h4>{c.title}</h4>
                                     <p>{c.desc}</p>
                                     <Link href={missionHref} className={styles.missionBtn}>
-                                        Support this mission
+                                        {content.missionBtnLabel}
                                     </Link>
                                 </div>
                             </div>
