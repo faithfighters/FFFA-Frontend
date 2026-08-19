@@ -6,6 +6,8 @@ import styles from './page.module.css';
 import {
     CalendarDays, Globe, Heart, Camera, Truck, DollarSign, ChevronRight,
 } from 'lucide-react';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { VOLUNTEER_DEFAULTS } from './volunteerDefaults';
 
 const DESKTOP_HERO_IMAGES = [
     '/images/desktop1.png',
@@ -19,18 +21,22 @@ const MOBILE_HERO_IMAGES = [
     '/images/team_img.svg',
 ];
 
-const roles = [
-    { title: 'Event Crew', desc: 'Setup, greeting guests, and event support.', icon: <CalendarDays size={20} />, img: '/images/serve-event.jpg', accent: 'red' },
-    { title: 'Community Outreach', desc: 'Shelter visits, food drives, partner support.', icon: <Globe size={20} />, img: '/images/serve-outreach.jpg', accent: 'gold' },
-    { title: 'Prayer & Care Team', desc: 'Encouragement and follow-up support.', icon: <Heart size={20} />, img: '/images/serve-prayer.jpg', accent: 'red' },
-    { title: 'Content & Media', desc: 'Photography, storytelling, social media.', icon: <Camera size={20} />, img: '/images/serve-media.jpg', accent: 'gold' },
-    { title: 'Drivers & Logistics', desc: 'Transport supplies and resources.', icon: <Truck size={20} />, img: '/images/serve-drive.jpg', accent: 'red' },
-    { title: 'Fundraising Support', desc: 'Awareness and donation initiatives.', icon: <DollarSign size={20} />, img: '/images/serve-fund.jpg', accent: 'gold' },
+// Icons and accent colors for the "Six ways to serve" grid aren't
+// CMS-editable — matched positionally to content.roles.
+const ROLE_ICONS = [
+    <CalendarDays key="0" size={20} />,
+    <Globe key="1" size={20} />,
+    <Heart key="2" size={20} />,
+    <Camera key="3" size={20} />,
+    <Truck key="4" size={20} />,
+    <DollarSign key="5" size={20} />,
 ];
+const ROLE_ACCENTS: ('red' | 'gold')[] = ['red', 'gold', 'red', 'gold', 'red', 'gold'];
 
 const availabilityOptions = ['Weekdays', 'Weekends', 'Flexible'];
 
 export default function VolunteerContent() {
+    const content = useSiteContent('volunteer', VOLUNTEER_DEFAULTS);
     const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [form, setForm] = useState({
         fullName: '',
@@ -113,11 +119,10 @@ export default function VolunteerContent() {
                 <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
-                            <span className={styles.eyebrow}>Volunteer</span>
-                            <h1 className={styles.heroTitle}>Serve Your Community</h1>
+                            <span className={styles.eyebrow}>{content.heroEyebrow}</span>
+                            <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
                             <p className={styles.heroLead}>
-                                One hour a week or a full weekend — bring your time and talents and make a
-                                real difference.
+                                {content.heroLead}
                             </p>
                         </div>
                     </div>
@@ -128,18 +133,18 @@ export default function VolunteerContent() {
             <section className={`section ${styles.rolesSection}`}>
                 <div className="container">
                     <div className={styles.sectionHeaderCenter}>
-                        <span className={styles.eyebrow}>Find Your Role</span>
-                        <h2 className={styles.sectionTitle}>Six ways to serve</h2>
+                        <span className={styles.eyebrow}>{content.rolesEyebrow}</span>
+                        <h2 className={styles.sectionTitle}>{content.rolesTitle}</h2>
                     </div>
                     <div className={styles.rolesGrid}>
-                        {roles.map((role) => (
+                        {content.roles.map((role, i) => (
                             <div key={role.title} className={styles.roleRow}>
                                 <div className={styles.roleImage}>
-                                    <Image src={role.img} alt={role.title} fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
+                                    <Image src={role.image} alt={role.title} fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
                                 </div>
                                 <div className={styles.roleBody}>
-                                    <div className={`${styles.roleIcon} ${role.accent === 'gold' ? styles.roleIconGold : ''}`}>
-                                        {role.icon}
+                                    <div className={`${styles.roleIcon} ${ROLE_ACCENTS[i % ROLE_ACCENTS.length] === 'gold' ? styles.roleIconGold : ''}`}>
+                                        {ROLE_ICONS[i % ROLE_ICONS.length]}
                                     </div>
                                     <div>
                                         <h4>{role.title}</h4>
@@ -158,42 +163,30 @@ export default function VolunteerContent() {
                 <div className="container">
                     <div className={styles.splitGrid}>
                         <div>
-                            <span className={styles.eyebrow}>How It Works</span>
-                            <h2 className={styles.sectionTitle}>Start in three steps</h2>
+                            <span className={styles.eyebrow}>{content.howItWorksEyebrow}</span>
+                            <h2 className={styles.sectionTitle}>{content.howItWorksTitle}</h2>
                             <div className={styles.stepsList}>
-                                <div className={styles.step}>
-                                    <div className={styles.stepNumber}>1</div>
-                                    <div>
-                                        <h4>Sign up</h4>
-                                        <p>Complete the short form with your info and preferred role.</p>
+                                {content.steps.map((step, i) => (
+                                    <div className={styles.step} key={step.title}>
+                                        <div className={styles.stepNumber}>{i + 1}</div>
+                                        <div>
+                                            <h4>{step.title}</h4>
+                                            <p>{step.desc}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={styles.step}>
-                                    <div className={styles.stepNumber}>2</div>
-                                    <div>
-                                        <h4>Get matched</h4>
-                                        <p>A dedicated coordinator in your area reaches out to you.</p>
-                                    </div>
-                                </div>
-                                <div className={styles.step}>
-                                    <div className={styles.stepNumber}>3</div>
-                                    <div>
-                                        <h4>Start serving</h4>
-                                        <p>Begin making a tangible difference alongside your community.</p>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
 
                         <div>
-                            <span className={styles.eyebrow}>Ready to Serve?</span>
-                            <h2 className={styles.sectionTitle}>Sign up to volunteer</h2>
+                            <span className={styles.eyebrow}>{content.signupEyebrow}</span>
+                            <h2 className={styles.sectionTitle}>{content.signupTitle}</h2>
 
                             {submitted ? (
                                 <div className={styles.successCard}>
                                     <div className={styles.successIcon}>✓</div>
-                                    <h3>Thank You!</h3>
-                                    <p>A volunteer coordinator will be in touch with you soon.</p>
+                                    <h3>{content.successTitle}</h3>
+                                    <p>{content.successText}</p>
                                 </div>
                             ) : (
                                 <form className={styles.form} onSubmit={handleSubmit}>
@@ -271,7 +264,7 @@ export default function VolunteerContent() {
                                             required
                                         >
                                             <option value="">Select a role…</option>
-                                            {roles.map((r) => (
+                                            {content.roles.map((r) => (
                                                 <option key={r.title} value={r.title}>{r.title}</option>
                                             ))}
                                         </select>
@@ -280,7 +273,7 @@ export default function VolunteerContent() {
                                     {error && <p className={styles.errorText}>{error}</p>}
 
                                     <button type="submit" className={styles.submitBtn} disabled={submitting}>
-                                        {submitting ? 'Submitting…' : 'Submit Volunteer Application →'}
+                                        {submitting ? 'Submitting…' : content.submitBtnLabel}
                                     </button>
                                 </form>
                             )}
