@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { MdEmail } from 'react-icons/md';
 import styles from './Newsletter.module.css';
 import { haptics } from '@/lib/haptics';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { GLOBAL_DEFAULTS } from './globalContentDefaults';
 
 export default function Newsletter() {
+  const content = useSiteContent('global', GLOBAL_DEFAULTS);
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -20,15 +23,15 @@ export default function Newsletter() {
       <div className={styles.container}>
         <div className={styles.titleArea}>
           <div className={styles.aboutLabelWrapper}>
-            <span className={styles.label}>NEWSLETTER</span>
+            <span className={styles.label}>{content.newsletterLabel}</span>
             <div className={styles.labelUnderline} />
           </div>
-          <h2 className={styles.title}>STAY CONNECTED TO THE MOVEMENT</h2>
+          <h2 className={styles.title}>{content.newsletterTitle}</h2>
         </div>
 
         <div className={styles.formArea}>
           <p className={styles.description}>
-            Get inspiring stories, volunteer opportunities, community updates, and behind-the-scenes access delivered straight to your inbox.
+            {content.newsletterDescription}
           </p>
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputWrap}>
@@ -45,10 +48,10 @@ export default function Newsletter() {
             </div>
             <button type="submit" className={styles.submitBtn}>
               <MdEmail size={18} />
-              JOIN THE MISSION
+              {content.newsletterBtnLabel}
             </button>
           </form>
-          <p className={styles.noSpam}>No spam. Just purpose-driven updates.</p>
+          <p className={styles.noSpam}>{content.newsletterNoSpamText}</p>
         </div>
       </div>
     </section>
