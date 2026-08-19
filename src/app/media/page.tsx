@@ -1,4 +1,3 @@
-import PageBanner from '@/components/frontend/PageBanner';
 import Newsletter from '@/components/frontend/Newsletter';
 import MediaContent from './MediaContent';
 import { Video } from '@/lib/types';
@@ -20,15 +19,6 @@ export default async function MediaPage() {
 
     return (
         <>
-            <PageBanner
-                title="Media"
-                backgroundImage="/images/hero-flag.png"
-                breadcrumbs={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Media', href: '/media' },
-                ]}
-            />
-
             <MediaContent videos={approvedVideos} />
 
             <Newsletter />
