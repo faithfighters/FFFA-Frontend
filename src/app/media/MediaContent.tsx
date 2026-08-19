@@ -3,7 +3,10 @@
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import VideoPlayerModal from '@/components/shared/VideoPlayerModal';
+import PageBanner from '@/components/frontend/PageBanner';
 import { Video } from '@/lib/types';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { MEDIA_DEFAULTS } from './mediaDefaults';
 import styles from './page.module.css';
 
 type MediaVideo = Video & {
@@ -53,6 +56,7 @@ function VideoPreview({ video, large = false }: { video: MediaVideo; large?: boo
 }
 
 export default function MediaContent({ videos }: MediaContentProps) {
+    const content = useSiteContent('media', MEDIA_DEFAULTS);
     const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
     const featured = videos.find(v => v.isFeatured) ?? videos[0];
 
@@ -75,10 +79,19 @@ export default function MediaContent({ videos }: MediaContentProps) {
 
     return (
         <>
+            <PageBanner
+                title={content.heroTitle}
+                backgroundImage="/images/hero-flag.png"
+                breadcrumbs={[
+                    { label: 'Home', href: '/' },
+                    { label: content.heroTitle, href: '/media' },
+                ]}
+            />
+
             <section className={`section ${styles.featured}`}>
                 <div className="container">
-                    <span className="section-label">Featured</span>
-                    <h2 className="heading-lg">Latest From Our Community</h2>
+                    <span className="section-label">{content.featuredEyebrow}</span>
+                    <h2 className="heading-lg">{content.featuredTitle}</h2>
                     {featured ? (
                         <div className={styles.featuredGrid}>
                             <button
@@ -103,7 +116,7 @@ export default function MediaContent({ videos }: MediaContentProps) {
                         </div>
                     ) : (
                         <div className={styles.emptyState}>
-                            No videos yet. Be the first to submit a story!
+                            {content.emptyStateText}
                         </div>
                     )}
                 </div>
@@ -111,8 +124,8 @@ export default function MediaContent({ videos }: MediaContentProps) {
 
             <section className={`section section--light ${styles.gallery}`}>
                 <div className="container">
-                    <span className="section-label">All Videos</span>
-                    <h2 className="heading-lg">Stories of Impact</h2>
+                    <span className="section-label">{content.galleryEyebrow}</span>
+                    <h2 className="heading-lg">{content.galleryTitle}</h2>
                     <div className={styles.videoGrid}>
                         {videos.map((video) => (
                             <button
