@@ -9,6 +9,8 @@ import { Eye, EyeOff } from 'lucide-react';
 import styles from './page.module.css';
 import { haptics } from '@/lib/haptics';
 import AuthTabs from '@/components/shared/AuthTabs';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { LOGIN_DEFAULTS } from './loginContent';
 
 const DESKTOP_HERO_IMAGES = [
     '/images/desktop1.png',
@@ -31,6 +33,7 @@ const fraunces = Fraunces({
 });
 
 export default function LoginPage() {
+    const content = useSiteContent('login', LOGIN_DEFAULTS);
     const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -100,10 +103,10 @@ export default function LoginPage() {
                 <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
-                            <span className={styles.eyebrow}>Welcome Back</span>
-                            <h1 className={styles.heroTitle}>One Spirit. One Mission.</h1>
+                            <span className={styles.eyebrow}>{content.heroEyebrow}</span>
+                            <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
                             <p className={styles.heroLead}>
-                                Sign in to track your giving, follow your missions, and stand with 10,000+ Americans.
+                                {content.heroLead}
                             </p>
                         </div>
                     </div>
@@ -175,8 +178,8 @@ export default function LoginPage() {
                 </button>
 
                 <p className={styles.footer}>
-                    New to Faith Fighters?{' '}
-                    <Link href="/register" className={styles.footerLink}>Create an account</Link>
+                    {content.footerText}{' '}
+                    <Link href="/register" className={styles.footerLink}>{content.footerLinkLabel}</Link>
                 </p>
             </div>
 
