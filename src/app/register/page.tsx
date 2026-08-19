@@ -10,6 +10,8 @@ import styles from './page.module.css';
 import OtpInput from '@/components/shared/OtpInput';
 import AuthTabs from '@/components/shared/AuthTabs';
 import { haptics } from '@/lib/haptics';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { REGISTER_DEFAULTS } from './registerContent';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://stage.faithfightersforamerica.com');
 
@@ -33,7 +35,18 @@ const fraunces = Fraunces({
     display: 'swap',
 });
 
+// Icons for the "How We Help" cards aren't CMS-editable — matched
+// positionally to content.helpCards.
+const HELP_CARD_ICONS = [
+    <Home key="0" size={20} />,
+    <UtensilsCrossed key="1" size={20} />,
+    <LifeBuoy key="2" size={20} />,
+    <HeartHandshake key="3" size={20} />,
+];
+const HELP_CARD_GOLD = [false, true, false, true];
+
 function RegisterForm() {
+    const content = useSiteContent('register', REGISTER_DEFAULTS);
     const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -268,10 +281,10 @@ function RegisterForm() {
                     <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                         <div className="container">
                             <div className={styles.heroInner}>
-                                <span className={styles.eyebrow}>Need Help</span>
-                                <h1 className={styles.heroTitle}>We&apos;re Here for You</h1>
+                                <span className={styles.eyebrow}>{content.helpHeroEyebrow}</span>
+                                <h1 className={styles.heroTitle}>{content.helpHeroTitle}</h1>
                                 <p className={styles.heroLead}>
-                                    If you or someone you know is in need, reach out. No situation is too small for compassion.
+                                    {content.helpHeroLead}
                                 </p>
                             </div>
                         </div>
@@ -281,37 +294,20 @@ function RegisterForm() {
                 <div className={`${styles.helpContainer} ${styles.helpMainContainer}`}>
                     {/* How we help */}
                     <div className={styles.howWeHelpSection}>
-                        <span className={styles.helpEyebrowRed}>— How We Help</span>
-                        <h2 className={styles.howWeHelpHeading}>Ways we can support you</h2>
+                        <span className={styles.helpEyebrowRed}>{content.howWeHelpEyebrow}</span>
+                        <h2 className={styles.howWeHelpHeading}>{content.howWeHelpTitle}</h2>
                         <div className={styles.helpCardsGrid}>
-                            <div className={styles.helpInfoCard}>
-                                <span className={styles.helpInfoIcon}><Home size={20} /></span>
-                                <div>
-                                    <h4 className={styles.helpInfoTitle}>Housing &amp; shelter</h4>
-                                    <p className={styles.helpInfoDesc}>Emergency housing, repairs, and essentials.</p>
+                            {content.helpCards.map((card, i) => (
+                                <div className={styles.helpInfoCard} key={card.title}>
+                                    <span className={HELP_CARD_GOLD[i % HELP_CARD_GOLD.length] ? `${styles.helpInfoIcon} ${styles.helpInfoIconGold}` : styles.helpInfoIcon}>
+                                        {HELP_CARD_ICONS[i % HELP_CARD_ICONS.length]}
+                                    </span>
+                                    <div>
+                                        <h4 className={styles.helpInfoTitle}>{card.title}</h4>
+                                        <p className={styles.helpInfoDesc}>{card.desc}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={styles.helpInfoCard}>
-                                <span className={`${styles.helpInfoIcon} ${styles.helpInfoIconGold}`}><UtensilsCrossed size={20} /></span>
-                                <div>
-                                    <h4 className={styles.helpInfoTitle}>Food &amp; supplies</h4>
-                                    <p className={styles.helpInfoDesc}>Meals, groceries, and daily necessities.</p>
-                                </div>
-                            </div>
-                            <div className={styles.helpInfoCard}>
-                                <span className={styles.helpInfoIcon}><LifeBuoy size={20} /></span>
-                                <div>
-                                    <h4 className={styles.helpInfoTitle}>Disaster relief</h4>
-                                    <p className={styles.helpInfoDesc}>Rapid response for families hit by crisis.</p>
-                                </div>
-                            </div>
-                            <div className={styles.helpInfoCard}>
-                                <span className={`${styles.helpInfoIcon} ${styles.helpInfoIconGold}`}><HeartHandshake size={20} /></span>
-                                <div>
-                                    <h4 className={styles.helpInfoTitle}>Prayer &amp; care</h4>
-                                    <p className={styles.helpInfoDesc}>Encouragement, connection, and follow-up.</p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
 
@@ -319,9 +315,9 @@ function RegisterForm() {
                     <div className={styles.pageInnerHelp}>
                         <div className={styles.placeholderCol}>
                             <div className={styles.formEyebrowWrap}>
-                                <span className={styles.helpEyebrowRed}>— Share Your Story</span>
-                                <h2 className={styles.formHeading}>Your story matters</h2>
-                                <p className={styles.formSub}>Every mission starts with someone reaching out — thank you for taking this step.</p>
+                                <span className={styles.helpEyebrowRed}>{content.shareStoryEyebrow}</span>
+                                <h2 className={styles.formHeading}>{content.shareStoryTitle}</h2>
+                                <p className={styles.formSub}>{content.shareStoryText}</p>
                             </div>
                             <div className={styles.placeholderPane}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -331,9 +327,9 @@ function RegisterForm() {
 
                         <div className={styles.helpRightCol}>
                             <div className={styles.formEyebrowWrap}>
-                                <span className={styles.helpEyebrowRed}>— Submit Your Request</span>
-                                <h2 className={styles.formHeading}>A few details &amp; you&apos;re done</h2>
-                                <p className={styles.formSub}>No account needed — we&apos;ll create your member account with this request so you can track it.</p>
+                                <span className={styles.helpEyebrowRed}>{content.submitRequestEyebrow}</span>
+                                <h2 className={styles.formHeading}>{content.submitRequestTitle}</h2>
+                                <p className={styles.formSub}>{content.submitRequestText}</p>
                             </div>
                             <div className={styles.helpCard}>
                                 {error && <div className={styles.error}>{error}</div>}
@@ -484,12 +480,12 @@ function RegisterForm() {
                 <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
-                            <span className={styles.eyebrow}>Join the Movement</span>
+                            <span className={styles.eyebrow}>{content.donorHeroEyebrow}</span>
                             <h1 className={styles.heroTitle}>
-                                One Spirit. One Mission.
+                                {content.donorHeroTitle}
                             </h1>
                             <p className={styles.heroLead}>
-                                Create your account to track your giving, join missions, and stand with 10,000+ Americans.
+                                {content.donorHeroLead}
                             </p>
                         </div>
                     </div>
@@ -611,8 +607,8 @@ function RegisterForm() {
                 </button>
 
                 <p className={styles.footer}>
-                    Already have an account?{' '}
-                    <Link href="/login" className={styles.footerLink}>Log In</Link>
+                    {content.donorFooterText}{' '}
+                    <Link href="/login" className={styles.footerLink}>{content.donorFooterLinkLabel}</Link>
                 </p>
             </div>
 
