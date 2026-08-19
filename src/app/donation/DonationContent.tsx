@@ -5,6 +5,8 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 import styles from './page.module.css';
 import { haptics } from '@/lib/haptics';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { DONATION_DEFAULTS, DonationPageContent } from './donationDefaults';
 
 const DESKTOP_HERO_IMAGES = [
   '/images/desktop1.png',
@@ -18,24 +20,7 @@ const MOBILE_HERO_IMAGES = [
   '/images/team_img.svg',
 ];
 
-const amountOptions = [
-  { value: 25, label: '1 family meal' },
-  { value: 50, label: 'Shelter kit' },
-  { value: 100, label: 'Youth mentor' },
-  { value: 250, label: 'Relief supplies' },
-  { value: 500, label: 'Rebuild fund' },
-];
-
-const causeOptions = [
-  "Where it's needed most",
-  'Disaster Relief',
-  'Youth Programs',
-  'Medical Relief',
-  'Food Security',
-  'Housing',
-];
-
-function PurchaseCelebrationModal({ onClose }: { onClose: () => void }) {
+function PurchaseCelebrationModal({ content, onClose }: { content: DonationPageContent; onClose: () => void }) {
   return (
     <div 
       style={{
@@ -121,15 +106,15 @@ function PurchaseCelebrationModal({ onClose }: { onClose: () => void }) {
           </div>
 
           <h2 style={{ fontSize: '28px', fontWeight: 800, margin: '0 0 10px', color: '#ffffff', letterSpacing: '-0.5px' }}>
-            Donation Successful!
+            {content.modalTitle}
           </h2>
 
           <p style={{ fontSize: '15px', fontWeight: 600, margin: '0 0 12px', color: 'rgba(255,255,255,0.9)' }}>
-            Thank you for your <span style={{ color: '#ff7b5a' }}>contribution!</span>
+            {content.modalSubtitle}
           </p>
 
           <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.5, padding: '0 12px' }}>
-            Your support helps us continue our mission to strengthen faith, unity, and purpose across America.
+            {content.modalBody}
           </p>
         </div>
 
@@ -167,10 +152,10 @@ function PurchaseCelebrationModal({ onClose }: { onClose: () => void }) {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', textAlign: 'left' }}>
               <span style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>
-                Thank you for <span style={{ color: '#ff7b5a' }}>Supporting!</span>
+                {content.modalCardTitle}
               </span>
               <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.3 }}>
-                Together we can bring hope and rebuild lives
+                {content.modalCardSubtitle}
               </span>
             </div>
           </div>
@@ -192,7 +177,7 @@ function PurchaseCelebrationModal({ onClose }: { onClose: () => void }) {
               transition: 'transform 0.2s',
             }}
           >
-            Great!
+            {content.modalBtnLabel}
           </button>
         </div>
       </div>
@@ -206,6 +191,8 @@ function PurchaseCelebrationModal({ onClose }: { onClose: () => void }) {
 export default function DonationContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const content = useSiteContent('donation', DONATION_DEFAULTS);
+  const causeOptions = content.causeOptionsCsv.split(',').map(c => c.trim()).filter(Boolean);
   const [showCelebration, setShowCelebration] = useState(false);
   const [selected, setSelected] = useState<number | 'custom'>(100);
   const [customAmount, setCustomAmount] = useState('');
@@ -295,10 +282,10 @@ export default function DonationContent() {
         <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
           <div className="container">
             <div className={styles.heroInner}>
-              <span className={styles.eyebrow}>Give Today</span>
-              <h1 className={styles.heroTitle}>Your gift, made visible</h1>
+              <span className={styles.eyebrow}>{content.heroEyebrow}</span>
+              <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
               <p className={styles.heroLead}>
-                100% transparent. Every dollar tracked to a mission you can follow from start to finish.
+                {content.heroLead}
               </p>
             </div>
           </div>
@@ -309,14 +296,14 @@ export default function DonationContent() {
       <section className={`section ${styles.donateSection}`}>
         <div className="container">
           <div className={styles.donateCard}>
-            <label className={styles.amountLabel}>Choose an amount</label>
+            <label className={styles.amountLabel}>{content.amountLabel}</label>
             <div className={styles.amtGrid}>
-              {amountOptions.map((opt) => (
+              {content.amountOptions.map((opt) => (
                 <button
                   key={opt.value}
                   type="button"
-                  className={`${styles.amtBtn} ${selected === opt.value ? styles.amtBtnActive : ''}`}
-                  onClick={() => setSelected(opt.value)}
+                  className={`${styles.amtBtn} ${selected === Number(opt.value) ? styles.amtBtnActive : ''}`}
+                  onClick={() => setSelected(Number(opt.value))}
                 >
                   <b>${opt.value}</b>
                   <small>{opt.label}</small>
@@ -370,7 +357,7 @@ export default function DonationContent() {
 
             <div className={styles.secureNote}>
               <span className={styles.secureIcon}>🔒</span>
-              <span>Secure checkout via Stripe. You&apos;ll receive a tax-deductible receipt and a link to follow your mission.</span>
+              <span>{content.secureNoteText}</span>
             </div>
           </div>
         </div>
@@ -380,31 +367,28 @@ export default function DonationContent() {
       <section className={`section ${styles.benefitsSection}`}>
         <div className="container">
           <div className={styles.benefitsGrid}>
-            <div className={styles.benefitRow}>
-              <div className={styles.benefitIcon}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+            {content.benefits.map((benefit, i) => (
+              <div className={styles.benefitRow} key={benefit.title}>
+                <div className={i === 1 ? `${styles.benefitIcon} ${styles.benefitIconGold}` : styles.benefitIcon}>
+                  {i === 0 ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                  ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                  )}
+                </div>
+                <div>
+                  <h4>{benefit.title}</h4>
+                  <p>{benefit.text}</p>
+                </div>
               </div>
-              <div>
-                <h4>Tracked to the dollar</h4>
-                <p>Follow your gift to the exact mission it funds.</p>
-              </div>
-            </div>
-            <div className={styles.benefitRow}>
-              <div className={`${styles.benefitIcon} ${styles.benefitIconGold}`}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
-              </div>
-              <div>
-                <h4>Boots on the ground</h4>
-                <p>963 missions delivered by real volunteers.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Celebration Modal on Successful checkout */}
       {showCelebration && (
-        <PurchaseCelebrationModal onClose={() => setShowCelebration(false)} />
+        <PurchaseCelebrationModal content={content} onClose={() => setShowCelebration(false)} />
       )}
     </>
   );
