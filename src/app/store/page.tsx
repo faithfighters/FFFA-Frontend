@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import Newsletter from '@/components/frontend/Newsletter';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { STORE_DEFAULTS } from './storeContent';
 
 const DESKTOP_HERO_IMAGES = [
     '/images/desktop1.png',
@@ -19,14 +21,8 @@ const MOBILE_HERO_IMAGES = [
 
 const SHOP = 'https://shop.faithfightersforamerica.com/';
 
-const products = [
-    { name: "Men's Faith Tee", price: '30', img: '/images/serve-img.jpg', url: `${SHOP}products/wake-up-with-faith-mens-shirts` },
-    { name: "Women's Faith Tank", price: '25', img: '/images/serve-img-2.jpg', url: `${SHOP}products/wake-up-with-faith-female-tanktops` },
-    { name: 'Faith Fighters Hat', price: '25', img: '/images/serve-img-3.jpg', url: `${SHOP}products/wake-up-with-faith-hats` },
-    { name: 'Wake Up With Faith Coffee', price: '25', img: '/images/serve-img-4.jpg', url: `${SHOP}products/wake-up-with-faith-cofee` },
-];
-
 export default function StorePage() {
+    const content = useSiteContent('store', STORE_DEFAULTS);
     const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
 
     useEffect(() => {
@@ -65,11 +61,10 @@ export default function StorePage() {
                 <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
                     <div className="container">
                         <div className={styles.heroInner}>
-                            <span className={styles.eyebrow}>Official Store</span>
-                            <h1 className={styles.heroTitle}>Wear the Mission</h1>
+                            <span className={styles.eyebrow}>{content.heroEyebrow}</span>
+                            <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
                             <p className={styles.heroLead}>
-                                Every purchase funds faith-driven initiatives that uplift communities and
-                                strengthen America&apos;s spirit.
+                                {content.heroLead}
                             </p>
                         </div>
                     </div>
@@ -80,13 +75,13 @@ export default function StorePage() {
             <section className={`section ${styles.productsSection}`}>
                 <div className="container">
                     <div className={styles.sectionHeaderCenter}>
-                        <span className={styles.eyebrow}>Shop the Collection</span>
-                        <h2 className={styles.sectionTitle}>Wear your faith</h2>
-                        <p className={styles.sectionSub}>Tap a product to shop it directly.</p>
+                        <span className={styles.eyebrow}>{content.productsEyebrow}</span>
+                        <h2 className={styles.sectionTitle}>{content.productsTitle}</h2>
+                        <p className={styles.sectionSub}>{content.productsSubtitle}</p>
                     </div>
 
                     <div className={styles.productGrid}>
-                        {products.map((product) => (
+                        {content.products.map((product) => (
                             <a
                                 key={product.name}
                                 href={product.url}
@@ -96,7 +91,7 @@ export default function StorePage() {
                             >
                                 <div className={styles.productImage}>
                                     <Image
-                                        src={product.img}
+                                        src={product.image}
                                         alt={product.name}
                                         fill
                                         sizes="(max-width: 768px) 50vw, 25vw"
@@ -112,7 +107,7 @@ export default function StorePage() {
                     </div>
 
                     <a href={SHOP} target="_blank" rel="noopener noreferrer" className={styles.fullStoreBtn}>
-                        Visit the Full Store
+                        {content.fullStoreBtnLabel}
                     </a>
                 </div>
             </section>
@@ -121,24 +116,21 @@ export default function StorePage() {
             <section className={`section ${styles.benefitsSection}`}>
                 <div className="container">
                     <div className={styles.benefitsGrid}>
-                        <div className={styles.benefitRow}>
-                            <div className={styles.benefitIcon}>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><path d="M16 8h4l3 3v5h-7V8z" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+                        {content.benefits.map((benefit, i) => (
+                            <div className={styles.benefitRow} key={benefit.title}>
+                                <div className={i === 1 ? `${styles.benefitIcon} ${styles.benefitIconRed}` : styles.benefitIcon}>
+                                    {i === 0 ? (
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><path d="M16 8h4l3 3v5h-7V8z" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+                                    ) : (
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                                    )}
+                                </div>
+                                <div>
+                                    <h4>{benefit.title}</h4>
+                                    <p>{benefit.text}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4>Ships to all 50 states</h4>
-                                <p>Fast, tracked delivery nationwide.</p>
-                            </div>
-                        </div>
-                        <div className={styles.benefitRow}>
-                            <div className={`${styles.benefitIcon} ${styles.benefitIconRed}`}>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-                            </div>
-                            <div>
-                                <h4>Funds the mission</h4>
-                                <p>Proceeds support faith-driven missions.</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
