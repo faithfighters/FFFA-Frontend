@@ -20,7 +20,6 @@ const navLinks: { label: string; href: string; external?: boolean; icon: React.R
   { label: 'Campaigns', href: '/campaigns', icon: <BarChart3 size={20} /> },
   { label: 'Store', href: '/store', icon: <ShoppingBag size={20} /> },
   { label: 'Volunteer', href: '/volunteer', icon: <User size={20} /> },
-  { label: 'Need Help', href: '/register?intent=help', icon: <Heart size={20} /> },
   { label: 'Contact', href: '/contact', icon: <Mail size={20} /> },
 ];
 
@@ -111,6 +110,9 @@ export default function Header() {
           </nav>
 
           <div className={styles.ctaGroup}>
+            <Link href="/register?intent=help" className={styles.topDonateBtn}>
+              <Heart size={15} style={{ marginRight: '6px' }} /> Need Help
+            </Link>
             {user ? (
               <Link href="/dashboard" className={styles.joinBtn}>
                 Hi, {firstName}
@@ -205,13 +207,16 @@ export default function Header() {
           )}
         </ul>
 
-        {!user && (
-          <div className={styles.mobileCtas}>
+        <div className={styles.mobileCtas}>
+          <Link href="/register?intent=help" className={styles.mobileDonateBtn} onClick={() => setIsMenuOpen(false)}>
+            <Heart size={16} style={{ marginRight: '8px' }} /> Need Help
+          </Link>
+          {!user && (
             <Link href="/login" className={styles.mobileLoginBtn} onClick={() => setIsMenuOpen(false)}>
               Login / Join
             </Link>
-          </div>
-        )}
+          )}
+        </div>
 
         <div className={styles.mobileSocials}>
           {socialLinks.map((social) => (

@@ -128,11 +128,6 @@ export default function Home() {
                     <Link href={user ? '/dashboard' : '/register?intent=donate'} className={styles.joinNowBigBtn}>
                         {user ? 'Go to Dashboard' : content.joinNowLabel} <ArrowRight size={20} />
                     </Link>
-                    {!user && (
-                        <Link href="/register?intent=help" className={styles.needHelpBtn}>
-                            {content.needHelpLabel}
-                        </Link>
-                    )}
                 </motion.div>
             </div>
 
