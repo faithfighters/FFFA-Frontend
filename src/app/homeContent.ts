@@ -26,6 +26,7 @@ export interface HomeContent {
     heroVideoCaption: string;
     heroVideoPoster: string;
     joinNowLabel: string;
+    needHelpLabel: string;
     whatWeDoEyebrow: string;
     whatWeDoTitle: string;
     whatWeDo: HomeWhatWeDoItem[];
@@ -56,6 +57,7 @@ export const HOME_DEFAULTS: HomeContent = {
     heroVideoCaption: 'One Nation. One Mission. · 1:53',
     heroVideoPoster: '/images/video-thumbnail.png',
     joinNowLabel: 'Join Now',
+    needHelpLabel: 'Need Help',
     whatWeDoEyebrow: '— What We Do',
     whatWeDoTitle: 'Faith in action, made visible',
     whatWeDo: [

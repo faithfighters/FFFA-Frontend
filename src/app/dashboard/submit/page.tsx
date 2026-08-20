@@ -104,6 +104,7 @@ export default function DashboardSubmitPage() {
         if (causeMode === 'existing' && !selectedExistingCauseId) { haptics.error(); setError('Please select an existing cause.'); return; }
         if (!beneficiaryName.trim()) { haptics.error(); setError('Please enter the name of the person or family in need.'); return; }
         if (!targetAmount || Number(targetAmount) <= 0) { haptics.error(); setError('Please enter a target funding amount.'); return; }
+        if (Number(targetAmount) > 500) { haptics.error(); setError('Assistance requests cannot exceed $500 at this time.'); return; }
         if (!urgencyReason.trim()) { haptics.error(); setError('Please explain why this request is urgent.'); return; }
         if (!billType) { haptics.error(); setError('Please select a bill type.'); return; }
         if (!institutionName.trim()) { haptics.error(); setError('Please enter the institution/company name.'); return; }
@@ -343,8 +344,8 @@ export default function DashboardSubmitPage() {
                             <input className={styles.formInput} type="text" value={beneficiaryName} onChange={e => setBeneficiaryName(e.target.value)} placeholder="e.g. The Johnson Family" required />
                         </div>
                         <div className={styles.formGroup} style={{ marginBottom: 0 }}>
-                            <label className={styles.formLabel}>Target Funding Amount ($) *</label>
-                            <input className={styles.formInput} type="number" min="1" step="0.01" value={targetAmount} onChange={e => setTargetAmount(e.target.value)} placeholder="e.g. 3500" required />
+                            <label className={styles.formLabel}>Target Funding Amount ($, max $500) *</label>
+                            <input className={styles.formInput} type="number" min="1" max="500" step="0.01" value={targetAmount} onChange={e => setTargetAmount(e.target.value)} placeholder="e.g. 350 (max $500)" required />
                         </div>
                     </div>
                     <div className={styles.formGroup}>

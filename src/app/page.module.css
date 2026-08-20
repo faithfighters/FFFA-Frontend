@@ -200,7 +200,9 @@
     margin: -20px auto 0;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 12px;
     padding: 14px 6px;
 }
 
@@ -209,7 +211,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    width: 100%;
+    flex: 1 1 240px;
     padding: 18px 24px;
     border-radius: 16px;
     background: linear-gradient(135deg, #F4B98C 0%, #EE8A4C 50%, #E4531F 100%);
@@ -219,6 +221,28 @@
     text-decoration: none;
     box-shadow: 0 20px 50px rgba(228, 75, 52, 0.4);
     transition: transform 0.15s;
+}
+
+.needHelpBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: 1 1 240px;
+    padding: 18px 24px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 18px;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.needHelpBtn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .joinNowBigBtn:hover {
@@ -760,7 +784,8 @@
         padding: 28px 8px;
     }
 
-    .joinNowBigBtn {
+    .joinNowBigBtn,
+    .needHelpBtn {
         padding: 22px 32px;
         font-size: 22px;
         border-radius: 16px;
