@@ -1,0 +1,67 @@
+name: Uptime Check
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check production endpoints
+        id: check
+        run: |
+          set +e
+          FAILURES=""
+
+          check_url() {
+            local name="$1"
+            local url="$2"
+            local code
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$url")
+            echo "$name ($url) -> $code"
+            # Treat connection failures (000) and 5xx server errors as down.
+            # 2xx/3xx/4xx (including a bare 404 on an API root) mean the
+            # server responded, so it isn't actually down.
+            if [ "$code" = "000" ] || [ "$code" -ge 500 ]; then
+              FAILURES="${FAILURES}${name}: ${url} returned HTTP ${code}\n"
+            fi
+          }
+
+          check_url "Public site" "https://faithfightersforamerica.com"
+          check_url "API" "https://api.faithfightersforamerica.com"
+          check_url "Admin portal" "https://admin.faithfightersforamerica.com"
+
+          if [ -n "$FAILURES" ]; then
+            echo "down=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "failures<<EOF"
+              echo -e "$FAILURES"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "down=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Send alert email
+        if: steps.check.outputs.down == 'true'
+        run: |
+          TEXT="One or more Faith Fighters For America production endpoints are not responding:
+
+          ${{ steps.check.outputs.failures }}
+          Checked at $(date -u +'%Y-%m-%d %H:%M:%S UTC').
+
+          This is an automated alert, sent every 5 minutes while the issue persists."
+
+          BODY=$(jq -n \
+            --arg from "${{ secrets.ALERT_EMAIL_FROM }}" \
+            --arg to "${{ secrets.ALERT_EMAIL_TO }}" \
+            --arg subject "🚨 FFFA site down — action needed" \
+            --arg text "$TEXT" \
+            '{from: $from, to: $to, subject: $subject, text: $text}')
+
+          curl -s -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d "$BODY"
