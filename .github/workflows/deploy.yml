@@ -98,7 +98,8 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         script: |
           echo "✅ Connected to $(hostname)"
-          cd /root/faithfighters-backend
+          mkdir -p /root/faithfighters-frontend
+          cd /root/faithfighters-frontend
 
           DEPLOY_TIME=$(date +'%Y-%m-%d %H:%M:%S')
           echo "📦 Deploying: ${{ env.CONTAINER_NAME }} on port ${{ env.APP_PORT }}"
@@ -129,9 +130,11 @@ jobs:
 
           sleep 15
           echo "🏥 Health checks..."
+          HEALTHY=0
           for i in {1..5}; do
             if curl -f http://localhost:${{ env.APP_PORT }}/health 2>/dev/null || curl -f http://localhost:${{ env.APP_PORT }} 2>/dev/null; then
               echo "✅ Health check passed"
+              HEALTHY=1
               break
             else
               echo "⏳ Retry $i/5"
@@ -141,6 +144,11 @@ jobs:
 
           docker ps --filter "name=${{ env.CONTAINER_NAME }}"
           docker logs --tail=15 ${{ env.CONTAINER_NAME }}
+
+          if [ "$HEALTHY" != "1" ]; then
+            echo "❌ Health check failed after 5 retries — container is not responding."
+            exit 1
+          fi
           echo "🎉 Production deployment complete!"
 
     # Deploy to Staging
