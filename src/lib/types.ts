@@ -12,6 +12,7 @@ export interface User {
     stripeCustomerId?: string;
     stripeSubscriptionId?: string;
     image?: string;
+    phone?: string;
 }
 
 export interface Cause {
