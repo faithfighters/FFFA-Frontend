@@ -3,18 +3,30 @@
 import { useState, useEffect, useRef } from 'react';
 import { Upload, CheckCircle, Target, Send, HeartHandshake, Hospital, Zap, Home, FileText } from 'lucide-react';
 import { haptics } from '@/lib/haptics';
+import { useAuth } from '@/context/AuthContext';
 import styles from '../page.module.css';
 
 const CAUSE_CATEGORIES = [
-    'Veterans', 'Youth Programs', 'Food Security', 'Disaster Relief',
-    'Healthcare', 'First Responders', 'Housing', 'Utility Assistance',
-    'Medical Relief', 'Education', 'Poverty Alleviation', 'Other',
+    'Emergency Housing / Shelter',
+    'Food & Grocery Assistance',
+    'Utility / Bill Assistance',
+    'Medical / Health Related',
+    'Disaster / Crisis Relief',
+    'Family / Children Support',
+    'Transportation Assistance',
+    'Employment / Job Related',
+    'Senior / Elderly Support',
+    'Veteran Support',
+    'Other / General Hardship',
 ];
+
+const DESCRIPTION_MAX_LENGTH = 500;
 
 type BillType = 'hospital' | 'utility' | 'rent' | 'other' | '';
 
 export default function DashboardSubmitPage() {
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const { user } = useAuth();
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -22,12 +34,7 @@ export default function DashboardSubmitPage() {
     const [fileName, setFileName] = useState('');
     const [isDragging, setIsDragging] = useState(false);
 
-    const [activeCauses, setActiveCauses] = useState<{ id: string; name: string; category: string }[]>([]);
-    const [causeMode, setCauseMode] = useState<'existing' | 'new'>('new');
-    const [selectedExistingCauseId, setSelectedExistingCauseId] = useState('');
-    const [causeName, setCauseName] = useState('');
     const [causeCategory, setCauseCategory] = useState('');
-    const [causeGoal, setCauseGoal] = useState('');
 
     // ── Assistance request details ──
     const [beneficiaryName, setBeneficiaryName] = useState('');
@@ -43,21 +50,16 @@ export default function DashboardSubmitPage() {
 
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [infoLoading, setInfoLoading] = useState(true);
     const [error, setError] = useState('');
     const [step, setStep] = useState('');
 
+    // Autofill from the member's own account info (collected at registration)
     useEffect(() => {
-        fetch('/api/causes?status=active', { credentials: 'include' })
-            .then(r => r.json())
-            .then(data => {
-                const causes = data.causes ?? [];
-                setActiveCauses(causes);
-                if (causes.length > 0) setCauseMode('existing');
-            })
-            .catch(() => {})
-            .finally(() => setInfoLoading(false));
-    }, []);
+        if (!user) return;
+        setBeneficiaryName(prev => prev || user.name || '');
+        setSubmitterEmail(prev => prev || user.email || '');
+        setSubmitterPhone(prev => prev || user.phone || '');
+    }, [user]);
 
     const validateVideoDuration = (f: File): Promise<boolean> =>
         new Promise(resolve => {
@@ -100,8 +102,7 @@ export default function DashboardSubmitPage() {
         haptics.tap();
         if (!file) { haptics.error(); setError('Please select a video file.'); return; }
         if (!title.trim()) { haptics.error(); setError('Please enter a title.'); return; }
-        if (causeMode === 'new' && (!causeName || !causeCategory)) { haptics.error(); setError('Please fill in cause name and category.'); return; }
-        if (causeMode === 'existing' && !selectedExistingCauseId) { haptics.error(); setError('Please select an existing cause.'); return; }
+        if (!causeCategory) { haptics.error(); setError('Please select a cause category.'); return; }
         if (!beneficiaryName.trim()) { haptics.error(); setError('Please enter the name of the person or family in need.'); return; }
         if (!targetAmount || Number(targetAmount) <= 0) { haptics.error(); setError('Please enter a target funding amount.'); return; }
         if (Number(targetAmount) > 500) { haptics.error(); setError('Assistance requests cannot exceed $500 at this time.'); return; }
@@ -130,43 +131,13 @@ export default function DashboardSubmitPage() {
             await fetch(uploadUrl, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } })
                 .then(r => { if (!r.ok) throw new Error('Storage upload failed.'); });
 
-            setStep('Setting up cause…');
-            let causeId: string | undefined;
-            let resolvedTag = causeCategory;
-
-            if (causeMode === 'existing') {
-                causeId = selectedExistingCauseId;
-                const found = activeCauses.find(c => c.id === selectedExistingCauseId);
-                resolvedTag = found?.category || found?.name || '';
-            } else if (causeMode === 'new' && causeName) {
-                const causeRes = await fetch('/api/causes', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
-                    body: JSON.stringify({
-                        name: causeName,
-                        description: description || causeName,
-                        category: causeCategory,
-                        goalAmount: causeGoal ? Number(causeGoal) : 0,
-                    }),
-                });
-                if (!causeRes.ok) {
-                    const err = await causeRes.json().catch(() => ({}));
-                    throw new Error(err.message || 'Failed to create cause.');
-                }
-                const causeData = await causeRes.json();
-                causeId = causeData.cause?.id ?? causeData.cause?._id?.toString();
-                resolvedTag = causeCategory;
-            }
-
             setStep('Saving video…');
             const body: Record<string, unknown> = {
-                title, description, videoUrl: publicUrl, causeTag: resolvedTag,
+                title, description, videoUrl: publicUrl, causeTag: causeCategory,
                 beneficiaryName, targetAmount: Number(targetAmount), urgencyReason,
                 submitterPhone: submitterPhone || undefined,
                 submitterEmail: submitterEmail || undefined,
             };
-            if (causeId) body.causeId = causeId;
             if (billType) {
                 body.paymentDestination = {
                     type: billType,
@@ -202,10 +173,8 @@ export default function DashboardSubmitPage() {
     const resetForm = () => {
         setSubmitted(false);
         setTitle(''); setDescription(''); setFile(null); setFileName('');
-        setCauseMode('existing'); setSelectedExistingCauseId('');
-        setCauseName(''); setCauseCategory(''); setCauseGoal('');
-        setBeneficiaryName(''); setTargetAmount(''); setUrgencyReason('');
-        setSubmitterPhone(''); setSubmitterEmail('');
+        setCauseCategory('');
+        setTargetAmount(''); setUrgencyReason('');
         setBillType(''); setInstitutionName(''); setBillAddress(''); setBillPhone(''); setAccountNumber('');
     };
 
@@ -222,15 +191,6 @@ export default function DashboardSubmitPage() {
                     <p>Your reel has been submitted for review. It will be transcribed and checked automatically. Once approved it will appear in campaigns.</p>
                     <button onClick={resetForm} className={styles.submitBtn}>Submit Another Reel</button>
                 </div>
-            </div>
-        );
-    }
-
-    if (infoLoading) {
-        return (
-            <div>
-                <div className={styles.pageHeader}><h1>Submit a Video</h1><p>Share a reel for a cause close to your heart.</p></div>
-                <div style={{ padding: '48px', textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: '14px' }}>Loading…</div>
             </div>
         );
     }
@@ -277,56 +237,28 @@ export default function DashboardSubmitPage() {
 
                     <div className={styles.formGroup} style={{ marginBottom: 0 }}>
                         <label className={styles.formLabel}>Description</label>
-                        <textarea className={styles.formTextarea} value={description} onChange={e => setDescription(e.target.value)} placeholder="Share the story behind this reel…" />
+                        <textarea
+                            className={styles.formTextarea}
+                            value={description}
+                            onChange={e => setDescription(e.target.value.slice(0, DESCRIPTION_MAX_LENGTH))}
+                            placeholder="Share the story behind this reel…"
+                            maxLength={DESCRIPTION_MAX_LENGTH}
+                        />
+                        <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', margin: '4px 0 0', textAlign: 'right' }}>{description.length}/{DESCRIPTION_MAX_LENGTH}</p>
                     </div>
                 </div>
 
                 {/* ── Section 2: Cause ── */}
                 <div className={styles.formCard}>
-                    <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Target size={18} color="#E7421B" /> Linked Cause <span style={{ fontWeight: 500, color: 'rgba(255,255,255,0.4)', fontSize: '13px' }}>(members vote on this)</span></h3>
+                    <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Target size={18} color="#E7421B" /> Cause Category</h3>
 
-                    {activeCauses.length > 0 && (
-                        <div className={styles.causeTabs}>
-                            {(['existing', 'new'] as const).map(mode => (
-                                <button
-                                    key={mode}
-                                    type="button"
-                                    className={`${styles.causeTab} ${causeMode === mode ? styles.causeTabActive : ''}`}
-                                    onClick={() => setCauseMode(mode)}
-                                >
-                                    {mode === 'existing' ? 'Link to existing cause' : '+ Create new cause'}
-                                </button>
-                            ))}
-                        </div>
-                    )}
-
-                    {causeMode === 'existing' && activeCauses.length > 0 ? (
-                        <div className={styles.formGroup} style={{ marginBottom: 0 }}>
-                            <label className={styles.formLabel}>Select Cause *</label>
-                            <select className={styles.formSelect} value={selectedExistingCauseId} onChange={e => setSelectedExistingCauseId(e.target.value)} required>
-                                <option value="">— Pick a cause —</option>
-                                {activeCauses.map(c => <option key={c.id} value={c.id}>{c.name} ({c.category})</option>)}
-                            </select>
-                        </div>
-                    ) : (
-                        <div className={styles.formGrid}>
-                            <div className={styles.formGroup} style={{ marginBottom: 0 }}>
-                                <label className={styles.formLabel}>Cause Name *</label>
-                                <input className={styles.formInput} type="text" value={causeName} onChange={e => setCauseName(e.target.value)} placeholder="e.g. Disaster Relief Fund" required={causeMode === 'new'} />
-                            </div>
-                            <div className={styles.formGroup} style={{ marginBottom: 0 }}>
-                                <label className={styles.formLabel}>Category *</label>
-                                <select className={styles.formSelect} value={causeCategory} onChange={e => setCauseCategory(e.target.value)} required={causeMode === 'new'}>
-                                    <option value="">— Pick category —</option>
-                                    {CAUSE_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                                </select>
-                            </div>
-                            <div className={styles.formGroup} style={{ marginBottom: 0 }}>
-                                <label className={styles.formLabel}>Fundraising Goal ($)</label>
-                                <input className={styles.formInput} type="number" value={causeGoal} onChange={e => setCauseGoal(e.target.value)} placeholder="e.g. 5000" min="0" />
-                            </div>
-                        </div>
-                    )}
+                    <div className={styles.formGroup} style={{ marginBottom: 0 }}>
+                        <label className={styles.formLabel}>Select Category *</label>
+                        <select className={styles.formSelect} value={causeCategory} onChange={e => setCauseCategory(e.target.value)} required>
+                            <option value="">— Pick a category —</option>
+                            {CAUSE_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                        </select>
+                    </div>
                 </div>
 
                 {/* ── Section 3: Assistance Request Details ── */}
@@ -345,7 +277,7 @@ export default function DashboardSubmitPage() {
                         </div>
                         <div className={styles.formGroup} style={{ marginBottom: 0 }}>
                             <label className={styles.formLabel}>Target Funding Amount ($, max $500) *</label>
-                            <input className={styles.formInput} type="number" min="1" max="500" step="0.01" value={targetAmount} onChange={e => setTargetAmount(e.target.value)} placeholder="e.g. 350 (max $500)" required />
+                            <input className={styles.formInput} type="number" min="1" step="0.01" value={targetAmount} onChange={e => setTargetAmount(e.target.value)} placeholder="e.g. 350 (max $500)" required />
                         </div>
                     </div>
                     <div className={styles.formGroup}>
