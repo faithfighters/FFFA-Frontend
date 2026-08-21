@@ -277,7 +277,20 @@ export default function DashboardSubmitPage() {
                         </div>
                         <div className={styles.formGroup} style={{ marginBottom: 0 }}>
                             <label className={styles.formLabel}>Target Funding Amount ($, max $500) *</label>
-                            <input className={styles.formInput} type="number" min="1" step="0.01" value={targetAmount} onChange={e => setTargetAmount(e.target.value)} placeholder="e.g. 350 (max $500)" required />
+                            <input
+                                className={styles.formInput}
+                                type="number"
+                                min="1"
+                                max="500"
+                                step="0.01"
+                                value={targetAmount}
+                                onChange={e => {
+                                    const val = e.target.value;
+                                    if (val === '' || Number(val) <= 500) setTargetAmount(val);
+                                }}
+                                placeholder="e.g. 350 (max $500)"
+                                required
+                            />
                         </div>
                     </div>
                     <div className={styles.formGroup}>
