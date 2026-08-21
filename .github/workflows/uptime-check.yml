@@ -63,9 +63,12 @@ jobs:
 
           This is an automated alert, sent every 5 minutes while the issue persists."
 
+          # Alert destination reuses the same address configured as
+          # EMAIL_FROM for OTP/other platform emails (per request — no
+          # separate alert-recipient secret needed).
           BODY=$(jq -n \
             --arg from "$FROM_ADDR" \
-            --arg to "${{ secrets.ALERT_EMAIL_TO }}" \
+            --arg to "$FROM_ADDR" \
             --arg subject "🚨 FFFA site down — action needed" \
             --arg text "$TEXT" \
             '{from: $from, to: $to, subject: $subject, text: $text}')
