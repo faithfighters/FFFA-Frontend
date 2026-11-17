@@ -161,7 +161,7 @@ function RegisterForm() {
                 router.push('/dashboard/submit');
                 return;
             }
-            // Donor path — send straight to Stripe checkout for the $30 membership.
+            // Donor path — send straight to Stripe checkout for the $9.95 membership.
             setCheckoutRedirecting(true);
             try {
                 const res = await fetch('/api/stripe/checkout', {
