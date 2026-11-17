@@ -63,10 +63,10 @@ interface ParticipationReport {
 type Tab = 'overview' | 'financial' | 'voting' | 'participation';
 
 const PLAN_LABELS: Record<string, string> = {
-  faith_fighter: 'Faith Fighter ($30)',
-  // Legacy aliases — same $30 plan, kept so old subscription records still label correctly.
-  faith_builder: 'Faith Fighter ($30)',
-  faith_hero: 'Faith Fighter ($30)',
+  faith_fighter: 'Faith Fighter ($9.95)',
+  // Legacy aliases — same $9.95 plan, kept so old subscription records still label correctly.
+  faith_builder: 'Faith Fighter ($9.95)',
+  faith_hero: 'Faith Fighter ($9.95)',
 };
 
 export default function AdminAnalyticsPage() {
