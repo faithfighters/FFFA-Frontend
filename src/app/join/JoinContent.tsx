@@ -2,13 +2,12 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Newsletter from '@/components/frontend/Newsletter';
 import { PLAN_CONFIG } from '@/lib/types';
 import { useAuth } from '@/context/AuthContext';
 import styles from './page.module.css';
-import { Vote, BarChart3, Video, Users, Package, Star, ShieldCheck, Gift } from 'lucide-react';
+import { Vote, BarChart3, Video, Users } from 'lucide-react';
 import { haptics } from '@/lib/haptics';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -208,91 +207,6 @@ export default function JoinContent() {
           </motion.p>
         </div>
       </section>
-
-      {/* Faith Builder Welcome Kit — shown to new users only */}
-      {(!user || !user.plan) && (
-        <section className={styles.kitSection}>
-          <div className="container">
-            <motion.div
-              className={styles.kitBadge}
-              initial={{ opacity: 0, y: -8 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.4 }}
-            >
-              <Gift size={14} />
-              Included with your first subscription
-            </motion.div>
-
-            <motion.div
-              className={styles.kitCard}
-              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Left — box image */}
-              <div className={styles.kitImageWrap}>
-                <div className={styles.kitGlow} />
-                <Image
-                  src="/images/welcome-kit-box.png"
-                  alt="Faith Builder Welcome Kit box"
-                  width={420}
-                  height={340}
-                  className={styles.kitBoxImage}
-                  style={{ objectFit: 'contain' }}
-                />
-                <Image
-                  src="/images/logo-fist-transparent.png"
-                  alt=""
-                  aria-hidden="true"
-                  width={90}
-                  height={90}
-                  className={styles.kitFistAccent}
-                  style={{ objectFit: 'contain' }}
-                />
-              </div>
-
-              {/* Right — content */}
-              <div className={styles.kitContent}>
-                <p className={styles.kitEyebrow}>Faith Builder Welcome Kit</p>
-                <h2 className={styles.kitHeading}>
-                  Everything You Need<br />
-                  <span className={styles.kitHeadingRed}>to Start Your Mission</span>
-                </h2>
-                <p className={styles.kitSubtext}>
-                  Your Faith Fighters welcome kit is shipped directly to you as part of your onboarding —
-                  a one-time package with everything you need to hit the ground running.
-                </p>
-
-                <div className={styles.kitItems}>
-                  {[
-                    { icon: <Package size={16} />, text: 'Branded FFFA welcome box & packaging' },
-                    { icon: <Star size={16} />, text: 'Exclusive member items & official gear' },
-                    { icon: <ShieldCheck size={16} />, text: 'Faith Fighter certificate of membership' },
-                    { icon: <Gift size={16} />, text: 'Personalized thank-you materials from the team' },
-                  ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      className={styles.kitItem}
-                      initial={{ opacity: 0, x: -12 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.35, delay: i * 0.07 }}
-                    >
-                      <span className={styles.kitItemIcon}>{item.icon}</span>
-                      <span>{item.text}</span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className={styles.kitFooter}>
-                  <div className={styles.kitNote}>
-                    <ShieldCheck size={14} color="#F8C38F" />
-                    One-time fee — only charged at your first signup
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      )}
 
       {/* Features Section */}
       <section className="section section--dark">

@@ -101,7 +101,7 @@ export interface Payout {
 
 const _FAITH_FIGHTER_PLAN = {
     name: 'Faith Fighter',
-    price: 30,
+    price: 9.95,
     votes: 30,
     features: [
         'Full platform access (live streams, impact reports, stories)',
