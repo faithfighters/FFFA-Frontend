@@ -98,7 +98,7 @@ function SubscriptionContent() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body: JSON.stringify({ votes: pack.votes, price: pack.price, label: pack.label }),
+                body: JSON.stringify({ packId: pack.id }),
             });
             const data = await res.json();
             if (res.ok && data.url) { window.location.href = data.url; return; }
