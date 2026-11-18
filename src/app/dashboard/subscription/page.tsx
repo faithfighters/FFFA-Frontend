@@ -16,9 +16,9 @@ interface SubscriptionInfo {
 }
 
 const VOTE_PACKS = [
-    { id: 'pack_15', votes: 15, price: 10.00, label: 'Starter Boost',  description: 'No daily limit — use anytime', popular: false },
-    { id: 'pack_30', votes: 30, price: 20.00, label: 'Value Boost',    description: 'No daily limit — use anytime', popular: true },
-    { id: 'pack_45', votes: 45, price: 30.00, label: 'Power Boost',    description: 'No daily limit — use anytime', popular: false },
+    { id: 'pack_30', votes: 30, price: 10.00, label: 'Starter Boost',  description: 'No daily limit — use anytime', popular: false },
+    { id: 'pack_60', votes: 60, price: 20.00, label: 'Value Boost',    description: 'No daily limit — use anytime', popular: true },
+    { id: 'pack_90', votes: 90, price: 30.00, label: 'Power Boost',    description: 'No daily limit — use anytime', popular: false },
 ];
 
 function SubscriptionContent() {
